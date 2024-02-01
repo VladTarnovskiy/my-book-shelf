@@ -1,0 +1,12 @@
+@import 'placeholders';
+
+.header {
+  padding: 46px 38px 48px 25px;
+  @extend %itemsCenter;
+  justify-content: space-between;
+}
+
+.searchBar {
+  @extend %itemsCenter;
+  justify-content: center;
+}

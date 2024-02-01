@@ -33,21 +33,3 @@
     @content;
   }
 }
-
-@mixin wrapper() {
-  max-width: 1160px;
-  margin-left: auto;
-  margin-right: auto;
-
-  @include desktop {
-    padding: 0 30px;
-  }
-
-  @include small-desktop {
-    padding: 0 20px;
-  }
-
-  @include tablet {
-    padding: 0 10px;
-  }
-}

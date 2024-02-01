@@ -1,12 +1,14 @@
-@import './styles/normalize';
-@import './styles/fonts';
-@import './styles/variables';
-@import './styles/mixins';
-@import './styles/placeholders';
+@import 'normalize';
+@import 'fonts';
+@import 'variables';
 
 body {
   background-image: url('assets/background/main-1.svg'),
     url('assets/background/main-2.svg');
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: 'Inter Regular';
+  color: $primary-second;
+  font-size: 20px;
+  background-color: $primary-third;
 }
