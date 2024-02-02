@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/pages/home/home.component';
-import { SearchComponent } from './search/pages/search/search.component';
-
 export const routes: Routes = [
   {
     path: '',
@@ -9,6 +7,9 @@ export const routes: Routes = [
   },
   {
     path: 'search',
-    component: SearchComponent,
+    loadComponent: () =>
+      import('./search/pages/search/search.component').then(
+        (m) => m.SearchComponent
+      ),
   },
 ];

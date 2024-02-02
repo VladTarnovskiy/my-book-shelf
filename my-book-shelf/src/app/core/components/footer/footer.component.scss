@@ -1,3 +1,6 @@
+@import 'placeholders';
+@import 'variables';
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -11,6 +14,11 @@
 
     &:last-child {
       margin-bottom: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $primary-second;
     }
   }
 }
