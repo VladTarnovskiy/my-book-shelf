@@ -1,0 +1,68 @@
+@import 'placeholders';
+@import 'variables';
+
+.book {
+  padding: 13px 25px 13px 22px;
+  background-color: $primary-third;
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  border-radius: 10px;
+}
+
+.cover {
+  width: 75px;
+  height: 99px;
+  margin-right: 47px;
+}
+
+.description {
+  max-width: 493px;
+  width: 100%;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__author {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  &__edition {
+    font-size: 10px;
+  }
+}
+
+.category {
+  max-width: 480px;
+  width: 100%;
+}
+
+.rating {
+  margin-right: 72px;
+  min-width: 60px;
+  &__total {
+    font-size: 15px;
+    color: $secondary-fifth;
+  }
+}
+
+.favorite-but {
+  @extend %itemsCenter;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 67px;
+}
+
+.preview-but {
+  @extend %itemsCenter;
+  justify-content: center;
+  width: 85px;
+  height: 30px;
+  border: 1px solid $primary-first;
+  font-size: 15px;
+  color: $primary-first;
+  border-radius: 10px;
+  padding: 6px 12px;
+}

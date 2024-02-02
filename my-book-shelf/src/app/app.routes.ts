@@ -5,6 +5,10 @@ import { SearchComponent } from './search/pages/search/search.component';
 export const routes: Routes = [
   {
     path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'search',
     component: SearchComponent,
   },
 ];

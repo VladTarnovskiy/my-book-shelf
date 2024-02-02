@@ -1,0 +1,30 @@
+@import 'placeholders';
+@import 'variables';
+
+.search {
+  padding-right: 35px;
+  padding-left: 45px;
+}
+
+.titles {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  font-family: 'Inter Medium';
+  margin-bottom: 23px;
+
+  &__title {
+    width: 125px;
+  }
+
+  &__rating {
+    max-width: 597px;
+    width: 100%;
+    padding-right: 25px;
+    text-align: end;
+    margin-right: 78px;
+  }
+
+  &__category {
+    width: 100%;
+  }
+}
