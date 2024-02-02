@@ -1,1 +1,25 @@
+@import 'placeholders';
+@import 'variables';
 
+.home {
+  color: $primary-second;
+}
+
+.greeting {
+  font-family: 'Inter Semi Bold';
+  font-size: 35px;
+  margin-bottom: 24px;
+}
+
+.recommended {
+  &__title {
+    font-size: 25px;
+    margin-bottom: 24px;
+  }
+
+  &__books {
+    @extend %itemsCenter;
+    justify-content: space-between;
+    row-gap: 39px;
+  }
+}
