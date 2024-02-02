@@ -2,7 +2,7 @@
 @import 'variables';
 
 .quote {
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 15px 15px 25px 44px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     linear-gradient(140.88deg, #eb5231 -29.15%, #571fcf 151.64%);
@@ -13,7 +13,7 @@
   &__title {
     font-family: 'Inter Medium';
     font-size: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
   }
 
   &__content {

@@ -2,7 +2,21 @@
   <app-quote />
   <p class="greeting">Good Morning</p>
   <div class="recommended">
-    <h3 class="recommended__title">Recommended for You</h3>
-    <div class="recommended__books"></div>
+    <h3 class="recommended__description">
+      <h3 class="recommended__title">Recommended for You</h3>
+      <button class="recommended__showAll">Show All</button>
+    </h3>
+    <div class="recommended__books">
+      <app-home-book />
+    </div>
+  </div>
+  <div class="recent">
+    <h3 class="recent__description">
+      <h3 class="recent__title">Recent Readings</h3>
+      <button class="recent__showAll">Show All</button>
+    </h3>
+    <div class="recent__books">
+      <app-home-book />
+    </div>
   </div>
 </div>
