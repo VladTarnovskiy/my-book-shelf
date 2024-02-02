@@ -1,22 +1,30 @@
 <nav class="nav">
-  <div class="item">
+  <a class="item active">
     <img class="item__img" src="assets/navigation/home.svg" alt="Home" />
     <div class="item__title">Home</div>
-  </div>
-  <div class="item">
-    <img class="item__img" src="assets/navigation/search.svg" alt="Home" />
+  </a>
+  <a [routerLink]="['/search']" class="item">
+    <img class="item__img" src="assets/navigation/search.svg" alt="Search" />
     <div class="item__title">Search</div>
-  </div>
-  <div class="item">
-    <img class="item__img" src="assets/navigation/bookshelf.svg" alt="Home" />
+  </a>
+  <a class="item">
+    <img
+      class="item__img"
+      src="assets/navigation/bookshelf.svg"
+      alt="Favorite"
+    />
     <div class="item__title">Favorite</div>
-  </div>
-  <div class="item">
-    <img class="item__img" src="assets/navigation/bookshelf.svg" alt="Home" />
+  </a>
+  <a class="item">
+    <img
+      class="item__img"
+      src="assets/navigation/bookshelf.svg"
+      alt="My Books"
+    />
     <div class="item__title">My Books</div>
-  </div>
-  <div class="item">
-    <img class="item__img" src="assets/navigation/give-gift.svg" alt="Home" />
+  </a>
+  <a class="item">
+    <img class="item__img" src="assets/navigation/give-gift.svg" alt="Upload" />
     <div class="item__title">Upload</div>
-  </div>
+  </a>
 </nav>
