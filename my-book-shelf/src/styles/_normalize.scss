@@ -181,6 +181,12 @@ button,
 input {
   /* 1 */
   overflow: visible;
+  border: none;
+}
+
+input {
+  /* 1 */
+  outline: none;
 }
 
 /**
@@ -192,6 +198,8 @@ button,
 select {
   /* 1 */
   text-transform: none;
+  background-color: inherit;
+  padding: 0;
 }
 
 /**

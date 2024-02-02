@@ -1,0 +1,66 @@
+@import 'placeholders';
+@import 'variables';
+
+.searchBar {
+  @extend %itemsCenter;
+  justify-content: center;
+  height: 49px;
+  border-radius: 40px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  background-color: $primary-third;
+}
+
+.input {
+  height: 100%;
+  width: 362px;
+  padding: 12px 21px;
+  color: $primary-fourth;
+}
+
+.filters {
+  @extend %itemsCenter;
+  justify-content: center;
+  height: 100%;
+  border-radius: 40px 0 0 40px;
+  background-color: $secondary-fourth;
+
+  &__title {
+    width: 27px;
+    margin-left: 37px;
+    margin-right: 10px;
+  }
+
+  &__img {
+    width: 17px;
+    height: 9px;
+    margin-right: 11px;
+  }
+}
+
+.searchBut {
+  width: 29px;
+  height: 33px;
+  padding-right: 9px;
+  border-right: 1px solid $secondary-fourth;
+  @extend %itemsCenter;
+  justify-content: center;
+
+  &__img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.scanner {
+  height: 100%;
+  width: 48px;
+  border-radius: 0 40px 40px 0;
+  padding: 0 17px 0 11px;
+  @extend %itemsCenter;
+  justify-content: center;
+
+  &__img {
+    width: 20px;
+    height: 20px;
+  }
+}
