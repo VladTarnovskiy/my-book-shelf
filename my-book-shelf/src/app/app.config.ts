@@ -9,11 +9,15 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { booksReducer } from './store/books/reducers/books.reducer';
+import { BooksEffects } from './store/books/effects/books.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideStore(),
+    provideStore({ books: booksReducer }),
+    provideEffects(BooksEffects),
   ],
 };

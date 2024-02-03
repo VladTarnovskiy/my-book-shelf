@@ -3,8 +3,13 @@
     <div class="filters__title">All</div>
     <img class="filters__img" src="assets/header/polygon.svg" alt="Polygon" />
   </button>
-  <input type="input" class="input" placeholder="Search" />
-  <button class="searchBut">
+  <input
+    [(ngModel)]="searchValue"
+    type="input"
+    class="input"
+    placeholder="Search"
+  />
+  <button class="searchBut" (click)="onClick()">
     <img class="searchBut__img" src="assets/header/search.svg" alt="Search" />
   </button>
   <button class="scanner">
