@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   title = 'my-book-shelf';
   ngOnInit() {
     alert(
-      'The Google books API is not available in Belarus, use a VPN to make the service work correctly!'
+      'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     );
   }
 }

@@ -10,15 +10,10 @@ export const FetchBooks = createAction(
 
 export const FetchBooksSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ books: IBook[] }>()
+  props<{ books: IBook[]; searchValue: string }>()
 );
 
 export const FetchBooksFailed = createAction(
   `${actionSource} Fetch Failed`,
   props<{ error: string }>()
 );
-
-// export const SetSearchValue = createAction(
-//   `${actionSource} Set Search Value`,
-//   props<{ searchValue: string }>()
-// );

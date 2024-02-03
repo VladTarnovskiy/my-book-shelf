@@ -4,14 +4,14 @@ import { IBook } from '../../../shared/models/book.model';
 
 export interface BooksState {
   books: IBook[] | null;
-  // searchValue: string;
+  searchValue: string;
   isLoading: boolean;
   error: string | null;
 }
 
 export const initialState: BooksState = {
   books: null,
-  // searchValue: '',
+  searchValue: '',
   isLoading: true,
   error: null,
 };
@@ -20,8 +20,9 @@ export const booksReducer = createReducer(
   initialState,
   on(
     BooksActions.FetchBooks,
-    (state): BooksState => ({
+    (state, { searchValue }): BooksState => ({
       ...state,
+      searchValue,
       isLoading: true,
     })
   ),
@@ -41,12 +42,4 @@ export const booksReducer = createReducer(
       isLoading: false,
     })
   )
-  // on(
-  //   BooksActions.SetSearchValue,
-  //   (state, { searchValue }): BooksState => ({
-  //     ...state,
-  //     searchValue,
-  //     isLoading: true,
-  //   })
-  // )
 );

@@ -11,3 +11,8 @@ export const selectLoading = createSelector(
   selectBooksStore,
   (state: BooksState) => state.isLoading
 );
+
+export const selectSearchValue = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.searchValue
+);
