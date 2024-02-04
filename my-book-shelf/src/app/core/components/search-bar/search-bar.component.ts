@@ -12,10 +12,15 @@ import { Store } from '@ngrx/store';
 })
 export class SearchBarComponent {
   searchValue = '';
+  isFilter = false;
 
   constructor(private store: Store) {}
 
-  onClick() {
+  onSearch() {
     this.store.dispatch(FetchBooks({ searchValue: this.searchValue }));
+  }
+
+  onFilterToggle() {
+    this.isFilter = !this.isFilter;
   }
 }

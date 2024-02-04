@@ -1,15 +1,30 @@
 <div class="searchBar">
-  <button class="filters">
+  <button class="filters" (click)="onFilterToggle()">
     <div class="filters__title">All</div>
-    <img class="filters__img" src="assets/header/polygon.svg" alt="Polygon" />
+    <img
+      class="filters__img"
+      [class.active]="isFilter"
+      src="assets/header/polygon.svg"
+      alt="Polygon"
+    />
+    <!-- @if (isFilter) { -->
+    <ul class="menu" [class.active]="isFilter">
+      <li class="menu__item">All</li>
+      <li class="menu__item">Title</li>
+      <li class="menu__item">Author</li>
+      <li class="menu__item">Text</li>
+      <li class="menu__item">Subjects</li>
+    </ul>
+    <!-- } -->
   </button>
   <input
     [(ngModel)]="searchValue"
     type="input"
     class="input"
     placeholder="Search"
+    (keyup.enter)="onSearch()"
   />
-  <button class="searchBut" (click)="onClick()">
+  <button class="searchBut" (click)="onSearch()">
     <img class="searchBut__img" src="assets/header/search.svg" alt="Search" />
   </button>
   <button class="scanner">

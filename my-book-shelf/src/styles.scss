@@ -1,6 +1,7 @@
 @import 'normalize';
 @import 'fonts';
 @import 'variables';
+@import 'placeholders';
 
 body {
   background-image: url('assets/background/main-3.svg');
@@ -10,6 +11,10 @@ body {
   color: $primary-second;
   font-size: 20px;
   background-color: $primary-third;
+}
+
+* {
+  @extend %transition;
 }
 
 button:hover {

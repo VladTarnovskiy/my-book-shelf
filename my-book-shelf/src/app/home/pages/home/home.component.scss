@@ -34,6 +34,7 @@
     justify-content: flex-start;
     column-gap: 39px;
     margin-bottom: 53px;
-    overflow-x: scroll;
+    overflow: hidden;
+    overflow-x: auto;
   }
 }
