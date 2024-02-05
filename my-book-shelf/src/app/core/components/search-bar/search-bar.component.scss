@@ -26,13 +26,14 @@
   background-color: $secondary-fourth;
 
   &__title {
-    width: 27px;
+    min-width: 27px;
     margin-left: 37px;
     margin-right: 10px;
   }
 
   &__img {
     margin-right: 11px;
+    @extend %transition;
 
     &.active {
       transform: rotate(180deg);
@@ -53,7 +54,9 @@
   line-height: 26px;
   background-color: $primary-third;
   opacity: 0;
+  text-align: start;
   @extend %shadow;
+  @extend %transition;
 
   &.active {
     visibility: visible;

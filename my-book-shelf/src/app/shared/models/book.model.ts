@@ -7,4 +7,5 @@ export interface IBook {
     small: string;
     normal: string;
   };
+  categories: string[];
 }

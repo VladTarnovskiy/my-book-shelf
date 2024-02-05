@@ -13,10 +13,6 @@ body {
   background-color: $primary-third;
 }
 
-* {
-  @extend %transition;
-}
-
 button:hover {
   cursor: pointer;
 }

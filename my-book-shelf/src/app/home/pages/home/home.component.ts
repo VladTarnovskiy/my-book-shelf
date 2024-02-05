@@ -28,9 +28,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.subscription = this.searchValue$.subscribe((searchValue) => {
-      this.store.dispatch(FetchBooks({ searchValue }));
-    });
+    // this.subscription = this.searchValue$.subscribe((searchValue) => {
+    //   this.store.dispatch(FetchBooks({ searchValue }));
+    // });
   }
 
   ngOnDestroy() {

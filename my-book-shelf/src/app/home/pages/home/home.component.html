@@ -10,7 +10,7 @@
       @for (book of books$ | async; track book.id) {
         <app-home-book [bookData]="book" />
       } @empty {
-        Empty list of users
+        Empty list of books
       }
     </div>
   </section>

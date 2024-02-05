@@ -1,14 +1,17 @@
 <div class="book">
-  <img class="cover" src="assets/logo.svg" alt="Cover" />
+  <div class="cover">
+    <img class="cover__img" [src]="bookData.images.small" alt="Cover" />
+  </div>
   <div class="description">
-    <p class="description__title">Don’t Make Me think</p>
+    <p class="description__title">{{ bookData.title }}</p>
     <p class="description__author">
-      Steve Krug, <span class="book__year">2000</span>
+      {{ bookData.authors[0] }},
+      <span class="book__year">{{ bookData.publishedDate }}</span>
     </p>
     <p class="description__edition">second edition</p>
   </div>
   <div class="rating">4.5<span class="rating__total">/5</span></div>
-  <div class="category">Computer Science</div>
+  <div class="category">{{ bookData.categories[0] }}</div>
   <button class="favorite-but">
     <img src="assets/heart.svg" alt="Favorite" />
   </button>

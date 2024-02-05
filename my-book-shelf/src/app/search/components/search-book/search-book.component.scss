@@ -7,12 +7,23 @@
   @extend %itemsCenter;
   justify-content: flex-start;
   border-radius: 10px;
+  height: 125px;
+  margin-bottom: 23px;
+
+  &:hover {
+    background-color: $secondary-fourth;
+  }
 }
 
 .cover {
   width: 75px;
   height: 99px;
   margin-right: 47px;
+
+  &__img {
+    width: 75px;
+    height: 99px;
+  }
 }
 
 .description {
