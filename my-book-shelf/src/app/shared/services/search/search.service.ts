@@ -72,7 +72,6 @@ export class SearchService {
       .get<ISearchResp>(this.searchURL, options ? options : undefined)
       .pipe(
         map((resp) => {
-          console.log(resp);
           const transData = resp.items.map((book) => {
             const transBook = {
               id: book.id,
@@ -91,8 +90,7 @@ export class SearchService {
             return transBook;
           });
           return transData;
-        }),
-        tap((data) => console.log(data))
+        })
       );
   }
 

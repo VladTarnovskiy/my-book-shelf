@@ -42,7 +42,6 @@ export class CategoryFilterComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         SetFilterCategoryType({ filterCategoryType: this.filterCategory })
       );
-      console.log(this.filterCategory);
     }
   }
 
