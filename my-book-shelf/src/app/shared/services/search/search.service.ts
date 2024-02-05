@@ -4,7 +4,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { map } from 'rxjs';
 import { ISearchResp } from '../../interfaces/booksResp';
 import { FilterCategoryKeys, FilterTypesKeys } from '../../interfaces/filters';
 
