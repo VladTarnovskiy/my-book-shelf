@@ -7,7 +7,7 @@
       <button class="recommended__showAll">Show All</button>
     </h3>
     <div class="recommended__books">
-      @for (book of books$ | async; track book.id) {
+      @for (book of testBooksData; track book.id) {
         <app-home-book [bookData]="book" />
       } @empty {
         Empty list of books
@@ -20,7 +20,11 @@
       <button class="recent__showAll">Show All</button>
     </h3>
     <div class="recent__books">
-      <!-- <app-home-book /> -->
+      @for (book of testBooksData; track book.id) {
+        <app-home-book [bookData]="book" />
+      } @empty {
+        Empty list of books
+      }
     </div>
   </section>
 </div>

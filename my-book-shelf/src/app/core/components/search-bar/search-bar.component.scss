@@ -50,13 +50,13 @@
   width: 170px;
   height: 272px;
   border-radius: 10px;
-  padding: 21px 8px 21px 18px;
   line-height: 26px;
   background-color: $primary-third;
   opacity: 0;
   text-align: start;
   @extend %shadow;
   @extend %transition;
+  z-index: 2;
 
   &.active {
     visibility: visible;
@@ -64,11 +64,7 @@
   }
 
   &__item {
-    margin-bottom: 25px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    padding: 12px 9px;
 
     &:hover {
       background-color: $secondary-fourth;

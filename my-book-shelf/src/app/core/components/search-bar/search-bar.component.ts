@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FetchBooks } from '../../../store/books/actions/books.action';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { FilterTypesKeys } from '../../../shared/interfaces/filters';
+import {
+  FilterCategoryKeys,
+  FilterTypesKeys,
+} from '../../../shared/interfaces/filters';
+import { Observable, Subscription } from 'rxjs';
+import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,10 +17,15 @@ import { FilterTypesKeys } from '../../../shared/interfaces/filters';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit, OnDestroy {
   searchValue = '';
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
+  filterCategory: FilterCategoryKeys = 'Browse';
+  filterCategory$: Observable<FilterCategoryKeys> = this.store.select(
+    selectBookFilterCategoryType
+  );
+  subscription!: Subscription;
 
   constructor(
     private store: Store,
@@ -25,7 +35,11 @@ export class SearchBarComponent {
   onSearch() {
     this.router.navigateByUrl('search');
     this.store.dispatch(
-      FetchBooks({ searchValue: this.searchValue, filterType: this.filterType })
+      FetchBooks({
+        searchValue: this.searchValue,
+        filterType: this.filterType,
+        categoryFilterType: this.filterCategory,
+      })
     );
   }
 
@@ -33,11 +47,26 @@ export class SearchBarComponent {
     this.isFilter = !this.isFilter;
   }
 
+  onFilterClose() {
+    setTimeout(() => {
+      this.isFilter = false;
+    }, 300);
+  }
+
   changeFilterType(event: Event) {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
-      console.log(this.filterType);
     }
+  }
+
+  ngOnInit() {
+    this.subscription = this.filterCategory$.subscribe((value) => {
+      this.filterCategory = value;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

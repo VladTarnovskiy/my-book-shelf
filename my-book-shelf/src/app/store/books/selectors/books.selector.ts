@@ -21,3 +21,8 @@ export const selectBookFilterType = createSelector(
   selectBooksStore,
   (state: BooksState) => state.filterType
 );
+
+export const selectBookFilterCategoryType = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.filterCategoryType
+);

@@ -1,7 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import * as BooksActions from '../actions/books.action';
 import { IBook } from '../../../shared/models/book.model';
-import { FilterTypesKeys } from '../../../shared/interfaces/filters';
+import {
+  FilterCategoryKeys,
+  FilterTypesKeys,
+} from '../../../shared/interfaces/filters';
 
 export interface BooksState {
   books: IBook[] | null;
@@ -9,6 +12,7 @@ export interface BooksState {
   isLoading: boolean;
   error: string | null;
   filterType: FilterTypesKeys;
+  filterCategoryType: FilterCategoryKeys;
 }
 
 export const initialState: BooksState = {
@@ -17,6 +21,7 @@ export const initialState: BooksState = {
   isLoading: true,
   error: null,
   filterType: 'All',
+  filterCategoryType: 'Browse',
 };
 
 export const booksReducer = createReducer(
@@ -44,6 +49,13 @@ export const booksReducer = createReducer(
       ...state,
       error,
       isLoading: false,
+    })
+  ),
+  on(
+    BooksActions.SetFilterCategoryType,
+    (state, { filterCategoryType }): BooksState => ({
+      ...state,
+      filterCategoryType,
     })
   )
 );

@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
 import { ISearchResp } from '../../interfaces/booksResp';
-import { FilterTypesKeys } from '../../interfaces/filters';
+import { FilterCategoryKeys, FilterTypesKeys } from '../../interfaces/filters';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -16,6 +16,15 @@ const filterTypes: Record<FilterTypesKeys, string> = {
   Subjects: 'subject',
 };
 
+const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
+  Browse: '',
+  Engineering: 'Engineering',
+  Medical: 'Medical',
+  'Arts & Science': 'Arts & Science',
+  Architecture: 'Architecture',
+  Law: 'Law',
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -23,15 +32,27 @@ export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
   constructor(private http: HttpClient) {}
 
-  getBooks(searchValue: string, filterType: FilterTypesKeys) {
+  getBooks(
+    searchValue: string,
+    filterType: FilterTypesKeys,
+    filterCategoryType: FilterCategoryKeys
+  ) {
     const filterTypeValue = filterTypes[filterType];
+    const filterCategoryValue = filterCategoryTypes[filterCategoryType];
     let checkedFilterTypeValue: string;
+    let checkedCategoryFilterValue: string;
     let options: { params: HttpParams };
 
     if (filterTypeValue === '') {
       checkedFilterTypeValue = '';
     } else {
       checkedFilterTypeValue = `${filterTypeValue}:`;
+    }
+
+    if (filterCategoryValue === '') {
+      checkedCategoryFilterValue = '';
+    } else {
+      checkedCategoryFilterValue = `+${filterCategoryValue}:`;
     }
 
     if (searchValue === '') {
@@ -42,7 +63,7 @@ export class SearchService {
       options = {
         params: new HttpParams().set(
           'q',
-          `${checkedFilterTypeValue}${searchValue}`
+          `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
         ),
       };
     }
