@@ -1,13 +1,9 @@
 <div class="book">
-  @if (bookData.images.small) {
-    <img class="book__img" [src]="bookData.images.small" alt="Cover" />
-  } @else {
-    <img class="book__img" src="assets/logo.svg" alt="Cover" />
-  }
-  <p class="book__title">{{ bookData.title }}</p>
-  <p class="book__author">
+  <img class="cover" [src]="bookData.images.small" alt="Cover" />
+  <p class="title">{{ bookData.title }}</p>
+  <p class="author">
     {{ bookData.authors[0] }},
-    <span class="book__year">{{ bookData.publishedDate }}</span>
+    <span class="year">{{ bookData.publishedDate }}</span>
   </p>
-  <div class="book__rating">4.5 <span class="ratingTotal">/5</span></div>
+  <div class="rating">4.5 <span class="rating_total">/5</span></div>
 </div>

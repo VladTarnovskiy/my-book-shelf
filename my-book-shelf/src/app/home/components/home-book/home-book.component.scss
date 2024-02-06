@@ -7,29 +7,29 @@
   border-radius: 5px;
   padding: 16px 15px 13px 15px;
   background-color: $primary-third;
+}
 
-  &__img {
-    width: 123px;
-    height: 170px;
-    border-radius: 5px;
-    margin-bottom: 12px;
-  }
+.cover {
+  width: 123px;
+  height: 170px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
 
-  &__title {
-    font-size: 12px;
-    margin-bottom: 5px;
-  }
+.title {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
 
-  &__author {
-    font-size: 10px;
-    margin-bottom: 5px;
-  }
+.author {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
 
-  &__rating {
-    font-size: 10px;
+.rating {
+  font-size: 10px;
 
-    .ratingTotal {
-      color: $secondary-fifth;
-    }
+  .rating__total {
+    color: $secondary-fifth;
   }
 }

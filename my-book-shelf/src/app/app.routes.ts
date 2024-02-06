@@ -12,4 +12,11 @@ export const routes: Routes = [
         (m) => m.SearchComponent
       ),
   },
+  {
+    path: 'favorite',
+    loadComponent: () =>
+      import('./favorite/pages/favorite/favorite.component').then(
+        (m) => m.FavoriteComponent
+      ),
+  },
 ];

@@ -5,8 +5,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { ISearchResp } from '../../interfaces/booksResp';
-import { FilterCategoryKeys, FilterTypesKeys } from '../../interfaces/filters';
+import { ISearchResp } from '../../../shared/interfaces/booksResp';
+import {
+  FilterCategoryKeys,
+  FilterTypesKeys,
+} from '../../../shared/interfaces/filters';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -75,6 +78,7 @@ export class SearchService {
           const transData = resp.items.map((book) => {
             const transBook = {
               id: book.id,
+              isFavorite: false,
               title: book.volumeInfo.title || '',
               authors: book.volumeInfo.authors || ['unknown'],
               publishedDate: book.volumeInfo.publishedDate || '',

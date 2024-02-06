@@ -52,6 +52,7 @@
 .rating {
   margin-right: 72px;
   min-width: 60px;
+
   &__total {
     font-size: 15px;
     color: $secondary-fifth;
@@ -69,11 +70,11 @@
 .preview-but {
   @extend %itemsCenter;
   justify-content: center;
-  width: 85px;
+  min-width: 85px;
   height: 30px;
   border: 1px solid $primary-first;
   font-size: 15px;
   color: $primary-first;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 6px 12px;
 }

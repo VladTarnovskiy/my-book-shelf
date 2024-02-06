@@ -9,21 +9,21 @@
   color: $primary-third;
   max-width: 811px;
   margin-bottom: 42px;
+}
 
-  &__title {
-    font-family: 'Inter Medium';
-    font-size: 25px;
-    margin-bottom: 24px;
-  }
+.title {
+  font-family: 'Inter Medium';
+  font-size: 25px;
+  margin-bottom: 24px;
+}
 
-  &__content {
-    margin-bottom: 8px;
-  }
+.content {
+  margin-bottom: 8px;
+}
 
-  &__description {
-    @extend %itemsCenter;
-    justify-content: space-between;
-  }
+.description {
+  @extend %itemsCenter;
+  justify-content: space-between;
 }
 
 .slider {
