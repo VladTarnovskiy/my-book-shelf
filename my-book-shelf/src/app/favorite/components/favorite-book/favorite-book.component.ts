@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IFavoriteBook } from '../../models/favoriteBook';
 
 @Component({
   selector: 'app-favorite-book',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
 })
-export class FavoriteBookComponent {}
+export class FavoriteBookComponent {
+  @Input({ required: true }) bookData!: IFavoriteBook;
+}

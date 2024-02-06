@@ -7,7 +7,7 @@ import {
 } from '../../../shared/interfaces/filters';
 
 export interface BooksState {
-  books: IBook[] | null;
+  books: IBook[];
   searchValue: string;
   isLoading: boolean;
   error: string | null;
@@ -16,7 +16,7 @@ export interface BooksState {
 }
 
 export const initialState: BooksState = {
-  books: null,
+  books: [],
   searchValue: '',
   isLoading: true,
   error: null,
@@ -56,6 +56,32 @@ export const booksReducer = createReducer(
     (state, { filterCategoryType }): BooksState => ({
       ...state,
       filterCategoryType,
+    })
+  ),
+  on(
+    BooksActions.AddFavoriteStatus,
+    (state, { bookId }): BooksState => ({
+      ...state,
+      books: [...state.books].map((book) => {
+        if (book.id === bookId) {
+          return { ...book, isFavorite: true };
+        } else {
+          return book;
+        }
+      }),
+    })
+  ),
+  on(
+    BooksActions.RemoveFavoriteStatus,
+    (state, { bookId }): BooksState => ({
+      ...state,
+      books: [...state.books].map((book) => {
+        if (book.id === bookId) {
+          return { ...book, isFavorite: false };
+        } else {
+          return book;
+        }
+      }),
     })
   )
 );

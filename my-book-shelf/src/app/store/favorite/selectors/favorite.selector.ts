@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { FavoriteBooksState } from '../reducers/books.reducer';
+import { FavoriteBooksState } from '../reducers/favorite.reducer';
 
 export const selectFavoriteBooksStore =
   createFeatureSelector<FavoriteBooksState>('favoriteBooks');

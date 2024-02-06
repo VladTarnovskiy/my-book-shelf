@@ -12,7 +12,7 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { booksReducer } from './store/books/reducers/books.reducer';
 import { BooksEffects } from './store/books/effects/books.effects';
-import { favoriteBooksReducer } from './store/favorite/reducers/books.reducer';
+import { favoriteBooksReducer } from './store/favorite/reducers/favorite.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [

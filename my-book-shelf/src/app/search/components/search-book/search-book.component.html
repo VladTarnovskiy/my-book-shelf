@@ -12,8 +12,15 @@
   </div>
   <div class="rating">4.5<span class="rating__total">/5</span></div>
   <div class="category">{{ bookData.categories[0] }}</div>
-  <button class="favorite-but">
-    <img src="assets/heart.svg" alt="Favorite" />
-  </button>
+  @if (bookData.isFavorite) {
+    <button class="favorite-but" (click)="removeFromFavorite()">
+      <img src="assets/heart.svg" alt="Favorite" />
+    </button>
+  } @else {
+    <button class="favorite-but" (click)="addToFavorite()">
+      <img src="assets/empty-heart.svg" alt="Favorite" />
+    </button>
+  }
+
   <button class="preview-but">Preview</button>
 </div>

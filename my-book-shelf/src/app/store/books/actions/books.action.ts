@@ -30,3 +30,13 @@ export const SetFilterCategoryType = createAction(
   `${actionSource} Filter Category`,
   props<{ filterCategoryType: FilterCategoryKeys }>()
 );
+
+export const AddFavoriteStatus = createAction(
+  `${actionSource} Add Favorite Status`,
+  props<{ bookId: string }>()
+);
+
+export const RemoveFavoriteStatus = createAction(
+  `${actionSource} Remove Favorite Status`,
+  props<{ bookId: string }>()
+);

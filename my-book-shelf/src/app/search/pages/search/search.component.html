@@ -7,7 +7,11 @@
   </div>
   <div class="books">
     @for (book of books$ | async; track book.id) {
-      <app-search-book [bookData]="book" />
+      <app-search-book
+        [bookData]="book"
+        (addToFavoriteEvent)="addToFavorite($event)"
+        (removeFromFavoriteEvent)="removeFromFavorite($event)"
+      />
     } @empty {
       Empty list of books
     }

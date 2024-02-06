@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBook } from '../../../shared/models/book.model';
 
 @Component({
@@ -10,4 +10,14 @@ import { IBook } from '../../../shared/models/book.model';
 })
 export class SearchBookComponent {
   @Input({ required: true }) bookData!: IBook;
+  @Output() addToFavoriteEvent = new EventEmitter<IBook>();
+  @Output() removeFromFavoriteEvent = new EventEmitter<string>();
+
+  addToFavorite() {
+    this.addToFavoriteEvent.emit(this.bookData);
+  }
+
+  removeFromFavorite() {
+    this.removeFromFavoriteEvent.emit(this.bookData.id);
+  }
 }

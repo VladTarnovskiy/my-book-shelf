@@ -1,6 +1,10 @@
 <div class="favorite">
   <div class="title">Your Favourite</div>
   <div class="books">
-    <app-favorite-book />
+    @for (book of favoriteBooks$ | async; track book.id) {
+      <app-favorite-book [bookData]="book" />
+    } @empty {
+      Empty list of books
+    }
   </div>
 </div>
