@@ -10,6 +10,7 @@ import {
   FilterCategoryKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
+import { Store } from '@ngrx/store';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -33,7 +34,10 @@ const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
 })
 export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
   getBooks(
     searchValue: string,

@@ -6,7 +6,7 @@
     <div class="titles__category">Category</div>
   </div>
   <div class="books">
-    @for (book of books$ | async; track book.id) {
+    @for (book of books; track book.id) {
       <app-search-book
         [bookData]="book"
         (addToFavoriteEvent)="addToFavorite($event)"
