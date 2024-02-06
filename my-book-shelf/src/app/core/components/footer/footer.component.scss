@@ -1,0 +1,24 @@
+@import 'placeholders';
+@import 'variables';
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 15px;
+  margin-bottom: 51px;
+  height: 87px;
+
+  &__item {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $primary-second;
+    }
+  }
+}

@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -13,7 +14,7 @@ on:
         with:
           path: ~/.npm
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependecies
+      - name: Install dependencies
         run: npm ci
       - name: Lint application
         run: npm run lint

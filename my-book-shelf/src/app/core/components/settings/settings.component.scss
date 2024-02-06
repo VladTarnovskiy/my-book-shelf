@@ -1,0 +1,62 @@
+@import 'placeholders';
+@import 'variables';
+
+.settings {
+  @extend %itemsCenter;
+  color: $primary-second;
+}
+
+.lang {
+  @extend %itemsCenter;
+  @extend %shadow;
+  border-radius: 40px;
+  height: 47px;
+  padding: 14px 0 14px 25px;
+  margin-right: 25px;
+  background-color: $primary-third;
+
+  &__img {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+  }
+
+  &__title {
+    margin-right: 20px;
+  }
+
+  &__polygon {
+    margin-right: 29px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.profile {
+  @extend %itemsCenter;
+  @extend %shadow;
+  border-radius: 40px;
+  height: 47px;
+  padding: 3px 0 3px 3px;
+  background-color: $primary-third;
+
+  &__img {
+    width: 43px;
+    height: 43px;
+    margin-right: 19px;
+  }
+
+  &__title {
+    margin-right: 26px;
+  }
+
+  &__polygon {
+    margin-right: 29px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

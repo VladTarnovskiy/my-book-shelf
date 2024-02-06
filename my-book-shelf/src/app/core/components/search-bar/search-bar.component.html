@@ -1,0 +1,35 @@
+<div class="searchBar">
+  <button class="filters" (click)="onFilterToggle()" (blur)="onFilterClose()">
+    <div class="filters__title">{{ filterType }}</div>
+    <img
+      class="filters__img"
+      [class.active]="isFilter"
+      src="assets/header/polygon.svg"
+      alt="Polygon"
+    />
+    <button
+      class="menu"
+      [class.active]="isFilter"
+      (click)="changeFilterType($event)"
+    >
+      <div class="menu__item" data-filterType="All">All</div>
+      <div class="menu__item" data-filterType="Title">Title</div>
+      <div class="menu__item" data-filterType="Author">Author</div>
+      <div class="menu__item" data-filterType="Text">Text</div>
+      <div class="menu__item" data-filterType="Subjects">Subjects</div>
+    </button>
+  </button>
+  <input
+    [(ngModel)]="searchValue"
+    type="input"
+    class="input"
+    placeholder="Search"
+    (keyup.enter)="onSearch()"
+  />
+  <button class="searchBut" (click)="onSearch()">
+    <img class="searchBut__img" src="assets/header/search.svg" alt="Search" />
+  </button>
+  <button class="scanner">
+    <img class="scanner__img" src="assets/header/scanner.svg" alt="Scanner" />
+  </button>
+</div>

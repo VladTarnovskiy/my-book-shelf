@@ -1,0 +1,48 @@
+@import 'mixins';
+@import 'variables';
+
+.wrapper {
+  border-radius: 10px;
+  margin: 45px 36px;
+  display: flex;
+  background-color: $secondary-fourth;
+
+  @include desktop {
+    margin: 45px 36px;
+  }
+
+  @include small-desktop {
+    margin: 35px 20px;
+  }
+
+  @include tablet {
+    margin: 15px 10px;
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+.main {
+  margin-top: 22px;
+}
+
+.sidebar {
+  min-width: 306px;
+  padding-left: 68px;
+  padding-top: 38px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px 0px 0px 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: $primary-third;
+  color: $primary-fourth;
+}
+
+.logo {
+  width: 120px;
+  height: 74px;
+  margin-bottom: 100px;
+}

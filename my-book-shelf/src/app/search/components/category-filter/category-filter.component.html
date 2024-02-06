@@ -1,0 +1,25 @@
+<div class="wrapper">
+  <button class="filter" (click)="onFilterToggle()" (blur)="onFilterClose()">
+    <div class="filter__title">{{ filterCategory }}</div>
+    <img
+      class="filter__polygon"
+      [class.active]="isFilter"
+      src="assets/header/polygon.svg"
+      alt="Polygon"
+    />
+    <button
+      class="menu"
+      [class.active]="isFilter"
+      (click)="changeFilterType($event)"
+    >
+      <div class="menu__item" data-filterType="Browse">Browse</div>
+      <div class="menu__item" data-filterType="Engineering">Engineering</div>
+      <div class="menu__item" data-filterType="Medical">Medical</div>
+      <div class="menu__item" data-filterType="Arts & Science">
+        Arts & Science
+      </div>
+      <div class="menu__item" data-filterType="Architecture">Architecture</div>
+      <div class="menu__item" data-filterType="Law">Law</div>
+    </button>
+  </button>
+</div>

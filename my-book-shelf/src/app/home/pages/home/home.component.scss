@@ -1,0 +1,40 @@
+@import 'placeholders';
+@import 'variables';
+
+.home {
+  color: $primary-second;
+  margin-left: 28px;
+}
+
+.greeting {
+  font-family: 'Inter Semi Bold';
+  font-size: 35px;
+  margin-bottom: 24px;
+}
+
+.recommended,
+.recent {
+  &__description {
+    @extend %itemsCenter;
+    justify-content: space-between;
+    margin-right: 48px;
+  }
+
+  &__title {
+    font-size: 25px;
+    margin-bottom: 24px;
+  }
+
+  &__showAll {
+    color: $primary-fourth;
+  }
+
+  &__books {
+    @extend %itemsCenter;
+    justify-content: flex-start;
+    column-gap: 39px;
+    margin-bottom: 53px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+}

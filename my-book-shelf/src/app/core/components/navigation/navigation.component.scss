@@ -1,0 +1,32 @@
+@import 'placeholders';
+@import 'variables';
+
+.nav {
+  margin-bottom: 383px;
+}
+
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 37px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__img {
+    width: 23px;
+    height: 23px;
+    margin-right: 14px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $primary-second;
+  }
+
+  &.active {
+    color: $primary-second;
+  }
+}

@@ -1,0 +1,30 @@
+<div class="home">
+  <app-quote />
+  <p class="greeting">Good Morning</p>
+  <section class="recommended">
+    <h3 class="recommended__description">
+      <h3 class="recommended__title">Recommended for You</h3>
+      <button class="recommended__showAll">Show All</button>
+    </h3>
+    <div class="recommended__books">
+      @for (book of testBooksData; track book.id) {
+        <app-home-book [bookData]="book" />
+      } @empty {
+        Empty list of books
+      }
+    </div>
+  </section>
+  <section class="recent">
+    <h3 class="recent__description">
+      <h3 class="recent__title">Recent Readings</h3>
+      <button class="recent__showAll">Show All</button>
+    </h3>
+    <div class="recent__books">
+      @for (book of testBooksData; track book.id) {
+        <app-home-book [bookData]="book" />
+      } @empty {
+        Empty list of books
+      }
+    </div>
+  </section>
+</div>

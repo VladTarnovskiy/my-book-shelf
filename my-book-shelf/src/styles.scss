@@ -1,12 +1,44 @@
-@import './styles/normalize';
-@import './styles/fonts';
-@import './styles/variables';
-@import './styles/mixins';
-@import './styles/placeholders';
+@import 'normalize';
+@import 'fonts';
+@import 'variables';
+@import 'placeholders';
 
 body {
-  background-image: url('assets/background/main-1.svg'),
-    url('assets/background/main-2.svg');
+  background-image: url('assets/background/main-3.svg');
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: 'Inter Regular';
+  color: $primary-second;
+  font-size: 20px;
+  background-color: $primary-third;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1c1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
 }

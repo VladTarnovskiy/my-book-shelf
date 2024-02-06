@@ -1,0 +1,19 @@
+<div class="book">
+  <div class="cover">
+    <img class="cover__img" [src]="bookData.images.small" alt="Cover" />
+  </div>
+  <div class="description">
+    <p class="description__title">{{ bookData.title }}</p>
+    <p class="description__author">
+      {{ bookData.authors[0] }},
+      <span class="book__year">{{ bookData.publishedDate }}</span>
+    </p>
+    <p class="description__edition">second edition</p>
+  </div>
+  <div class="rating">4.5<span class="rating__total">/5</span></div>
+  <div class="category">{{ bookData.categories[0] }}</div>
+  <button class="favorite-but">
+    <img src="assets/heart.svg" alt="Favorite" />
+  </button>
+  <button class="preview-but">Preview</button>
+</div>
