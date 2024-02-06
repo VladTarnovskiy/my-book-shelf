@@ -18,6 +18,7 @@ const testBookData = [
   {
     id: 'xiPaZKAq_mUC',
     title: 'Theory of Random Sets',
+    isFavorite: false,
     authors: ['Ilya Molchanov'],
     publishedDate: '2005-11-28',
     images: {
@@ -31,6 +32,7 @@ const testBookData = [
   {
     id: '-ifxDwAAQBAJ',
     title: 'Random Summation',
+    isFavorite: false,
     authors: ['Boris V. Gnedenko', 'Victor Yu. Korolev'],
     publishedDate: '2020-07-24',
     images: {
@@ -44,6 +46,7 @@ const testBookData = [
   {
     id: 'UDeFCwAAQBAJ',
     title: 'Branching Random Walks',
+    isFavorite: false,
     authors: ['Zhan Shi'],
     publishedDate: '2016-02-04',
     images: {
@@ -57,6 +60,7 @@ const testBookData = [
   {
     id: 'kjRqDQAAQBAJ',
     title: 'Random Knotting and Linking',
+    isFavorite: false,
     authors: ['Kenneth C. Millett'],
     publishedDate: '1994',
     images: {
@@ -70,6 +74,7 @@ const testBookData = [
   {
     id: 'vbcwDwAAQBAJ',
     title: 'Random Violence',
+    isFavorite: false,
     authors: ['Joel Best'],
     publishedDate: '1999-03-02',
     images: {
