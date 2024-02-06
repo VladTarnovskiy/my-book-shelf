@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { IFavoriteBook } from '../../models/favoriteBook';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-favorite-book',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
 })

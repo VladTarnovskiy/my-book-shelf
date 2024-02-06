@@ -12,7 +12,9 @@
     <div class="terms">
       <div class="borrowed">
         <p class="borrowed__title">Borrowed on</p>
-        <p class="borrowed__desc">{{ bookData.borrowedOn }}</p>
+        <p class="borrowed__desc">
+          {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
       </div>
       <div class="submission">
         <p class="submission__title">Submission Due</p>

@@ -1,0 +1,162 @@
+@import 'placeholders';
+@import 'variables';
+
+.details {
+  padding: 93px 45px;
+}
+
+.back-but {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  height: 22px;
+  margin-bottom: 22px;
+
+  &__arrow {
+    width: 12px;
+    height: 12px;
+    margin-right: 13px;
+  }
+  &__title {
+    font-size: 15px;
+  }
+}
+
+.content {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+}
+
+.book {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 15px;
+}
+
+.cover {
+  width: 278px;
+  height: 445px;
+  margin-right: 71px;
+  padding: 24px 34px;
+  background-color: $primary-third;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+
+  &__img {
+    width: 209px;
+    height: 277px;
+    margin-bottom: 27px;
+  }
+}
+
+.options {
+  @extend %itemsCenter;
+  justify-content: space-between;
+  width: 193px;
+  padding: 6px;
+
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__icon {
+      width: 25px;
+      height: 25px;
+      margin-bottom: 7px;
+    }
+
+    &__title {
+      font-family: 'Inter Bold';
+      font-size: 11px;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 35px;
+  line-height: 45px;
+  margin-bottom: 8px;
+}
+
+.author {
+  line-height: 18px;
+  margin-bottom: 20px;
+
+  &__name {
+    text-decoration: underline;
+  }
+}
+
+.edition {
+  color: $secondary-fifth;
+  margin-bottom: 42px;
+}
+
+.rating {
+  margin-bottom: 35px;
+  @extend %itemsCenter;
+  justify-content: flex-start;
+
+  &__value {
+    font-family: 'Inter Medium';
+  }
+}
+
+.stars {
+  margin-right: 8px;
+
+  &__item {
+    width: 14px;
+    height: 14px;
+    margin-right: 3px;
+  }
+}
+
+.availability {
+  margin-bottom: 44px;
+
+  &__title {
+    font-family: 'Inter Bold';
+    margin-bottom: 11px;
+  }
+}
+
+.availability-item {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  margin-bottom: 8px;
+
+  &__icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+  }
+}
+
+.buttons {
+  &__read,
+  &__listen {
+    width: 209px;
+    height: 61px;
+    border-radius: 5px;
+    font-size: 20px;
+    background: $primary-first;
+    color: $primary-third;
+    text-transform: uppercase;
+    font-family: 'Inter Semi Bold';
+    margin-right: 38px;
+  }
+
+  &__listen {
+    background: $secondary-third;
+  }
+}
