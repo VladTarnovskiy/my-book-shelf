@@ -47,7 +47,7 @@
               >
                 {{ bookData.authors[0] }}</button
               >,
-              {{ bookData.publishedDate }}
+              {{ bookData.publishedDate | date: 'y' }}
             </p>
             <p class="edition">Second Edition</p>
             <div class="rating">

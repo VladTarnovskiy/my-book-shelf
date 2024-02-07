@@ -6,10 +6,30 @@
     </p>
     <div class="description">
       <div class="slider">
-        <div class="slider__but active"></div>
-        <div class="slider__but"></div>
-        <div class="slider__but"></div>
-        <div class="slider__but"></div>
+        <button
+          aria-label="change quote"
+          class="slider__but"
+          [class]="{ active: isActive[0] }"
+          (click)="setNewQuote(0)"
+        ></button>
+        <button
+          aria-label="change quote"
+          class="slider__but"
+          [class]="{ active: isActive[1] }"
+          (click)="setNewQuote(1)"
+        ></button>
+        <button
+          aria-label="change quote"
+          class="slider__but"
+          [class]="{ active: isActive[2] }"
+          (click)="setNewQuote(2)"
+        ></button>
+        <button
+          aria-label="change quote"
+          class="slider__but"
+          [class]="{ active: isActive[3] }"
+          (click)="setNewQuote(3)"
+        ></button>
       </div>
       <p class="author">-{{ quote.author }}</p>
     </div>

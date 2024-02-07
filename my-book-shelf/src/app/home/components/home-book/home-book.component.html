@@ -3,7 +3,7 @@
   <p class="title">{{ bookData.title }}</p>
   <p class="author">
     {{ bookData.authors[0] }},
-    <span class="year">{{ bookData.publishedDate }}</span>
+    <span class="year">{{ bookData.publishedDate | date: 'y' }}</span>
   </p>
   <div class="rating">4.5 <span class="rating_total">/5</span></div>
 </div>

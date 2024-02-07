@@ -13,19 +13,34 @@ import { IQuote } from '../../../search/models/quote';
 export class QuoteComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   quote!: IQuote | null;
+  isActive = [true, false, false, false];
 
   constructor(private quotesService: QuotesService) {}
 
-  ngOnInit() {
+  getQuote() {
     this.subscription = this.quotesService
       .getTodayQuote()
       .subscribe((quote) => {
         this.quote = quote;
-        console.log(quote);
       });
+  }
+
+  setNewQuote(el: number) {
+    this.getQuote();
+    this.isActive = this.isActive.map((_, index) => {
+      if (el === index) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  ngOnInit() {
+    this.getQuote();
   }
 }
