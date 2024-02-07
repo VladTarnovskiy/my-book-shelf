@@ -1,5 +1,5 @@
 export interface IQuote {
-  q: string;
-  a: string;
-  h: string;
+  id: number;
+  quote: string;
+  author: string;
 }

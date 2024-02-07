@@ -21,6 +21,7 @@ export class QuoteComponent implements OnInit, OnDestroy {
       .getTodayQuote()
       .subscribe((quote) => {
         this.quote = quote;
+        console.log(quote);
       });
   }
 
