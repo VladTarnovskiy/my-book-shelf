@@ -28,4 +28,19 @@ export class BooksEffects {
       )
     );
   });
+
+  fetchBook$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BooksActions.FetchBook),
+      switchMap(({ bookId }) =>
+        this.searchService.getBook(bookId).pipe(
+          map((previewBook) => BooksActions.FetchBookSuccess({ previewBook })),
+          catchError((error: HttpErrorResponse) => {
+            const handleError = this.searchService.handleError(error);
+            return of(BooksActions.FetchBookFailed({ error: handleError }));
+          })
+        )
+      )
+    );
+  });
 }

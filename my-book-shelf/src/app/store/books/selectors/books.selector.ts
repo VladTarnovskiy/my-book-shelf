@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { BooksState } from '../reducers/books.reducer';
+import { selectRouteParams } from '../../router.selectors';
 
 export const selectBooksStore = createFeatureSelector<BooksState>('books');
 export const selectBooks = createSelector(
@@ -25,4 +26,16 @@ export const selectBookFilterType = createSelector(
 export const selectBookFilterCategoryType = createSelector(
   selectBooksStore,
   (state: BooksState) => state.filterCategoryType
+);
+
+export const selectPreviewBook = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.previewBook
+);
+
+export const selectBookId = createSelector(
+  selectRouteParams,
+  ({ previewId }) => {
+    return previewId;
+  }
 );

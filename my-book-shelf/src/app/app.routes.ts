@@ -8,12 +8,16 @@ export const routes: Routes = [
   {
     path: 'search',
     loadComponent: () =>
-      import('./search/pages/details/details.component').then(
-        (m) => m.DetailsComponent
+      import('./search/pages/search/search.component').then(
+        (m) => m.SearchComponent
       ),
-    // import('./search/pages/search/search.component').then(
-    //   (m) => m.SearchComponent
-    // ),
+  },
+  {
+    path: 'search/preview/:previewId',
+    loadComponent: () =>
+      import('./search/pages/preview/preview.component').then(
+        (m) => m.PreviewComponent
+      ),
   },
   {
     path: 'favorite',

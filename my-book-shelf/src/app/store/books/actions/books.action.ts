@@ -40,3 +40,20 @@ export const RemoveFavoriteStatus = createAction(
   `${actionSource} Remove Favorite Status`,
   props<{ bookId: string }>()
 );
+
+export const FetchBook = createAction(
+  `${actionSource} Fetch Book`,
+  props<{
+    bookId: string;
+  }>()
+);
+
+export const FetchBookSuccess = createAction(
+  `${actionSource} Fetch Book Success`,
+  props<{ previewBook: IBook }>()
+);
+
+export const FetchBookFailed = createAction(
+  `${actionSource} Fetch Book Failed`,
+  props<{ error: string }>()
+);

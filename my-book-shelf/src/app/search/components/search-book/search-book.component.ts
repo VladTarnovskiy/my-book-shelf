@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBook } from '../../../shared/models/book.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-search-book',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.scss',
 })

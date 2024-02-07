@@ -8,8 +8,10 @@ import {
 
 export interface BooksState {
   books: IBook[];
+  previewBook: IBook | null;
   searchValue: string;
   isLoading: boolean;
+  isPreviewLoading: boolean;
   error: string | null;
   filterType: FilterTypesKeys;
   filterCategoryType: FilterCategoryKeys;
@@ -17,8 +19,10 @@ export interface BooksState {
 
 export const initialState: BooksState = {
   books: [],
+  previewBook: null,
   searchValue: '',
   isLoading: true,
+  isPreviewLoading: true,
   error: null,
   filterType: 'All',
   filterCategoryType: 'Browse',
@@ -49,6 +53,29 @@ export const booksReducer = createReducer(
       ...state,
       error,
       isLoading: false,
+    })
+  ),
+  on(
+    BooksActions.FetchBook,
+    (state): BooksState => ({
+      ...state,
+      isPreviewLoading: true,
+    })
+  ),
+  on(
+    BooksActions.FetchBookSuccess,
+    (state, { previewBook }): BooksState => ({
+      ...state,
+      previewBook,
+      isPreviewLoading: false,
+    })
+  ),
+  on(
+    BooksActions.FetchBookFailed,
+    (state, { error }): BooksState => ({
+      ...state,
+      error,
+      isPreviewLoading: false,
     })
   ),
   on(

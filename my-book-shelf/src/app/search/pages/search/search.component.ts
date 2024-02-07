@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryFilterComponent } from '../../components/category-filter/category-filter.component';
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
 import { selectBooks } from '../../../store/books/selectors/books.selector';
 import { CommonModule } from '@angular/common';
@@ -23,9 +23,10 @@ import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   books$: Observable<IBook[] | null> = this.store.select(selectBooks);
   books: IBook[] = [];
+  subscription!: Subscription;
   constructor(private store: Store) {}
 
   addToFavorite(book: IBook) {
@@ -47,7 +48,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.books$.subscribe((books) => {
+    this.subscription = this.books$.subscribe((books) => {
       if (books) {
         this.store.select(selectFavoriteBooks).subscribe((favBooks) => {
           const favIDs = favBooks.map((favBook) => favBook.id);
@@ -62,5 +63,9 @@ export class SearchComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

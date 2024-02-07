@@ -5,12 +5,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { ISearchResp } from '../../../shared/interfaces/booksResp';
+import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
 import {
   FilterCategoryKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
-import { Store } from '@ngrx/store';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -34,10 +33,7 @@ const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
 })
 export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
-  constructor(
-    private http: HttpClient,
-    private store: Store
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getBooks(
     searchValue: string,
@@ -100,6 +96,27 @@ export class SearchService {
           return transData;
         })
       );
+  }
+
+  getBook(bookId: string) {
+    return this.http.get<IBookResp>(`${this.searchURL}/${bookId}`).pipe(
+      map((book) => {
+        const transBook = {
+          id: book.id,
+          isFavorite: false,
+          title: book.volumeInfo.title || '',
+          authors: book.volumeInfo.authors || ['unknown'],
+          publishedDate: book.volumeInfo.publishedDate || '',
+          images: {
+            small:
+              book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
+            normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
+          },
+          categories: book.volumeInfo?.categories || ['unknown'],
+        };
+        return transBook;
+      })
+    );
   }
 
   handleError(error: HttpErrorResponse) {
