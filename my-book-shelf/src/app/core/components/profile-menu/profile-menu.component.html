@@ -1,0 +1,16 @@
+<button class="profile" (click)="onProfileToggle()" (blur)="onProfileClose()">
+  <img class="profile__img" src="assets/header/profile.svg" alt="Profile" />
+  <p class="profile__title">Kenson</p>
+  <img
+    class="profile__polygon"
+    src="assets/header/polygon.svg"
+    alt="Polygon"
+    [class.active]="isMenu"
+  />
+  <button class="profile-menu" [class.active]="isMenu">
+    <div class="profile-menu__item">Profile</div>
+    <div class="profile-menu__item" [routerLink]="['/favorite']">Favorite</div>
+    <div class="profile-menu__item">My Books</div>
+    <div class="profile-menu__item">Logout</div>
+  </button>
+</button>
