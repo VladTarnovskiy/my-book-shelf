@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationComponent {
   registerForm = this.fb.group({
@@ -29,11 +30,6 @@ export class RegistrationComponent {
   onSubmit() {
     const formUserData = this.registerForm.getRawValue() as IUserDetails;
     if (this.registerForm.status === 'VALID') {
-      // if (this.registerForm.status === 'VALID' && this.isLoading === false) {
-
-      // this.store.dispatch(
-      //   AuthActions.FetchRegister({ registerData: formUserData })
-      // );
       console.log(formUserData);
     }
   }

@@ -1,22 +1,23 @@
-<div class="registration">
-  <div class="description">
-    <img src="assets/logo.svg" alt="Logo" class="description__icon" />
-    <div class="description__title">Registration</div>
-    <div class="description__info">For Both Staff & Students</div>
-  </div>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
-    <div class="form-item">
-      <label htmlFor="name" class="form-item__label">
-        <div class="form-item__title">Name</div>
-        <input
-          id="name"
-          type="text"
-          formControlName="name"
-          class="form-item__input"
-          required
-        />
-      </label>
-      <!-- <div *ngIf="name?.errors?.['required']" class="invalid__message">
+<div class="container">
+  <div class="registration">
+    <div class="description">
+      <img src="assets/logo.svg" alt="Logo" class="description__icon" />
+      <div class="description__title">Registration</div>
+      <div class="description__info">For Both Staff & Students</div>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-item">
+        <label htmlFor="name" class="form-item__label">
+          <div class="form-item__title">Name</div>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-item__input"
+            required
+          />
+        </label>
+        <!-- <div *ngIf="name?.errors?.['required']" class="invalid__message">
         please enter a username
       </div>
       <div *ngIf="name?.errors?.['maxlength']" class="invalid__message">
@@ -25,38 +26,38 @@
       <div *ngIf="name?.errors?.['forbiddenUsername']" class="invalid__message">
         {{ name?.errors?.['forbiddenUsername'].value }}
       </div> -->
-    </div>
-    <div class="form-item">
-      <label htmlFor="email" class="form-item__label">
-        <div class="form-item__title">Email</div>
-        <input
-          id="email"
-          formControlName="email"
-          required
-          type="email"
-          class="form-item__input"
-        />
-      </label>
-      <!-- <div *ngIf="email?.errors?.['required']" class="invalid__message">
+      </div>
+      <div class="form-item">
+        <label htmlFor="email" class="form-item__label">
+          <div class="form-item__title">Email</div>
+          <input
+            id="email"
+            formControlName="email"
+            required
+            type="email"
+            class="form-item__input"
+          />
+        </label>
+        <!-- <div *ngIf="email?.errors?.['required']" class="invalid__message">
         please enter a email
       </div>
       <div *ngIf="email?.errors?.['email']" class="invalid__message">
         the email is invalid
       </div> -->
-    </div>
-    <div class="form-item">
-      <label htmlFor="password" class="form-item__label">
-        <div class="form-item__title">Password</div>
-        <input
-          id="password"
-          formControlName="password"
-          type="password"
-          required
-          autoComplete="on"
-          class="form-item__input"
-        />
-      </label>
-      <!-- <div *ngIf="password?.errors?.['required']" class="invalid__message">
+      </div>
+      <div class="form-item">
+        <label htmlFor="password" class="form-item__label">
+          <div class="form-item__title">Password</div>
+          <input
+            id="password"
+            formControlName="password"
+            type="password"
+            required
+            autoComplete="on"
+            class="form-item__input"
+          />
+        </label>
+        <!-- <div *ngIf="password?.errors?.['required']" class="invalid__message">
         please enter a password
       </div>
       <div
@@ -65,20 +66,20 @@
       >
         {{ password?.errors?.['forbiddenPassword'].value }}
       </div> -->
-    </div>
-    <div class="form-item">
-      <label htmlFor="password" class="form-item__label">
-        <div class="form-item__title">Confirm Password</div>
-        <input
-          id="password"
-          formControlName="password"
-          type="password"
-          required
-          autoComplete="on"
-          class="form-item__input"
-        />
-      </label>
-      <!-- <div *ngIf="password?.errors?.['required']" class="invalid__message">
+      </div>
+      <div class="form-item">
+        <label htmlFor="password" class="form-item__label">
+          <div class="form-item__title">Confirm Password</div>
+          <input
+            id="password"
+            formControlName="password"
+            type="password"
+            required
+            autoComplete="on"
+            class="form-item__input"
+          />
+        </label>
+        <!-- <div *ngIf="password?.errors?.['required']" class="invalid__message">
         please enter a password
       </div>
       <div
@@ -87,15 +88,16 @@
       >
         {{ password?.errors?.['forbiddenPassword'].value }}
       </div> -->
-    </div>
-    <div class="buttons">
-      <button type="submit" class="buttons__reg">Register</button>
-      <div class="user-check">
-        <div>Already a User?</div>
-        <a routerLink="../login">
-          <button type="button" class="login-link">Login now</button>
-        </a>
       </div>
-    </div>
-  </form>
+      <div class="buttons">
+        <button type="submit" class="buttons__reg">Register</button>
+        <div class="user-check">
+          <div>Already a User?</div>
+          <a routerLink="../login">
+            <button type="button" class="login-link">Login now</button>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
