@@ -1,5 +1,5 @@
 <div class="favorite">
-  <div class="title">Your Favourite</div>
+  <div class="title">Your Favorite</div>
   <div class="books">
     @for (book of favoriteBooks$ | async; track book.id) {
       <app-favorite-book [bookData]="book" />

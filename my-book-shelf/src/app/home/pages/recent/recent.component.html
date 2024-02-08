@@ -1,0 +1,10 @@
+<div class="recent">
+  <div class="title">Your Recent</div>
+  <div class="books">
+    @for (book of recentBooks$ | async; track book.id) {
+      <app-home-book [bookData]="book" />
+    } @empty {
+      Empty list of books
+    }
+  </div>
+</div>

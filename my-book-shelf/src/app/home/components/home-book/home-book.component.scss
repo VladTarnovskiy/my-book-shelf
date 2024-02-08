@@ -3,7 +3,7 @@
 
 .book {
   width: 160px;
-  height: 260px;
+  min-height: 260px;
   border-radius: 5px;
   padding: 16px 15px 13px 15px;
   background-color: $primary-third;
