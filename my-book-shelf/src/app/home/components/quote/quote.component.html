@@ -1,37 +1,41 @@
-@if (quote) {
+@if (!isError) {
   <div class="quote">
-    <h3 class="title">Today’s Quote</h3>
-    <p class="content">
-      {{ quote.quote }}
-    </p>
-    <div class="description">
-      <div class="slider">
-        <button
-          aria-label="change quote"
-          class="slider__but"
-          [class]="{ active: isActive[0] }"
-          (click)="setNewQuote(0)"
-        ></button>
-        <button
-          aria-label="change quote"
-          class="slider__but"
-          [class]="{ active: isActive[1] }"
-          (click)="setNewQuote(1)"
-        ></button>
-        <button
-          aria-label="change quote"
-          class="slider__but"
-          [class]="{ active: isActive[2] }"
-          (click)="setNewQuote(2)"
-        ></button>
-        <button
-          aria-label="change quote"
-          class="slider__but"
-          [class]="{ active: isActive[3] }"
-          (click)="setNewQuote(3)"
-        ></button>
+    @if (quote && !isLoading) {
+      <h3 class="title">Today’s Quote</h3>
+      <p class="content">
+        {{ quote.quote }}
+      </p>
+      <div class="description">
+        <div class="slider">
+          <button
+            aria-label="change quote"
+            class="slider__but"
+            [class]="{ active: isActive[0] }"
+            (click)="setNewQuote(0)"
+          ></button>
+          <button
+            aria-label="change quote"
+            class="slider__but"
+            [class]="{ active: isActive[1] }"
+            (click)="setNewQuote(1)"
+          ></button>
+          <button
+            aria-label="change quote"
+            class="slider__but"
+            [class]="{ active: isActive[2] }"
+            (click)="setNewQuote(2)"
+          ></button>
+          <button
+            aria-label="change quote"
+            class="slider__but"
+            [class]="{ active: isActive[3] }"
+            (click)="setNewQuote(3)"
+          ></button>
+        </div>
+        <p class="author">-{{ quote.author }}</p>
       </div>
-      <p class="author">-{{ quote.author }}</p>
-    </div>
+    } @else if (isLoading) {
+      <app-quote-skeleton />
+    }
   </div>
 }

@@ -8,11 +8,12 @@ import {
 import { QuotesService } from '../../../search/services/quotes/quotes.service';
 import { Subscription } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
+import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';
 
 @Component({
   selector: 'app-quote',
   standalone: true,
-  imports: [],
+  imports: [QuoteSkeletonComponent],
   templateUrl: './quote.component.html',
   styleUrl: './quote.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +21,8 @@ import { IQuote } from '../../../search/models/quote';
 export class QuoteComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   quote!: IQuote | null;
+  isLoading = false;
+  isError = false;
   isActive = [true, false, false, false];
 
   constructor(
@@ -28,12 +31,20 @@ export class QuoteComponent implements OnInit, OnDestroy {
   ) {}
 
   getQuote() {
-    this.subscription = this.quotesService
-      .getTodayQuote()
-      .subscribe((quote) => {
+    this.isLoading = true;
+    this.subscription = this.quotesService.getTodayQuote().subscribe({
+      next: (quote) => {
         this.quote = quote;
+        this.isLoading = false;
+        this.isError = false;
         this.cd.detectChanges();
-      });
+      },
+      error: () => {
+        this.isLoading = false;
+        this.isError = true;
+        this.cd.detectChanges();
+      },
+    });
   }
 
   setNewQuote(el: number) {
