@@ -1,10 +1,14 @@
+import { SearchBookSkeletonComponent } from './../../components/search-book-skeleton/search-book-skeleton.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CategoryFilterComponent } from '../../components/category-filter/category-filter.component';
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { selectBooks } from '../../../store/books/selectors/books.selector';
+import {
+  selectBooks,
+  selectBooksLoading,
+} from '../../../store/books/selectors/books.selector';
 import { CommonModule } from '@angular/common';
 import {
   AddFavoriteBook,
@@ -19,13 +23,20 @@ import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CategoryFilterComponent, SearchBookComponent, CommonModule],
+  imports: [
+    CategoryFilterComponent,
+    SearchBookComponent,
+    CommonModule,
+    SearchBookSkeletonComponent,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  books$: Observable<IBook[] | null> = this.store.select(selectBooks);
+  books$: Observable<IBook[]> = this.store.select(selectBooks);
+  isLoading$: Observable<boolean> = this.store.select(selectBooksLoading);
   books: IBook[] = [];
+  skeletonItems = [...Array(10).keys()];
   subscription!: Subscription;
   constructor(private store: Store) {}
 

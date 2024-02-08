@@ -6,6 +6,11 @@
     <div class="titles__category">Category</div>
   </div>
   <div class="books">
+    @if (isLoading$ | async) {
+      @for (item of skeletonItems; track item) {
+        <app-search-book-skeleton />
+      }
+    }
     @for (book of books; track book.id) {
       <app-search-book
         [bookData]="book"

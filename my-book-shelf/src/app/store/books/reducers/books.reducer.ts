@@ -21,7 +21,7 @@ export const initialState: BooksState = {
   books: [],
   previewBook: null,
   searchValue: '',
-  isLoading: true,
+  isLoading: false,
   isPreviewLoading: true,
   error: null,
   filterType: 'All',
