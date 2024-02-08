@@ -33,6 +33,11 @@ export const selectPreviewBook = createSelector(
   (state: BooksState) => state.previewBook
 );
 
+export const selectPreviewBookLoader = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.isPreviewLoading
+);
+
 export const selectBookId = createSelector(
   selectRouteParams,
   ({ previewId }) => {

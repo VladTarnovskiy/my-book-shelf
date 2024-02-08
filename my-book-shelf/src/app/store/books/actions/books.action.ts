@@ -41,19 +41,19 @@ export const RemoveFavoriteStatus = createAction(
   props<{ bookId: string }>()
 );
 
-export const FetchBook = createAction(
-  `${actionSource} Fetch Book`,
+export const FetchPreviewBook = createAction(
+  `${actionSource} Fetch Preview Book`,
   props<{
     bookId: string;
   }>()
 );
 
-export const FetchBookSuccess = createAction(
-  `${actionSource} Fetch Book Success`,
+export const FetchPreviewBookSuccess = createAction(
+  `${actionSource} Fetch Preview Book Success`,
   props<{ previewBook: IBook }>()
 );
 
-export const FetchBookFailed = createAction(
-  `${actionSource} Fetch Book Failed`,
+export const FetchPreviewBookFailed = createAction(
+  `${actionSource} Fetch Preview Book Failed`,
   props<{ error: string }>()
 );

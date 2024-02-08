@@ -31,13 +31,17 @@ export class BooksEffects {
 
   fetchBook$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(BooksActions.FetchBook),
+      ofType(BooksActions.FetchPreviewBook),
       switchMap(({ bookId }) =>
         this.searchService.getBook(bookId).pipe(
-          map((previewBook) => BooksActions.FetchBookSuccess({ previewBook })),
+          map((previewBook) =>
+            BooksActions.FetchPreviewBookSuccess({ previewBook })
+          ),
           catchError((error: HttpErrorResponse) => {
             const handleError = this.searchService.handleError(error);
-            return of(BooksActions.FetchBookFailed({ error: handleError }));
+            return of(
+              BooksActions.FetchPreviewBookFailed({ error: handleError })
+            );
           })
         )
       )

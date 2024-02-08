@@ -12,6 +12,7 @@ export interface BooksState {
   searchValue: string;
   isLoading: boolean;
   isPreviewLoading: boolean;
+  previewError: string | null;
   error: string | null;
   filterType: FilterTypesKeys;
   filterCategoryType: FilterCategoryKeys;
@@ -22,7 +23,8 @@ export const initialState: BooksState = {
   previewBook: null,
   searchValue: '',
   isLoading: false,
-  isPreviewLoading: true,
+  isPreviewLoading: false,
+  previewError: null,
   error: null,
   filterType: 'All',
   filterCategoryType: 'Browse',
@@ -56,14 +58,14 @@ export const booksReducer = createReducer(
     })
   ),
   on(
-    BooksActions.FetchBook,
+    BooksActions.FetchPreviewBook,
     (state): BooksState => ({
       ...state,
       isPreviewLoading: true,
     })
   ),
   on(
-    BooksActions.FetchBookSuccess,
+    BooksActions.FetchPreviewBookSuccess,
     (state, { previewBook }): BooksState => ({
       ...state,
       previewBook,
@@ -71,10 +73,10 @@ export const booksReducer = createReducer(
     })
   ),
   on(
-    BooksActions.FetchBookFailed,
+    BooksActions.FetchPreviewBookFailed,
     (state, { error }): BooksState => ({
       ...state,
-      error,
+      previewError: error,
       isPreviewLoading: false,
     })
   ),

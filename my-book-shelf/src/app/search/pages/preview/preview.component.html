@@ -1,3 +1,6 @@
+@if (isLoading$ | async) {
+  <app-preview-skeleton />
+}
 @if (book$ | async; as bookData) {
   <div class="details">
     <button class="back-but">
