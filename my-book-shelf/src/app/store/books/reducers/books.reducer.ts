@@ -68,6 +68,7 @@ export const booksReducer = createReducer(
     (state, { error }): BooksState => ({
       ...state,
       error,
+      books: [],
       isLoading: false,
     })
   ),
