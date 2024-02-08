@@ -11,8 +11,8 @@ import { LayoutComponent } from './core/pages/layout/layout.component';
 export class AppComponent implements OnInit {
   title = 'my-book-shelf';
   ngOnInit() {
-    // alert(
-    //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
-    // );
+    alert(
+      'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
+    );
   }
 }

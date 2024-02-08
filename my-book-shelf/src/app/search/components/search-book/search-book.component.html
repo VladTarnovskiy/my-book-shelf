@@ -12,16 +12,17 @@
   </div>
   <div class="rating">4.5<span class="rating__total">/5</span></div>
   <div class="category">{{ bookData.categories[0] }}</div>
-  @if (bookData.isFavorite) {
-    <button class="favorite-but" (click)="removeFromFavorite()">
-      <img src="assets/heart.svg" alt="Favorite" />
-    </button>
-  } @else {
-    <button class="favorite-but" (click)="addToFavorite()">
-      <img src="assets/empty-heart.svg" alt="Favorite" />
-    </button>
-  }
-
+  <div class="favorite">
+    @if (bookData.isFavorite) {
+      <button class="favorite__but" (click)="removeFromFavorite()">
+        <img src="assets/heart.svg" alt="Favorite" />
+      </button>
+    } @else {
+      <button class="favorite__but" (click)="addToFavorite()">
+        <img src="assets/empty-heart.svg" alt="Favorite" />
+      </button>
+    }
+  </div>
   <button
     class="preview-but"
     [routerLink]="['preview', bookData.id]"

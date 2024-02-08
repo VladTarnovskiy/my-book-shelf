@@ -60,12 +60,17 @@
   }
 }
 
-.favorite-but {
-  @extend %itemsCenter;
-  justify-content: center;
+.favorite {
   width: 30px;
   height: 30px;
   margin-right: 67px;
+
+  &__but {
+    @extend %itemsCenter;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .preview-but {
