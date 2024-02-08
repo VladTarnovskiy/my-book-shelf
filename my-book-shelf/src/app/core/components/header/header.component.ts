@@ -1,6 +1,6 @@
 import { SettingsComponent } from '../settings/settings.component';
 import { SearchBarComponent } from './../search-bar/search-bar.component';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   imports: [SearchBarComponent, SettingsComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {}

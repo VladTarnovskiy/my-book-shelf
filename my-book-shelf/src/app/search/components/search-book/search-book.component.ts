@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IBook } from '../../../shared/models/book.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +17,7 @@ import { AddRecentBook } from '../../../store/books/actions/books.action';
   imports: [RouterModule, CommonModule],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBookComponent {
   @Input({ required: true }) bookData!: IBook;

@@ -1,5 +1,11 @@
 import { selectPreviewBookLoader } from './../../../store/books/selectors/books.selector';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IBook } from '../../../shared/models/book.model';
 import { Store } from '@ngrx/store';
@@ -27,6 +33,7 @@ import { PreviewOptionsComponent } from '../../components/preview-options/previe
   ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PreviewComponent implements OnInit, OnDestroy {
   ratingItems = [...Array(5).keys()];
