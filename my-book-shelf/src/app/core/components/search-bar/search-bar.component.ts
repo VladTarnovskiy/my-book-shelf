@@ -1,10 +1,8 @@
+import { SetFilterType } from './../../../store/books/actions/books.action';
 import { selectSearchOptions } from './../../../store/books/selectors/books.selector';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  FetchBooks,
-  SetSearchPage,
-} from '../../../store/books/actions/books.action';
+import { FetchBooks } from '../../../store/books/actions/books.action';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {
@@ -12,7 +10,6 @@ import {
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 import { Observable, Subscription } from 'rxjs';
-import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
 import { ISearchOptions } from '../../../search/interfaces/search';
 
 @Component({
@@ -27,12 +24,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
-  filterCategory$: Observable<CategoryFilterKeys> = this.store.select(
-    selectBookFilterCategoryType
-  );
   searchOptions$: Observable<ISearchOptions> =
     this.store.select(selectSearchOptions);
-  page = 1;
   subscription!: Subscription;
 
   constructor(
@@ -41,20 +34,17 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ) {}
 
   onSearch() {
-    this.setDefaultSearchPage();
-    this.router.navigateByUrl('search');
     this.store.dispatch(
       FetchBooks({
         searchValue: this.searchValue,
         filterType: this.filterType,
         categoryFilterType: this.filterCategory,
-        page: this.page,
+        page: 1,
       })
     );
-  }
-
-  setDefaultSearchPage() {
-    this.store.dispatch(SetSearchPage({ page: 1 }));
+    if (this.router.url !== '/search') {
+      this.router.navigateByUrl('search');
+    }
   }
 
   onFilterToggle() {
@@ -71,6 +61,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
+      this.store.dispatch(SetFilterType({ filterType: this.filterType }));
     }
   }
 
@@ -78,7 +69,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     this.subscription = this.searchOptions$.subscribe((options) => {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;
-      this.filterCategory = options.categoryFilterType;
+      this.filterType = options.filterType;
     });
   }
 

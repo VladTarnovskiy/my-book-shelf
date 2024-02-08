@@ -63,6 +63,6 @@ export const selectPreviewBookLoader = createSelector(
 export const selectBookId = createSelector(
   selectRouteParams,
   ({ previewId }) => {
-    return previewId;
+    return previewId as string;
   }
 );

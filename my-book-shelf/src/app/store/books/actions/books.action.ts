@@ -32,6 +32,11 @@ export const AddRecentBook = createAction(
   props<{ recentBook: IBook }>()
 );
 
+export const SetFilterType = createAction(
+  `${actionSource} Filter `,
+  props<{ filterType: FilterTypesKeys }>()
+);
+
 export const SetCategoryFilterType = createAction(
   `${actionSource} Category Filter `,
   props<{ categoryFilterType: CategoryFilterKeys }>()

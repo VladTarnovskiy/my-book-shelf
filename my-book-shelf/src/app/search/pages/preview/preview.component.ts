@@ -31,12 +31,6 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store) {}
 
-  ngOnInit() {
-    this.subscription = this.store.select(selectBookId).subscribe((bookId) => {
-      this.store.dispatch(FetchPreviewBook({ bookId }));
-    });
-  }
-
   searchAuthorBooks(author: string) {
     this.store.dispatch(
       FetchBooks({
@@ -46,6 +40,14 @@ export class PreviewComponent implements OnInit, OnDestroy {
         page: 1,
       })
     );
+  }
+
+  ngOnInit() {
+    this.subscription = this.store.select(selectBookId).subscribe((bookId) => {
+      if (bookId) {
+        this.store.dispatch(FetchPreviewBook({ bookId }));
+      }
+    });
   }
 
   ngOnDestroy() {

@@ -121,6 +121,13 @@ export const booksReducer = createReducer(
     })
   ),
   on(
+    BooksActions.SetFilterType,
+    (state, { filterType }): BooksState => ({
+      ...state,
+      filterType,
+    })
+  ),
+  on(
     BooksActions.AddFavoriteStatus,
     (state, { bookId }): BooksState => ({
       ...state,
