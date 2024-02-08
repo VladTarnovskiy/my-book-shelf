@@ -18,6 +18,11 @@ export const selectSearchValue = createSelector(
   (state: BooksState) => state.searchValue
 );
 
+export const selectSearchPage = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.page
+);
+
 export const selectBookFilterType = createSelector(
   selectBooksStore,
   (state: BooksState) => state.filterType
@@ -25,7 +30,19 @@ export const selectBookFilterType = createSelector(
 
 export const selectBookFilterCategoryType = createSelector(
   selectBooksStore,
-  (state: BooksState) => state.filterCategoryType
+  (state: BooksState) => state.categoryFilterType
+);
+
+export const selectSearchOptions = createSelector(
+  selectBooksStore,
+  (state: BooksState) => {
+    return {
+      page: state.page,
+      filterType: state.filterType,
+      categoryFilterType: state.categoryFilterType,
+      searchValue: state.searchValue,
+    };
+  }
 );
 
 export const selectPreviewBook = createSelector(

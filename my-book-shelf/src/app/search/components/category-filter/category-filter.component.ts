@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FilterCategoryKeys } from '../../../shared/interfaces/filters';
+import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
 import { Store } from '@ngrx/store';
-import { SetFilterCategoryType } from '../../../store/books/actions/books.action';
+import { SetCategoryFilterType } from '../../../store/books/actions/books.action';
 import { Observable, Subscription } from 'rxjs';
 import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
 
@@ -14,8 +14,8 @@ import { selectBookFilterCategoryType } from '../../../store/books/selectors/boo
 })
 export class CategoryFilterComponent implements OnInit, OnDestroy {
   isFilter = false;
-  filterCategory: FilterCategoryKeys = 'Browse';
-  filterCategory$: Observable<FilterCategoryKeys> = this.store.select(
+  filterCategory: CategoryFilterKeys = 'Browse';
+  filterCategory$: Observable<CategoryFilterKeys> = this.store.select(
     selectBookFilterCategoryType
   );
 
@@ -38,9 +38,9 @@ export class CategoryFilterComponent implements OnInit, OnDestroy {
     if (el.className === 'menu__item') {
       this.filterCategory = el.getAttribute(
         'data-filterType'
-      ) as FilterCategoryKeys;
+      ) as CategoryFilterKeys;
       this.store.dispatch(
-        SetFilterCategoryType({ filterCategoryType: this.filterCategory })
+        SetCategoryFilterType({ categoryFilterType: this.filterCategory })
       );
     }
   }

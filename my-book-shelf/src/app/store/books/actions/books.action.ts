@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { IBook } from '../../../shared/models/book.model';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 
@@ -12,7 +12,8 @@ export const FetchBooks = createAction(
   props<{
     searchValue: string;
     filterType: FilterTypesKeys;
-    categoryFilterType: FilterCategoryKeys;
+    categoryFilterType: CategoryFilterKeys;
+    page: number;
   }>()
 );
 
@@ -26,9 +27,19 @@ export const FetchBooksFailed = createAction(
   props<{ error: string }>()
 );
 
-export const SetFilterCategoryType = createAction(
-  `${actionSource} Filter Category`,
-  props<{ filterCategoryType: FilterCategoryKeys }>()
+// export const SetSearchValue = createAction(
+//   `${actionSource} Search Value`,
+//   props<{ searchValue: string }>()
+// );
+
+export const SetCategoryFilterType = createAction(
+  `${actionSource} Category Filter `,
+  props<{ categoryFilterType: CategoryFilterKeys }>()
+);
+
+export const SetSearchPage = createAction(
+  `${actionSource} Set Search Page`,
+  props<{ page: number }>()
 );
 
 export const AddFavoriteStatus = createAction(

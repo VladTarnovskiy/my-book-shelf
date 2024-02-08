@@ -8,6 +8,7 @@ import { IBook } from '../../../shared/models/book.model';
 import {
   selectBooks,
   selectBooksLoading,
+  selectSearchOptions,
 } from '../../../store/books/selectors/books.selector';
 import { CommonModule } from '@angular/common';
 import {
@@ -16,9 +17,12 @@ import {
 } from '../../../store/favorite/actions/favorite.action';
 import {
   AddFavoriteStatus,
+  FetchBooks,
   RemoveFavoriteStatus,
+  SetSearchPage,
 } from '../../../store/books/actions/books.action';
 import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.selector';
+import { ISearchOptions } from '../../interfaces/search';
 
 @Component({
   selector: 'app-search',
@@ -35,6 +39,9 @@ import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.
 export class SearchComponent implements OnInit, OnDestroy {
   books$: Observable<IBook[]> = this.store.select(selectBooks);
   isLoading$: Observable<boolean> = this.store.select(selectBooksLoading);
+  searchOptions$: Observable<ISearchOptions> =
+    this.store.select(selectSearchOptions);
+  searchOptions!: ISearchOptions;
   books: IBook[] = [];
   skeletonItems = [...Array(10).keys()];
   subscription!: Subscription;
@@ -58,6 +65,22 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.store.dispatch(RemoveFavoriteStatus({ bookId }));
   }
 
+  getNextPage() {
+    this.setNextPage();
+    this.store.dispatch(
+      FetchBooks({
+        searchValue: this.searchOptions.searchValue,
+        filterType: this.searchOptions.filterType,
+        categoryFilterType: this.searchOptions.categoryFilterType,
+        page: this.searchOptions.page,
+      })
+    );
+  }
+
+  setNextPage() {
+    this.store.dispatch(SetSearchPage({ page: this.searchOptions.page + 1 }));
+  }
+
   ngOnInit() {
     this.subscription = this.books$.subscribe((books) => {
       if (books) {
@@ -74,6 +97,12 @@ export class SearchComponent implements OnInit, OnDestroy {
         });
       }
     });
+
+    const childSubscription = this.searchOptions$.subscribe((options) => {
+      this.searchOptions = options;
+    });
+
+    this.subscription.add(childSubscription);
   }
 
   ngOnDestroy() {

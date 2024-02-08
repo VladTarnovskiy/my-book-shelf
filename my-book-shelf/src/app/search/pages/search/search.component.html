@@ -21,4 +21,11 @@
       Empty list of books
     }
   </div>
+  @if (books.length === 10) {
+    <div class="show-more">
+      <button class="show-more__button" (click)="getNextPage()">
+        Show More
+      </button>
+    </div>
+  }
 </div>

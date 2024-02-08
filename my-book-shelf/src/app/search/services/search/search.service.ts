@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 
@@ -19,7 +19,7 @@ const filterTypes: Record<FilterTypesKeys, string> = {
   Subjects: 'subject',
 };
 
-const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
+const filterCategoryTypes: Record<CategoryFilterKeys, string> = {
   Browse: '',
   Engineering: 'Engineering',
   Medical: 'Medical',
@@ -38,7 +38,8 @@ export class SearchService {
   getBooks(
     searchValue: string,
     filterType: FilterTypesKeys,
-    filterCategoryType: FilterCategoryKeys
+    filterCategoryType: CategoryFilterKeys,
+    page: number
   ) {
     const filterTypeValue = filterTypes[filterType];
     const filterCategoryValue = filterCategoryTypes[filterCategoryType];
@@ -60,14 +61,21 @@ export class SearchService {
 
     if (searchValue === '') {
       options = {
-        params: new HttpParams().set('q', `${checkedFilterTypeValue}random`),
+        params: new HttpParams()
+          .set(
+            'q',
+            `${checkedFilterTypeValue}random${checkedCategoryFilterValue}`
+          )
+          .append('startIndex', `${page * 10}`),
       };
     } else {
       options = {
-        params: new HttpParams().set(
-          'q',
-          `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
-        ),
+        params: new HttpParams()
+          .set(
+            'q',
+            `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
+          )
+          .append('startIndex', `${page * 10}`),
       };
     }
 

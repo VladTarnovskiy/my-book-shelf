@@ -2,12 +2,13 @@ import { createReducer, on } from '@ngrx/store';
 import * as BooksActions from '../actions/books.action';
 import { IBook } from '../../../shared/models/book.model';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 
 export interface BooksState {
   books: IBook[];
+  page: number;
   previewBook: IBook | null;
   searchValue: string;
   isLoading: boolean;
@@ -15,29 +16,31 @@ export interface BooksState {
   previewError: string | null;
   error: string | null;
   filterType: FilterTypesKeys;
-  filterCategoryType: FilterCategoryKeys;
+  categoryFilterType: CategoryFilterKeys;
 }
 
 export const initialState: BooksState = {
   books: [],
   previewBook: null,
+  page: 1,
   searchValue: '',
   isLoading: false,
   isPreviewLoading: false,
   previewError: null,
   error: null,
   filterType: 'All',
-  filterCategoryType: 'Browse',
+  categoryFilterType: 'Browse',
 };
 
 export const booksReducer = createReducer(
   initialState,
   on(
     BooksActions.FetchBooks,
-    (state, { searchValue, filterType }): BooksState => ({
+    (state, { searchValue, filterType, categoryFilterType }): BooksState => ({
       ...state,
       searchValue,
       filterType,
+      categoryFilterType,
       isLoading: true,
     })
   ),
@@ -80,11 +83,25 @@ export const booksReducer = createReducer(
       isPreviewLoading: false,
     })
   ),
+  // on(
+  //   BooksActions.SetSearchValue,
+  //   (state, { searchValue }): BooksState => ({
+  //     ...state,
+  //     searchValue,
+  //   })
+  // ),
   on(
-    BooksActions.SetFilterCategoryType,
-    (state, { filterCategoryType }): BooksState => ({
+    BooksActions.SetSearchPage,
+    (state, { page }): BooksState => ({
       ...state,
-      filterCategoryType,
+      page,
+    })
+  ),
+  on(
+    BooksActions.SetCategoryFilterType,
+    (state, { categoryFilterType }): BooksState => ({
+      ...state,
+      categoryFilterType,
     })
   ),
   on(

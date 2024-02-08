@@ -27,3 +27,22 @@
     width: 100%;
   }
 }
+
+.show-more {
+  width: 100%;
+  @extend %itemsCenter;
+  justify-content: center;
+  margin-bottom: 23px;
+
+  &__button {
+    width: 209px;
+    height: 61px;
+    border-radius: 5px;
+    font-size: 20px;
+    background: $primary-first;
+    color: $primary-third;
+    text-transform: uppercase;
+    font-family: 'Inter Semi Bold';
+    margin-right: 38px;
+  }
+}

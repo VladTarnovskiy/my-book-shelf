@@ -1,14 +1,19 @@
+import { selectSearchOptions } from './../../../store/books/selectors/books.selector';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FetchBooks } from '../../../store/books/actions/books.action';
+import {
+  FetchBooks,
+  SetSearchPage,
+} from '../../../store/books/actions/books.action';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 import { Observable, Subscription } from 'rxjs';
 import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
+import { ISearchOptions } from '../../../search/interfaces/search';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,10 +26,13 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   searchValue = '';
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
-  filterCategory: FilterCategoryKeys = 'Browse';
-  filterCategory$: Observable<FilterCategoryKeys> = this.store.select(
+  filterCategory: CategoryFilterKeys = 'Browse';
+  filterCategory$: Observable<CategoryFilterKeys> = this.store.select(
     selectBookFilterCategoryType
   );
+  searchOptions$: Observable<ISearchOptions> =
+    this.store.select(selectSearchOptions);
+  page = 1;
   subscription!: Subscription;
 
   constructor(
@@ -33,14 +41,20 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ) {}
 
   onSearch() {
+    this.setDefaultSearchPage();
     this.router.navigateByUrl('search');
     this.store.dispatch(
       FetchBooks({
         searchValue: this.searchValue,
         filterType: this.filterType,
         categoryFilterType: this.filterCategory,
+        page: this.page,
       })
     );
+  }
+
+  setDefaultSearchPage() {
+    this.store.dispatch(SetSearchPage({ page: 1 }));
   }
 
   onFilterToggle() {
@@ -61,8 +75,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.filterCategory$.subscribe((value) => {
-      this.filterCategory = value;
+    this.subscription = this.searchOptions$.subscribe((options) => {
+      this.filterCategory = options.categoryFilterType;
+      this.searchValue = options.searchValue;
+      this.filterCategory = options.categoryFilterType;
     });
   }
 

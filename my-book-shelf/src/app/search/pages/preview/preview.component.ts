@@ -43,6 +43,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
         searchValue: author,
         filterType: 'Author',
         categoryFilterType: 'Browse',
+        page: 1,
       })
     );
   }

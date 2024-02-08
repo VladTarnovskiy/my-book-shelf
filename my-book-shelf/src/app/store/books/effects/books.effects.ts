@@ -15,9 +15,9 @@ export class BooksEffects {
   fetchBooks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BooksActions.FetchBooks),
-      switchMap(({ searchValue, filterType, categoryFilterType }) =>
+      switchMap(({ searchValue, filterType, categoryFilterType, page }) =>
         this.searchService
-          .getBooks(searchValue, filterType, categoryFilterType)
+          .getBooks(searchValue, filterType, categoryFilterType, page)
           .pipe(
             map((books) => BooksActions.FetchBooksSuccess({ books })),
             catchError((error: HttpErrorResponse) => {
