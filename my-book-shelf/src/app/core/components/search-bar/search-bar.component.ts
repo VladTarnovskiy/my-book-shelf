@@ -1,14 +1,16 @@
+import { SetFilterType } from './../../../store/books/actions/books.action';
+import { selectSearchOptions } from './../../../store/books/selectors/books.selector';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FetchBooks } from '../../../store/books/actions/books.action';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
 import { Observable, Subscription } from 'rxjs';
-import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
+import { ISearchOptions } from '../../../search/interfaces/search';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,10 +23,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   searchValue = '';
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
-  filterCategory: FilterCategoryKeys = 'Browse';
-  filterCategory$: Observable<FilterCategoryKeys> = this.store.select(
-    selectBookFilterCategoryType
-  );
+  filterCategory: CategoryFilterKeys = 'Browse';
+  searchOptions$: Observable<ISearchOptions> =
+    this.store.select(selectSearchOptions);
   subscription!: Subscription;
 
   constructor(
@@ -33,14 +34,17 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   ) {}
 
   onSearch() {
-    this.router.navigateByUrl('search');
     this.store.dispatch(
       FetchBooks({
         searchValue: this.searchValue,
         filterType: this.filterType,
         categoryFilterType: this.filterCategory,
+        page: 1,
       })
     );
+    if (this.router.url !== '/search') {
+      this.router.navigateByUrl('search');
+    }
   }
 
   onFilterToggle() {
@@ -57,12 +61,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
+      this.store.dispatch(SetFilterType({ filterType: this.filterType }));
     }
   }
 
   ngOnInit() {
-    this.subscription = this.filterCategory$.subscribe((value) => {
-      this.filterCategory = value;
+    this.subscription = this.searchOptions$.subscribe((options) => {
+      this.filterCategory = options.categoryFilterType;
+      this.searchValue = options.searchValue;
+      this.filterType = options.filterType;
     });
   }
 

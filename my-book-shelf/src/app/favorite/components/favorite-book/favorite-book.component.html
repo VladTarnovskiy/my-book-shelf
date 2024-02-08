@@ -1,10 +1,10 @@
 <div class="book">
   <div class="book-info">
-    <img class="cover" src="assets/logo.svg" alt="Cover" />
-    <p class="title">Hello</p>
+    <img class="cover" [src]="bookData.images.small" alt="Cover" />
+    <p class="title">{{ bookData.title }}</p>
     <p class="author">
-      Hert Fevgyhy,
-      <span class="year">2024</span>
+      {{ bookData.authors[0] }},
+      <span class="year">{{ bookData.publishedDate }}</span>
     </p>
     <div class="rating">4.5 <span class="rating__total">/5</span></div>
   </div>
@@ -12,7 +12,9 @@
     <div class="terms">
       <div class="borrowed">
         <p class="borrowed__title">Borrowed on</p>
-        <p class="borrowed__desc">11 Mar 2023 09:00 AM</p>
+        <p class="borrowed__desc">
+          {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
       </div>
       <div class="submission">
         <p class="submission__title">Submission Due</p>

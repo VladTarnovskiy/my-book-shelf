@@ -1,0 +1,64 @@
+@import 'placeholders';
+@import 'variables';
+
+.lang {
+  @extend %itemsCenter;
+  @extend %shadow;
+  position: relative;
+  border-radius: 40px;
+  height: 47px;
+  padding: 14px 0 14px 25px;
+  margin-right: 25px;
+  background-color: $primary-third;
+
+  &__img {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+  }
+
+  &__title {
+    margin-right: 20px;
+  }
+
+  &__polygon {
+    margin-right: 29px;
+    @extend %transition;
+
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.lang-menu {
+  position: absolute;
+  visibility: hidden;
+  right: 0;
+  bottom: 0;
+  transform: translateY(105%);
+  width: 155px;
+  min-height: 70px;
+  border-radius: 10px;
+  line-height: 26px;
+  background-color: $primary-third;
+  opacity: 0;
+  text-align: start;
+  @extend %shadow;
+  @extend %transition;
+  z-index: 2;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__item {
+    padding: 2px 35px 2px 19px;
+    font-size: 15px;
+
+    &:hover {
+      background-color: $secondary-fourth;
+    }
+  }
+}

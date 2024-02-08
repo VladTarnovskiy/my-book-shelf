@@ -5,11 +5,13 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
-import { ISearchResp } from '../../../shared/interfaces/booksResp';
+import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
 import {
-  FilterCategoryKeys,
+  CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
+import { SetTotalsItems } from '../../../store/books/actions/books.action';
+import { Store } from '@ngrx/store';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -19,7 +21,7 @@ const filterTypes: Record<FilterTypesKeys, string> = {
   Subjects: 'subject',
 };
 
-const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
+const filterCategoryTypes: Record<CategoryFilterKeys, string> = {
   Browse: '',
   Engineering: 'Engineering',
   Medical: 'Medical',
@@ -33,12 +35,16 @@ const filterCategoryTypes: Record<FilterCategoryKeys, string> = {
 })
 export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
   getBooks(
     searchValue: string,
     filterType: FilterTypesKeys,
-    filterCategoryType: FilterCategoryKeys
+    filterCategoryType: CategoryFilterKeys,
+    page: number
   ) {
     const filterTypeValue = filterTypes[filterType];
     const filterCategoryValue = filterCategoryTypes[filterCategoryType];
@@ -60,14 +66,21 @@ export class SearchService {
 
     if (searchValue === '') {
       options = {
-        params: new HttpParams().set('q', `${checkedFilterTypeValue}random`),
+        params: new HttpParams()
+          .set(
+            'q',
+            `${checkedFilterTypeValue}random${checkedCategoryFilterValue}`
+          )
+          .append('startIndex', `${page * 10}`),
       };
     } else {
       options = {
-        params: new HttpParams().set(
-          'q',
-          `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
-        ),
+        params: new HttpParams()
+          .set(
+            'q',
+            `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
+          )
+          .append('startIndex', `${page * 10}`),
       };
     }
 
@@ -75,6 +88,7 @@ export class SearchService {
       .get<ISearchResp>(this.searchURL, options ? options : undefined)
       .pipe(
         map((resp) => {
+          this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
           const transData = resp.items.map((book) => {
             const transBook = {
               id: book.id,
@@ -96,6 +110,27 @@ export class SearchService {
           return transData;
         })
       );
+  }
+
+  getBook(bookId: string) {
+    return this.http.get<IBookResp>(`${this.searchURL}/${bookId}`).pipe(
+      map((book) => {
+        const transBook = {
+          id: book.id,
+          isFavorite: false,
+          title: book.volumeInfo.title || '',
+          authors: book.volumeInfo.authors || ['unknown'],
+          publishedDate: book.volumeInfo.publishedDate || '',
+          images: {
+            small:
+              book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
+            normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
+          },
+          categories: book.volumeInfo?.categories || ['unknown'],
+        };
+        return transBook;
+      })
+    );
   }
 
   handleError(error: HttpErrorResponse) {

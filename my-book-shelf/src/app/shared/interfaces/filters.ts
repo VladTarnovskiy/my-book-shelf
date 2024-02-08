@@ -1,5 +1,5 @@
 export type FilterTypesKeys = 'All' | 'Title' | 'Author' | 'Text' | 'Subjects';
-export type FilterCategoryKeys =
+export type CategoryFilterKeys =
   | 'Browse'
   | 'Engineering'
   | 'Medical'

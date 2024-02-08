@@ -12,5 +12,5 @@ export const AddFavoriteBook = createAction(
 
 export const RemoveFavoriteBook = createAction(
   `${actionSource} Remove Book`,
-  props<{ id: string }>()
+  props<{ bookId: string }>()
 );

@@ -13,6 +13,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'search/preview/:previewId',
+    loadComponent: () =>
+      import('./search/pages/preview/preview.component').then(
+        (m) => m.PreviewComponent
+      ),
+  },
+  {
     path: 'favorite',
     loadComponent: () =>
       import('./favorite/pages/favorite/favorite.component').then(

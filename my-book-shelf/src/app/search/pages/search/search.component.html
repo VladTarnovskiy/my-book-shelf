@@ -6,10 +6,26 @@
     <div class="titles__category">Category</div>
   </div>
   <div class="books">
-    @for (book of books$ | async; track book.id) {
-      <app-search-book [bookData]="book" />
+    @for (book of books; track book.id) {
+      <app-search-book
+        [bookData]="book"
+        (addToFavoriteEvent)="addToFavorite($event)"
+        (removeFromFavoriteEvent)="removeFromFavorite($event)"
+      />
     } @empty {
       Empty list of books
     }
+    @if (isLoading$ | async) {
+      @for (item of skeletonItems; track item) {
+        <app-search-book-skeleton />
+      }
+    }
   </div>
+  @if (isShowMore) {
+    <div class="show-more">
+      <button class="show-more__button" (click)="getNextPage()">
+        Show More
+      </button>
+    </div>
+  }
 </div>

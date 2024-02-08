@@ -15,16 +15,35 @@ export class BooksEffects {
   fetchBooks$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BooksActions.FetchBooks),
-      switchMap(({ searchValue, filterType, categoryFilterType }) =>
+      switchMap(({ searchValue, filterType, categoryFilterType, page }) =>
         this.searchService
-          .getBooks(searchValue, filterType, categoryFilterType)
+          .getBooks(searchValue, filterType, categoryFilterType, page)
           .pipe(
-            map((books) => BooksActions.FetchBooksSuccess({ books })),
+            map((books) => BooksActions.FetchBooksSuccess({ books, page })),
             catchError((error: HttpErrorResponse) => {
               const handleError = this.searchService.handleError(error);
               return of(BooksActions.FetchBooksFailed({ error: handleError }));
             })
           )
+      )
+    );
+  });
+
+  fetchBook$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BooksActions.FetchPreviewBook),
+      switchMap(({ bookId }) =>
+        this.searchService.getBook(bookId).pipe(
+          map((previewBook) =>
+            BooksActions.FetchPreviewBookSuccess({ previewBook })
+          ),
+          catchError((error: HttpErrorResponse) => {
+            const handleError = this.searchService.handleError(error);
+            return of(
+              BooksActions.FetchPreviewBookFailed({ error: handleError })
+            );
+          })
+        )
       )
     );
   });

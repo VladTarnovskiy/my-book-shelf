@@ -20,7 +20,7 @@
       <button class="recent__showAll">Show All</button>
     </h3>
     <div class="recent__books">
-      @for (book of testBooksData; track book.id) {
+      @for (book of recentBooks$ | async; track book.id) {
         <app-home-book [bookData]="book" />
       } @empty {
         Empty list of books

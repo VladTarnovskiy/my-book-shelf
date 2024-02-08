@@ -1,0 +1,58 @@
+@if (book$ | async; as bookData) {
+  <div class="details">
+    <button class="back-but" [routerLink]="['/search']">
+      <img src="assets/arrow.svg" alt="Back" class="back-but__arrow" />
+      <div class="back-but__title">Back to results</div>
+    </button>
+    <div class="content">
+      <div class="book">
+        <div class="cover">
+          <img [src]="bookData.images.normal" alt="Cover" class="cover__img" />
+          <app-preview-options />
+        </div>
+        <div class="description">
+          <div class="description__info">
+            <p class="title">{{ bookData.title }}</p>
+            <p class="author">
+              By
+              <button
+                class="author__name"
+                (click)="searchAuthorBooks(bookData.authors[0])"
+                [routerLink]="['/search']"
+              >
+                {{ bookData.authors[0] }}</button
+              >,
+              {{ bookData.publishedDate | date: 'y' }}
+            </p>
+            <p class="edition">Second Edition</p>
+            <div class="rating">
+              <div class="stars">
+                @for (item of ratingItems; track item) {
+                  <img src="assets/star.svg" alt="Star" class="stars__item" />
+                }
+              </div>
+              <p class="rating__value"><span>5.0</span> Ratings</p>
+            </div>
+            <div class="availability">
+              <div class="availability__title">Availability</div>
+              <div class="availability-item">
+                <img
+                  src="assets/availability.svg"
+                  alt="Availability"
+                  class="availability-item__icon"
+                />
+                <div class="availability-item__title">Hard Copy</div>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="buttons__read">Read</button>
+            <button class="buttons__listen">Listen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+} @else if (isLoading$ | async) {
+  <app-preview-skeleton />
+}

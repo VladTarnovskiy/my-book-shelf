@@ -1,0 +1,140 @@
+@import 'placeholders';
+@import 'variables';
+
+.details {
+  padding: 93px 45px;
+}
+
+.back-but {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  height: 22px;
+  margin-bottom: 22px;
+  width: 151px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.content {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+}
+
+.book {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.cover {
+  width: 278px;
+  height: 445px;
+  margin-right: 71px;
+  padding: 24px 34px;
+  background-color: $primary-third;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+
+  &__img {
+    width: 209px;
+    height: 277px;
+    margin-bottom: 27px;
+    @extend %skeletonBackgroundAnimation;
+  }
+}
+
+.options {
+  @extend %itemsCenter;
+  justify-content: space-between;
+  width: 193px;
+  padding: 6px;
+
+  .option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__icon {
+      width: 25px;
+      height: 25px;
+      margin-bottom: 7px;
+      @extend %skeletonBackgroundAnimation;
+    }
+
+    &__title {
+      width: 31px;
+      height: 12px;
+      @extend %skeletonBackgroundAnimation;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  height: 40px;
+  width: 380px;
+  margin-bottom: 8px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.author {
+  margin-bottom: 18px;
+  width: 140px;
+  height: 15px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.edition {
+  width: 120px;
+  height: 14px;
+  margin-bottom: 42px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.rating {
+  margin-bottom: 35px;
+  @extend %itemsCenter;
+  @extend %skeletonBackgroundAnimation;
+  justify-content: flex-start;
+  width: 173px;
+  height: 16px;
+}
+
+.availability {
+  margin-bottom: 44px;
+
+  &__title {
+    width: 100px;
+    height: 16px;
+    margin-bottom: 11px;
+    @extend %skeletonBackgroundAnimation;
+  }
+}
+
+.availability-item {
+  width: 160px;
+  height: 20px;
+  margin-bottom: 8px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.buttons {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &__read,
+  &__listen {
+    width: 209px;
+    height: 61px;
+    border-radius: 5px;
+    margin-right: 38px;
+    @extend %skeletonBackgroundAnimation;
+  }
+}

@@ -7,7 +7,7 @@
   @extend %itemsCenter;
   justify-content: flex-start;
   border-radius: 10px;
-  height: 125px;
+  min-height: 125px;
   margin-bottom: 23px;
 
   &:hover {
@@ -47,6 +47,7 @@
 .category {
   max-width: 480px;
   width: 100%;
+  margin-right: auto;
 }
 
 .rating {
