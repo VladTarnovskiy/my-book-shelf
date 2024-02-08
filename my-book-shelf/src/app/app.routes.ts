@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/pages/home/home.component';
 import { RecentComponent } from './home/pages/recent/recent.component';
+import { RegistrationComponent } from './auth/pages/registration/registration.component';
 export const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: RegistrationComponent,
+    // component: HomeComponent,
   },
   {
     path: 'recent',
