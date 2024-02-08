@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './profile-menu.component.html',
   styleUrl: './profile-menu.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMenuComponent {
   isMenu = false;

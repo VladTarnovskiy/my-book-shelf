@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IFavoriteBook } from '../../models/favoriteBook';
 import { CommonModule } from '@angular/common';
 
@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteBookComponent {
   @Input({ required: true }) bookData!: IFavoriteBook;

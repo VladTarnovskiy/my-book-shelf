@@ -1,5 +1,10 @@
 import { SearchBookSkeletonComponent } from './../../components/search-book-skeleton/search-book-skeleton.component';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CategoryFilterComponent } from '../../components/category-filter/category-filter.component';
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
 import { Store } from '@ngrx/store';
@@ -36,6 +41,7 @@ import { ISearchOptions } from '../../interfaces/search';
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
   books$: Observable<IBook[]> = this.store.select(selectBooks);

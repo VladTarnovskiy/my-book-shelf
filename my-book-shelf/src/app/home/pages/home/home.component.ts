@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { QuoteComponent } from '../../components/quote/quote.component';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import { selectRecentBooks } from '../../../store/books/selectors/books.selector
   imports: [QuoteComponent, HomeBookComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
   testBooksData = testBookData;

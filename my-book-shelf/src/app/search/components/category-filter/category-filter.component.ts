@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
 import { Store } from '@ngrx/store';
 import { SetCategoryFilterType } from '../../../store/books/actions/books.action';
@@ -11,6 +16,7 @@ import { selectBookFilterCategoryType } from '../../../store/books/selectors/boo
   imports: [],
   templateUrl: './category-filter.component.html',
   styleUrl: './category-filter.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryFilterComponent implements OnInit, OnDestroy {
   isFilter = false;

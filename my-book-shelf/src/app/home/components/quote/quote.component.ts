@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { QuotesService } from '../../../search/services/quotes/quotes.service';
 import { Subscription } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
@@ -9,19 +15,24 @@ import { IQuote } from '../../../search/models/quote';
   imports: [],
   templateUrl: './quote.component.html',
   styleUrl: './quote.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuoteComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   quote!: IQuote | null;
   isActive = [true, false, false, false];
 
-  constructor(private quotesService: QuotesService) {}
+  constructor(
+    private quotesService: QuotesService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   getQuote() {
     this.subscription = this.quotesService
       .getTodayQuote()
       .subscribe((quote) => {
         this.quote = quote;
+        this.cd.detectChanges();
       });
   }
 

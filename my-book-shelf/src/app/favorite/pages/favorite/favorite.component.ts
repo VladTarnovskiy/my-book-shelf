@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FavoriteBookComponent } from '../../components/favorite-book/favorite-book.component';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { IFavoriteBook } from '../../models/favoriteBook';
   imports: [FavoriteBookComponent, CommonModule],
   templateUrl: './favorite.component.html',
   styleUrl: './favorite.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FavoriteComponent {
   favoriteBooks$: Observable<IFavoriteBook[]> =

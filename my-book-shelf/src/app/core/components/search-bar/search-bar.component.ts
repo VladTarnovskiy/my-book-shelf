@@ -1,6 +1,6 @@
 import { SetFilterType } from './../../../store/books/actions/books.action';
 import { selectSearchOptions } from './../../../store/books/selectors/books.selector';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FetchBooks } from '../../../store/books/actions/books.action';
 import { Store } from '@ngrx/store';
@@ -30,7 +30,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   onSearch() {
@@ -70,6 +71,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;
       this.filterType = options.filterType;
+      this.cd.detectChanges();
     });
   }
 
