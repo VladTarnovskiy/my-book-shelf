@@ -27,10 +27,10 @@ export const FetchBooksFailed = createAction(
   props<{ error: string }>()
 );
 
-// export const SetSearchValue = createAction(
-//   `${actionSource} Search Value`,
-//   props<{ searchValue: string }>()
-// );
+export const AddRecentBook = createAction(
+  `${actionSource} Add Recent Book`,
+  props<{ recentBook: IBook }>()
+);
 
 export const SetCategoryFilterType = createAction(
   `${actionSource} Category Filter `,

@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { QuoteComponent } from '../../components/quote/quote.component';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { Observable, Subscription } from 'rxjs';
+import { IBook } from '../../../shared/models/book.model';
+import { selectRecentBooks } from '../../../store/books/selectors/books.selector';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +16,10 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   testBooksData = testBookData;
+  recentBooks$: Observable<IBook[]> = this.store.select(selectRecentBooks);
+  subscription!: Subscription;
+
+  constructor(private store: Store) {}
 }
 
 const testBookData = [

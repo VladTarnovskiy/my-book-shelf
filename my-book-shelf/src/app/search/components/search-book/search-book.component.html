@@ -22,7 +22,11 @@
     </button>
   }
 
-  <button class="preview-but" [routerLink]="['preview', bookData.id]">
+  <button
+    class="preview-but"
+    [routerLink]="['preview', bookData.id]"
+    (click)="addBookToRecent()"
+  >
     Preview
   </button>
 </div>

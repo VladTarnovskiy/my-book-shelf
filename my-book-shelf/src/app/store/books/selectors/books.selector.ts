@@ -8,6 +8,11 @@ export const selectBooks = createSelector(
   (state: BooksState) => state.books
 );
 
+export const selectRecentBooks = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.recentBooks
+);
+
 export const selectBooksLoading = createSelector(
   selectBooksStore,
   (state: BooksState) => state.isLoading
