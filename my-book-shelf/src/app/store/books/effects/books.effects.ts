@@ -19,7 +19,7 @@ export class BooksEffects {
         this.searchService
           .getBooks(searchValue, filterType, categoryFilterType, page)
           .pipe(
-            map((books) => BooksActions.FetchBooksSuccess({ books })),
+            map((books) => BooksActions.FetchBooksSuccess({ books, page })),
             catchError((error: HttpErrorResponse) => {
               const handleError = this.searchService.handleError(error);
               return of(BooksActions.FetchBooksFailed({ error: handleError }));

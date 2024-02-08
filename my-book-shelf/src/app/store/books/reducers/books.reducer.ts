@@ -9,6 +9,7 @@ import {
 export interface BooksState {
   books: IBook[];
   recentBooks: IBook[];
+  totalItems: number;
   page: number;
   previewBook: IBook | null;
   searchValue: string;
@@ -23,6 +24,7 @@ export interface BooksState {
 export const initialState: BooksState = {
   books: [],
   recentBooks: [],
+  totalItems: 0,
   previewBook: null,
   page: 1,
   searchValue: '',
@@ -46,14 +48,21 @@ export const booksReducer = createReducer(
       isLoading: true,
     })
   ),
-  on(
-    BooksActions.FetchBooksSuccess,
-    (state, { books }): BooksState => ({
-      ...state,
-      books,
-      isLoading: false,
-    })
-  ),
+  on(BooksActions.FetchBooksSuccess, (state, { books, page }): BooksState => {
+    if (page === 1) {
+      return {
+        ...state,
+        books,
+        isLoading: false,
+      };
+    } else {
+      return {
+        ...state,
+        books: [...state.books, ...books],
+        isLoading: false,
+      };
+    }
+  }),
   on(
     BooksActions.FetchBooksFailed,
     (state, { error }): BooksState => ({
@@ -125,6 +134,13 @@ export const booksReducer = createReducer(
     (state, { filterType }): BooksState => ({
       ...state,
       filterType,
+    })
+  ),
+  on(
+    BooksActions.SetTotalsItems,
+    (state, { totalItems }): BooksState => ({
+      ...state,
+      totalItems,
     })
   ),
   on(

@@ -28,14 +28,14 @@ export const selectSearchPage = createSelector(
   (state: BooksState) => state.page
 );
 
-export const selectBookFilterType = createSelector(
-  selectBooksStore,
-  (state: BooksState) => state.filterType
-);
-
 export const selectBookFilterCategoryType = createSelector(
   selectBooksStore,
   (state: BooksState) => state.categoryFilterType
+);
+
+export const selectSearchTotalItems = createSelector(
+  selectBooksStore,
+  (state: BooksState) => state.totalItems
 );
 
 export const selectSearchOptions = createSelector(

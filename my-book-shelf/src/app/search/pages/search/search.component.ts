@@ -9,6 +9,7 @@ import {
   selectBooks,
   selectBooksLoading,
   selectSearchOptions,
+  selectSearchTotalItems,
 } from '../../../store/books/selectors/books.selector';
 import { CommonModule } from '@angular/common';
 import {
@@ -41,9 +42,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean> = this.store.select(selectBooksLoading);
   searchOptions$: Observable<ISearchOptions> =
     this.store.select(selectSearchOptions);
+  totalItems$: Observable<number> = this.store.select(selectSearchTotalItems);
   searchOptions!: ISearchOptions;
   books: IBook[] = [];
   skeletonItems = [...Array(10).keys()];
+  isShowMore = false;
   subscription!: Subscription;
   constructor(private store: Store) {}
 
@@ -102,7 +105,16 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.searchOptions = options;
     });
 
+    const secondChildSubscription = this.totalItems$.subscribe((totalItems) => {
+      if (totalItems - 10 * this.searchOptions.page > 10) {
+        this.isShowMore = true;
+      } else {
+        this.isShowMore = false;
+      }
+    });
+
     this.subscription.add(childSubscription);
+    this.subscription.add(secondChildSubscription);
   }
 
   ngOnDestroy() {

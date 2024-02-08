@@ -6,11 +6,6 @@
     <div class="titles__category">Category</div>
   </div>
   <div class="books">
-    @if (isLoading$ | async) {
-      @for (item of skeletonItems; track item) {
-        <app-search-book-skeleton />
-      }
-    }
     @for (book of books; track book.id) {
       <app-search-book
         [bookData]="book"
@@ -20,8 +15,13 @@
     } @empty {
       Empty list of books
     }
+    @if (isLoading$ | async) {
+      @for (item of skeletonItems; track item) {
+        <app-search-book-skeleton />
+      }
+    }
   </div>
-  @if (books.length === 10) {
+  @if (isShowMore) {
     <div class="show-more">
       <button class="show-more__button" (click)="getNextPage()">
         Show More

@@ -51,30 +51,6 @@
   }
 }
 
-.options {
-  @extend %itemsCenter;
-  justify-content: space-between;
-  width: 193px;
-  padding: 6px;
-
-  .option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &__icon {
-      width: 25px;
-      height: 25px;
-      margin-bottom: 7px;
-    }
-
-    &__title {
-      font-family: 'Inter Bold';
-      font-size: 11px;
-    }
-  }
-}
-
 .description {
   display: flex;
   flex-direction: column;

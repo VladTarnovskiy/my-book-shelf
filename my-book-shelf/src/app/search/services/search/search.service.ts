@@ -10,6 +10,8 @@ import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
+import { SetTotalsItems } from '../../../store/books/actions/books.action';
+import { Store } from '@ngrx/store';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -33,7 +35,10 @@ const filterCategoryTypes: Record<CategoryFilterKeys, string> = {
 })
 export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
   getBooks(
     searchValue: string,
@@ -83,6 +88,7 @@ export class SearchService {
       .get<ISearchResp>(this.searchURL, options ? options : undefined)
       .pipe(
         map((resp) => {
+          this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
           const transData = resp.items.map((book) => {
             const transBook = {
               id: book.id,

@@ -14,11 +14,17 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { PreviewSkeletonComponent } from '../../components/preview-skeleton/preview-skeleton.component';
+import { PreviewOptionsComponent } from '../../components/preview-options/preview-options.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [RouterModule, CommonModule, PreviewSkeletonComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    PreviewSkeletonComponent,
+    PreviewOptionsComponent,
+  ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
 })
