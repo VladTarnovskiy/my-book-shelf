@@ -12,13 +12,13 @@
         (addToFavoriteEvent)="addToFavorite($event)"
         (removeFromFavoriteEvent)="removeFromFavorite($event)"
       />
-    } @empty {
-      Empty list of books
     }
     @if (isLoading$ | async) {
       @for (item of skeletonItems; track item) {
         <app-search-book-skeleton />
       }
+    } @else if (!books.length) {
+      Empty list of books
     }
   </div>
   @if (isShowMore) {

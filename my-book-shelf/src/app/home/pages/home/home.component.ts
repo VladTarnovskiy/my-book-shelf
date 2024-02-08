@@ -6,11 +6,12 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
 import { selectRecentBooks } from '../../../store/books/selectors/books.selector';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [QuoteComponent, HomeBookComponent, CommonModule],
+  imports: [QuoteComponent, HomeBookComponent, CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

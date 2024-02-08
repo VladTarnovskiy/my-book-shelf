@@ -17,7 +17,9 @@
   <section class="recent">
     <h3 class="recent__description">
       <h3 class="recent__title">Recent Readings</h3>
-      <button class="recent__showAll">Show All</button>
+      <button class="recent__showAll" [routerLink]="['/recent']">
+        Show All
+      </button>
     </h3>
     <div class="recent__books">
       @for (book of recentBooks$ | async; track book.id) {
