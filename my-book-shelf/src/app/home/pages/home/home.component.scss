@@ -27,6 +27,10 @@
 
   &__showAll {
     color: $primary-fourth;
+
+    &:hover {
+      color: $primary-second;
+    }
   }
 
   &__books {
