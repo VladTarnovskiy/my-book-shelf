@@ -49,8 +49,6 @@ export class RegistrationComponent {
 
   onSubmit() {
     const formUserData = this.registerForm.getRawValue();
-    console.log(formUserData);
-    console.log(this.registerForm.status);
     this.authService.signUp({
       email: formUserData.email,
       password: formUserData.password,

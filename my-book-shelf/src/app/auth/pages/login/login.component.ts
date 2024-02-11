@@ -10,11 +10,12 @@ import { ValidatePassword } from '../../validators/password';
 import { CommonModule } from '@angular/common';
 import { IUserDetailsLoginForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -35,15 +36,13 @@ export class LoginComponent {
 
   onSubmit() {
     const formUserData = this.loginForm.getRawValue();
-    console.log(formUserData);
-    console.log(this.loginForm.status);
 
-    if (this.loginForm.status === 'VALID') {
-      this.authService.login({
-        email: formUserData.email,
-        password: formUserData.password,
-      });
-    }
+    // if (this.loginForm.status === 'VALID') {
+    this.authService.login({
+      email: formUserData.email,
+      password: formUserData.password,
+    });
+    // }
   }
 
   get email() {

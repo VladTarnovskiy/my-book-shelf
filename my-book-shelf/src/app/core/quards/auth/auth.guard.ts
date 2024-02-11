@@ -8,6 +8,7 @@ export const authGuard = () => {
 
   authService.isLoggedIn$.subscribe((isAuth) => {
     if (isAuth) {
+      console.log(isAuth);
       return true;
     } else {
       return router.navigate(['auth/login']);
