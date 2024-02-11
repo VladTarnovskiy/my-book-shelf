@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
-import { QuotesService } from '../../../search/services/quotes/quotes.service';
+import { QuotesService } from '../../../core/services/quotes/quotes.service';
 import { Subscription } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
 import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';

@@ -10,8 +10,8 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   ngOnInit() {
-    alert(
-      'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
-    );
+    // alert(
+    //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
+    // );
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IQuote } from '../../models/quote';
+import { IQuote } from '../../../search/models/quote';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({

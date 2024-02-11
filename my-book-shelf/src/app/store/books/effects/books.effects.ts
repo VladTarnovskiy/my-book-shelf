@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as BooksActions from '../actions/books.action';
-import { SearchService } from '../../../search/services/search/search.service';
+import { SearchService } from '../../../core/services/search/search.service';
 
 @Injectable()
 export class BooksEffects {
