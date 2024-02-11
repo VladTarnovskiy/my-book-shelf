@@ -7,7 +7,7 @@
 
 .registration {
   width: 565px;
-  height: 917px;
+  min-height: 917px;
   padding: 63px 71px 87px 71px;
   margin: auto;
   @extend %shadow;
@@ -93,4 +93,17 @@
 
 .login-link {
   text-decoration: underline;
+}
+
+.ng-touched.ng-invalid:not(form) {
+  border-left: 2px solid #ef4444;
+}
+
+.ng-touched.ng-valid[required],
+.ng-valid.required {
+  border-left: 2px solid #42a948;
+}
+
+.invalid__message {
+  color: rgb(239 68 68);
 }
