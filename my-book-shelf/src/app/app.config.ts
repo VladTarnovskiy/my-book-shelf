@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
@@ -14,6 +14,9 @@ import { booksReducer } from './store/books/reducers/books.reducer';
 import { BooksEffects } from './store/books/effects/books.effects';
 import { favoriteBooksReducer } from './store/favorite/reducers/favorite.reducer';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { firebaseConfig } from '../environments/environment';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,5 +29,9 @@ export const appConfig: ApplicationConfig = {
     }),
     provideEffects(BooksEffects),
     provideRouterStore(),
+    importProvidersFrom([
+      provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),
+      provideAuth(() => getAuth()),
+    ]),
   ],
 };
