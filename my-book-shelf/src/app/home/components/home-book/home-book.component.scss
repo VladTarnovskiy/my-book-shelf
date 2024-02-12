@@ -7,6 +7,12 @@
   border-radius: 5px;
   padding: 16px 15px 13px 15px;
   background-color: $primary-third;
+  @extend %transition;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $secondary-fourth;
+  }
 }
 
 .cover {

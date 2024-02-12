@@ -52,8 +52,21 @@
   height: 100%;
 }
 
+.favorite {
+  width: 25px;
+  height: 25px;
+  margin-left: auto;
+
+  &__but {
+    @extend %itemsCenter;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+  }
+}
+
 .terms {
-  padding: 5px;
+  padding: 0 5px 5px 5px;
 }
 
 .borrowed,

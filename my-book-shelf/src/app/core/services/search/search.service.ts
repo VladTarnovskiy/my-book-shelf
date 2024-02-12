@@ -67,10 +67,7 @@ export class SearchService {
     if (searchValue === '') {
       options = {
         params: new HttpParams()
-          .set(
-            'q',
-            `${checkedFilterTypeValue}random${checkedCategoryFilterValue}`
-          )
+          .set('q', `${checkedFilterTypeValue}''${checkedCategoryFilterValue}`)
           .append('startIndex', `${page * 10}`),
       };
     } else {

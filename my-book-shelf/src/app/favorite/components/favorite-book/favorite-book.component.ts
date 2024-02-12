@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IFavoriteBook } from '../../models/favoriteBook';
 import { CommonModule } from '@angular/common';
 
@@ -12,4 +18,9 @@ import { CommonModule } from '@angular/common';
 })
 export class FavoriteBookComponent {
   @Input({ required: true }) bookData!: IFavoriteBook;
+  @Output() removeFromFavoriteEvent = new EventEmitter<string>();
+
+  removeFromFavorite() {
+    this.removeFromFavoriteEvent.emit(this.bookData.id);
+  }
 }

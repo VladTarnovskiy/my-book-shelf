@@ -19,6 +19,7 @@ export const favoriteBooksReducer = createReducer(
       books: [...state.books].concat({
         ...book,
         borrowedOn: Date.now().toString(),
+        submissionDate: String(Date.now() + 259200000),
       }),
     })
   ),
