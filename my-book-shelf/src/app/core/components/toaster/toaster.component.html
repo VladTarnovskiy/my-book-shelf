@@ -1,0 +1,5 @@
+<div class="toast toast-{{ toast.type }}" [style.bottom.px]="i * 100">
+  <h4 class="toast-heading">{{ toast.title }}</h4>
+  <p>{{ toast.body }}</p>
+  <button class="close" (click)="onClose()">&times;</button>
+</div>
