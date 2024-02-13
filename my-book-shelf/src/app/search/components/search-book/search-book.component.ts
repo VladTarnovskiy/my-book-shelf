@@ -25,15 +25,15 @@ export class SearchBookComponent {
 
   constructor(private booksFacade: BooksFacade) {}
 
-  addToFavorite() {
+  addToFavorite(): void {
     this.addToFavoriteEvent.emit(this.bookData);
   }
 
-  removeFromFavorite() {
+  removeFromFavorite(): void {
     this.removeFromFavoriteEvent.emit(this.bookData.id);
   }
 
-  addBookToRecent() {
+  addBookToRecent(): void {
     this.booksFacade.addRecentBook(this.bookData);
   }
 }

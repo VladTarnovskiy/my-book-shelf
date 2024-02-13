@@ -34,7 +34,7 @@ export class LoginComponent {
     }),
   });
 
-  onSubmit() {
+  onSubmit(): void {
     const formUserData = this.loginForm.getRawValue();
 
     if (this.loginForm.status === 'VALID') {

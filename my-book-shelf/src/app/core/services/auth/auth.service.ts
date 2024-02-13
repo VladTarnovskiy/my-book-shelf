@@ -20,7 +20,13 @@ export class AuthService {
     private router: Router
   ) {}
 
-  async signUp({ email, password }: { email: string; password: string }) {
+  async signUp({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<void> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
       this.router.navigate(['auth/login']);
@@ -29,7 +35,13 @@ export class AuthService {
     }
   }
 
-  async login({ email, password }: { email: string; password: string }) {
+  async login({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }): Promise<void> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       this.isLoggedIn.next(true);
@@ -39,7 +51,7 @@ export class AuthService {
     }
   }
 
-  async logout() {
+  async logout(): Promise<void> {
     await signOut(this.auth)
       .then(() => {
         console.log('Logout successful');

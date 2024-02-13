@@ -20,7 +20,7 @@ export class FavoriteBookComponent {
   @Input({ required: true }) bookData!: IFavoriteBook;
   @Output() removeFromFavoriteEvent = new EventEmitter<string>();
 
-  removeFromFavorite() {
+  removeFromFavorite(): void {
     this.removeFromFavoriteEvent.emit(this.bookData.id);
   }
 }

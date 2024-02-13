@@ -47,7 +47,7 @@ export class RegistrationComponent {
     }),
   });
 
-  onSubmit() {
+  onSubmit(): void {
     const formUserData = this.registerForm.getRawValue();
     if (this.registerForm.status === 'VALID') {
       this.authService.signUp({

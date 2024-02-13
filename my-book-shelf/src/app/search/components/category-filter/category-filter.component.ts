@@ -26,17 +26,17 @@ export class CategoryFilterComponent implements OnInit, OnDestroy {
 
   constructor(private booksFacade: BooksFacade) {}
 
-  onFilterToggle() {
+  onFilterToggle(): void {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose() {
+  onFilterClose(): void {
     setTimeout(() => {
       this.isFilter = false;
     }, 300);
   }
 
-  changeFilterType(event: Event) {
+  changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterCategory = el.getAttribute(
@@ -46,7 +46,7 @@ export class CategoryFilterComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.filterCategory$.subscribe((value) => {
       this.filterCategory = value;
     });

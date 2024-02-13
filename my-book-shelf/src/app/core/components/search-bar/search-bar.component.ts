@@ -30,7 +30,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     private booksFacade: BooksFacade
   ) {}
 
-  onSearch() {
+  onSearch(): void {
     this.booksFacade.fetchBooks(
       this.searchValue,
       this.filterType,
@@ -43,17 +43,17 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFilterToggle() {
+  onFilterToggle(): void {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose() {
+  onFilterClose(): void {
     setTimeout(() => {
       this.isFilter = false;
     }, 300);
   }
 
-  changeFilterType(event: Event) {
+  changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
@@ -61,7 +61,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.searchOptions$.subscribe((options) => {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;

@@ -42,25 +42,25 @@ export class SearchComponent implements OnInit, OnDestroy {
     private favoriteFacade: FavoriteFacade
   ) {}
 
-  addToFavorite(book: IBook) {
+  addToFavorite(book: IBook): void {
     this.favoriteFacade.addFavoriteBook(book);
     this.addFavoriteStatus(book.id);
   }
 
-  removeFromFavorite(bookId: string) {
+  removeFromFavorite(bookId: string): void {
     this.favoriteFacade.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 
-  addFavoriteStatus(bookId: string) {
+  addFavoriteStatus(bookId: string): void {
     this.booksFacade.addFavoriteStatus(bookId);
   }
 
-  removeFavoriteStatus(bookId: string) {
+  removeFavoriteStatus(bookId: string): void {
     this.booksFacade.removeFavoriteStatus(bookId);
   }
 
-  getNextPage() {
+  getNextPage(): void {
     this.setNextPage();
     this.booksFacade.fetchBooks(
       this.searchOptions.searchValue,
@@ -70,11 +70,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  setNextPage() {
+  setNextPage(): void {
     this.booksFacade.setSearchPage(this.searchOptions.page + 1);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.books$.subscribe((books) => {
       if (books) {
         this.favoriteFacade.favoriteBooks$.subscribe((favBooks) => {
@@ -107,7 +107,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.subscription.add(secondChildSubscription);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

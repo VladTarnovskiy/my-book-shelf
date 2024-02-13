@@ -12,11 +12,11 @@ import { RouterModule } from '@angular/router';
 export class ProfileMenuComponent {
   isMenu = false;
 
-  onProfileToggle() {
+  onProfileToggle(): void {
     this.isMenu = !this.isMenu;
   }
 
-  onProfileClose() {
+  onProfileClose(): void {
     setTimeout(() => {
       this.isMenu = false;
     }, 300);

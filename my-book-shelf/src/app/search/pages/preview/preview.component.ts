@@ -35,11 +35,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
   constructor(private booksFacade: BooksFacade) {}
 
-  searchAuthorBooks(author: string) {
+  searchAuthorBooks(author: string): void {
     this.booksFacade.fetchBooks(author, 'Author', 'Browse', 1);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.booksFacade.previewBookId$.subscribe((bookId) => {
       if (bookId) {
         this.booksFacade.fetchPreviewBook(bookId);
@@ -47,7 +47,7 @@ export class PreviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

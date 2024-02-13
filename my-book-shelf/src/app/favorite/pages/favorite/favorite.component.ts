@@ -23,12 +23,12 @@ export class FavoriteComponent {
     private booksFacade: BooksFacade
   ) {}
 
-  removeFromFavorite(bookId: string) {
+  removeFromFavorite(bookId: string): void {
     this.favoriteFacade.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 
-  removeFavoriteStatus(bookId: string) {
+  removeFavoriteStatus(bookId: string): void {
     this.booksFacade.removeFavoriteStatus(bookId);
   }
 }

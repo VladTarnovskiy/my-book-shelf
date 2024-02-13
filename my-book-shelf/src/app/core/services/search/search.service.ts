@@ -4,7 +4,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
 import {
   CategoryFilterKeys,
@@ -12,6 +12,7 @@ import {
 } from '../../../shared/interfaces/filters';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
+import { IBook } from '../../../shared/models/book.model';
 
 const filterTypes: Record<FilterTypesKeys, string> = {
   All: '',
@@ -45,7 +46,7 @@ export class SearchService {
     filterType: FilterTypesKeys,
     filterCategoryType: CategoryFilterKeys,
     page: number
-  ) {
+  ): Observable<IBook[]> {
     const filterTypeValue = filterTypes[filterType];
     const filterCategoryValue = filterCategoryTypes[filterCategoryType];
     let checkedFilterTypeValue: string;
@@ -109,7 +110,7 @@ export class SearchService {
       );
   }
 
-  getBook(bookId: string) {
+  getBook(bookId: string): Observable<IBook> {
     return this.http.get<IBookResp>(`${this.searchURL}/${bookId}`).pipe(
       map((book) => {
         const transBook = {
@@ -130,7 +131,7 @@ export class SearchService {
     );
   }
 
-  handleError(error: HttpErrorResponse) {
+  handleError(error: HttpErrorResponse): string {
     if (error.status === 0) {
       return `An error occurred:', ${error.error}`;
     }
