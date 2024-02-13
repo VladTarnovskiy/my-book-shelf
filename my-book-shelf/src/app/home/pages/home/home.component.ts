@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { QuoteComponent } from '../../components/quote/quote.component';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { selectRecentBooks } from '../../../store/books/selectors/books.selector';
 import { RouterModule } from '@angular/router';
+import { BooksFacade } from '../../../store/books/books.facade';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +17,10 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent {
   testBooksData = testBookData;
-  recentBooks$: Observable<IBook[]> = this.store.select(selectRecentBooks);
+  recentBooks$: Observable<IBook[]> = this.booksFacade.recentBooks$;
   subscription!: Subscription;
 
-  constructor(private store: Store) {}
+  constructor(private booksFacade: BooksFacade) {}
 }
 
 const testBookData = [

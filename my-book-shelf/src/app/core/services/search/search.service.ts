@@ -10,7 +10,7 @@ import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../../shared/interfaces/filters';
-import { SetTotalsItems } from '../../../store/books/actions/books.action';
+import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
 
 const filterTypes: Record<FilterTypesKeys, string> = {

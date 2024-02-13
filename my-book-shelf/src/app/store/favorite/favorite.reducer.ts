@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import * as FavoriteBooksActions from '../actions/favorite.action';
-import { IFavoriteBook } from '../../../favorite/models/favoriteBook';
+import * as FavoriteBooksActions from './favorite.action';
+import { IFavoriteBook } from '../../favorite/models/favoriteBook';
 
 export interface FavoriteBooksState {
   books: IFavoriteBook[];

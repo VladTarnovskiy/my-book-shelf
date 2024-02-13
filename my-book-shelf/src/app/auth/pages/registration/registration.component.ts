@@ -49,13 +49,12 @@ export class RegistrationComponent {
 
   onSubmit() {
     const formUserData = this.registerForm.getRawValue();
-    this.authService.signUp({
-      email: formUserData.email,
-      password: formUserData.password,
-    });
-    // if (this.registerForm.status === 'VALID') {
-    //   console.log(formUserData);
-    // }
+    if (this.registerForm.status === 'VALID') {
+      this.authService.signUp({
+        email: formUserData.email,
+        password: formUserData.password,
+      });
+    }
   }
 
   get name() {

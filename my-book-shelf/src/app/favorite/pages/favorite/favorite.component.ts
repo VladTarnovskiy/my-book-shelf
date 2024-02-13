@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FavoriteBookComponent } from '../../components/favorite-book/favorite-book.component';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.selector';
 import { CommonModule } from '@angular/common';
 import { IFavoriteBook } from '../../models/favoriteBook';
-import { RemoveFavoriteBook } from '../../../store/favorite/actions/favorite.action';
-import { RemoveFavoriteStatus } from '../../../store/books/actions/books.action';
+import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
+import { BooksFacade } from '../../../store/books/books.facade';
 
 @Component({
   selector: 'app-favorite',
@@ -18,15 +16,19 @@ import { RemoveFavoriteStatus } from '../../../store/books/actions/books.action'
 })
 export class FavoriteComponent {
   favoriteBooks$: Observable<IFavoriteBook[]> =
-    this.store.select(selectFavoriteBooks);
-  constructor(private store: Store) {}
+    this.favoriteFacade.favoriteBooks$;
+
+  constructor(
+    private favoriteFacade: FavoriteFacade,
+    private booksFacade: BooksFacade
+  ) {}
 
   removeFromFavorite(bookId: string) {
-    this.store.dispatch(RemoveFavoriteBook({ bookId }));
+    this.favoriteFacade.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 
   removeFavoriteStatus(bookId: string) {
-    this.store.dispatch(RemoveFavoriteStatus({ bookId }));
+    this.booksFacade.removeFavoriteStatus(bookId);
   }
 }

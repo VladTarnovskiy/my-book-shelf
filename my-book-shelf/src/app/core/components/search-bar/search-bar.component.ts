@@ -1,9 +1,5 @@
-import { SetFilterType } from './../../../store/books/actions/books.action';
-import { selectSearchOptions } from './../../../store/books/selectors/books.selector';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FetchBooks } from '../../../store/books/actions/books.action';
-import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import {
   CategoryFilterKeys,
@@ -11,6 +7,7 @@ import {
 } from '../../../shared/interfaces/filters';
 import { Observable, Subscription } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
+import { BooksFacade } from '../../../store/books/books.facade';
 
 @Component({
   selector: 'app-search-bar',
@@ -24,25 +21,23 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
-  searchOptions$: Observable<ISearchOptions> =
-    this.store.select(selectSearchOptions);
+  searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
   subscription!: Subscription;
 
   constructor(
-    private store: Store,
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private booksFacade: BooksFacade
   ) {}
 
   onSearch() {
-    this.store.dispatch(
-      FetchBooks({
-        searchValue: this.searchValue,
-        filterType: this.filterType,
-        categoryFilterType: this.filterCategory,
-        page: 1,
-      })
+    this.booksFacade.fetchBooks(
+      this.searchValue,
+      this.filterType,
+      this.filterCategory,
+      1
     );
+
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
     }
@@ -62,7 +57,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
-      this.store.dispatch(SetFilterType({ filterType: this.filterType }));
+      this.booksFacade.setFilterType(this.filterType);
     }
   }
 
