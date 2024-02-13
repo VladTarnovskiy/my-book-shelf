@@ -9,6 +9,15 @@ import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy';
 
+const filterCategoryList = [
+  'Browse',
+  'Engineering',
+  'Medical',
+  'Arts & Science',
+  'Architecture',
+  'Law',
+];
+
 @Component({
   selector: 'app-category-filter',
   standalone: true,
@@ -18,6 +27,7 @@ import { DestroyDirective } from '../../../core/directives/destroy';
   hostDirectives: [DestroyDirective],
 })
 export class CategoryFilterComponent implements OnInit {
+  filterCategoryList = filterCategoryList;
   isFilter = false;
   filterCategory: CategoryFilterKeys = 'Browse';
   filterCategory$: Observable<CategoryFilterKeys> =

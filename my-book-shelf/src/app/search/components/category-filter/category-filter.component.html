@@ -12,14 +12,9 @@
       [class.active]="isFilter"
       (click)="changeFilterType($event)"
     >
-      <div class="menu__item" data-filterType="Browse">Browse</div>
-      <div class="menu__item" data-filterType="Engineering">Engineering</div>
-      <div class="menu__item" data-filterType="Medical">Medical</div>
-      <div class="menu__item" data-filterType="Arts & Science">
-        Arts & Science
-      </div>
-      <div class="menu__item" data-filterType="Architecture">Architecture</div>
-      <div class="menu__item" data-filterType="Law">Law</div>
+      @for (item of filterCategoryList; track $index) {
+        <div class="menu__item" [attr.data-filterType]="item">{{ item }}</div>
+      }
     </button>
   </button>
 </div>

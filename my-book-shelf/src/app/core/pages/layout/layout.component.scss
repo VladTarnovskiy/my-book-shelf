@@ -1,5 +1,6 @@
 @import 'mixins';
 @import 'variables';
+@import 'placeholders';
 
 .wrapper {
   border-radius: 10px;
@@ -26,6 +27,13 @@
 
 .main {
   margin-top: 22px;
+}
+
+.header {
+  padding: 38px 48px 25px 46px;
+  @extend %itemsCenter;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .sidebar {

@@ -31,18 +31,9 @@
 .slider {
   @extend %itemsCenter;
   justify-content: space-between;
-
-  &__but {
-    border: 1px solid $primary-third;
-    margin-right: 10px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
+  width: 70px;
+  height: 10px;
+  @extend %skeletonBackgroundAnimation;
 
   &__but:last-child {
     margin-right: 0;

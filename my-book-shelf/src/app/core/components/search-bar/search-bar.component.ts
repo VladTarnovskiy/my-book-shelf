@@ -10,6 +10,8 @@ import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy';
 
+const filterTypeList = ['All', 'Title', 'Author', 'Text', 'Subjects'];
+
 @Component({
   selector: 'app-search-bar',
   standalone: true,
@@ -19,6 +21,7 @@ import { DestroyDirective } from '../../directives/destroy';
   hostDirectives: [DestroyDirective],
 })
 export class SearchBarComponent implements OnInit {
+  filterTypeList = filterTypeList;
   searchValue = '';
   isFilter = false;
   filterType: FilterTypesKeys = 'All';

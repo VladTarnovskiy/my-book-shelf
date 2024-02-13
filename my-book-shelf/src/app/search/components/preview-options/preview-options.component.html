@@ -1,14 +1,8 @@
 <div class="options">
-  <div class="option">
-    <img src="assets/details/review.svg" alt="Review" class="option__icon" />
-    <div class="option__title">Review</div>
-  </div>
-  <div class="option">
-    <img src="assets/details/notes.svg" alt="Notes" class="option__icon" />
-    <div class="option__title">Notes</div>
-  </div>
-  <div class="option">
-    <img src="assets/details/share.svg" alt="Share" class="option__icon" />
-    <div class="option__title">Share</div>
-  </div>
+  @for (item of optionsList; track item.title) {
+    <div class="option">
+      <img [src]="item.src" [alt]="item.title" class="option__icon" />
+      <div class="option__title">{{ item.title }}</div>
+    </div>
+  }
 </div>

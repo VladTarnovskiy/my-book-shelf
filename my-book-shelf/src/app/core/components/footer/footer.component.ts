@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+const footerData = [
+  { href: '#', title: 'About' },
+  { href: '#', title: 'Support' },
+  { href: '#', title: 'Terms & Condition' },
+];
+
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -8,4 +14,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './footer.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent {}
+export class FooterComponent {
+  footerData = footerData;
+}
