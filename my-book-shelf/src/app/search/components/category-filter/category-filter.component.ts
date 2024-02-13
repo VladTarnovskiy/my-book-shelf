@@ -5,10 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
-import { Store } from '@ngrx/store';
-import { SetCategoryFilterType } from '../../../store/books/actions/books.action';
 import { Observable, Subscription } from 'rxjs';
-import { selectBookFilterCategoryType } from '../../../store/books/selectors/books.selector';
+import { BooksFacade } from '../../../store/books/books.facade';
 
 @Component({
   selector: 'app-category-filter',
@@ -21,37 +19,34 @@ import { selectBookFilterCategoryType } from '../../../store/books/selectors/boo
 export class CategoryFilterComponent implements OnInit, OnDestroy {
   isFilter = false;
   filterCategory: CategoryFilterKeys = 'Browse';
-  filterCategory$: Observable<CategoryFilterKeys> = this.store.select(
-    selectBookFilterCategoryType
-  );
+  filterCategory$: Observable<CategoryFilterKeys> =
+    this.booksFacade.filterCategoryType$;
 
   subscription!: Subscription;
 
-  constructor(private store: Store) {}
+  constructor(private booksFacade: BooksFacade) {}
 
-  onFilterToggle() {
+  onFilterToggle(): void {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose() {
+  onFilterClose(): void {
     setTimeout(() => {
       this.isFilter = false;
     }, 300);
   }
 
-  changeFilterType(event: Event) {
+  changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
       this.filterCategory = el.getAttribute(
         'data-filterType'
       ) as CategoryFilterKeys;
-      this.store.dispatch(
-        SetCategoryFilterType({ categoryFilterType: this.filterCategory })
-      );
+      this.booksFacade.setCategoryFilterType(this.filterCategory);
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.filterCategory$.subscribe((value) => {
       this.filterCategory = value;
     });

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IBook } from '../../../shared/models/book.model';
+import { IBook } from '../../shared/models/book.model';
 
 const actionSource = '[Favorite]';
 

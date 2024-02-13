@@ -1,4 +1,4 @@
-<div class="book">
+<div class="book" [routerLink]="['search/preview', bookData.id]">
   <img class="cover" [src]="bookData.images.small" alt="Cover" />
   <p class="title">{{ bookData.title }}</p>
   <p class="author">

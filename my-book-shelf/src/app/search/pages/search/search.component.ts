@@ -7,28 +7,12 @@ import {
 } from '@angular/core';
 import { CategoryFilterComponent } from '../../components/category-filter/category-filter.component';
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
-import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import {
-  selectBooks,
-  selectBooksLoading,
-  selectSearchOptions,
-  selectSearchTotalItems,
-} from '../../../store/books/selectors/books.selector';
 import { CommonModule } from '@angular/common';
-import {
-  AddFavoriteBook,
-  RemoveFavoriteBook,
-} from '../../../store/favorite/actions/favorite.action';
-import {
-  AddFavoriteStatus,
-  FetchBooks,
-  RemoveFavoriteStatus,
-  SetSearchPage,
-} from '../../../store/books/actions/books.action';
-import { selectFavoriteBooks } from '../../../store/favorite/selectors/favorite.selector';
 import { ISearchOptions } from '../../interfaces/search';
+import { BooksFacade } from '../../../store/books/books.facade';
+import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
 
 @Component({
   selector: 'app-search',
@@ -44,56 +28,56 @@ import { ISearchOptions } from '../../interfaces/search';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  books$: Observable<IBook[]> = this.store.select(selectBooks);
-  isLoading$: Observable<boolean> = this.store.select(selectBooksLoading);
-  searchOptions$: Observable<ISearchOptions> =
-    this.store.select(selectSearchOptions);
-  totalItems$: Observable<number> = this.store.select(selectSearchTotalItems);
+  books$: Observable<IBook[]> = this.booksFacade.books$;
+  isLoading$: Observable<boolean> = this.booksFacade.booksLoading$;
+  searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
+  totalItems$: Observable<number> = this.booksFacade.searchTotalItems$;
   searchOptions!: ISearchOptions;
   books: IBook[] = [];
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
   subscription!: Subscription;
-  constructor(private store: Store) {}
+  constructor(
+    private booksFacade: BooksFacade,
+    private favoriteFacade: FavoriteFacade
+  ) {}
 
-  addToFavorite(book: IBook) {
-    this.store.dispatch(AddFavoriteBook({ book }));
+  addToFavorite(book: IBook): void {
+    this.favoriteFacade.addFavoriteBook(book);
     this.addFavoriteStatus(book.id);
   }
 
-  removeFromFavorite(bookId: string) {
-    this.store.dispatch(RemoveFavoriteBook({ bookId }));
+  removeFromFavorite(bookId: string): void {
+    this.favoriteFacade.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 
-  addFavoriteStatus(bookId: string) {
-    this.store.dispatch(AddFavoriteStatus({ bookId }));
+  addFavoriteStatus(bookId: string): void {
+    this.booksFacade.addFavoriteStatus(bookId);
   }
 
-  removeFavoriteStatus(bookId: string) {
-    this.store.dispatch(RemoveFavoriteStatus({ bookId }));
+  removeFavoriteStatus(bookId: string): void {
+    this.booksFacade.removeFavoriteStatus(bookId);
   }
 
-  getNextPage() {
+  getNextPage(): void {
     this.setNextPage();
-    this.store.dispatch(
-      FetchBooks({
-        searchValue: this.searchOptions.searchValue,
-        filterType: this.searchOptions.filterType,
-        categoryFilterType: this.searchOptions.categoryFilterType,
-        page: this.searchOptions.page,
-      })
+    this.booksFacade.fetchBooks(
+      this.searchOptions.searchValue,
+      this.searchOptions.filterType,
+      this.searchOptions.categoryFilterType,
+      this.searchOptions.page
     );
   }
 
-  setNextPage() {
-    this.store.dispatch(SetSearchPage({ page: this.searchOptions.page + 1 }));
+  setNextPage(): void {
+    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription = this.books$.subscribe((books) => {
       if (books) {
-        this.store.select(selectFavoriteBooks).subscribe((favBooks) => {
+        this.favoriteFacade.favoriteBooks$.subscribe((favBooks) => {
           const favIDs = favBooks.map((favBook) => favBook.id);
           const checkedBooks = books?.map((book) => {
             if (favIDs.includes(book.id)) {
@@ -123,7 +107,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.subscription.add(secondChildSubscription);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

@@ -6,33 +6,24 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ValidateName } from '../../validators/name';
 import { ValidatePassword } from '../../validators/password';
 import { CommonModule } from '@angular/common';
-import { IUserDetailsRegistrationForm } from '../../models/user';
+import { IUserDetailsLoginForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-registration',
+  selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.scss',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationComponent {
+export class LoginComponent {
   constructor(private authService: AuthService) {}
 
-  registerForm = new FormGroup<IUserDetailsRegistrationForm>({
-    name: new FormControl('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.maxLength(40),
-        ValidateName(),
-      ],
-    }),
+  loginForm = new FormGroup<IUserDetailsLoginForm>({
     email: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required, Validators.email],
@@ -41,31 +32,24 @@ export class RegistrationComponent {
       nonNullable: true,
       validators: [Validators.required, ValidatePassword()],
     }),
-    confirmPassword: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, ValidatePassword()],
-    }),
   });
 
   onSubmit(): void {
-    const formUserData = this.registerForm.getRawValue();
-    if (this.registerForm.status === 'VALID') {
-      this.authService.signUp({
+    const formUserData = this.loginForm.getRawValue();
+
+    if (this.loginForm.status === 'VALID') {
+      this.authService.login({
         email: formUserData.email,
         password: formUserData.password,
       });
     }
   }
 
-  get name() {
-    return this.registerForm.get('name');
-  }
-
   get email() {
-    return this.registerForm.get('email');
+    return this.loginForm.get('email');
   }
 
   get password() {
-    return this.registerForm.get('password');
+    return this.loginForm.get('password');
   }
 }

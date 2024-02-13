@@ -5,7 +5,7 @@
   padding-top: 75px;
 }
 
-.registration {
+.login {
   width: 565px;
   min-height: 917px;
   padding: 63px 71px 87px 71px;
@@ -24,12 +24,12 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 31px;
+  margin-bottom: 42px;
 
   &__icon {
     width: 150px;
     height: 92px;
-    margin-bottom: 55px;
+    margin-bottom: 62px;
   }
 
   &__title {
@@ -51,7 +51,7 @@
 }
 
 .form-item {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 
   &__title {
     font-family: 'Inter Semi Bold';
@@ -73,16 +73,16 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin-top: 18px;
+  margin-top: 55px;
 
-  &__reg {
+  &__login {
     height: 48px;
     width: 100%;
     background-color: $primary-first;
     font-family: 'Inter Semi Bold';
     color: $primary-third;
     border-radius: 8px;
-    margin-bottom: 38px;
+    margin-bottom: 79px;
   }
 }
 

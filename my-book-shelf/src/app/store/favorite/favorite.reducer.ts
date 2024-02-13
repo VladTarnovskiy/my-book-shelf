@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import * as FavoriteBooksActions from '../actions/favorite.action';
-import { IFavoriteBook } from '../../../favorite/models/favoriteBook';
+import * as FavoriteBooksActions from './favorite.action';
+import { IFavoriteBook } from '../../favorite/models/favoriteBook';
 
 export interface FavoriteBooksState {
   books: IFavoriteBook[];
@@ -19,6 +19,7 @@ export const favoriteBooksReducer = createReducer(
       books: [...state.books].concat({
         ...book,
         borrowedOn: Date.now().toString(),
+        submissionDate: String(Date.now() + 259200000),
       }),
     })
   ),

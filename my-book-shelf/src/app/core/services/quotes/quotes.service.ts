@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IQuote } from '../../models/quote';
+import { IQuote } from '../../../search/models/quote';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class QuotesService {
 
   constructor(private http: HttpClient) {}
 
-  getTodayQuote() {
+  getTodayQuote(): Observable<IQuote> {
     const interceptorSkipHeader = new HttpHeaders({
       'X-Skip-Interceptor': '',
     });

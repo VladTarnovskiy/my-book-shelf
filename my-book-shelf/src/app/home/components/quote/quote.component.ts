@@ -5,7 +5,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
-import { QuotesService } from '../../../search/services/quotes/quotes.service';
+import { QuotesService } from '../../../core/services/quotes/quotes.service';
 import { Subscription } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
 import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';
@@ -30,7 +30,7 @@ export class QuoteComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef
   ) {}
 
-  getQuote() {
+  getQuote(): void {
     this.isLoading = true;
     this.subscription = this.quotesService.getTodayQuote().subscribe({
       next: (quote) => {
@@ -47,7 +47,7 @@ export class QuoteComponent implements OnInit, OnDestroy {
     });
   }
 
-  setNewQuote(el: number) {
+  setNewQuote(el: number): void {
     this.getQuote();
     this.isActive = this.isActive.map((_, index) => {
       if (el === index) {
@@ -58,11 +58,11 @@ export class QuoteComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getQuote();
   }
 }

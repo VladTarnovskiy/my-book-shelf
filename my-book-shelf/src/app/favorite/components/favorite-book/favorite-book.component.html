@@ -9,6 +9,11 @@
     <div class="rating">4.5 <span class="rating__total">/5</span></div>
   </div>
   <div class="additional">
+    <div class="favorite">
+      <button class="favorite__but" (click)="removeFromFavorite()">
+        <img class="favorite__cover" src="assets/heart.svg" alt="Favorite" />
+      </button>
+    </div>
     <div class="terms">
       <div class="borrowed">
         <p class="borrowed__title">Borrowed on</p>
@@ -18,7 +23,9 @@
       </div>
       <div class="submission">
         <p class="submission__title">Submission Due</p>
-        <p class="submission__desc">14 Mar 2023</p>
+        <p class="submission__desc">
+          {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
+        </p>
       </div>
     </div>
     <div class="links">

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { selectRecentBooks } from '../../../store/books/selectors/books.selector';
+import { selectRecentBooks } from '../../../store/books/books.selector';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';

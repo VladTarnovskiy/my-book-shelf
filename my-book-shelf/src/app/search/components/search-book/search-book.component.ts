@@ -8,8 +8,7 @@ import {
 import { IBook } from '../../../shared/models/book.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AddRecentBook } from '../../../store/books/actions/books.action';
+import { BooksFacade } from '../../../store/books/books.facade';
 
 @Component({
   selector: 'app-search-book',
@@ -24,17 +23,17 @@ export class SearchBookComponent {
   @Output() addToFavoriteEvent = new EventEmitter<IBook>();
   @Output() removeFromFavoriteEvent = new EventEmitter<string>();
 
-  constructor(private store: Store) {}
+  constructor(private booksFacade: BooksFacade) {}
 
-  addToFavorite() {
+  addToFavorite(): void {
     this.addToFavoriteEvent.emit(this.bookData);
   }
 
-  removeFromFavorite() {
+  removeFromFavorite(): void {
     this.removeFromFavoriteEvent.emit(this.bookData.id);
   }
 
-  addBookToRecent() {
-    this.store.dispatch(AddRecentBook({ recentBook: this.bookData }));
+  addBookToRecent(): void {
+    this.booksFacade.addRecentBook(this.bookData);
   }
 }

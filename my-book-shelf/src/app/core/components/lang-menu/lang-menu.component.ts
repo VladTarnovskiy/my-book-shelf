@@ -11,11 +11,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 export class LangMenuComponent {
   isMenu = false;
 
-  onLangToggle() {
+  onLangToggle(): void {
     this.isMenu = !this.isMenu;
   }
 
-  onLangClose() {
+  onLangClose(): void {
     setTimeout(() => {
       this.isMenu = false;
     }, 300);
