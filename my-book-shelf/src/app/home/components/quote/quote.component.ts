@@ -1,14 +1,15 @@
 import {
   Component,
   OnInit,
-  OnDestroy,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  inject,
 } from '@angular/core';
 import { QuotesService } from '../../../core/services/quotes/quotes.service';
-import { Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
 import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';
+import { DestroyDirective } from '../../../core/directives/destroy';
 
 @Component({
   selector: 'app-quote',
@@ -17,13 +18,14 @@ import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.compone
   templateUrl: './quote.component.html',
   styleUrl: './quote.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [DestroyDirective],
 })
-export class QuoteComponent implements OnInit, OnDestroy {
-  subscription!: Subscription;
+export class QuoteComponent implements OnInit {
   quote!: IQuote | null;
   isLoading = false;
   isError = false;
   isActive = [true, false, false, false];
+  destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private quotesService: QuotesService,
@@ -32,19 +34,22 @@ export class QuoteComponent implements OnInit, OnDestroy {
 
   getQuote(): void {
     this.isLoading = true;
-    this.subscription = this.quotesService.getTodayQuote().subscribe({
-      next: (quote) => {
-        this.quote = quote;
-        this.isLoading = false;
-        this.isError = false;
-        this.cd.detectChanges();
-      },
-      error: () => {
-        this.isLoading = false;
-        this.isError = true;
-        this.cd.detectChanges();
-      },
-    });
+    this.quotesService
+      .getTodayQuote()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (quote) => {
+          this.quote = quote;
+          this.isLoading = false;
+          this.isError = false;
+          this.cd.detectChanges();
+        },
+        error: () => {
+          this.isLoading = false;
+          this.isError = true;
+          this.cd.detectChanges();
+        },
+      });
   }
 
   setNewQuote(el: number): void {
@@ -56,10 +61,6 @@ export class QuoteComponent implements OnInit, OnDestroy {
         return false;
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   ngOnInit(): void {

@@ -1,28 +1,28 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
   OnInit,
+  inject,
 } from '@angular/core';
 import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
+import { DestroyDirective } from '../../../core/directives/destroy';
 
 @Component({
   selector: 'app-category-filter',
   standalone: true,
-  imports: [],
   templateUrl: './category-filter.component.html',
   styleUrl: './category-filter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [DestroyDirective],
 })
-export class CategoryFilterComponent implements OnInit, OnDestroy {
+export class CategoryFilterComponent implements OnInit {
   isFilter = false;
   filterCategory: CategoryFilterKeys = 'Browse';
   filterCategory$: Observable<CategoryFilterKeys> =
     this.booksFacade.filterCategoryType$;
-
-  subscription!: Subscription;
+  destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
 
@@ -47,12 +47,8 @@ export class CategoryFilterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.filterCategory$.subscribe((value) => {
+    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
       this.filterCategory = value;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
