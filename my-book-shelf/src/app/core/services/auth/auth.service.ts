@@ -49,7 +49,9 @@ export class AuthService {
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
-      this.toaster.show('error', 'Check it out!', 'Login error');
+      if (error instanceof Error) {
+        this.errorHandling(error);
+      }
     }
   }
 
@@ -59,5 +61,9 @@ export class AuthService {
     } catch (error) {
       this.toaster.show('error', 'Check it out!', 'Logout error');
     }
+  }
+
+  errorHandling(error: Error) {
+    this.toaster.show('error', error.name, error.message);
   }
 }

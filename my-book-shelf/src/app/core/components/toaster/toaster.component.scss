@@ -1,26 +1,26 @@
 .toast {
   width: 300px;
-  height: 80px;
-  padding: 8px 12px;
+  min-height: 80px;
+  padding: 23px 12px;
   margin-top: 16px;
   border: 1px solid transparent;
   border-radius: 1px;
   animation: move 1s both;
 }
 
-.toast-success {
+.success {
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
 }
 
-.toast-error {
+.error {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
 
-.toast-warning {
+.warning {
   color: #856404;
   background-color: #fff3cd;
   border-color: #ffeeba;
@@ -35,7 +35,8 @@
 }
 
 .toast-heading {
-  margin-top: 10px;
+  font-family: 'Inter Semi Bold';
+  margin-bottom: 10px;
 }
 
 @keyframes move {
