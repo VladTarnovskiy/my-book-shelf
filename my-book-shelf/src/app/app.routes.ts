@@ -23,6 +23,14 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'recommended',
+        loadComponent: () =>
+          import('./home/pages/recommended/recommended.component').then(
+            (m) => m.RecommendedComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
         path: 'search',
         loadComponent: () =>
           import('./search/pages/search/search.component').then(
