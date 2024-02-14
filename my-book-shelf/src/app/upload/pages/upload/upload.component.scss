@@ -1,0 +1,93 @@
+@import 'placeholders';
+@import 'variables';
+
+.upload {
+  padding: 46px 89px 28px 100px;
+  width: 732px;
+  min-height: 845px;
+  border-radius: 10px;
+  color: $primary-fifth;
+  background-color: $primary-third;
+  margin: auto;
+  margin-bottom: 38px;
+}
+
+.title {
+  font-family: 'Inter Semi Bold';
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 39px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+  font-size: 16px;
+
+  &__title {
+    font-family: 'Inter Semi Bold';
+    margin-bottom: 22px;
+  }
+
+  &__input {
+    width: 100%;
+    height: 59px;
+    border-radius: 10px;
+    padding: 20px 30px;
+    border: 1px solid $primary-sixth;
+  }
+}
+
+.form-item.file,
+.form-item.image {
+  .form-item__title {
+    margin-bottom: 12px;
+  }
+
+  .form-item__input {
+    padding: 13px 30px;
+  }
+
+  .form-item__input::file-selector-button {
+    padding: 5px;
+    border: 1px solid $primary-sixth;
+    border-radius: 3px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.form-item.description {
+  .form-item__input {
+    min-height: 108px;
+  }
+}
+
+.buttons {
+  padding-top: 7px;
+
+  &__submit {
+    display: block;
+    height: 65px;
+    width: 316px;
+    margin: auto;
+    background-color: $primary-first;
+    font-family: 'Inter Semi Bold';
+    color: $primary-third;
+    border-radius: 5px;
+  }
+}
+
+.ng-touched.ng-invalid:not(form) {
+  border-left: 2px solid #ef4444;
+}
+
+.ng-touched.ng-valid[required],
+.ng-valid.required {
+  border-left: 2px solid #42a948;
+}
+
+.invalid__message {
+  color: rgb(239 68 68);
+}

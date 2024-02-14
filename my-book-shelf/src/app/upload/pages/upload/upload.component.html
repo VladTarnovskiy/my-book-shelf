@@ -1,0 +1,87 @@
+<div class="upload">
+  <div class="title">Upload Your Book</div>
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-item">
+      <label for="title" class="form-item__label">
+        <div class="form-item__title">Title</div>
+        <input
+          id="title"
+          formControlName="title"
+          placeholder="Book title"
+          required
+          type="text"
+          class="form-item__input"
+        />
+      </label>
+      <div *ngIf="title?.errors?.['required']" class="invalid__message">
+        please enter a title
+      </div>
+    </div>
+    <div class="form-item">
+      <label for="author" class="form-item__label">
+        <div class="form-item__title">Author</div>
+        <input
+          id="author"
+          formControlName="author"
+          placeholder="Author"
+          required
+          type="text"
+          class="form-item__input"
+        />
+      </label>
+      <div *ngIf="author?.errors?.['required']" class="invalid__message">
+        please enter a author
+      </div>
+    </div>
+    <div class="form-item description">
+      <label for="description" class="form-item__label">
+        <div class="form-item__title">Description</div>
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Purpose"
+          required
+          class="form-item__input"
+        ></textarea>
+      </label>
+      <div *ngIf="description?.errors?.['required']" class="invalid__message">
+        please enter a description
+      </div>
+    </div>
+    <div class="form-item file">
+      <label for="file" class="form-item__label">
+        <div class="form-item__title">File</div>
+        <input
+          id="file"
+          formControlName="file"
+          placeholder="Upload book file"
+          required
+          type="file"
+          class="form-item__input"
+        />
+      </label>
+      <div *ngIf="file?.errors?.['required']" class="invalid__message">
+        please choose a file
+      </div>
+    </div>
+    <div class="form-item image">
+      <label for="image" class="form-item__label">
+        <div class="form-item__title">Image</div>
+        <input
+          id="image"
+          formControlName="image"
+          placeholder="Image"
+          required
+          type="file"
+          class="form-item__input"
+        />
+      </label>
+      <div *ngIf="image?.errors?.['required']" class="invalid__message">
+        please choose a image
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="submit" class="buttons__submit">UPLOAD</button>
+    </div>
+  </form>
+</div>

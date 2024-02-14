@@ -10,7 +10,7 @@ const navigationList = [
     title: 'Favorite',
   },
   { link: '/', icon: 'assets/navigation/bookshelf.svg', title: 'My Books' },
-  { link: '/', icon: 'assets/navigation/give-gift.svg', title: 'Upload' },
+  { link: '/upload', icon: 'assets/navigation/give-gift.svg', title: 'Upload' },
 ];
 
 @Component({
