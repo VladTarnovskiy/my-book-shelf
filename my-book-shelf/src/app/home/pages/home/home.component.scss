@@ -34,7 +34,8 @@
   }
 
   &__books {
-    @extend %itemsCenter;
+    display: flex;
+    align-items: flex-start;
     justify-content: flex-start;
     column-gap: 39px;
     margin-bottom: 53px;

@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { Toaster, ToasterType } from '../../interfaces/toaster';
+import { Toaster, ToasterType } from '../../models/toaster';
 import { Injectable } from '@angular/core';
 
 @Injectable({

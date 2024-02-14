@@ -96,12 +96,9 @@ export class SearchComponent implements OnInit {
       }
     });
 
-    this.searchOptions$
-      .pipe(takeUntil(this.destroy$))
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((options) => {
-        this.searchOptions = options;
-      });
+    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
+      this.searchOptions = options;
+    });
 
     this.totalItems$.pipe(takeUntil(this.destroy$)).subscribe((totalItems) => {
       if (totalItems - 10 * this.searchOptions.page > 10) {

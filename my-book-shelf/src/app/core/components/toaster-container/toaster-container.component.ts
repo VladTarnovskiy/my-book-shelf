@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Toaster } from '../../interfaces/toaster';
+import { Toaster } from '../../models/toaster';
 import { ToasterComponent } from '../toaster/toaster.component';
 import { ToasterService } from '../../services/toaster/toaster.service';
 import { CommonModule } from '@angular/common';

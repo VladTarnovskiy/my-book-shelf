@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { QuoteComponent } from '../../components/quote/quote.component';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,8 @@ import { Observable, Subscription } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
 import { RouterModule } from '@angular/router';
 import { BooksFacade } from '../../../store/books/books.facade';
+import { RecommendedBooksFacade } from '../../../store/recommendedBooks/recommendedBooks.facade';
+import { recommendedGenerator } from '../../../core/utils/recStubGenerator';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,23 @@ import { BooksFacade } from '../../../store/books/books.facade';
   styleUrl: './home.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   testBooksData = testBookData;
   recentBooks$: Observable<IBook[]> = this.booksFacade.recentBooks$;
+  recommendedBooks$: Observable<IBook[]> =
+    this.recommendedBooksFacade.recommendedBooks$;
   subscription!: Subscription;
 
-  constructor(private booksFacade: BooksFacade) {}
+  constructor(
+    private booksFacade: BooksFacade,
+    private recommendedBooksFacade: RecommendedBooksFacade
+  ) {}
+
+  ngOnInit(): void {
+    const searchValue = recommendedGenerator();
+    console.log(searchValue);
+    this.recommendedBooksFacade.fetchRecommendedBooks(searchValue);
+  }
 }
 
 const testBookData = [
