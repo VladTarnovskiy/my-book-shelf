@@ -40,13 +40,29 @@ export const booksReducer = createReducer(
   initialState,
   on(
     BooksActions.FetchBooks,
-    (state, { searchValue, filterType, categoryFilterType }): BooksState => ({
-      ...state,
-      searchValue,
-      filterType,
-      categoryFilterType,
-      isLoading: true,
-    })
+    (
+      state,
+      { searchValue, filterType, categoryFilterType, page }
+    ): BooksState => {
+      if (page === 1) {
+        return {
+          ...state,
+          books: [],
+          searchValue,
+          filterType,
+          categoryFilterType,
+          isLoading: true,
+        };
+      } else {
+        return {
+          ...state,
+          searchValue,
+          filterType,
+          categoryFilterType,
+          isLoading: true,
+        };
+      }
+    }
   ),
   on(BooksActions.FetchBooksSuccess, (state, { books, page }): BooksState => {
     if (page === 1) {

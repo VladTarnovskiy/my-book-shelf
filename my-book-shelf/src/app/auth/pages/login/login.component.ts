@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const formUserData = this.loginForm.getRawValue();
 
-    if (this.loginForm.status === 'VALID') {
-      this.authService.login({
-        email: formUserData.email,
-        password: formUserData.password,
-      });
-    }
+    // if (this.loginForm.status === 'VALID') {
+    this.authService.login({
+      email: formUserData.email,
+      password: formUserData.password,
+    });
+    // }
   }
 
   get email() {
