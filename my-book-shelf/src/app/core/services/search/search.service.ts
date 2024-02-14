@@ -5,16 +5,20 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
+import { IBookResp, ISearchResp } from '../../interfaces/booksResp';
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
   filterCategoryTypes,
   filterTypes,
-} from '../../../shared/interfaces/filters';
+} from '../../interfaces/filters';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
 import { IBook } from '../../../shared/models/book.model';
+import {
+  transformRespBookData,
+  transformRespBooksData,
+} from '../../utils/transformRespData';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +41,6 @@ export class SearchService {
     let checkedFilterTypeValue: string;
     let checkedCategoryFilterValue: string;
     let options: { params: HttpParams };
-
-    //???????????????????
 
     if (filterTypeValue === '') {
       checkedFilterTypeValue = '';
@@ -74,24 +76,7 @@ export class SearchService {
       .pipe(
         map((resp) => {
           this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
-          const transData = resp.items.map((book) => {
-            const transBook = {
-              id: book.id,
-              isFavorite: false,
-              title: book.volumeInfo.title || '',
-              authors: book.volumeInfo.authors || ['unknown'],
-              publishedDate: book.volumeInfo.publishedDate || '',
-              images: {
-                small:
-                  book.volumeInfo.imageLinks?.smallThumbnail ||
-                  'assets/logo.svg',
-                normal:
-                  book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
-              },
-              categories: book.volumeInfo?.categories || ['unknown'],
-            };
-            return transBook;
-          });
+          const transData = transformRespBooksData(resp);
           return transData;
         })
       );
@@ -100,19 +85,7 @@ export class SearchService {
   getBook(bookId: string): Observable<IBook> {
     return this.http.get<IBookResp>(`${this.searchURL}/${bookId}`).pipe(
       map((book) => {
-        const transBook = {
-          id: book.id,
-          isFavorite: false,
-          title: book.volumeInfo.title || '',
-          authors: book.volumeInfo.authors || ['unknown'],
-          publishedDate: book.volumeInfo.publishedDate || '',
-          images: {
-            small:
-              book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
-            normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
-          },
-          categories: book.volumeInfo?.categories || ['unknown'],
-        };
+        const transBook = transformRespBookData(book);
         return transBook;
       })
     );
@@ -127,24 +100,7 @@ export class SearchService {
       .get<ISearchResp>(this.searchURL, options ? options : undefined)
       .pipe(
         map((resp) => {
-          const transData = resp.items.map((book) => {
-            const transBook = {
-              id: book.id,
-              isFavorite: false,
-              title: book.volumeInfo.title || '',
-              authors: book.volumeInfo.authors || ['unknown'],
-              publishedDate: book.volumeInfo.publishedDate || '',
-              images: {
-                small:
-                  book.volumeInfo.imageLinks?.smallThumbnail ||
-                  'assets/logo.svg',
-                normal:
-                  book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
-              },
-              categories: book.volumeInfo?.categories || ['unknown'],
-            };
-            return transBook;
-          });
+          const transData = transformRespBooksData(resp);
           return transData;
         })
       );

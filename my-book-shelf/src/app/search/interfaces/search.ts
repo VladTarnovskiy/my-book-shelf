@@ -1,7 +1,7 @@
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
-} from '../../shared/interfaces/filters';
+} from '../../core/interfaces/filters';
 
 export interface ISearchOptions {
   page: number;

@@ -16,7 +16,7 @@ import {
 import {
   FilterTypesKeys,
   CategoryFilterKeys,
-} from '../../shared/interfaces/filters';
+} from '../../core/interfaces/filters';
 import { IBook } from '../../shared/models/book.model';
 import * as BooksActions from './books.action';
 

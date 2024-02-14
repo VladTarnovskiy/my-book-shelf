@@ -9,10 +9,16 @@
       </button>
     </h3>
     <div class="recommended__books">
-      @for (recBook of recommendedBooks$ | async; track recBook.id) {
-        <app-home-book [bookData]="recBook" />
-      } @empty {
-        Empty list of books
+      @if (recommendedBooksIsLoading$ | async) {
+        @for (skeleton of skeletonItems; track skeleton) {
+          <app-home-book-skeleton />
+        }
+      } @else {
+        @for (recBook of recommendedBooks$ | async; track recBook.id) {
+          <app-home-book [bookData]="recBook" />
+        } @empty {
+          Empty list of books
+        }
       }
     </div>
   </section>

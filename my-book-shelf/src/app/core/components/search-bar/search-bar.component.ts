@@ -1,10 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  CategoryFilterKeys,
-  FilterTypesKeys,
-} from '../../../shared/interfaces/filters';
+import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
 import { Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';

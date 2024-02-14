@@ -3,7 +3,7 @@ import { IBook } from '../../shared/models/book.model';
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
-} from '../../shared/interfaces/filters';
+} from '../../core/interfaces/filters';
 
 const actionSource = '[Books]';
 

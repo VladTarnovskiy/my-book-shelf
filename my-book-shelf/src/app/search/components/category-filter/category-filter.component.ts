@@ -4,7 +4,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
+import { CategoryFilterKeys } from '../../../core/interfaces/filters';
 import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy';
