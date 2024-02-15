@@ -17,18 +17,19 @@
             required
           />
         </label>
-        <div *ngIf="name?.errors?.['required']" class="invalid__message">
-          please enter a username
-        </div>
-        <div *ngIf="name?.errors?.['maxlength']" class="invalid__message">
-          username should contains less then 40 symbols
-        </div>
-        <div
-          *ngIf="name?.errors?.['forbiddenUsername']"
-          class="invalid__message"
-        >
-          {{ name?.errors?.['forbiddenUsername'].value }}
-        </div>
+        @if (name?.hasError('required')) {
+          <div class="invalid__message">please enter a username</div>
+        }
+        @if (name?.hasError('maxlength')) {
+          <div class="invalid__message">
+            username should contains less then 40 symbols
+          </div>
+        }
+        @if (name?.hasError('forbiddenUsername')) {
+          <div class="invalid__message">
+            {{ name?.errors?.['forbiddenUsername'].value }}
+          </div>
+        }
       </div>
       <div class="form-item">
         <label for="email" class="form-item__label">
@@ -41,12 +42,12 @@
             class="form-item__input"
           />
         </label>
-        <div *ngIf="email?.errors?.['required']" class="invalid__message">
-          please enter a email
-        </div>
-        <div *ngIf="email?.errors?.['email']" class="invalid__message">
-          the email is invalid
-        </div>
+        @if (email?.hasError('required')) {
+          <div class="invalid__message">please enter a email</div>
+        }
+        @if (email?.hasError('email')) {
+          <div class="invalid__message">the email is invalid</div>
+        }
       </div>
       <div class="form-item">
         <label for="password" class="form-item__label">
@@ -60,15 +61,14 @@
             class="form-item__input"
           />
         </label>
-        <div *ngIf="password?.errors?.['required']" class="invalid__message">
-          please enter a password
-        </div>
-        <div
-          *ngIf="password?.errors?.['forbiddenPassword']"
-          class="invalid__message"
-        >
-          {{ password?.errors?.['forbiddenPassword'].value }}
-        </div>
+        @if (password?.hasError('required')) {
+          <div class="invalid__message">please enter a password</div>
+        }
+        @if (password?.hasError('forbiddenPassword')) {
+          <div class="invalid__message">
+            {{ password?.errors?.['forbiddenPassword'].value }}
+          </div>
+        }
       </div>
       <div class="form-item">
         <label for="confirmPassword" class="form-item__label">
@@ -86,12 +86,9 @@
             }"
           />
         </label>
-        <div
-          *ngIf="registerForm.errors?.['passwordNoMatch']"
-          class="invalid__message"
-        >
-          Password does'nt match.
-        </div>
+        @if (registerForm.hasError('passwordNoMatch')) {
+          <div class="invalid__message">Password does'nt match.</div>
+        }
       </div>
       <div class="buttons">
         <button type="submit" class="buttons__reg">Register</button>
