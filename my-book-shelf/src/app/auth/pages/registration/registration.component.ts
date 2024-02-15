@@ -27,7 +27,7 @@ export class RegistrationComponent {
 
   registerForm = new FormGroup<IUserDetailsRegistrationForm>(
     {
-      name: new FormControl('', {
+      name: new FormControl<string>('', {
         nonNullable: true,
         validators: [
           Validators.required,
@@ -35,15 +35,15 @@ export class RegistrationComponent {
           ValidateName(),
         ],
       }),
-      email: new FormControl('', {
+      email: new FormControl<string>('', {
         nonNullable: true,
         validators: [Validators.required, Validators.email],
       }),
-      password: new FormControl('', {
+      password: new FormControl<string>('', {
         nonNullable: true,
         validators: [Validators.required, ValidatePassword()],
       }),
-      confirmPassword: new FormControl('', {
+      confirmPassword: new FormControl<string>('', {
         nonNullable: true,
       }),
     },

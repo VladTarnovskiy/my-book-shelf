@@ -17,23 +17,23 @@ import { CommonModule } from '@angular/common';
 })
 export class UploadComponent {
   uploadForm = new FormGroup<IUpLoadBookForm>({
-    title: new FormControl('', {
+    title: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    author: new FormControl('', {
+    author: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    description: new FormControl('', {
+    description: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    file: new FormControl('', {
+    file: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    image: new FormControl('', {
+    image: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
