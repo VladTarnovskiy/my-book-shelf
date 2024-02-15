@@ -1,40 +1,13 @@
 <nav class="nav">
-  <a
-    [routerLink]="['/']"
-    class="item"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
-    <img class="item__img" src="assets/navigation/home.svg" alt="Home" />
-    <div class="item__title">Home</div>
-  </a>
-  <a [routerLink]="['/search']" class="item" routerLinkActive="active">
-    <img class="item__img" src="assets/navigation/search.svg" alt="Search" />
-    <div class="item__title">Search</div>
-  </a>
-  <a
-    class="item"
-    [routerLink]="['/favorite']"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-  >
-    <img
-      class="item__img"
-      src="assets/navigation/bookshelf.svg"
-      alt="Favorite"
-    />
-    <div class="item__title">Favorite</div>
-  </a>
-  <a class="item">
-    <img
-      class="item__img"
-      src="assets/navigation/bookshelf.svg"
-      alt="My Books"
-    />
-    <div class="item__title">My Books</div>
-  </a>
-  <a class="item">
-    <img class="item__img" src="assets/navigation/give-gift.svg" alt="Upload" />
-    <div class="item__title">Upload</div>
-  </a>
+  @for (item of navigationList; track item.title) {
+    <a
+      [routerLink]="[item.link]"
+      class="item"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img class="item__img" [src]="item.icon" [alt]="item.title" />
+      <div class="item__title">{{ item.title }}</div>
+    </a>
+  }
 </nav>

@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+const optionsList = [
+  { src: 'assets/details/review.svg', title: 'Review' },
+  { src: 'assets/details/notes.svg', title: 'Notes' },
+  { src: 'assets/details/share.svg', title: 'Share' },
+];
+
 @Component({
   selector: 'app-preview-options',
   standalone: true,
@@ -8,4 +14,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './preview-options.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewOptionsComponent {}
+export class PreviewOptionsComponent {
+  optionsList = optionsList;
+}

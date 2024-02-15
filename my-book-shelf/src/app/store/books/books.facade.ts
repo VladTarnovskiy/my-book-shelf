@@ -16,7 +16,7 @@ import {
 import {
   FilterTypesKeys,
   CategoryFilterKeys,
-} from '../../shared/interfaces/filters';
+} from '../../core/interfaces/filters';
 import { IBook } from '../../shared/models/book.model';
 import * as BooksActions from './books.action';
 
@@ -54,14 +54,6 @@ export class BooksFacade {
     );
   }
 
-  fetchBooksSuccess(books: IBook[], page: number) {
-    this.store.dispatch(BooksActions.FetchBooksSuccess({ books, page }));
-  }
-
-  fetchBooksFailed(error: string) {
-    this.store.dispatch(BooksActions.FetchBooksFailed({ error }));
-  }
-
   addRecentBook(recentBook: IBook) {
     this.store.dispatch(BooksActions.AddRecentBook({ recentBook }));
   }
@@ -94,13 +86,5 @@ export class BooksFacade {
 
   fetchPreviewBook(bookId: string) {
     this.store.dispatch(BooksActions.FetchPreviewBook({ bookId }));
-  }
-
-  fetchPreviewBookSuccess(previewBook: IBook) {
-    this.store.dispatch(BooksActions.FetchPreviewBookSuccess({ previewBook }));
-  }
-
-  fetchPreviewBookFailed(error: string) {
-    this.store.dispatch(BooksActions.FetchPreviewBookFailed({ error }));
   }
 }

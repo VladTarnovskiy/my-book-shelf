@@ -3,15 +3,16 @@
 
 .title {
   width: 150px;
-  height: 25px;
+  height: 26px;
   margin-bottom: 26px;
   @extend %skeletonBackgroundAnimation;
 }
 
-.content {
+.content,
+.content-second {
   margin-bottom: 8px;
   width: 754px;
-  height: 22px;
+  height: 24px;
   margin-bottom: 4px;
   @extend %skeletonBackgroundAnimation;
 }
@@ -19,8 +20,6 @@
 .content-second {
   margin-bottom: 8px;
   width: 454px;
-  height: 22px;
-  @extend %skeletonBackgroundAnimation;
 }
 
 .description {
@@ -31,18 +30,9 @@
 .slider {
   @extend %itemsCenter;
   justify-content: space-between;
-
-  &__but {
-    border: 1px solid $primary-third;
-    margin-right: 10px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
+  width: 70px;
+  height: 10px;
+  @extend %skeletonBackgroundAnimation;
 
   &__but:last-child {
     margin-right: 0;

@@ -1,0 +1,10 @@
+<div class="recommended">
+  <div class="title">Your Recent</div>
+  <div class="books">
+    @for (book of recBooks$ | async; track book.id) {
+      <app-home-book [bookData]="book" />
+    } @empty {
+      Empty list of books
+    }
+  </div>
+</div>

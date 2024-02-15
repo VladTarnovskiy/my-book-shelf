@@ -1,9 +1,0 @@
-@import 'placeholders';
-@import 'variables';
-
-.header {
-  padding: 38px 48px 25px 46px;
-  @extend %itemsCenter;
-  justify-content: space-between;
-  width: 100%;
-}

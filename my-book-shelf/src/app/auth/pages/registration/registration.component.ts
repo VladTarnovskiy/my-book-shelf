@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { IUserDetailsRegistrationForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { RouterModule } from '@angular/router';
+import { confirmPasswordValidator } from '../../validators/confirmPassword';
 
 @Component({
   selector: 'app-registration',
@@ -24,28 +25,30 @@ import { RouterModule } from '@angular/router';
 export class RegistrationComponent {
   constructor(private authService: AuthService) {}
 
-  registerForm = new FormGroup<IUserDetailsRegistrationForm>({
-    name: new FormControl('', {
-      nonNullable: true,
-      validators: [
-        Validators.required,
-        Validators.maxLength(40),
-        ValidateName(),
-      ],
-    }),
-    email: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.email],
-    }),
-    password: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, ValidatePassword()],
-    }),
-    confirmPassword: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, ValidatePassword()],
-    }),
-  });
+  registerForm = new FormGroup<IUserDetailsRegistrationForm>(
+    {
+      name: new FormControl('', {
+        nonNullable: true,
+        validators: [
+          Validators.required,
+          Validators.maxLength(40),
+          ValidateName(),
+        ],
+      }),
+      email: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.email],
+      }),
+      password: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, ValidatePassword()],
+      }),
+      confirmPassword: new FormControl('', {
+        nonNullable: true,
+      }),
+    },
+    { validators: [confirmPasswordValidator] }
+  );
 
   onSubmit(): void {
     const formUserData = this.registerForm.getRawValue();

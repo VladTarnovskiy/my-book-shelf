@@ -8,11 +8,10 @@
     [class.active]="isMenu"
   />
   <button class="profile-menu" [class.active]="isMenu">
-    <div class="profile-menu__item">Profile</div>
-    <div class="profile-menu__item" [routerLink]="['/favorite']">Favorite</div>
-    <div class="profile-menu__item">My Books</div>
-    <div class="profile-menu__item" [routerLink]="['/auth/registration']">
-      Logout
-    </div>
+    @for (item of navigationList; track item.title) {
+      <div class="profile-menu__item" [routerLink]="[item.link]">
+        {{ item.title }}
+      </div>
+    }
   </button>
 </button>

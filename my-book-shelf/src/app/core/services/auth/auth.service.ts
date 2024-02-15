@@ -7,6 +7,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { ToasterService } from '../toaster/toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthService {
 
   constructor(
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private toaster: ToasterService
   ) {}
 
   async signUp({
@@ -31,7 +33,7 @@ export class AuthService {
       await createUserWithEmailAndPassword(this.auth, email, password);
       this.router.navigate(['auth/login']);
     } catch (error) {
-      console.log(error);
+      this.toaster.show('error', 'Check it out!', 'Registration error');
     }
   }
 
@@ -47,17 +49,21 @@ export class AuthService {
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        this.errorHandling(error);
+      }
     }
   }
 
   async logout(): Promise<void> {
-    await signOut(this.auth)
-      .then(() => {
-        console.log('Logout successful');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      await signOut(this.auth);
+    } catch (error) {
+      this.toaster.show('error', 'Check it out!', 'Logout error');
+    }
+  }
+
+  errorHandling(error: Error) {
+    this.toaster.show('error', error.name, error.message);
   }
 }

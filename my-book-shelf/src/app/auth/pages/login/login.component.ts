@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -20,9 +20,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
-  constructor(private authService: AuthService) {}
-
+export class LoginComponent implements OnInit {
   loginForm = new FormGroup<IUserDetailsLoginForm>({
     email: new FormControl('', {
       nonNullable: true,
@@ -34,15 +32,21 @@ export class LoginComponent {
     }),
   });
 
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.logout();
+  }
+
   onSubmit(): void {
     const formUserData = this.loginForm.getRawValue();
 
-    if (this.loginForm.status === 'VALID') {
-      this.authService.login({
-        email: formUserData.email,
-        password: formUserData.password,
-      });
-    }
+    // if (this.loginForm.status === 'VALID') {
+    this.authService.login({
+      email: formUserData.email,
+      password: formUserData.password,
+    });
+    // }
   }
 
   get email() {

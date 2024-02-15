@@ -1,5 +1,7 @@
 <footer class="footer">
-  <a href="#" class="footer__item" target="_blank">About</a>
-  <a href="#" class="footer__item" target="_blank">Support</a>
-  <a href="#" class="footer__item" target="_blank">Terms & Condition</a>
+  @for (item of footerData; track item.title) {
+    <a [href]="item.href" class="footer__item" target="_blank">{{
+      item.title
+    }}</a>
+  }
 </footer>

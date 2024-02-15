@@ -4,6 +4,7 @@
 .home {
   color: $primary-second;
   margin-left: 28px;
+  margin-top: 22px;
 }
 
 .greeting {
@@ -34,7 +35,8 @@
   }
 
   &__books {
-    @extend %itemsCenter;
+    display: flex;
+    align-items: flex-start;
     justify-content: flex-start;
     column-gap: 39px;
     margin-bottom: 53px;

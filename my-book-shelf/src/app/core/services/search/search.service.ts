@@ -5,31 +5,20 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
+import { IBookResp, ISearchResp } from '../../interfaces/booksResp';
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
-} from '../../../shared/interfaces/filters';
+  filterCategoryTypes,
+  filterTypes,
+} from '../../interfaces/filters';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
 import { IBook } from '../../../shared/models/book.model';
-
-const filterTypes: Record<FilterTypesKeys, string> = {
-  All: '',
-  Title: 'intitle',
-  Author: 'inauthor',
-  Text: 'inpublisher',
-  Subjects: 'subject',
-};
-
-const filterCategoryTypes: Record<CategoryFilterKeys, string> = {
-  Browse: '',
-  Engineering: 'Engineering',
-  Medical: 'Medical',
-  'Arts & Science': 'Arts & Science',
-  Architecture: 'Architecture',
-  Law: 'Law',
-};
+import {
+  transformRespBookData,
+  transformRespBooksData,
+} from '../../utils/transformRespData';
 
 @Injectable({
   providedIn: 'root',
@@ -87,24 +76,7 @@ export class SearchService {
       .pipe(
         map((resp) => {
           this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
-          const transData = resp.items.map((book) => {
-            const transBook = {
-              id: book.id,
-              isFavorite: false,
-              title: book.volumeInfo.title || '',
-              authors: book.volumeInfo.authors || ['unknown'],
-              publishedDate: book.volumeInfo.publishedDate || '',
-              images: {
-                small:
-                  book.volumeInfo.imageLinks?.smallThumbnail ||
-                  'assets/logo.svg',
-                normal:
-                  book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
-              },
-              categories: book.volumeInfo?.categories || ['unknown'],
-            };
-            return transBook;
-          });
+          const transData = transformRespBooksData(resp);
           return transData;
         })
       );
@@ -113,22 +85,25 @@ export class SearchService {
   getBook(bookId: string): Observable<IBook> {
     return this.http.get<IBookResp>(`${this.searchURL}/${bookId}`).pipe(
       map((book) => {
-        const transBook = {
-          id: book.id,
-          isFavorite: false,
-          title: book.volumeInfo.title || '',
-          authors: book.volumeInfo.authors || ['unknown'],
-          publishedDate: book.volumeInfo.publishedDate || '',
-          images: {
-            small:
-              book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
-            normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
-          },
-          categories: book.volumeInfo?.categories || ['unknown'],
-        };
+        const transBook = transformRespBookData(book);
         return transBook;
       })
     );
+  }
+
+  getRecBooks(searchValue: string): Observable<IBook[]> {
+    const options: { params: HttpParams } = {
+      params: new HttpParams().set('q', `${searchValue}`),
+    };
+
+    return this.http
+      .get<ISearchResp>(this.searchURL, options ? options : undefined)
+      .pipe(
+        map((resp) => {
+          const transData = transformRespBooksData(resp);
+          return transData;
+        })
+      );
   }
 
   handleError(error: HttpErrorResponse): string {

@@ -80,16 +80,17 @@
             required
             autoComplete="on"
             class="form-item__input"
+            [ngClass]="{
+              'ng-invalid': registerForm.errors?.['passwordNoMatch'],
+              'ng-valid': !registerForm.errors?.['passwordNoMatch']
+            }"
           />
         </label>
-        <div *ngIf="password?.errors?.['required']" class="invalid__message">
-          please enter a password
-        </div>
         <div
-          *ngIf="password?.errors?.['forbiddenPassword']"
+          *ngIf="registerForm.errors?.['passwordNoMatch']"
           class="invalid__message"
         >
-          {{ password?.errors?.['forbiddenPassword'].value }}
+          Password does'nt match.
         </div>
       </div>
       <div class="buttons">

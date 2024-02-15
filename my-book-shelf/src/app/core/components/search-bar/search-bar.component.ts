@@ -1,13 +1,13 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  CategoryFilterKeys,
-  FilterTypesKeys,
-} from '../../../shared/interfaces/filters';
-import { Observable, Subscription } from 'rxjs';
+import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
+import { Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
+import { DestroyDirective } from '../../directives/destroy';
+
+const filterTypeList = ['All', 'Title', 'Author', 'Text', 'Subjects'];
 
 @Component({
   selector: 'app-search-bar',
@@ -15,14 +15,16 @@ import { BooksFacade } from '../../../store/books/books.facade';
   imports: [FormsModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
+  hostDirectives: [DestroyDirective],
 })
-export class SearchBarComponent implements OnInit, OnDestroy {
+export class SearchBarComponent implements OnInit {
+  filterTypeList = filterTypeList;
   searchValue = '';
   isFilter = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
-  subscription!: Subscription;
+  destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
@@ -62,15 +64,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.searchOptions$.subscribe((options) => {
+    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;
       this.filterType = options.filterType;
       this.cd.detectChanges();
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

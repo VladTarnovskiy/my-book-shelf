@@ -1,0 +1,41 @@
+@import 'placeholders';
+@import 'variables';
+
+.book {
+  width: 160px;
+  min-height: 260px;
+  border-radius: 5px;
+  padding: 16px 15px 13px 15px;
+  background-color: $primary-third;
+}
+
+.cover {
+  width: 123px;
+  height: 170px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.title {
+  margin-bottom: 5px;
+  height: 14px;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.author {
+  height: 12px;
+  width: 80px;
+  margin-bottom: 5px;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.rating {
+  height: 10px;
+  width: 30px;
+  @extend %skeletonBackgroundAnimation;
+}

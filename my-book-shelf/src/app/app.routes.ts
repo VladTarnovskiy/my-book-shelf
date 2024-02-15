@@ -5,6 +5,7 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
@@ -12,7 +13,6 @@ export const routes: Routes = [
           import('./home/pages/home/home.component').then(
             (m) => m.HomeComponent
           ),
-        canActivate: [authGuard],
       },
       {
         path: 'recent',
@@ -20,29 +20,46 @@ export const routes: Routes = [
           import('./home/pages/recent/recent.component').then(
             (m) => m.RecentComponent
           ),
-        canActivate: [authGuard],
       },
+      {
+        path: 'recommended',
+        loadComponent: () =>
+          import('./home/pages/recommended/recommended.component').then(
+            (m) => m.RecommendedComponent
+          ),
+      },
+
       {
         path: 'search',
-        loadComponent: () =>
-          import('./search/pages/search/search.component').then(
-            (m) => m.SearchComponent
-          ),
-        canActivate: [authGuard],
-      },
-      {
-        path: 'search/preview/:previewId',
-        loadComponent: () =>
-          import('./search/pages/preview/preview.component').then(
-            (m) => m.PreviewComponent
-          ),
-        canActivate: [authGuard],
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./search/pages/search/search.component').then(
+                (m) => m.SearchComponent
+              ),
+          },
+          {
+            path: 'preview/:previewId',
+            loadComponent: () =>
+              import('./search/pages/preview/preview.component').then(
+                (m) => m.PreviewComponent
+              ),
+          },
+        ],
       },
       {
         path: 'favorite',
         loadComponent: () =>
           import('./favorite/pages/favorite/favorite.component').then(
             (m) => m.FavoriteComponent
+          ),
+      },
+      {
+        path: 'upload',
+        loadComponent: () =>
+          import('./upload/pages/upload/upload.component').then(
+            (m) => m.UploadComponent
           ),
         canActivate: [authGuard],
       },
