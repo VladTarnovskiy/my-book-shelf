@@ -25,7 +25,7 @@ export class QuoteComponent implements OnInit {
   isLoading = false;
   isError = false;
   isActive = [true, false, false, false];
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private quotesService: QuotesService,

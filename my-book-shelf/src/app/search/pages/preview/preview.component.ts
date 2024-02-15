@@ -33,7 +33,7 @@ export class PreviewComponent implements OnInit {
   book$: Observable<IBook | null> = this.booksFacade.previewBook$;
   isLoading$: Observable<boolean> = this.booksFacade.previewBookLoader$;
   @Input({ required: true }) bookData!: IBook;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
 

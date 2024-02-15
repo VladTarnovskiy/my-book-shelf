@@ -32,7 +32,7 @@ export class CategoryFilterComponent implements OnInit {
   filterCategory: CategoryFilterKeys = 'Browse';
   filterCategory$: Observable<CategoryFilterKeys> =
     this.booksFacade.filterCategoryType$;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
 

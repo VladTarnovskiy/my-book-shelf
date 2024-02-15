@@ -24,7 +24,7 @@ export class SearchBarComponent implements OnInit {
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,

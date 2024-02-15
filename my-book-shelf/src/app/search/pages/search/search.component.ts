@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
   books: IBook[] = [];
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private booksFacade: BooksFacade,
