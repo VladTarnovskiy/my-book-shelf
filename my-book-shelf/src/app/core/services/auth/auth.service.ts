@@ -33,7 +33,9 @@ export class AuthService {
       await createUserWithEmailAndPassword(this.auth, email, password);
       this.router.navigate(['auth/login']);
     } catch (error) {
-      this.toaster.show('error', 'Check it out!', 'Registration error');
+      if (error instanceof Error) {
+        this.errorHandling(error);
+      }
     }
   }
 
@@ -59,11 +61,17 @@ export class AuthService {
     try {
       await signOut(this.auth);
     } catch (error) {
-      this.toaster.show('error', 'Check it out!', 'Logout error');
+      if (error instanceof Error) {
+        this.errorHandling(error);
+      }
     }
   }
 
   errorHandling(error: Error) {
-    this.toaster.show('error', error.name, error.message);
+    this.toaster.show({
+      type: 'error',
+      title: error.name,
+      body: error.message,
+    });
   }
 }

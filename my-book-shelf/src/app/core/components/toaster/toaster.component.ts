@@ -10,11 +10,10 @@ import { Toaster } from '../../models/toaster';
 })
 export class ToasterComponent {
   @Input() toast!: Toaster;
-  @Input() i!: number;
-
+  @Input() index!: number;
   @Output() remove = new EventEmitter<number>();
 
   onClose(): void {
-    this.remove.emit(this.i);
+    this.remove.emit(this.index);
   }
 }
