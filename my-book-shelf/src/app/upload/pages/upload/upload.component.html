@@ -13,9 +13,9 @@
           class="form-item__input"
         />
       </label>
-      <div *ngIf="title?.errors?.['required']" class="invalid__message">
-        please enter a title
-      </div>
+      @if (title?.hasError('required')) {
+        <div class="invalid__message">please enter a title</div>
+      }
     </div>
     <div class="form-item">
       <label for="author" class="form-item__label">
@@ -29,9 +29,9 @@
           class="form-item__input"
         />
       </label>
-      <div *ngIf="author?.errors?.['required']" class="invalid__message">
-        please enter a author
-      </div>
+      @if (author?.hasError('required')) {
+        <div class="invalid__message">please enter a author</div>
+      }
     </div>
     <div class="form-item description">
       <label for="description" class="form-item__label">
@@ -44,9 +44,9 @@
           class="form-item__input"
         ></textarea>
       </label>
-      <div *ngIf="description?.errors?.['required']" class="invalid__message">
-        please enter a description
-      </div>
+      @if (description?.hasError('required')) {
+        <div class="invalid__message">please enter a description</div>
+      }
     </div>
     <div class="form-item file">
       <label for="file" class="form-item__label">
@@ -60,9 +60,9 @@
           class="form-item__input"
         />
       </label>
-      <div *ngIf="file?.errors?.['required']" class="invalid__message">
-        please choose a file
-      </div>
+      @if (file?.hasError('required')) {
+        <div class="invalid__message">please choose a file</div>
+      }
     </div>
     <div class="form-item image">
       <label for="image" class="form-item__label">
@@ -76,9 +76,9 @@
           class="form-item__input"
         />
       </label>
-      <div *ngIf="image?.errors?.['required']" class="invalid__message">
-        please choose a image
-      </div>
+      @if (image?.hasError('required')) {
+        <div class="invalid__message">please choose a image</div>
+      }
     </div>
     <div class="buttons">
       <button type="submit" class="buttons__submit">UPLOAD</button>
