@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-const footerData = [
-  { href: '#', title: 'About' },
-  { href: '#', title: 'Support' },
-  { href: '#', title: 'Terms & Condition' },
-];
+import { footerData } from './footer.constant';
 
 @Component({
   selector: 'app-footer',

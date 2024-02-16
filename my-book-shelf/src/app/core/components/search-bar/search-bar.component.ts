@@ -6,8 +6,7 @@ import { Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy';
-
-const filterTypeList = ['All', 'Title', 'Author', 'Text', 'Subjects'];
+import { filterTypeList } from './search-bar.constant';
 
 @Component({
   selector: 'app-search-bar',

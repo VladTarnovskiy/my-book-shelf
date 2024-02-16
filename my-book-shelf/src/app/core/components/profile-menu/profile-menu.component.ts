@@ -1,15 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-const navigationList = [
-  { link: '/', title: 'Profile' },
-  { link: '/favorite', title: 'Favorite' },
-  {
-    link: '/',
-    title: 'My Books',
-  },
-  { link: '/auth/login', title: 'Logout' },
-];
+import { profileList } from './profile-menu.constant';
 
 @Component({
   selector: 'app-profile-menu',
@@ -20,7 +11,7 @@ const navigationList = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMenuComponent {
-  navigationList = navigationList;
+  navigationList = profileList;
   isMenu = false;
 
   onProfileToggle(): void {
