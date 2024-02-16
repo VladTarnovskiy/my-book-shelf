@@ -9,7 +9,11 @@ const navigationList = [
     icon: 'assets/navigation/bookshelf.svg',
     title: 'Favorite',
   },
-  { link: '/', icon: 'assets/navigation/bookshelf.svg', title: 'My Books' },
+  {
+    link: '/my-books',
+    icon: 'assets/navigation/bookshelf.svg',
+    title: 'My Books',
+  },
   { link: '/upload', icon: 'assets/navigation/give-gift.svg', title: 'Upload' },
 ];
 

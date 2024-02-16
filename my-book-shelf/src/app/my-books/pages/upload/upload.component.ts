@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
+import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 
 @Component({
   selector: 'app-upload',
@@ -33,16 +34,39 @@ export class UploadComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    image: new FormControl<string>('', {
+    image: new FormControl('', {
       nonNullable: true,
       validators: [Validators.required],
     }),
   });
 
+  constructor(private myBooksFacade: MyBooksFacade) {}
+
   onSubmit(): void {
     const formUserData = this.uploadForm.getRawValue();
-    if (this.uploadForm.status === 'VALID') {
-      console.log(formUserData);
+    // if (this.uploadForm.valid) {
+    this.myBooksFacade.addMyBook({ ...formUserData, id: 'erfer' });
+    console.log(formUserData);
+    // }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSetImage(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.patchValue({
+        image: file,
+      });
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSetFile(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.uploadForm.patchValue({
+        file: file,
+      });
     }
   }
 

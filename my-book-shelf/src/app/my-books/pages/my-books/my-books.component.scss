@@ -1,0 +1,21 @@
+@import 'placeholders';
+@import 'variables';
+
+.my-books {
+  padding: 18px 45px;
+  margin-top: 18px;
+}
+
+.title {
+  font-size: 25px;
+  font-family: 'Inter Bold';
+  color: $primary-second;
+  margin-bottom: 51px;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(308px, 1fr));
+  justify-items: center;
+  gap: 28px;
+}

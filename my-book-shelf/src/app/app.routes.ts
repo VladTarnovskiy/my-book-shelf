@@ -58,10 +58,16 @@ export const routes: Routes = [
       {
         path: 'upload',
         loadComponent: () =>
-          import('./upload/pages/upload/upload.component').then(
+          import('./my-books/pages/upload/upload.component').then(
             (m) => m.UploadComponent
           ),
-        canActivate: [authGuard],
+      },
+      {
+        path: 'my-books',
+        loadComponent: () =>
+          import('./my-books/pages/my-books/my-books.component').then(
+            (m) => m.MyBooksComponent
+          ),
       },
     ],
   },

@@ -52,7 +52,7 @@ export class RegistrationComponent {
 
   onSubmit(): void {
     const formUserData = this.registerForm.getRawValue();
-    if (this.registerForm.status === 'VALID') {
+    if (this.registerForm.valid) {
       this.authService.signUp({
         email: formUserData.email,
         password: formUserData.password,

@@ -19,6 +19,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { recommendedBooksReducer } from './store/recommendedBooks/recommendedBooks.reducer';
 import { RecommendedBooksEffects } from './store/recommendedBooks/recommendedBooks.effects';
+import { myBooksReducer } from './store/my-books/my-books.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
       recommendedBooks: recommendedBooksReducer,
       favoriteBooks: favoriteBooksReducer,
       router: routerReducer,
+      myBooks: myBooksReducer,
     }),
     provideEffects(BooksEffects, RecommendedBooksEffects),
     provideRouterStore(),

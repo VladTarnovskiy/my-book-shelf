@@ -58,6 +58,7 @@
           required
           type="file"
           class="form-item__input"
+          (change)="onSetFile($event)"
         />
       </label>
       @if (file?.hasError('required')) {
@@ -69,11 +70,11 @@
         <div class="form-item__title">Image</div>
         <input
           id="image"
-          formControlName="image"
           placeholder="Image"
           required
           type="file"
           class="form-item__input"
+          (change)="onSetImage($event)"
         />
       </label>
       @if (image?.hasError('required')) {

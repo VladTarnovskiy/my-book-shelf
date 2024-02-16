@@ -6,6 +6,9 @@ export interface IUploadBook {
   description: string;
   file: string;
   image: string;
+  id: string;
+  borrowedOn: string;
+  submissionDate: string;
 }
 
 export interface IUpLoadBookForm {

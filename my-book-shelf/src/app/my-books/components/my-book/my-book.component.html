@@ -1,0 +1,36 @@
+<div class="book">
+  <div class="book-info">
+    <img class="cover" [src]="bookData.image" alt="Cover" />
+    <p class="title">{{ bookData.title }}</p>
+    <p class="author">
+      {{ bookData.author }},
+      <!-- <span class="year">{{ bookData.publishedDate }}</span> -->
+    </p>
+    <div class="rating">4.5 <span class="rating__total">/5</span></div>
+  </div>
+  <div class="additional">
+    <div class="favorite">
+      <button class="favorite__but" (click)="removeFromMyBook()">
+        <img class="favorite__cover" src="assets/heart.svg" alt="Favorite" />
+      </button>
+    </div>
+    <div class="terms">
+      <div class="borrowed">
+        <p class="borrowed__title">Borrowed on</p>
+        <p class="borrowed__desc">
+          {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
+      </div>
+      <div class="submission">
+        <p class="submission__title">Submission Due</p>
+        <p class="submission__desc">
+          {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
+        </p>
+      </div>
+    </div>
+    <div class="links">
+      <button class="ebook">E-BOOK</button>
+      <button class="read">Read</button>
+    </div>
+  </div>
+</div>
