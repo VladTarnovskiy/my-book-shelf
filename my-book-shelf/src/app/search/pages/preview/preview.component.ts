@@ -37,10 +37,6 @@ export class PreviewComponent implements OnInit {
 
   constructor(private booksFacade: BooksFacade) {}
 
-  searchAuthorBooks(author: string): void {
-    this.booksFacade.fetchBooks(author, 'Author', 'Browse', 1);
-  }
-
   ngOnInit(): void {
     this.booksFacade.previewBookId$
       .pipe(takeUntil(this.destroy$))
@@ -49,5 +45,9 @@ export class PreviewComponent implements OnInit {
           this.booksFacade.fetchPreviewBook(bookId);
         }
       });
+  }
+
+  searchAuthorBooks(author: string): void {
+    this.booksFacade.fetchBooks(author, 'Author', 'Browse', 1);
   }
 }

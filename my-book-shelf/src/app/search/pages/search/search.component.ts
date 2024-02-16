@@ -45,38 +45,6 @@ export class SearchComponent implements OnInit {
     private favoriteFacade: FavoriteFacade
   ) {}
 
-  addToFavorite(book: IBook): void {
-    this.favoriteFacade.addFavoriteBook(book);
-    this.addFavoriteStatus(book.id);
-  }
-
-  removeFromFavorite(bookId: string): void {
-    this.favoriteFacade.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  addFavoriteStatus(bookId: string): void {
-    this.booksFacade.addFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
-  }
-
-  getNextPage(): void {
-    this.setNextPage();
-    this.booksFacade.fetchBooks(
-      this.searchOptions.searchValue,
-      this.searchOptions.filterType,
-      this.searchOptions.categoryFilterType,
-      this.searchOptions.page
-    );
-  }
-
-  setNextPage(): void {
-    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
-  }
-
   ngOnInit(): void {
     this.books$.pipe(takeUntil(this.destroy$)).subscribe((books) => {
       if (books) {
@@ -107,5 +75,37 @@ export class SearchComponent implements OnInit {
         this.isShowMore = false;
       }
     });
+  }
+
+  addToFavorite(book: IBook): void {
+    this.favoriteFacade.addFavoriteBook(book);
+    this.addFavoriteStatus(book.id);
+  }
+
+  removeFromFavorite(bookId: string): void {
+    this.favoriteFacade.removeFavoriteBook(bookId);
+    this.removeFavoriteStatus(bookId);
+  }
+
+  addFavoriteStatus(bookId: string): void {
+    this.booksFacade.addFavoriteStatus(bookId);
+  }
+
+  removeFavoriteStatus(bookId: string): void {
+    this.booksFacade.removeFavoriteStatus(bookId);
+  }
+
+  getNextPage(): void {
+    this.setNextPage();
+    this.booksFacade.fetchBooks(
+      this.searchOptions.searchValue,
+      this.searchOptions.filterType,
+      this.searchOptions.categoryFilterType,
+      this.searchOptions.page
+    );
+  }
+
+  setNextPage(): void {
+    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
   }
 }

@@ -32,6 +32,10 @@ export class QuoteComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {}
 
+  ngOnInit(): void {
+    this.getQuote();
+  }
+
   getQuote(): void {
     this.isLoading = true;
     this.quotesService
@@ -61,9 +65,5 @@ export class QuoteComponent implements OnInit {
         return false;
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.getQuote();
   }
 }

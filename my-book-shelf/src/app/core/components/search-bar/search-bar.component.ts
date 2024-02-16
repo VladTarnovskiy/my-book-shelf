@@ -31,6 +31,15 @@ export class SearchBarComponent implements OnInit {
     private booksFacade: BooksFacade
   ) {}
 
+  ngOnInit(): void {
+    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
+      this.filterCategory = options.categoryFilterType;
+      this.searchValue = options.searchValue;
+      this.filterType = options.filterType;
+      this.cd.detectChanges();
+    });
+  }
+
   onSearch(): void {
     this.booksFacade.fetchBooks(
       this.searchValue,
@@ -60,14 +69,5 @@ export class SearchBarComponent implements OnInit {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
       this.booksFacade.setFilterType(this.filterType);
     }
-  }
-
-  ngOnInit(): void {
-    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
-      this.filterCategory = options.categoryFilterType;
-      this.searchValue = options.searchValue;
-      this.filterType = options.filterType;
-      this.cd.detectChanges();
-    });
   }
 }

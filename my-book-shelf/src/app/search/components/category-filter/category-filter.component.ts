@@ -28,6 +28,12 @@ export class CategoryFilterComponent implements OnInit {
 
   constructor(private booksFacade: BooksFacade) {}
 
+  ngOnInit(): void {
+    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      this.filterCategory = value;
+    });
+  }
+
   onFilterToggle(): void {
     this.isFilter = !this.isFilter;
   }
@@ -46,11 +52,5 @@ export class CategoryFilterComponent implements OnInit {
       ) as CategoryFilterKeys;
       this.booksFacade.setCategoryFilterType(this.filterCategory);
     }
-  }
-
-  ngOnInit(): void {
-    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.filterCategory = value;
-    });
   }
 }
