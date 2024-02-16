@@ -52,16 +52,16 @@
   height: 100%;
 }
 
-.favorite {
+.remove-but {
+  margin-left: auto;
+  @extend %itemsCenter;
+  justify-content: center;
   width: 25px;
   height: 25px;
-  margin-left: auto;
 
-  &__but {
-    @extend %itemsCenter;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
+  &__img {
+    width: 30px;
+    height: 30px;
   }
 }
 

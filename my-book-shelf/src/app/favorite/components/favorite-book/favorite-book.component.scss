@@ -52,17 +52,12 @@
   height: 100%;
 }
 
-.favorite {
+.favorite-but {
+  margin-left: auto;
+  @extend %itemsCenter;
+  justify-content: center;
   width: 25px;
   height: 25px;
-  margin-left: auto;
-
-  &__but {
-    @extend %itemsCenter;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-  }
 }
 
 .terms {

@@ -4,16 +4,14 @@
     <p class="title">{{ bookData.title }}</p>
     <p class="author">
       {{ bookData.author }},
-      <!-- <span class="year">{{ bookData.publishedDate }}</span> -->
+      <span class="year">{{ bookData.description }}</span>
     </p>
     <div class="rating">4.5 <span class="rating__total">/5</span></div>
   </div>
   <div class="additional">
-    <div class="favorite">
-      <button class="favorite__but" (click)="removeFromMyBook()">
-        <img class="favorite__cover" src="assets/heart.svg" alt="Favorite" />
-      </button>
-    </div>
+    <button class="remove-but" (click)="removeFromMyBook()">
+      <img class="remove-but__img" src="assets/close.svg" alt="Favorite" />
+    </button>
     <div class="terms">
       <div class="borrowed">
         <p class="borrowed__title">Borrowed on</p>

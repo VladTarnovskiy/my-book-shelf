@@ -30,12 +30,10 @@ export class UploadComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    file: new FormControl<string>('', {
-      nonNullable: true,
+    file: new FormControl<string | ArrayBuffer | null>(null, {
       validators: [Validators.required],
     }),
-    image: new FormControl('', {
-      nonNullable: true,
+    image: new FormControl<string | ArrayBuffer | null>(null, {
       validators: [Validators.required],
     }),
   });
@@ -45,28 +43,41 @@ export class UploadComponent {
   onSubmit(): void {
     const formUserData = this.uploadForm.getRawValue();
     // if (this.uploadForm.valid) {
-    this.myBooksFacade.addMyBook({ ...formUserData, id: 'erfer' });
+    this.myBooksFacade.addMyBook({
+      ...formUserData,
+      id: crypto.randomUUID(),
+    });
     console.log(formUserData);
     // }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSetImage(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.patchValue({
-        image: file,
-      });
+  onSetImage(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    const fileList: FileList | null = element.files;
+    const reader = new FileReader();
+
+    if (fileList && fileList[0]) {
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = () => {
+        this.uploadForm.patchValue({
+          image: reader.result,
+        });
+      };
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSetFile(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.uploadForm.patchValue({
-        file: file,
-      });
+  onSetFile(event: Event) {
+    const element = event.currentTarget as HTMLInputElement;
+    const fileList: FileList | null = element.files;
+    const reader = new FileReader();
+
+    if (fileList && fileList[0]) {
+      reader.readAsDataURL(fileList[0]);
+      reader.onload = () => {
+        this.uploadForm.patchValue({
+          file: reader.result,
+        });
+      };
     }
   }
 
