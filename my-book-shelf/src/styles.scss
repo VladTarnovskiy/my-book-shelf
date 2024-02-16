@@ -17,6 +17,8 @@ button:hover {
   cursor: pointer;
 }
 
+//scrollbar
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -41,4 +43,23 @@ button:hover {
 
 ::-webkit-scrollbar-corner {
   background: rgba(0, 0, 0, 0);
+}
+
+//form validation
+
+.ng-touched.ng-invalid:not(form) {
+  border-left: 2px solid #ef4444;
+}
+
+.ng-touched.ng-valid[required],
+.ng-valid.required {
+  border-left: 2px solid #42a948;
+}
+
+.invalid__message {
+  color: rgb(239 68 68);
+}
+
+.invalid-but {
+  opacity: 0.7;
 }

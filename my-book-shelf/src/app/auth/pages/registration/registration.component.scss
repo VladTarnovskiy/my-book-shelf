@@ -94,16 +94,3 @@
 .login-link {
   text-decoration: underline;
 }
-
-.ng-touched.ng-invalid:not(form) {
-  border-left: 2px solid #ef4444;
-}
-
-.ng-touched.ng-valid[required],
-.ng-valid.required {
-  border-left: 2px solid #42a948;
-}
-
-.invalid__message {
-  color: rgb(239 68 68);
-}

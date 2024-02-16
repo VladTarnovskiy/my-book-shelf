@@ -91,7 +91,13 @@
         }
       </div>
       <div class="buttons">
-        <button type="submit" class="buttons__reg">Register</button>
+        <button
+          type="submit"
+          class="buttons__reg"
+          [ngClass]="registerForm.valid ? '' : 'invalid-but'"
+        >
+          Register
+        </button>
         <div class="user-check">
           <div>Already a User?</div>
           <a routerLink="../login">

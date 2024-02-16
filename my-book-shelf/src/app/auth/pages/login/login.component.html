@@ -48,11 +48,17 @@
         }
       </div>
       <div class="buttons">
-        <button type="submit" class="buttons__login">Login</button>
+        <button
+          type="submit"
+          class="buttons__login"
+          [ngClass]="loginForm.valid ? '' : 'invalid-but'"
+        >
+          Login
+        </button>
         <div class="user-check">
           <div>New User?</div>
           <a routerLink="../registration">
-            <button type="button" class="login-link">Register here</button>
+            <button type="button" class="register-link">Register here</button>
           </a>
         </div>
       </div>

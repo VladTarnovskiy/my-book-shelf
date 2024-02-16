@@ -8,6 +8,7 @@ import {
 import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
+import { ToasterService } from '../../../core/services/toaster/toaster.service';
 
 @Component({
   selector: 'app-upload',
@@ -38,17 +39,24 @@ export class UploadComponent {
     }),
   });
 
-  constructor(private myBooksFacade: MyBooksFacade) {}
+  constructor(
+    private myBooksFacade: MyBooksFacade,
+    private toasterService: ToasterService
+  ) {}
 
   onSubmit(): void {
     const formUserData = this.uploadForm.getRawValue();
-    // if (this.uploadForm.valid) {
-    this.myBooksFacade.addMyBook({
-      ...formUserData,
-      id: crypto.randomUUID(),
-    });
-    console.log(formUserData);
-    // }
+    if (this.uploadForm.valid) {
+      this.myBooksFacade.addMyBook({
+        ...formUserData,
+        id: crypto.randomUUID(),
+      });
+      this.toasterService.show({
+        type: 'success',
+        title: 'My book',
+        body: 'The book was created!',
+      });
+    }
   }
 
   onSetImage(event: Event) {

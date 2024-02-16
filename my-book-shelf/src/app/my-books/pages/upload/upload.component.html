@@ -81,7 +81,13 @@
       }
     </div>
     <div class="buttons">
-      <button type="submit" class="buttons__submit">UPLOAD</button>
+      <button
+        type="submit"
+        class="buttons__submit"
+        [ngClass]="uploadForm.valid ? '' : 'invalid-but'"
+      >
+        UPLOAD
+      </button>
     </div>
   </form>
 </div>
