@@ -8,15 +8,7 @@ import { CategoryFilterKeys } from '../../../core/interfaces/filters';
 import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy';
-
-const filterCategoryList = [
-  'Browse',
-  'Engineering',
-  'Medical',
-  'Arts & Science',
-  'Architecture',
-  'Law',
-];
+import { filterCategoryList } from './category-filter.constant';
 
 @Component({
   selector: 'app-category-filter',
@@ -32,9 +24,15 @@ export class CategoryFilterComponent implements OnInit {
   filterCategory: CategoryFilterKeys = 'Browse';
   filterCategory$: Observable<CategoryFilterKeys> =
     this.booksFacade.filterCategoryType$;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
+
+  ngOnInit(): void {
+    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
+      this.filterCategory = value;
+    });
+  }
 
   onFilterToggle(): void {
     this.isFilter = !this.isFilter;
@@ -54,11 +52,5 @@ export class CategoryFilterComponent implements OnInit {
       ) as CategoryFilterKeys;
       this.booksFacade.setCategoryFilterType(this.filterCategory);
     }
-  }
-
-  ngOnInit(): void {
-    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.filterCategory = value;
-    });
   }
 }

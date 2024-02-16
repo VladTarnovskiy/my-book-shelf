@@ -19,12 +19,12 @@
             class="form-item__input"
           />
         </label>
-        <div *ngIf="email?.errors?.['required']" class="invalid__message">
-          please enter a email
-        </div>
-        <div *ngIf="email?.errors?.['email']" class="invalid__message">
-          the email is invalid
-        </div>
+        @if (email?.hasError('required')) {
+          <div class="invalid__message">please enter a email</div>
+        }
+        @if (email?.hasError('email')) {
+          <div class="invalid__message">the email is invalid</div>
+        }
       </div>
       <div class="form-item">
         <label for="password" class="form-item__label">
@@ -38,22 +38,27 @@
             class="form-item__input"
           />
         </label>
-        <div *ngIf="password?.errors?.['required']" class="invalid__message">
-          please enter a password
-        </div>
-        <div
-          *ngIf="password?.errors?.['forbiddenPassword']"
-          class="invalid__message"
-        >
-          {{ password?.errors?.['forbiddenPassword'].value }}
-        </div>
+        @if (password?.hasError('required')) {
+          <div class="invalid__message">please enter a password</div>
+        }
+        @if (password?.hasError('forbiddenPassword')) {
+          <div class="invalid__message">
+            {{ password?.errors?.['forbiddenPassword'].value }}
+          </div>
+        }
       </div>
       <div class="buttons">
-        <button type="submit" class="buttons__login">Login</button>
+        <button
+          type="submit"
+          class="buttons__login"
+          [ngClass]="loginForm.valid ? '' : 'invalid-but'"
+        >
+          Login
+        </button>
         <div class="user-check">
-          <div>New User?</div>
+          <div>New User?&ensp;</div>
           <a routerLink="../registration">
-            <button type="button" class="login-link">Register here</button>
+            <button type="button" class="register-link">Register here</button>
           </a>
         </div>
       </div>

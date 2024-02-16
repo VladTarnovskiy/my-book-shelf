@@ -52,12 +52,17 @@
   height: 100%;
 }
 
-.favorite-but {
+.remove-but {
   margin-left: auto;
   @extend %itemsCenter;
   justify-content: center;
   width: 25px;
   height: 25px;
+
+  &__img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .terms {

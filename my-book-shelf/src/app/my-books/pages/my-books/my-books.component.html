@@ -1,0 +1,13 @@
+<div class="my-books">
+  <div class="title">My Books</div>
+  <div class="books">
+    @for (book of myBooks$ | async; track book.id) {
+      <app-my-book
+        [bookData]="book"
+        (removeFromMyBookEvent)="removeFromMyBook($event)"
+      />
+    } @empty {
+      Empty list of books
+    }
+  </div>
+</div>

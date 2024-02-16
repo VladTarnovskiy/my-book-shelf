@@ -22,11 +22,11 @@ import { RouterModule } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup<IUserDetailsLoginForm>({
-    email: new FormControl('', {
+    email: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required, Validators.email],
     }),
-    password: new FormControl('', {
+    password: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required, ValidatePassword()],
     }),
@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     const formUserData = this.loginForm.getRawValue();
 
-    // if (this.loginForm.status === 'VALID') {
-    this.authService.login({
-      email: formUserData.email,
-      password: formUserData.password,
-    });
-    // }
+    if (this.loginForm.valid) {
+      this.authService.login({
+        email: formUserData.email,
+        password: formUserData.password,
+      });
+    }
   }
 
   get email() {

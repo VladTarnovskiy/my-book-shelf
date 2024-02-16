@@ -38,44 +38,12 @@ export class SearchComponent implements OnInit {
   books: IBook[] = [];
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private booksFacade: BooksFacade,
     private favoriteFacade: FavoriteFacade
   ) {}
-
-  addToFavorite(book: IBook): void {
-    this.favoriteFacade.addFavoriteBook(book);
-    this.addFavoriteStatus(book.id);
-  }
-
-  removeFromFavorite(bookId: string): void {
-    this.favoriteFacade.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  addFavoriteStatus(bookId: string): void {
-    this.booksFacade.addFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
-  }
-
-  getNextPage(): void {
-    this.setNextPage();
-    this.booksFacade.fetchBooks(
-      this.searchOptions.searchValue,
-      this.searchOptions.filterType,
-      this.searchOptions.categoryFilterType,
-      this.searchOptions.page
-    );
-  }
-
-  setNextPage(): void {
-    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
-  }
 
   ngOnInit(): void {
     this.books$.pipe(takeUntil(this.destroy$)).subscribe((books) => {
@@ -107,5 +75,37 @@ export class SearchComponent implements OnInit {
         this.isShowMore = false;
       }
     });
+  }
+
+  addToFavorite(book: IBook): void {
+    this.favoriteFacade.addFavoriteBook(book);
+    this.addFavoriteStatus(book.id);
+  }
+
+  removeFromFavorite(bookId: string): void {
+    this.favoriteFacade.removeFavoriteBook(bookId);
+    this.removeFavoriteStatus(bookId);
+  }
+
+  addFavoriteStatus(bookId: string): void {
+    this.booksFacade.addFavoriteStatus(bookId);
+  }
+
+  removeFavoriteStatus(bookId: string): void {
+    this.booksFacade.removeFavoriteStatus(bookId);
+  }
+
+  getNextPage(): void {
+    this.setNextPage();
+    this.booksFacade.fetchBooks(
+      this.searchOptions.searchValue,
+      this.searchOptions.filterType,
+      this.searchOptions.categoryFilterType,
+      this.searchOptions.page
+    );
+  }
+
+  setNextPage(): void {
+    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
   }
 }

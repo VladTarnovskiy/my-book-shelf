@@ -14,12 +14,12 @@ import { CommonModule } from '@angular/common';
 export class ToasterContainerComponent implements OnInit {
   toasts: Toaster[] = [];
 
-  constructor(private toaster: ToasterService) {}
+  constructor(private toasterService: ToasterService) {}
 
   ngOnInit() {
-    this.toaster.toast$.subscribe((toast) => {
+    this.toasterService.toast$.subscribe((toast) => {
       this.toasts = [...this.toasts, toast];
-      setTimeout(() => this.toasts.pop(), toast.delay);
+      setTimeout(() => this.toasts.pop(), 4000);
     });
   }
 

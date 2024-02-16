@@ -6,8 +6,7 @@ import { Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy';
-
-const filterTypeList = ['All', 'Title', 'Author', 'Text', 'Subjects'];
+import { filterTypeList } from './search-bar.constant';
 
 @Component({
   selector: 'app-search-bar',
@@ -24,13 +23,22 @@ export class SearchBarComponent implements OnInit {
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
-  destroy$ = inject(DestroyDirective).destroy$;
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
     private cd: ChangeDetectorRef,
     private booksFacade: BooksFacade
   ) {}
+
+  ngOnInit(): void {
+    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
+      this.filterCategory = options.categoryFilterType;
+      this.searchValue = options.searchValue;
+      this.filterType = options.filterType;
+      this.cd.detectChanges();
+    });
+  }
 
   onSearch(): void {
     this.booksFacade.fetchBooks(
@@ -61,14 +69,5 @@ export class SearchBarComponent implements OnInit {
       this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
       this.booksFacade.setFilterType(this.filterType);
     }
-  }
-
-  ngOnInit(): void {
-    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
-      this.filterCategory = options.categoryFilterType;
-      this.searchValue = options.searchValue;
-      this.filterType = options.filterType;
-      this.cd.detectChanges();
-    });
   }
 }

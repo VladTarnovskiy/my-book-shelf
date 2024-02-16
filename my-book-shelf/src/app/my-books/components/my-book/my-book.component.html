@@ -1,16 +1,16 @@
 <div class="book">
   <div class="book-info">
-    <img class="cover" [src]="bookData.images.small" alt="Cover" />
+    <img class="cover" [src]="bookData.image" alt="Cover" />
     <p class="title">{{ bookData.title }}</p>
     <p class="author">
-      {{ bookData.authors[0] }},
-      <span class="year">{{ bookData.publishedDate }}</span>
+      {{ bookData.author }},
+      <span class="year">{{ bookData.description }}</span>
     </p>
     <div class="rating">4.5 <span class="rating__total">/5</span></div>
   </div>
   <div class="additional">
-    <button class="favorite-but" (click)="removeFromFavorite()">
-      <img class="favorite-but__img" src="assets/heart.svg" alt="Favorite" />
+    <button class="remove-but" (click)="removeFromMyBook()">
+      <img class="remove-but__img" src="assets/close.svg" alt="Favorite" />
     </button>
     <div class="terms">
       <div class="borrowed">
