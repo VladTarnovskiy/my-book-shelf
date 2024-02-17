@@ -56,6 +56,7 @@ export class UploadComponent {
         title: 'My book',
         body: 'The book was created!',
       });
+      this.uploadForm.reset();
     }
   }
 

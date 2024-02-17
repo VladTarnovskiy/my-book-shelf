@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import * as BooksActions from './books.action';
+import * as BOOKS_ACTIONS from './books.action';
 import { SearchService } from '../../core/services/search/search.service';
 
 @Injectable()
@@ -14,15 +14,15 @@ export class BooksEffects {
 
   fetchBooks$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(BooksActions.FetchBooks),
+      ofType(BOOKS_ACTIONS.FetchBooks),
       switchMap(({ searchValue, filterType, categoryFilterType, page }) =>
         this.searchService
           .getBooks(searchValue, filterType, categoryFilterType, page)
           .pipe(
-            map((books) => BooksActions.FetchBooksSuccess({ books, page })),
+            map((books) => BOOKS_ACTIONS.FetchBooksSuccess({ books, page })),
             catchError((error: HttpErrorResponse) => {
               const handleError = this.searchService.handleError(error);
-              return of(BooksActions.FetchBooksFailed({ error: handleError }));
+              return of(BOOKS_ACTIONS.FetchBooksFailed({ error: handleError }));
             })
           )
       )
@@ -31,16 +31,16 @@ export class BooksEffects {
 
   fetchBook$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(BooksActions.FetchPreviewBook),
+      ofType(BOOKS_ACTIONS.FetchPreviewBook),
       switchMap(({ bookId }) =>
         this.searchService.getBook(bookId).pipe(
           map((previewBook) =>
-            BooksActions.FetchPreviewBookSuccess({ previewBook })
+            BOOKS_ACTIONS.FetchPreviewBookSuccess({ previewBook })
           ),
           catchError((error: HttpErrorResponse) => {
             const handleError = this.searchService.handleError(error);
             return of(
-              BooksActions.FetchPreviewBookFailed({ error: handleError })
+              BOOKS_ACTIONS.FetchPreviewBookFailed({ error: handleError })
             );
           })
         )

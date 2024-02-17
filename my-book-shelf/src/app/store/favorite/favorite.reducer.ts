@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as FavoriteBooksActions from './favorite.action';
+import * as FAVORITE_BOOKS_ACTIONS from './favorite.action';
 import { IFavoriteBook } from '../../favorite/models/favoriteBook';
 
 export interface FavoriteBooksState {
@@ -13,7 +13,7 @@ export const initialState: FavoriteBooksState = {
 export const favoriteBooksReducer = createReducer(
   initialState,
   on(
-    FavoriteBooksActions.AddFavoriteBook,
+    FAVORITE_BOOKS_ACTIONS.AddFavoriteBook,
     (state, { book }): FavoriteBooksState => ({
       ...state,
       books: [...state.books].concat({
@@ -24,7 +24,7 @@ export const favoriteBooksReducer = createReducer(
     })
   ),
   on(
-    FavoriteBooksActions.RemoveFavoriteBook,
+    FAVORITE_BOOKS_ACTIONS.RemoveFavoriteBook,
     (state, { bookId }): FavoriteBooksState => ({
       ...state,
       books: [...state.books].filter((book) => book.id !== bookId),

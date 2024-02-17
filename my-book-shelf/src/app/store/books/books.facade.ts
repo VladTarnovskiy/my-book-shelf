@@ -18,7 +18,7 @@ import {
   CategoryFilterKeys,
 } from '../../core/interfaces/filters';
 import { IBook } from '../../shared/models/book.model';
-import * as BooksActions from './books.action';
+import * as BOOKS_ACTIONS from './books.action';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +45,7 @@ export class BooksFacade {
     page: number
   ) {
     this.store.dispatch(
-      BooksActions.FetchBooks({
+      BOOKS_ACTIONS.FetchBooks({
         searchValue,
         filterType,
         categoryFilterType,
@@ -55,36 +55,36 @@ export class BooksFacade {
   }
 
   addRecentBook(recentBook: IBook) {
-    this.store.dispatch(BooksActions.AddRecentBook({ recentBook }));
+    this.store.dispatch(BOOKS_ACTIONS.AddRecentBook({ recentBook }));
   }
 
   setFilterType(filterType: FilterTypesKeys) {
-    this.store.dispatch(BooksActions.SetFilterType({ filterType }));
+    this.store.dispatch(BOOKS_ACTIONS.SetFilterType({ filterType }));
   }
 
   setCategoryFilterType(categoryFilterType: CategoryFilterKeys) {
     this.store.dispatch(
-      BooksActions.SetCategoryFilterType({ categoryFilterType })
+      BOOKS_ACTIONS.SetCategoryFilterType({ categoryFilterType })
     );
   }
 
   setSearchPage(page: number) {
-    this.store.dispatch(BooksActions.SetSearchPage({ page }));
+    this.store.dispatch(BOOKS_ACTIONS.SetSearchPage({ page }));
   }
 
   setTotalsItems(totalItems: number) {
-    this.store.dispatch(BooksActions.SetTotalsItems({ totalItems }));
+    this.store.dispatch(BOOKS_ACTIONS.SetTotalsItems({ totalItems }));
   }
 
   addFavoriteStatus(bookId: string) {
-    this.store.dispatch(BooksActions.AddFavoriteStatus({ bookId }));
+    this.store.dispatch(BOOKS_ACTIONS.AddFavoriteStatus({ bookId }));
   }
 
   removeFavoriteStatus(bookId: string) {
-    this.store.dispatch(BooksActions.RemoveFavoriteStatus({ bookId }));
+    this.store.dispatch(BOOKS_ACTIONS.RemoveFavoriteStatus({ bookId }));
   }
 
   fetchPreviewBook(bookId: string) {
-    this.store.dispatch(BooksActions.FetchPreviewBook({ bookId }));
+    this.store.dispatch(BOOKS_ACTIONS.FetchPreviewBook({ bookId }));
   }
 }
