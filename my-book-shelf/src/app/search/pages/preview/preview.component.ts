@@ -48,6 +48,11 @@ export class PreviewComponent implements OnInit {
   }
 
   searchAuthorBooks(author: string): void {
-    this.booksFacade.fetchBooks(author, 'Author', 'Browse', 1);
+    this.booksFacade.fetchBooks({
+      searchValue: author,
+      filterType: 'Author',
+      categoryFilterType: 'Browse',
+      page: 1,
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
@@ -27,7 +27,6 @@ export class SearchBarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cd: ChangeDetectorRef,
     private booksFacade: BooksFacade
   ) {}
 
@@ -36,17 +35,16 @@ export class SearchBarComponent implements OnInit {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;
       this.filterType = options.filterType;
-      this.cd.detectChanges();
     });
   }
 
   onSearch(): void {
-    this.booksFacade.fetchBooks(
-      this.searchValue,
-      this.filterType,
-      this.filterCategory,
-      1
-    );
+    this.booksFacade.fetchBooks({
+      searchValue: this.searchValue,
+      filterType: this.filterType,
+      categoryFilterType: this.filterCategory,
+      page: 1,
+    });
 
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');

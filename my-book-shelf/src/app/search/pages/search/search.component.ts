@@ -97,12 +97,12 @@ export class SearchComponent implements OnInit {
 
   getNextPage(): void {
     this.setNextPage();
-    this.booksFacade.fetchBooks(
-      this.searchOptions.searchValue,
-      this.searchOptions.filterType,
-      this.searchOptions.categoryFilterType,
-      this.searchOptions.page
-    );
+    this.booksFacade.fetchBooks({
+      searchValue: this.searchOptions.searchValue,
+      filterType: this.searchOptions.filterType,
+      categoryFilterType: this.searchOptions.categoryFilterType,
+      page: this.searchOptions.page,
+    });
   }
 
   setNextPage(): void {

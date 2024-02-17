@@ -19,6 +19,7 @@ import {
 } from '../../core/interfaces/filters';
 import { IBook } from '../../shared/models/book.model';
 import * as BOOKS_ACTIONS from './books.action';
+import { IBooksSearchParams } from '../../core/interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',
@@ -38,12 +39,12 @@ export class BooksFacade {
 
   constructor(private store: Store) {}
 
-  fetchBooks(
-    searchValue: string,
-    filterType: FilterTypesKeys,
-    categoryFilterType: CategoryFilterKeys,
-    page: number
-  ) {
+  fetchBooks({
+    searchValue,
+    filterType,
+    categoryFilterType,
+    page,
+  }: IBooksSearchParams) {
     this.store.dispatch(
       BOOKS_ACTIONS.FetchBooks({
         searchValue,
