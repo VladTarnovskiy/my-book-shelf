@@ -17,7 +17,7 @@ export class BooksEffects {
       ofType(BOOKS_ACTIONS.FetchBooks),
       switchMap(({ searchValue, filterType, categoryFilterType, page }) =>
         this.searchService
-          .getBooks(searchValue, filterType, categoryFilterType, page)
+          .getBooks({ searchValue, filterType, categoryFilterType, page })
           .pipe(
             map((books) => BOOKS_ACTIONS.FetchBooksSuccess({ books, page })),
             catchError((error: HttpErrorResponse) => {

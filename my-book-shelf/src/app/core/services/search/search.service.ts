@@ -6,12 +6,6 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { IBookResp, ISearchResp } from '../../interfaces/booksResp';
-import {
-  CategoryFilterKeys,
-  FilterTypesKeys,
-  filterCategoryTypes,
-  filterTypes,
-} from '../../interfaces/filters';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
 import { IBook } from '../../../shared/models/book.model';
@@ -19,6 +13,8 @@ import {
   transformRespBookData,
   transformRespBooksData,
 } from '../../utils/transformRespData';
+import { getBooksSearchHeaders } from '../../utils/getBooksSearchHeaders';
+import { IBooksSearchParams } from '../../interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',
@@ -30,56 +26,26 @@ export class SearchService {
     private store: Store
   ) {}
 
-  getBooks(
-    searchValue: string,
-    filterType: FilterTypesKeys,
-    filterCategoryType: CategoryFilterKeys,
-    page: number
-  ): Observable<IBook[]> {
-    const filterTypeValue = filterTypes[filterType];
-    const filterCategoryValue = filterCategoryTypes[filterCategoryType];
-    let checkedFilterTypeValue: string;
-    let checkedCategoryFilterValue: string;
-    let options: { params: HttpParams };
+  getBooks({
+    searchValue,
+    filterType,
+    categoryFilterType,
+    page,
+  }: IBooksSearchParams): Observable<IBook[]> {
+    const options = getBooksSearchHeaders({
+      searchValue,
+      filterType,
+      categoryFilterType,
+      page,
+    });
 
-    if (filterTypeValue === '') {
-      checkedFilterTypeValue = '';
-    } else {
-      checkedFilterTypeValue = `${filterTypeValue}:`;
-    }
-
-    if (filterCategoryValue === '') {
-      checkedCategoryFilterValue = '';
-    } else {
-      checkedCategoryFilterValue = `+${filterCategoryValue}:`;
-    }
-
-    if (searchValue === '') {
-      options = {
-        params: new HttpParams()
-          .set('q', `${checkedFilterTypeValue}''${checkedCategoryFilterValue}`)
-          .append('startIndex', `${page * 10}`),
-      };
-    } else {
-      options = {
-        params: new HttpParams()
-          .set(
-            'q',
-            `${checkedFilterTypeValue}${searchValue}${checkedCategoryFilterValue}`
-          )
-          .append('startIndex', `${page * 10}`),
-      };
-    }
-
-    return this.http
-      .get<ISearchResp>(this.searchURL, options ? options : undefined)
-      .pipe(
-        map((resp) => {
-          this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
-          const transData = transformRespBooksData(resp);
-          return transData;
-        })
-      );
+    return this.http.get<ISearchResp>(this.searchURL, options).pipe(
+      map((resp) => {
+        this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
+        const transData = transformRespBooksData(resp);
+        return transData;
+      })
+    );
   }
 
   getBook(bookId: string): Observable<IBook> {
@@ -96,14 +62,12 @@ export class SearchService {
       params: new HttpParams().set('q', `${searchValue}`),
     };
 
-    return this.http
-      .get<ISearchResp>(this.searchURL, options ? options : undefined)
-      .pipe(
-        map((resp) => {
-          const transData = transformRespBooksData(resp);
-          return transData;
-        })
-      );
+    return this.http.get<ISearchResp>(this.searchURL, options).pipe(
+      map((resp) => {
+        const transData = transformRespBooksData(resp);
+        return transData;
+      })
+    );
   }
 
   handleError(error: HttpErrorResponse): string {
