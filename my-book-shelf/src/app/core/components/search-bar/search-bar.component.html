@@ -19,6 +19,9 @@
   </button>
   <input
     [(ngModel)]="searchValue"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="onChange()"
     type="search"
     class="input"
     placeholder="Search"
@@ -30,4 +33,13 @@
   <button class="scanner">
     <img class="scanner__img" src="assets/header/scanner.svg" alt="Scanner" />
   </button>
+  @if (isFocus && elasticValues.length) {
+    <div class="elastic-search">
+      @for (elasticItem of elasticValues; track elasticItem) {
+        <button class="elastic-item" (mousedown)="elasticSearch(elasticItem)">
+          {{ elasticItem }}
+        </button>
+      }
+    </div>
+  }
 </div>

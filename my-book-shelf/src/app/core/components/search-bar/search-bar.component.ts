@@ -7,6 +7,7 @@ import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy';
 import { filterTypeList } from './search-bar.constant';
+import { SearchService } from '../../services/search/search.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -20,14 +21,17 @@ export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;
   searchValue = '';
   isFilter = false;
+  isFocus = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
+  elasticValues: string[] = [];
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +40,14 @@ export class SearchBarComponent implements OnInit {
       this.searchValue = options.searchValue;
       this.filterType = options.filterType;
     });
+  }
+
+  onFocus(): void {
+    this.isFocus = true;
+  }
+
+  onBlur(): void {
+    this.isFocus = false;
   }
 
   onSearch(): void {
@@ -49,6 +61,22 @@ export class SearchBarComponent implements OnInit {
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
     }
+  }
+
+  onChange(): void {
+    this.searchService
+      .getSearchData({
+        searchValue: this.searchValue,
+        filterType: this.filterType,
+        categoryFilterType: this.filterCategory,
+        page: 1,
+      })
+      .subscribe((searchValues) => (this.elasticValues = searchValues));
+  }
+
+  elasticSearch(value: string): void {
+    this.searchValue = value;
+    this.onSearch();
   }
 
   onFilterToggle(): void {
