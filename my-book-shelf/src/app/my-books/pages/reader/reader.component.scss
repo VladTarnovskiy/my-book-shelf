@@ -39,7 +39,6 @@
   justify-content: flex-start;
 
   &__cover {
-    width: 48px;
     height: 48px;
     margin-right: 16px;
     background-color: white;
@@ -67,4 +66,5 @@
 
 .book {
   width: 100%;
+  height: 800px;
 }

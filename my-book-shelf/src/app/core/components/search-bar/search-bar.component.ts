@@ -73,9 +73,7 @@ export class SearchBarComponent implements OnInit {
         page: 1,
       })
       .subscribe((searchValues) => {
-        console.log(this.elasticValues);
         this.elasticValues.next(searchValues);
-        console.log(this.elasticValues);
       });
   }
 
@@ -89,9 +87,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onFilterClose(): void {
-    setTimeout(() => {
-      this.isFilter = false;
-    }, 300);
+    this.isFilter = false;
   }
 
   changeFilterType(event: Event): void {

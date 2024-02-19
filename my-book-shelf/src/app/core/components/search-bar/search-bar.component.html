@@ -1,5 +1,9 @@
 <div class="searchBar">
-  <button class="filters" (click)="onFilterToggle()" (blur)="onFilterClose()">
+  <button
+    class="filters"
+    (mousedown)="onFilterToggle()"
+    (blur)="onFilterClose()"
+  >
     <div class="filters__title">{{ filterType }}</div>
     <img
       class="filters__img"

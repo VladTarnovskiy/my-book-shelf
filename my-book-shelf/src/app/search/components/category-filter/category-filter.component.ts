@@ -39,9 +39,7 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   onFilterClose(): void {
-    setTimeout(() => {
-      this.isFilter = false;
-    }, 300);
+    this.isFilter = false;
   }
 
   changeFilterType(event: Event): void {

@@ -1,5 +1,9 @@
 <div class="wrapper">
-  <button class="filter" (click)="onFilterToggle()" (blur)="onFilterClose()">
+  <button
+    class="filter"
+    (mousedown)="onFilterToggle()"
+    (blur)="onFilterClose()"
+  >
     <div class="filter__title">{{ filterCategory }}</div>
     <img
       class="filter__polygon"

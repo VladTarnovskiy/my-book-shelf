@@ -1,6 +1,8 @@
 <div class="book">
   <div class="book-info">
-    <img class="cover" [src]="bookData.image" alt="Cover" />
+    <div class="cover">
+      <img class="cover__img" [src]="bookData.image" alt="Cover" />
+    </div>
     <p class="title">{{ bookData.title }}</p>
     <p class="author">
       {{ bookData.author }},
