@@ -4,10 +4,12 @@ import { IUploadBook } from '../../my-books/models/upload';
 
 export interface MyBooksState {
   books: IUploadBook[];
+  selectedBook: IUploadBook | null;
 }
 
 export const initialState: MyBooksState = {
   books: [],
+  selectedBook: null,
 };
 
 export const myBooksReducer = createReducer(
@@ -28,6 +30,13 @@ export const myBooksReducer = createReducer(
     (state, { bookId }): MyBooksState => ({
       ...state,
       books: [...state.books].filter((book) => book.id !== bookId),
+    })
+  ),
+  on(
+    MY_BOOKS_ACTIONS.SelectMyBook,
+    (state, { bookId }): MyBooksState => ({
+      ...state,
+      selectedBook: [...state.books].find((book) => book.id === bookId) || null,
     })
   )
 );

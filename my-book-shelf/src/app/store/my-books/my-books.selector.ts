@@ -8,3 +8,8 @@ export const selectMyBooks = createSelector(
   selectMyBooksStore,
   (state: MyBooksState) => state.books
 );
+
+export const selectBookForRead = createSelector(
+  selectMyBooksStore,
+  (state: MyBooksState) => state.selectedBook
+);

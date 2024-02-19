@@ -2,17 +2,18 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
-import { Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy';
 import { filterTypeList } from './search-bar.constant';
 import { SearchService } from '../../services/search/search.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AsyncPipe],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
@@ -25,7 +26,7 @@ export class SearchBarComponent implements OnInit {
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
-  elasticValues: string[] = [];
+  elasticValues = new BehaviorSubject<string[] | null>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -71,7 +72,11 @@ export class SearchBarComponent implements OnInit {
         categoryFilterType: this.filterCategory,
         page: 1,
       })
-      .subscribe((searchValues) => (this.elasticValues = searchValues));
+      .subscribe((searchValues) => {
+        console.log(this.elasticValues);
+        this.elasticValues.next(searchValues);
+        console.log(this.elasticValues);
+      });
   }
 
   elasticSearch(value: string): void {

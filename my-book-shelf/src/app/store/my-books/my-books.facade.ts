@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as MY_BOOKS_ACTIONS from './my-books.action';
-import { selectMyBooks } from './my-books.selector';
+import { selectBookForRead, selectMyBooks } from './my-books.selector';
 import { IUploadBook } from '../../my-books/models/upload';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { IUploadBook } from '../../my-books/models/upload';
 })
 export class MyBooksFacade {
   myBooks$ = this.store.select(selectMyBooks);
+  selectedBook$ = this.store.select(selectBookForRead);
 
   constructor(private store: Store) {}
 
@@ -18,5 +19,9 @@ export class MyBooksFacade {
 
   removeMyBook(bookId: string) {
     this.store.dispatch(MY_BOOKS_ACTIONS.RemoveMyBook({ bookId }));
+  }
+
+  readBook(bookId: string) {
+    this.store.dispatch(MY_BOOKS_ACTIONS.SelectMyBook({ bookId }));
   }
 }

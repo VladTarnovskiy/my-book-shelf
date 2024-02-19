@@ -1,0 +1,70 @@
+@import 'placeholders';
+@import 'variables';
+
+.reader {
+  color: $primary-third;
+  background-color: $primary-second;
+}
+
+.reader-header {
+  @extend %itemsCenter;
+  justify-content: space-between;
+  padding: 23px 72px 23px 18px;
+  margin-bottom: 20px;
+}
+
+.info {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+}
+
+.back {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  margin-right: 50px;
+
+  &__arrow {
+    width: 12px;
+    height: 12px;
+    margin-right: 9px;
+  }
+
+  &__title {
+    font-size: 15px;
+  }
+}
+
+.introduction {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+
+  &__cover {
+    width: 48px;
+    height: 48px;
+    margin-right: 16px;
+    background-color: white;
+  }
+}
+
+.description {
+  font-family: 'Inter Semi Bold';
+
+  &__title {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  &__name {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  &__author {
+    font-family: 'Inter Light';
+    font-size: 10px;
+  }
+}
+
+.book {
+  width: 100%;
+}
