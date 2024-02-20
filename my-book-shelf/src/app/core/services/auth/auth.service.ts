@@ -52,8 +52,7 @@ export class AuthService {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
       this.auth.languageCode = 'it';
-
-      this.onX();
+      this.onSendCode(); //temporary solution
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -71,7 +70,7 @@ export class AuthService {
         {
           size: 'invisible',
           callback: () => {
-            this.onX();
+            this.onSendCode();
           },
           'expired-callback': () => {},
         }
@@ -79,7 +78,7 @@ export class AuthService {
     }
   }
 
-  onX() {
+  onSendCode() {
     this.onCaptchaVerify();
     const appVerifier = window.recaptchaVerifier;
     signInWithPhoneNumber(this.auth, '+375255011513', appVerifier)
