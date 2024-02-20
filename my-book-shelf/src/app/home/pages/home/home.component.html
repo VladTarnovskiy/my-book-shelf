@@ -37,4 +37,21 @@
       }
     </div>
   </section>
+  <script
+    type="text/javascript"
+    src="https://www.google.com/books/jsapi.js"
+  ></script>
+  <script type="text/javascript">
+    google.books.load();
+
+    function initialize() {
+      var viewer = new google.books.DefaultViewer(
+        document.getElementById('viewerCanvas')
+      );
+      viewer.load('ISBN:0738531367');
+    }
+
+    google.books.setOnLoadCallback(initialize);
+  </script>
+  <div id="viewerCanvas" style="width: 600px; height: 500px"></div>
 </div>

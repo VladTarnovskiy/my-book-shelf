@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ISearchOptions } from '../../interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-search',
@@ -97,12 +97,12 @@ export class SearchComponent implements OnInit {
 
   getNextPage(): void {
     this.setNextPage();
-    this.booksFacade.fetchBooks(
-      this.searchOptions.searchValue,
-      this.searchOptions.filterType,
-      this.searchOptions.categoryFilterType,
-      this.searchOptions.page
-    );
+    this.booksFacade.fetchBooks({
+      searchValue: this.searchOptions.searchValue,
+      filterType: this.searchOptions.filterType,
+      categoryFilterType: this.searchOptions.categoryFilterType,
+      page: this.searchOptions.page,
+    });
   }
 
   setNextPage(): void {

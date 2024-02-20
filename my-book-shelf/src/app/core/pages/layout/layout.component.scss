@@ -32,6 +32,11 @@
   width: 100%;
 }
 
+.settings {
+  @extend %itemsCenter;
+  color: $primary-second;
+}
+
 .sidebar {
   min-width: 306px;
   padding-left: 68px;

@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { PreviewSkeletonComponent } from '../../components/preview-skeleton/preview-skeleton.component';
 import { PreviewOptionsComponent } from '../../components/preview-options/preview-options.component';
 import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-details',
@@ -48,6 +48,11 @@ export class PreviewComponent implements OnInit {
   }
 
   searchAuthorBooks(author: string): void {
-    this.booksFacade.fetchBooks(author, 'Author', 'Browse', 1);
+    this.booksFacade.fetchBooks({
+      searchValue: author,
+      filterType: 'Author',
+      categoryFilterType: 'Browse',
+      page: 1,
+    });
   }
 }

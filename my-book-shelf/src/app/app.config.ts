@@ -1,3 +1,4 @@
+import { quotesReducer } from './store/quotes/quotes.reducer';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import {
   PreloadAllModules,
@@ -20,6 +21,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { recommendedBooksReducer } from './store/recommendedBooks/recommendedBooks.reducer';
 import { RecommendedBooksEffects } from './store/recommendedBooks/recommendedBooks.effects';
 import { myBooksReducer } from './store/my-books/my-books.reducer';
+import { QuotesEffects } from './store/quotes/quotes.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,8 +33,9 @@ export const appConfig: ApplicationConfig = {
       favoriteBooks: favoriteBooksReducer,
       router: routerReducer,
       myBooks: myBooksReducer,
+      quotes: quotesReducer,
     }),
-    provideEffects(BooksEffects, RecommendedBooksEffects),
+    provideEffects(BooksEffects, RecommendedBooksEffects, QuotesEffects),
     provideRouterStore(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),

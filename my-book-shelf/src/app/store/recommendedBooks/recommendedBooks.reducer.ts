@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as BooksActions from './recommendedBooks.action';
+import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 import { IBook } from '../../shared/models/book.model';
 
 export interface RecommendedBooksState {
@@ -17,14 +17,14 @@ export const initialState: RecommendedBooksState = {
 export const recommendedBooksReducer = createReducer(
   initialState,
   on(
-    BooksActions.FetchRecommendedBooks,
+    RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooks,
     (state): RecommendedBooksState => ({
       ...state,
       isLoading: true,
     })
   ),
   on(
-    BooksActions.FetchRecommendedBooksSuccess,
+    RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooksSuccess,
     (state, { books }): RecommendedBooksState => {
       return {
         ...state,
@@ -34,7 +34,7 @@ export const recommendedBooksReducer = createReducer(
     }
   ),
   on(
-    BooksActions.FetchRecommendedBooksFailed,
+    RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooksFailed,
     (state, { error }): RecommendedBooksState => ({
       ...state,
       error,

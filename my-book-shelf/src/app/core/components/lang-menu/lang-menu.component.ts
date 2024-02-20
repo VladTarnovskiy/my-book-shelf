@@ -16,8 +16,6 @@ export class LangMenuComponent {
   }
 
   onLangClose(): void {
-    setTimeout(() => {
-      this.isMenu = false;
-    }, 300);
+    this.isMenu = false;
   }
 }

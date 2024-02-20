@@ -1,4 +1,8 @@
-<button class="profile" (click)="onProfileToggle()" (blur)="onProfileClose()">
+<button
+  class="profile"
+  (mousedown)="onProfileToggle()"
+  (blur)="onProfileClose()"
+>
   <img class="profile__img" src="assets/header/profile.svg" alt="Profile" />
   <p class="profile__title">Kenson</p>
   <img

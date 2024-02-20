@@ -1,17 +1,20 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
-import { Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../directives/destroy';
+import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
+import { SearchService } from '../../services/search/search.service';
+import { AsyncPipe } from '@angular/common';
+import { CloseMenuDirective } from '../../directives/close-menu/close-menu.directive';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AsyncPipe, CloseMenuDirective],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
@@ -20,15 +23,17 @@ export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;
   searchValue = '';
   isFilter = false;
+  isFocus = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
+  elasticValues = new BehaviorSubject<string[] | null>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
-    private cd: ChangeDetectorRef,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -36,31 +41,54 @@ export class SearchBarComponent implements OnInit {
       this.filterCategory = options.categoryFilterType;
       this.searchValue = options.searchValue;
       this.filterType = options.filterType;
-      this.cd.detectChanges();
     });
   }
 
+  onFocus(): void {
+    this.isFocus = true;
+  }
+
+  onBlur(): void {
+    this.isFocus = false;
+  }
+
   onSearch(): void {
-    this.booksFacade.fetchBooks(
-      this.searchValue,
-      this.filterType,
-      this.filterCategory,
-      1
-    );
+    this.booksFacade.fetchBooks({
+      searchValue: this.searchValue,
+      filterType: this.filterType,
+      categoryFilterType: this.filterCategory,
+      page: 1,
+    });
 
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
     }
   }
 
+  onChange(): void {
+    this.searchService
+      .getSearchData({
+        searchValue: this.searchValue,
+        filterType: this.filterType,
+        categoryFilterType: this.filterCategory,
+        page: 1,
+      })
+      .subscribe((searchValues) => {
+        this.elasticValues.next(searchValues);
+      });
+  }
+
+  elasticSearch(value: string): void {
+    this.searchValue = value;
+    this.onSearch();
+  }
+
   onFilterToggle(): void {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose(): void {
-    setTimeout(() => {
-      this.isFilter = false;
-    }, 300);
+  onFilterClose(value: boolean): void {
+    this.isFilter = value;
   }
 
   changeFilterType(event: Event): void {

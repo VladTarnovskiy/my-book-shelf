@@ -5,7 +5,7 @@ import {
   selectRecommendedBooksError,
   selectRecommendedBooksIsLoading,
 } from './recommendedBooks.selector';
-import * as RecommendedBooksActions from './recommendedBooks.action';
+import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class RecommendedBooksFacade {
 
   fetchRecommendedBooks(searchValue: string) {
     this.store.dispatch(
-      RecommendedBooksActions.FetchRecommendedBooks({
+      RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooks({
         searchValue,
       })
     );

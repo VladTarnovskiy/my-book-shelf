@@ -14,3 +14,8 @@ export const RemoveMyBook = createAction(
   `${actionSource} Remove Book`,
   props<{ bookId: string }>()
 );
+
+export const SelectMyBook = createAction(
+  `${actionSource} Select Book`,
+  props<{ bookId: string }>()
+);

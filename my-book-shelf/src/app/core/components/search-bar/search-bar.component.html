@@ -1,5 +1,10 @@
 <div class="searchBar">
-  <button class="filters" (click)="onFilterToggle()" (blur)="onFilterClose()">
+  <button
+    class="filters"
+    (mousedown)="onFilterToggle()"
+    appCloseMenu
+    (closeMenu)="onFilterClose($event)"
+  >
     <div class="filters__title">{{ filterType }}</div>
     <img
       class="filters__img"
@@ -19,6 +24,9 @@
   </button>
   <input
     [(ngModel)]="searchValue"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (input)="onChange()"
     type="search"
     class="input"
     placeholder="Search"
@@ -30,4 +38,13 @@
   <button class="scanner">
     <img class="scanner__img" src="assets/header/scanner.svg" alt="Scanner" />
   </button>
+  @if (isFocus && (elasticValues | async)) {
+    <div class="elastic-search">
+      @for (elasticItem of elasticValues | async; track elasticItem) {
+        <button class="elastic-item" (mousedown)="elasticSearch(elasticItem)">
+          {{ elasticItem }}
+        </button>
+      }
+    </div>
+  }
 </div>

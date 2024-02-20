@@ -64,10 +64,22 @@ export const routes: Routes = [
       },
       {
         path: 'my-books',
-        loadComponent: () =>
-          import('./my-books/pages/my-books/my-books.component').then(
-            (m) => m.MyBooksComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./my-books/pages/my-books/my-books.component').then(
+                (m) => m.MyBooksComponent
+              ),
+          },
+          {
+            path: 'reader',
+            loadComponent: () =>
+              import('./my-books/pages/reader/reader.component').then(
+                (m) => m.ReaderComponent
+              ),
+          },
+        ],
       },
     ],
   },
@@ -86,6 +98,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./auth/pages/login/login.component').then(
             (m) => m.LoginComponent
+          ),
+      },
+      {
+        path: 'verification',
+        loadComponent: () =>
+          import('./auth/pages/verification/verification.component').then(
+            (m) => m.VerificationComponent
           ),
       },
     ],

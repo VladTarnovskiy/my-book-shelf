@@ -4,6 +4,7 @@
 .searchBar {
   @extend %itemsCenter;
   @extend %shadow;
+  position: relative;
   justify-content: center;
   height: 49px;
   border-radius: 40px;
@@ -97,5 +98,32 @@
   &__img {
     width: 20px;
     height: 20px;
+  }
+}
+
+.elastic-search {
+  @extend %shadow;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(105%);
+  background-color: $primary-third;
+  border-radius: 8px;
+  padding: 8px 0;
+  z-index: 2;
+}
+
+.elastic-item {
+  padding: 4px 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $secondary-fourth;
   }
 }

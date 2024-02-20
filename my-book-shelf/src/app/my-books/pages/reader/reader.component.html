@@ -1,0 +1,38 @@
+@if (book) {
+  <div class="reader">
+    <div class="reader-header">
+      <div class="info">
+        <button class="back">
+          <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
+          <div class="back__title">Back</div>
+        </button>
+        <div class="introduction">
+          <img [src]="book.image" alt="Cover" class="introduction__cover" />
+          <div class="description">
+            <div class="description__title">INTRODUCTION</div>
+            <p class="description__name">{{ book.title }}</p>
+            <p class="description__author">
+              {{ book.author }},
+              <span class="year">2024</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <button class="favorite__but">
+        <img src="assets/heart.svg" alt="Favorite" />
+      </button>
+    </div>
+    <div class="book">
+      <object
+        aria-label="Book"
+        class="book__reader"
+        [data]="book.file | safe"
+        type="application/pdf"
+        width="100%"
+        height="100%"
+      >
+        Book
+      </object>
+    </div>
+  </div>
+}

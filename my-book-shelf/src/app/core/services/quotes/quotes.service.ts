@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { IQuote } from '../../../search/models/quote';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -18,5 +22,12 @@ export class QuotesService {
     return this.http.get<IQuote>(this.quotesURL, {
       headers: interceptorSkipHeader,
     });
+  }
+
+  handleError(error: HttpErrorResponse): string {
+    if (error.status === 0) {
+      return `An error occurred:', ${error.error}`;
+    }
+    return `Backend returned code ${error.status}, body was: , ${error.error} `;
   }
 }

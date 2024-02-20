@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -16,6 +16,7 @@ import { ToasterService } from '../../../core/services/toaster/toaster.service';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadComponent {
   uploadForm = new FormGroup<IUpLoadBookForm>({
@@ -56,6 +57,7 @@ export class UploadComponent {
         title: 'My book',
         body: 'The book was created!',
       });
+      this.uploadForm.reset();
     }
   }
 

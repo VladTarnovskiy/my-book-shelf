@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as BooksActions from './books.action';
+import * as BOOKS_ACTIONS from './books.action';
 import { IBook } from '../../shared/models/book.model';
 import {
   CategoryFilterKeys,
@@ -39,7 +39,7 @@ export const initialState: BooksState = {
 export const booksReducer = createReducer(
   initialState,
   on(
-    BooksActions.FetchBooks,
+    BOOKS_ACTIONS.FetchBooks,
     (
       state,
       { searchValue, filterType, categoryFilterType, page }
@@ -64,7 +64,7 @@ export const booksReducer = createReducer(
       }
     }
   ),
-  on(BooksActions.FetchBooksSuccess, (state, { books, page }): BooksState => {
+  on(BOOKS_ACTIONS.FetchBooksSuccess, (state, { books, page }): BooksState => {
     if (page === 1) {
       return {
         ...state,
@@ -80,7 +80,7 @@ export const booksReducer = createReducer(
     }
   }),
   on(
-    BooksActions.FetchBooksFailed,
+    BOOKS_ACTIONS.FetchBooksFailed,
     (state, { error }): BooksState => ({
       ...state,
       error,
@@ -89,14 +89,14 @@ export const booksReducer = createReducer(
     })
   ),
   on(
-    BooksActions.FetchPreviewBook,
+    BOOKS_ACTIONS.FetchPreviewBook,
     (state): BooksState => ({
       ...state,
       isPreviewLoading: true,
     })
   ),
   on(
-    BooksActions.FetchPreviewBookSuccess,
+    BOOKS_ACTIONS.FetchPreviewBookSuccess,
     (state, { previewBook }): BooksState => ({
       ...state,
       previewBook,
@@ -104,14 +104,14 @@ export const booksReducer = createReducer(
     })
   ),
   on(
-    BooksActions.FetchPreviewBookFailed,
+    BOOKS_ACTIONS.FetchPreviewBookFailed,
     (state, { error }): BooksState => ({
       ...state,
       previewError: error,
       isPreviewLoading: false,
     })
   ),
-  on(BooksActions.AddRecentBook, (state, { recentBook }): BooksState => {
+  on(BOOKS_ACTIONS.AddRecentBook, (state, { recentBook }): BooksState => {
     const hasRecentBook = state.recentBooks
       .map((book) => book.id)
       .includes(recentBook.id);
@@ -133,35 +133,35 @@ export const booksReducer = createReducer(
     }
   }),
   on(
-    BooksActions.SetSearchPage,
+    BOOKS_ACTIONS.SetSearchPage,
     (state, { page }): BooksState => ({
       ...state,
       page,
     })
   ),
   on(
-    BooksActions.SetCategoryFilterType,
+    BOOKS_ACTIONS.SetCategoryFilterType,
     (state, { categoryFilterType }): BooksState => ({
       ...state,
       categoryFilterType,
     })
   ),
   on(
-    BooksActions.SetFilterType,
+    BOOKS_ACTIONS.SetFilterType,
     (state, { filterType }): BooksState => ({
       ...state,
       filterType,
     })
   ),
   on(
-    BooksActions.SetTotalsItems,
+    BOOKS_ACTIONS.SetTotalsItems,
     (state, { totalItems }): BooksState => ({
       ...state,
       totalItems,
     })
   ),
   on(
-    BooksActions.AddFavoriteStatus,
+    BOOKS_ACTIONS.AddFavoriteStatus,
     (state, { bookId }): BooksState => ({
       ...state,
       books: [...state.books].map((book) => {
@@ -174,7 +174,7 @@ export const booksReducer = createReducer(
     })
   ),
   on(
-    BooksActions.RemoveFavoriteStatus,
+    BOOKS_ACTIONS.RemoveFavoriteStatus,
     (state, { bookId }): BooksState => ({
       ...state,
       books: [...state.books].map((book) => {

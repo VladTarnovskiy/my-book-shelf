@@ -7,7 +7,7 @@ import {
 import { CategoryFilterKeys } from '../../../core/interfaces/filters';
 import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { filterCategoryList } from './category-filter.constant';
 
 @Component({
@@ -39,9 +39,7 @@ export class CategoryFilterComponent implements OnInit {
   }
 
   onFilterClose(): void {
-    setTimeout(() => {
-      this.isFilter = false;
-    }, 300);
+    this.isFilter = false;
   }
 
   changeFilterType(event: Event): void {

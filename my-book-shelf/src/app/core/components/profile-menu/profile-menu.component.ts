@@ -19,8 +19,6 @@ export class ProfileMenuComponent {
   }
 
   onProfileClose(): void {
-    setTimeout(() => {
-      this.isMenu = false;
-    }, 300);
+    this.isMenu = false;
   }
 }

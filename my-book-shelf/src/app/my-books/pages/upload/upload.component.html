@@ -63,6 +63,9 @@
       @if (file?.hasError('required')) {
         <div class="invalid__message">please choose a file</div>
       }
+      @if (file?.hasError('forbiddenFileType')) {
+        {{ file?.errors?.['forbiddenFileType'].value }}
+      }
     </div>
     <div class="form-item image">
       <label for="image" class="form-item__label">

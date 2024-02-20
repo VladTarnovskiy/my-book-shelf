@@ -1,6 +1,6 @@
-@if (!isError) {
+@if ((error$ | async) === null) {
   <div class="quote">
-    @if (quote && !isLoading) {
+    @if (quote && (isLoading$ | async) === false) {
       <h3 class="title">Today’s Quote</h3>
       <p class="content">
         {{ quote.quote }}
@@ -18,7 +18,7 @@
         </div>
         <p class="author">-{{ quote.author }}</p>
       </div>
-    } @else if (isLoading) {
+    } @else if (isLoading$ | async) {
       <app-quote-skeleton />
     }
   </div>
