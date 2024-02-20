@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="verification">
+    <div class="description">
+      <img src="assets/logo.svg" alt="Logo" class="description__icon" />
+      <div class="description__title">Verification</div>
+      <div class="description__info">Check your E-mail for OTP</div>
+    </div>
+    <div class="message">Enter your OTP Here</div>
+
+    <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="form-items">
+        <div class="form-item">
+          <label for="codeOne" class="form-item__label">
+            <input
+              id="codeOne"
+              type="text"
+              formControlName="codeOne"
+              class="form-item__input"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-item">
+          <label for="codeTwo" class="form-item__label">
+            <input
+              id="codeTwo"
+              type="text"
+              formControlName="codeTwo"
+              class="form-item__input"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-item">
+          <label for="codeThree" class="form-item__label">
+            <input
+              id="codeThree"
+              type="text"
+              formControlName="codeThree"
+              class="form-item__input"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-item">
+          <label for="codeFour" class="form-item__label">
+            <input
+              id="codeFour"
+              type="text"
+              formControlName="codeFour"
+              class="form-item__input"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-item">
+          <label for="codeFive" class="form-item__label">
+            <input
+              id="codeFive"
+              type="text"
+              formControlName="codeFive"
+              class="form-item__input"
+              required
+            />
+          </label>
+        </div>
+      </div>
+      <div class="buttons">
+        <button
+          type="submit"
+          class="buttons__verify"
+          [ngClass]="verificationForm.valid ? '' : 'invalid-but'"
+        >
+          Verify
+        </button>
+      </div>
+      <div class="actions">
+        <div class="actions__item">
+          <div>Not yet received?&ensp;</div>
+          <button type="button" class="resend-but">Resend</button>
+        </div>
+        <div class="actions__item">
+          <button type="button" class="back">Back</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

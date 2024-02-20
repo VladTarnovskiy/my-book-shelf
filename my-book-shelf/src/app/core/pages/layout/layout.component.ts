@@ -3,7 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
-import { SettingsComponent } from '../../components/settings/settings.component';
+import { LangMenuComponent } from '../../components/lang-menu/lang-menu.component';
+import { ProfileMenuComponent } from '../../components/profile-menu/profile-menu.component';
 
 @Component({
   selector: 'app-layout',
@@ -13,7 +14,8 @@ import { SettingsComponent } from '../../components/settings/settings.component'
     NavigationComponent,
     FooterComponent,
     SearchBarComponent,
-    SettingsComponent,
+    LangMenuComponent,
+    ProfileMenuComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

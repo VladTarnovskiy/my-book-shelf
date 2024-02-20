@@ -100,6 +100,13 @@ export const routes: Routes = [
             (m) => m.LoginComponent
           ),
       },
+      {
+        path: 'verification',
+        loadComponent: () =>
+          import('./auth/pages/verification/verification.component').then(
+            (m) => m.VerificationComponent
+          ),
+      },
     ],
   },
 ];
