@@ -13,6 +13,7 @@ import { PreviewSkeletonComponent } from '../../components/preview-skeleton/prev
 import { PreviewOptionsComponent } from '../../components/preview-options/preview-options.component';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
+import { GoBackDirective } from '../../../core/directives/go-back/go-back.directive';
 
 @Component({
   selector: 'app-details',
@@ -22,6 +23,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
     CommonModule,
     PreviewSkeletonComponent,
     PreviewOptionsComponent,
+    GoBackDirective,
   ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
