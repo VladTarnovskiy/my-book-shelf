@@ -9,6 +9,7 @@ export interface IUploadBook {
   id: string;
   borrowedOn: string;
   submissionDate: string;
+  isFavorite: boolean;
 }
 
 export interface IUpLoadBookForm {

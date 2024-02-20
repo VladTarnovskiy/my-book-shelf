@@ -18,9 +18,17 @@
           </div>
         </div>
       </div>
-      <button class="favorite__but">
-        <img src="assets/heart.svg" alt="Favorite" />
-      </button>
+      <div class="favorite">
+        @if (isFavorite) {
+          <button class="favorite__but" (click)="removeFromFavorite()">
+            <img src="assets/heart.svg" alt="Favorite" />
+          </button>
+        } @else {
+          <button class="favorite__but" (click)="addToFavorite()">
+            <img src="assets/empty-heart.svg" alt="Favorite" />
+          </button>
+        }
+      </div>
     </div>
     <div class="book">
       <object
@@ -35,4 +43,6 @@
       </object>
     </div>
   </div>
+} @else {
+  <div class="not-found">Book not found.</div>
 }

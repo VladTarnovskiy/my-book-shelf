@@ -51,6 +51,7 @@ export class UploadComponent {
       this.myBooksFacade.addMyBook({
         ...formUserData,
         id: crypto.randomUUID(),
+        isFavorite: false,
       });
       this.toasterService.show({
         type: 'success',

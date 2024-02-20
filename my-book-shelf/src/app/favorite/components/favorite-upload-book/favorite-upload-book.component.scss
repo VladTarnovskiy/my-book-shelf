@@ -1,0 +1,108 @@
+@import 'placeholders';
+@import 'variables';
+
+.book {
+  padding: 16px 20px 13px 15px;
+  background-color: $primary-third;
+  width: 308px;
+  min-height: 260px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.book-info {
+  width: 123px;
+  border-radius: 5px;
+  margin-right: 25px;
+}
+
+.cover {
+  width: 123px;
+  height: 170px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.author {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.rating {
+  font-size: 10px;
+
+  .rating__total {
+    color: $secondary-fifth;
+  }
+}
+
+.additional {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 11px;
+  height: 100%;
+}
+
+.favorite-but {
+  margin-left: auto;
+  @extend %itemsCenter;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+}
+
+.terms {
+  padding: 0 5px 5px 5px;
+}
+
+.borrowed,
+.submission {
+  margin-bottom: 12px;
+
+  &__title {
+    font-size: 15px;
+    margin-bottom: 10px;
+    line-height: 20px;
+  }
+
+  &__desc {
+    font-size: 10px;
+    color: $secondary-fifth;
+    line-height: 13px;
+  }
+}
+
+.links {
+  .ebook {
+    width: 125px;
+    height: 40px;
+    background-color: $secondary-third;
+    border-radius: 5px;
+    @extend %itemsCenter;
+    justify-content: center;
+    font-family: 'Inter Semi Bold';
+    font-size: 15px;
+    color: $primary-third;
+    margin-bottom: 15px;
+  }
+
+  .read {
+    @extend %itemsCenter;
+    justify-content: center;
+    width: 125px;
+    height: 40px;
+    border: 1px solid $primary-first;
+    font-size: 15px;
+    color: $primary-first;
+    border-radius: 5px;
+  }
+}

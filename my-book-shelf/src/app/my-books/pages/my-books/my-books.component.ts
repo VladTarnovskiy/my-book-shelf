@@ -4,7 +4,6 @@ import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { IUploadBook } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { MyBookComponent } from '../../components/my-book/my-book.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-books',
@@ -17,18 +16,9 @@ import { Router } from '@angular/router';
 export class MyBooksComponent {
   myBooks$: Observable<IUploadBook[]> = this.myBooksFacade.myBooks$;
 
-  constructor(
-    private myBooksFacade: MyBooksFacade,
-    private router: Router
-  ) {}
+  constructor(private myBooksFacade: MyBooksFacade) {}
 
   removeFromMyBook(bookId: string): void {
     this.myBooksFacade.removeMyBook(bookId);
-  }
-
-  readBook(bookId: string) {
-    console.log(bookId);
-    this.myBooksFacade.readBook(bookId);
-    this.router.navigate(['my-books/reader']);
   }
 }

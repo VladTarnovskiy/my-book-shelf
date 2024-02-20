@@ -13,6 +13,19 @@
   margin-bottom: 20px;
 }
 
+.favorite {
+  width: 30px;
+  height: 30px;
+  margin-right: 67px;
+
+  &__but {
+    @extend %itemsCenter;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+  }
+}
+
 .info {
   @extend %itemsCenter;
   justify-content: flex-start;
@@ -67,4 +80,10 @@
 .book {
   width: 100%;
   height: 800px;
+}
+
+.not-found {
+  width: fit-content;
+  padding: 23px;
+  margin: auto;
 }

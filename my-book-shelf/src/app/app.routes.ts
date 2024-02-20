@@ -73,7 +73,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'reader',
+            path: 'reader/:myBookId',
             loadComponent: () =>
               import('./my-books/pages/reader/reader.component').then(
                 (m) => m.ReaderComponent

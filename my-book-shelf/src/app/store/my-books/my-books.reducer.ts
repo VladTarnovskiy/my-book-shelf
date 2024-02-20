@@ -4,12 +4,10 @@ import { IUploadBook } from '../../my-books/models/upload';
 
 export interface MyBooksState {
   books: IUploadBook[];
-  selectedBook: IUploadBook | null;
 }
 
 export const initialState: MyBooksState = {
   books: [],
-  selectedBook: null,
 };
 
 export const myBooksReducer = createReducer(
@@ -33,10 +31,29 @@ export const myBooksReducer = createReducer(
     })
   ),
   on(
-    MY_BOOKS_ACTIONS.SelectMyBook,
+    MY_BOOKS_ACTIONS.AddMyBookToFavorite,
     (state, { bookId }): MyBooksState => ({
       ...state,
-      selectedBook: [...state.books].find((book) => book.id === bookId) || null,
+      books: [...state.books].map((book) => {
+        if (book.id === bookId) {
+          return { ...book, isFavorite: true };
+        } else {
+          return book;
+        }
+      }),
+    })
+  ),
+  on(
+    MY_BOOKS_ACTIONS.RemoveMyBookFromFavorite,
+    (state, { bookId }): MyBooksState => ({
+      ...state,
+      books: [...state.books].map((book) => {
+        if (book.id === bookId) {
+          return { ...book, isFavorite: false };
+        } else {
+          return book;
+        }
+      }),
     })
   )
 );
