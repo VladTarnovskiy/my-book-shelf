@@ -7,7 +7,7 @@ import {
 import { Observable, takeUntil } from 'rxjs';
 import { IQuote } from '../../../search/models/quote';
 import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { QuotesFacade } from '../../../store/quotes/quotes.facade';
 import { CommonModule } from '@angular/common';
 

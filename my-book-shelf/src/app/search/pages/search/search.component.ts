@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ISearchOptions } from '../../interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-search',

@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { Observable, takeUntil } from 'rxjs';
 import { IUploadBook } from '../../models/upload';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { SafePipe } from '../../../core/pipes/safe/safe.pipe';
 
 @Component({

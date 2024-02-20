@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
+  RecaptchaVerifier,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPhoneNumber,
   signOut,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -49,6 +51,9 @@ export class AuthService {
   }): Promise<void> {
     try {
       await signInWithEmailAndPassword(this.auth, email, password);
+      this.auth.languageCode = 'it';
+
+      this.onX();
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -56,6 +61,34 @@ export class AuthService {
         this.errorHandling(error);
       }
     }
+  }
+
+  onCaptchaVerify() {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        this.auth,
+        'recaptcha-container',
+        {
+          size: 'invisible',
+          callback: () => {
+            this.onX();
+          },
+          'expired-callback': () => {},
+        }
+      );
+    }
+  }
+
+  onX() {
+    this.onCaptchaVerify();
+    const appVerifier = window.recaptchaVerifier;
+    signInWithPhoneNumber(this.auth, '+375255011513', appVerifier)
+      .then((confirmationResult) => {
+        console.log(confirmationResult);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   async logout(): Promise<void> {

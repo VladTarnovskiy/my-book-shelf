@@ -5,15 +5,16 @@ import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
 import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 import { ISearchOptions } from '../../../search/interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../directives/destroy';
+import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
 import { SearchService } from '../../services/search/search.service';
 import { AsyncPipe } from '@angular/common';
+import { CloseMenuDirective } from '../../directives/close-menu/close-menu.directive';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, AsyncPipe],
+  imports: [FormsModule, AsyncPipe, CloseMenuDirective],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
@@ -86,8 +87,8 @@ export class SearchBarComponent implements OnInit {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose(): void {
-    this.isFilter = false;
+  onFilterClose(value: boolean): void {
+    this.isFilter = value;
   }
 
   changeFilterType(event: Event): void {

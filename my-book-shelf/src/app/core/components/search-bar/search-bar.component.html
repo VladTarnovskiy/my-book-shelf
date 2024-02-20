@@ -2,7 +2,8 @@
   <button
     class="filters"
     (mousedown)="onFilterToggle()"
-    (blur)="onFilterClose()"
+    appCloseMenu
+    (closeMenu)="onFilterClose($event)"
   >
     <div class="filters__title">{{ filterType }}</div>
     <img

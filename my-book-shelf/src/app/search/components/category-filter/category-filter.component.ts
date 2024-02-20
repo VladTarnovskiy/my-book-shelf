@@ -7,7 +7,7 @@ import {
 import { CategoryFilterKeys } from '../../../core/interfaces/filters';
 import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../../core/directives/destroy';
+import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { filterCategoryList } from './category-filter.constant';
 
 @Component({
