@@ -117,3 +117,34 @@
     border-radius: 5px;
   }
 }
+
+.modal-content {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 600px;
+  height: 220px;
+  background-color: $primary-third;
+  border-radius: 10px;
+  font-family: 'Inter Semi Bold';
+}
+
+.modal-title {
+  margin-bottom: 100px;
+}
+
+.modal-buttons {
+  width: 100%;
+  @extend %itemsCenter;
+  justify-content: space-between;
+
+  &__item {
+    height: 48px;
+    width: 100px;
+    background-color: $primary-first;
+    color: $primary-third;
+    border-radius: 8px;
+  }
+}

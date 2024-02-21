@@ -1,0 +1,10 @@
+<div class="modal-wrapper">
+  <section class="modal" #modal>
+    <ng-content></ng-content>
+  </section>
+  <button
+    class="modal-overlay"
+    (click)="onClose()"
+    aria-label="overlay"
+  ></button>
+</div>

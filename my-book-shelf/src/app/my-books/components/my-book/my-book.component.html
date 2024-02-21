@@ -11,7 +11,7 @@
     <div class="rating">4.5 <span class="rating__total">/5</span></div>
   </div>
   <div class="additional">
-    <button class="remove-but" (click)="removeFromMyBook()">
+    <button class="remove-but" (click)="openModal()">
       <img class="remove-but__img" src="assets/close.svg" alt="Favorite" />
     </button>
     <div class="terms">
@@ -34,3 +34,20 @@
     </div>
   </div>
 </div>
+@if (isRemoveModal) {
+  <app-modal (closeModal)="closeModal($event)">
+    <div class="modal-content">
+      <div class="modal-title">
+        Are you sure that you want to delete this book?
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-buttons__item" (click)="removeFromMyBook()">
+          Remove
+        </button>
+        <button class="modal-buttons__item" (click)="closeModal(false)">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </app-modal>
+}

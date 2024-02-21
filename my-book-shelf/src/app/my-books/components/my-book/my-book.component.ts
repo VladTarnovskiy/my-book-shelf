@@ -8,11 +8,12 @@ import {
 import { CommonModule } from '@angular/common';
 import { IUploadBook } from '../../models/upload';
 import { RouterModule } from '@angular/router';
+import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-my-book',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ModalComponent],
   templateUrl: './my-book.component.html',
   styleUrl: './my-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,8 +21,18 @@ import { RouterModule } from '@angular/router';
 export class MyBookComponent {
   @Input({ required: true }) bookData!: IUploadBook;
   @Output() removeFromMyBookEvent = new EventEmitter<string>();
+  isRemoveModal = false;
+
+  openModal() {
+    this.isRemoveModal = true;
+  }
+
+  closeModal(value: boolean) {
+    this.isRemoveModal = value;
+  }
 
   removeFromMyBook(): void {
     this.removeFromMyBookEvent.emit(this.bookData.id);
+    this.closeModal(false);
   }
 }
