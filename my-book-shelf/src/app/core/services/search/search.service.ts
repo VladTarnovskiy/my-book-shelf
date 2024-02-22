@@ -4,7 +4,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { IBookResp, ISearchResp } from '../../interfaces/booksResp';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
@@ -40,6 +40,9 @@ export class SearchService {
     });
 
     return this.http.get<ISearchResp>(this.searchURL, options).pipe(
+      tap((resp) => {
+        console.log(resp);
+      }),
       map((resp) => {
         this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
         const transData = transformRespBooksData(resp);

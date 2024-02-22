@@ -1,0 +1,45 @@
+@if (book) {
+  <div class="reader">
+    <div class="reader-header">
+      <div class="info">
+        <button class="back" appGoBack>
+          <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
+          <div class="back__title">Back</div>
+        </button>
+        <div class="introduction">
+          <img
+            [src]="book.images.small"
+            alt="Cover"
+            class="introduction__cover"
+          />
+          <div class="description">
+            <div class="description__title">INTRODUCTION</div>
+            <p class="description__name">{{ book.title }}</p>
+            <p class="description__author">
+              {{ book.authors[0] }},
+              <span class="year">2024</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="favorite">
+        @if (isFavorite) {
+          <button class="favorite__but" (click)="removeFromFavorite(book.id)">
+            <img src="assets/heart.svg" alt="Favorite" />
+          </button>
+        } @else {
+          <button class="favorite__but" (click)="addToFavorite(book)">
+            <img src="assets/empty-heart.svg" alt="Favorite" />
+          </button>
+        }
+      </div>
+    </div>
+    @if (isAvailable | async) {
+      <div class="book" #bookCanvas></div>
+    } @else {
+      <div class="not-available">Book not available</div>
+    }
+  </div>
+} @else {
+  <div class="not-found">Book not found.</div>
+}

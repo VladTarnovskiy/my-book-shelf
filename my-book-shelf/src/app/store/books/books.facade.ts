@@ -5,6 +5,7 @@ import {
   selectBookId,
   selectBooks,
   selectBooksLoading,
+  selectISBNId,
   selectPreviewBook,
   selectPreviewBookLoader,
   selectRecentBooks,
@@ -36,6 +37,7 @@ export class BooksFacade {
   previewBook$ = this.store.select(selectPreviewBook);
   previewBookLoader$ = this.store.select(selectPreviewBookLoader);
   previewBookId$ = this.store.select(selectBookId);
+  bookByISBNId$ = this.store.select(selectISBNId);
 
   constructor(private store: Store) {}
 

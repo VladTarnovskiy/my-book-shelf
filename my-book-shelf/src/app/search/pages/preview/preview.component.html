@@ -46,7 +46,12 @@
             </div>
           </div>
           <div class="buttons">
-            <button class="buttons__read">Read</button>
+            <button
+              class="buttons__read"
+              [routerLink]="['/search/reader', bookData.ISBN]"
+            >
+              Read
+            </button>
             <button class="buttons__listen">Listen</button>
           </div>
         </div>

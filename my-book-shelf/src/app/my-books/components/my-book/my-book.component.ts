@@ -23,11 +23,11 @@ export class MyBookComponent {
   @Output() removeFromMyBookEvent = new EventEmitter<string>();
   isRemoveModal = false;
 
-  openModal() {
+  openModal(): void {
     this.isRemoveModal = true;
   }
 
-  closeModal(value: boolean) {
+  closeModal(value: boolean): void {
     this.isRemoveModal = value;
   }
 

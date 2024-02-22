@@ -66,3 +66,14 @@ export const selectBookId = createSelector(
     return previewId as string;
   }
 );
+
+export const selectISBNId = createSelector(
+  selectBooksStore,
+  selectRouteParams,
+  (store, { isbnId }) => {
+    const id = isbnId as string;
+    const book = store.books.find((book) => book.ISBN === id);
+
+    return book || null;
+  }
+);

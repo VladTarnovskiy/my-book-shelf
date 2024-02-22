@@ -46,6 +46,13 @@ export const routes: Routes = [
                 (m) => m.PreviewComponent
               ),
           },
+          {
+            path: 'reader/:isbnId',
+            loadComponent: () =>
+              import(
+                './search/pages/api-book-reader/api-book-reader.component'
+              ).then((m) => m.ApiBookReaderComponent),
+          },
         ],
       },
       {
