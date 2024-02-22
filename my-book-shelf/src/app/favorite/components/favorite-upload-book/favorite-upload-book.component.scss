@@ -19,16 +19,10 @@
 }
 
 .cover {
-  @extend %itemsCenter;
-  justify-items: center;
   width: 123px;
   height: 170px;
-
-  &__img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 12px;
-  }
+  border-radius: 5px;
+  margin-bottom: 12px;
 }
 
 .title {
@@ -58,17 +52,12 @@
   height: 100%;
 }
 
-.remove-but {
+.favorite-but {
   margin-left: auto;
   @extend %itemsCenter;
   justify-content: center;
   width: 25px;
   height: 25px;
-
-  &__img {
-    width: 30px;
-    height: 30px;
-  }
 }
 
 .terms {
@@ -115,36 +104,5 @@
     font-size: 15px;
     color: $primary-first;
     border-radius: 5px;
-  }
-}
-
-.modal-content {
-  display: flex;
-  padding: 20px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 600px;
-  height: 220px;
-  background-color: $primary-third;
-  border-radius: 10px;
-  font-family: 'Inter Semi Bold';
-}
-
-.modal-title {
-  margin-bottom: 100px;
-}
-
-.modal-buttons {
-  width: 100%;
-  @extend %itemsCenter;
-  justify-content: space-between;
-
-  &__item {
-    height: 48px;
-    width: 100px;
-    background-color: $primary-first;
-    color: $primary-third;
-    border-radius: 8px;
   }
 }

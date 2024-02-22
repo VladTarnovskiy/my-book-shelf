@@ -8,18 +8,20 @@
         Show All
       </button>
     </h3>
-    <div class="recommended__books">
-      @if (recommendedBooksIsLoading$ | async) {
-        @for (skeleton of skeletonItems; track skeleton) {
-          <app-home-book-skeleton />
+    <div class="recommended__wrapper">
+      <div class="recommended__books">
+        @if (recommendedBooksIsLoading$ | async) {
+          @for (skeleton of skeletonItems; track skeleton) {
+            <app-home-book-skeleton />
+          }
+        } @else {
+          @for (recBook of recommendedBooks$ | async; track recBook.id) {
+            <app-home-book [bookData]="recBook" />
+          } @empty {
+            Empty list of books
+          }
         }
-      } @else {
-        @for (recBook of recommendedBooks$ | async; track recBook.id) {
-          <app-home-book [bookData]="recBook" />
-        } @empty {
-          Empty list of books
-        }
-      }
+      </div>
     </div>
   </section>
   <section class="recent">
@@ -29,29 +31,14 @@
         Show All
       </button>
     </h3>
-    <div class="recent__books">
-      @for (book of recentBooks$ | async; track book.id) {
-        <app-home-book [bookData]="book" />
-      } @empty {
-        Empty list of books
-      }
+    <div class="recent__wrapper">
+      <div class="recent__books">
+        @for (book of recentBooks$ | async; track book.id) {
+          <app-home-book [bookData]="book" />
+        } @empty {
+          Empty list of books
+        }
+      </div>
     </div>
   </section>
-  <script
-    type="text/javascript"
-    src="https://www.google.com/books/jsapi.js"
-  ></script>
-  <script type="text/javascript">
-    google.books.load();
-
-    function initialize() {
-      var viewer = new google.books.DefaultViewer(
-        document.getElementById('viewerCanvas')
-      );
-      viewer.load('ISBN:0738531367');
-    }
-
-    google.books.setOnLoadCallback(initialize);
-  </script>
-  <div id="viewerCanvas" style="width: 600px; height: 500px"></div>
 </div>

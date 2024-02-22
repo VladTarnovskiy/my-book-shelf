@@ -1,4 +1,4 @@
-@if (book) {
+@if (book$ | async; as book) {
   <div class="reader">
     <div class="reader-header">
       <div class="info">
@@ -7,12 +7,16 @@
           <div class="back__title">Back</div>
         </button>
         <div class="introduction">
-          <img [src]="book.image" alt="Cover" class="introduction__cover" />
+          <img
+            [src]="book.images.small"
+            alt="Cover"
+            class="introduction__cover"
+          />
           <div class="description">
             <div class="description__title">INTRODUCTION</div>
             <p class="description__name">{{ book.title }}</p>
             <p class="description__author">
-              {{ book.author }},
+              {{ book.authors[0] }},
               <span class="year">2024</span>
             </p>
           </div>
@@ -20,29 +24,27 @@
       </div>
       <div class="favorite">
         @if (isFavorite) {
-          <button class="favorite__but" (click)="removeFromFavorite()">
+          <button class="favorite__but" (click)="removeFromFavorite(book.id)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>
         } @else {
-          <button class="favorite__but" (click)="addToFavorite()">
+          <button class="favorite__but" (click)="addToFavorite(book)">
             <img src="assets/empty-heart.svg" alt="Favorite" />
           </button>
         }
       </div>
     </div>
-    <div class="book">
-      <object
-        aria-label="Book"
-        class="book__reader"
-        [data]="book.file | safe"
-        type="application/pdf"
-        width="100%"
-        height="100%"
-      >
-        Book
-      </object>
+    <div class="book" #bookCanvas>
+      @if (isUnavailable$ | async) {
+        <div class="not-available">Book not available</div>
+      }
+      @if (isLoading$ | async) {
+        <div class="loader"></div>
+      }
     </div>
   </div>
 } @else {
-  <div class="not-found">Book not found.</div>
+  @if ((isLoading$ | async) === false) {
+    <div class="not-found">Book not found.</div>
+  }
 }

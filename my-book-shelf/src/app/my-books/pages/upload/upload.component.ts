@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -42,7 +46,8 @@ export class UploadComponent {
 
   constructor(
     private myBooksFacade: MyBooksFacade,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private cd: ChangeDetectorRef
   ) {}
 
   onSubmit(): void {
@@ -51,6 +56,7 @@ export class UploadComponent {
       this.myBooksFacade.addMyBook({
         ...formUserData,
         id: crypto.randomUUID(),
+        isFavorite: false,
       });
       this.toasterService.show({
         type: 'success',
@@ -72,6 +78,7 @@ export class UploadComponent {
         this.uploadForm.patchValue({
           image: reader.result,
         });
+        this.cd.detectChanges();
       };
     }
   }
@@ -87,6 +94,7 @@ export class UploadComponent {
         this.uploadForm.patchValue({
           file: reader.result,
         });
+        this.cd.detectChanges();
       };
     }
   }

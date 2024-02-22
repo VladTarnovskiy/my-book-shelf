@@ -19,10 +19,10 @@
             class="form-item__input"
           />
         </label>
-        @if (email?.hasError('required')) {
+        @if (email?.hasError('required') && loginForm.touched) {
           <div class="invalid__message">please enter a email</div>
         }
-        @if (email?.hasError('email')) {
+        @if (email?.hasError('email') && loginForm.touched) {
           <div class="invalid__message">the email is invalid</div>
         }
       </div>
@@ -38,10 +38,10 @@
             class="form-item__input"
           />
         </label>
-        @if (password?.hasError('required')) {
+        @if (password?.hasError('required') && loginForm.touched) {
           <div class="invalid__message">please enter a password</div>
         }
-        @if (password?.hasError('forbiddenPassword')) {
+        @if (password?.hasError('forbiddenPassword') && loginForm.touched) {
           <div class="invalid__message">
             {{ password?.errors?.['forbiddenPassword'].value }}
           </div>

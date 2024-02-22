@@ -22,6 +22,8 @@ import { recommendedBooksReducer } from './store/recommendedBooks/recommendedBoo
 import { RecommendedBooksEffects } from './store/recommendedBooks/recommendedBooks.effects';
 import { myBooksReducer } from './store/my-books/my-books.reducer';
 import { QuotesEffects } from './store/quotes/quotes.effects';
+import { readerBookReducer } from './store/api-reader/api-reader.reducer';
+import { ReaderBookEffects } from './store/api-reader/api-reader.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -34,8 +36,14 @@ export const appConfig: ApplicationConfig = {
       router: routerReducer,
       myBooks: myBooksReducer,
       quotes: quotesReducer,
+      readerBook: readerBookReducer,
     }),
-    provideEffects(BooksEffects, RecommendedBooksEffects, QuotesEffects),
+    provideEffects(
+      ReaderBookEffects,
+      BooksEffects,
+      RecommendedBooksEffects,
+      QuotesEffects
+    ),
     provideRouterStore(),
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),

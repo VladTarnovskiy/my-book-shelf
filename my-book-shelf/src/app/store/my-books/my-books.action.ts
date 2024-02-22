@@ -15,7 +15,12 @@ export const RemoveMyBook = createAction(
   props<{ bookId: string }>()
 );
 
-export const SelectMyBook = createAction(
-  `${actionSource} Select Book`,
+export const AddMyBookToFavorite = createAction(
+  `${actionSource} Add Book to favorite`,
+  props<{ bookId: string }>()
+);
+
+export const RemoveMyBookFromFavorite = createAction(
+  `${actionSource} Remove Book to favorite`,
   props<{ bookId: string }>()
 );

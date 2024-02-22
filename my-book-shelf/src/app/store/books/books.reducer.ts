@@ -92,6 +92,7 @@ export const booksReducer = createReducer(
     BOOKS_ACTIONS.FetchPreviewBook,
     (state): BooksState => ({
       ...state,
+      previewBook: null,
       isPreviewLoading: true,
     })
   ),

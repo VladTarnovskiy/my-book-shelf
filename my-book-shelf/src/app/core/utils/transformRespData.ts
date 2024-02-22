@@ -13,7 +13,12 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
         small: book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
         normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
       },
-      categories: book.volumeInfo?.categories || ['unknown'],
+      categories: book.volumeInfo.categories || ['unknown'],
+      ISBN: book.volumeInfo.industryIdentifiers
+        ? book.volumeInfo.industryIdentifiers.find(
+            (item) => item.type === 'ISBN_10'
+          )?.identifier || ''
+        : null,
     };
     return transBook;
   });
@@ -32,7 +37,12 @@ export const transformRespBookData = (book: IBookResp): IBook => {
       small: book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
       normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
     },
-    categories: book.volumeInfo?.categories || ['unknown'],
+    categories: book.volumeInfo.categories || ['unknown'],
+    ISBN: book.volumeInfo.industryIdentifiers
+      ? book.volumeInfo.industryIdentifiers.find(
+          (item) => item.type === 'ISBN_10'
+        )?.identifier || ''
+      : null,
   };
 
   return transBook;

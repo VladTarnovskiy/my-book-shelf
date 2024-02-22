@@ -34,6 +34,9 @@
 .author {
   font-size: 10px;
   margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .rating {

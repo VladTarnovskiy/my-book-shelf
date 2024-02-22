@@ -46,6 +46,13 @@ export const routes: Routes = [
                 (m) => m.PreviewComponent
               ),
           },
+          {
+            path: 'reader/:readerId',
+            loadComponent: () =>
+              import(
+                './search/pages/api-book-reader/api-book-reader.component'
+              ).then((m) => m.ApiBookReaderComponent),
+          },
         ],
       },
       {
@@ -73,7 +80,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'reader',
+            path: 'reader/:myBookId',
             loadComponent: () =>
               import('./my-books/pages/reader/reader.component').then(
                 (m) => m.ReaderComponent

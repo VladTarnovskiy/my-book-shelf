@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReaderComponent } from './reader.component';
+import { ApiBookReaderComponent } from './api-book-reader.component';
 
-describe('ReaderComponent', () => {
-  let component: ReaderComponent;
-  let fixture: ComponentFixture<ReaderComponent>;
+describe('ApiBookReaderComponent', () => {
+  let component: ApiBookReaderComponent;
+  let fixture: ComponentFixture<ApiBookReaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReaderComponent],
+      imports: [ApiBookReaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ReaderComponent);
+    fixture = TestBed.createComponent(ApiBookReaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

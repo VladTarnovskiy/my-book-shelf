@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReaderComponent } from './reader.component';
+import { ModalComponent } from './modal.component';
 
-describe('ReaderComponent', () => {
-  let component: ReaderComponent;
-  let fixture: ComponentFixture<ReaderComponent>;
+describe('ModalComponent', () => {
+  let component: ModalComponent;
+  let fixture: ComponentFixture<ModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReaderComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(ReaderComponent);
+      imports: [ModalComponent]
+    })
+    .compileComponents();
+    
+    fixture = TestBed.createComponent(ModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

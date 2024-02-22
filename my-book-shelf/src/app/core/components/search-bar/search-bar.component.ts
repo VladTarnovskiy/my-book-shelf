@@ -9,12 +9,11 @@ import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
 import { SearchService } from '../../services/search/search.service';
 import { AsyncPipe } from '@angular/common';
-import { CloseMenuDirective } from '../../directives/close-menu/close-menu.directive';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, CloseMenuDirective],
+  imports: [FormsModule, AsyncPipe],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
@@ -87,8 +86,8 @@ export class SearchBarComponent implements OnInit {
     this.isFilter = !this.isFilter;
   }
 
-  onFilterClose(value: boolean): void {
-    this.isFilter = value;
+  onFilterClose(): void {
+    this.isFilter = false;
   }
 
   changeFilterType(event: Event): void {

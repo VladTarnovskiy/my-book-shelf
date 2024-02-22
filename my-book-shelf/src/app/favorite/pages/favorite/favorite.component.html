@@ -1,12 +1,23 @@
 <div class="favorite">
   <div class="title">Your Favorite</div>
   <div class="books">
+    @for (uploadBook of uploadFavoriteBooks$ | async; track uploadBook.id) {
+      <app-favorite-upload-book
+        [uploadBookData]="uploadBook"
+        (removeFromUploadFavoriteEvent)="removeFromUploadFavorite($event)"
+      />
+    }
     @for (book of favoriteBooks$ | async; track book.id) {
       <app-favorite-book
         [bookData]="book"
         (removeFromFavoriteEvent)="removeFromFavorite($event)"
       />
-    } @empty {
+    }
+
+    @if (
+      (uploadFavoriteBooks$ | async)?.length === 0 &&
+      (favoriteBooks$ | async)?.length === 0
+    ) {
       Empty list of books
     }
   </div>
