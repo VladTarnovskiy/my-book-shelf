@@ -12,7 +12,12 @@
         [bookData]="book"
         (removeFromFavoriteEvent)="removeFromFavorite($event)"
       />
-    } @empty {
+    }
+
+    @if (
+      (uploadFavoriteBooks$ | async)?.length === 0 &&
+      (favoriteBooks$ | async)?.length === 0
+    ) {
       Empty list of books
     }
   </div>

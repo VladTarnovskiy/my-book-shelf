@@ -12,8 +12,10 @@ export const selectMyBooks = createSelector(
 
 export const selectMyBooksFavorite = createSelector(
   selectMyBooksStore,
-  (state: MyBooksState) =>
-    state.books.filter((book) => book.isFavorite === true)
+  (state: MyBooksState) => {
+    const books = state.books.filter((book) => book.isFavorite === true);
+    return books;
+  }
 );
 
 export const selectMyBookForId = createSelector(

@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
   inject,
 } from '@angular/core';
@@ -34,7 +33,7 @@ export class PreviewComponent implements OnInit {
   ratingItems = [...Array(5).keys()];
   book$: Observable<IBook | null> = this.booksFacade.previewBook$;
   isLoading$: Observable<boolean> = this.booksFacade.previewBookLoader$;
-  @Input({ required: true }) bookData!: IBook;
+  // @Input({ required: true }) bookData!: IBook;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
@@ -47,6 +46,11 @@ export class PreviewComponent implements OnInit {
           this.booksFacade.fetchPreviewBook(bookId);
         }
       });
+    this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
+      if (book) {
+        this.booksFacade.addRecentBook(book);
+      }
+    });
   }
 
   searchAuthorBooks(author: string): void {
