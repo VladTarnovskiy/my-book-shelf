@@ -9,5 +9,5 @@ export interface IBook {
     normal: string;
   };
   categories: string[];
-  ISBN: string;
+  ISBN: string | null;
 }

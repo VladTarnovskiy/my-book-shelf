@@ -14,10 +14,11 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
         normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
       },
       categories: book.volumeInfo.categories || ['unknown'],
-      ISBN:
-        book.volumeInfo.industryIdentifiers.find(
-          (item) => item.type === 'ISBN_10'
-        )?.identifier || '',
+      ISBN: book.volumeInfo.industryIdentifiers
+        ? book.volumeInfo.industryIdentifiers.find(
+            (item) => item.type === 'ISBN_10'
+          )?.identifier || ''
+        : null,
     };
     return transBook;
   });
@@ -37,10 +38,11 @@ export const transformRespBookData = (book: IBookResp): IBook => {
       normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
     },
     categories: book.volumeInfo.categories || ['unknown'],
-    ISBN:
-      book.volumeInfo.industryIdentifiers.find(
-        (item) => item.type === 'ISBN_10'
-      )?.identifier || '',
+    ISBN: book.volumeInfo.industryIdentifiers
+      ? book.volumeInfo.industryIdentifiers.find(
+          (item) => item.type === 'ISBN_10'
+        )?.identifier || ''
+      : null,
   };
 
   return transBook;

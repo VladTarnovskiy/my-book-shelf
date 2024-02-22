@@ -8,10 +8,9 @@ describe('ApiBookReaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ApiBookReaderComponent]
-    })
-    .compileComponents();
-    
+      imports: [ApiBookReaderComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ApiBookReaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

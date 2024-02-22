@@ -28,7 +28,11 @@
     </div>
     <div class="links">
       <button class="ebook">E-BOOK</button>
-      <button class="read">Read</button>
+      @if (bookData.ISBN) {
+        <button class="read" [routerLink]="['/search/reader', bookData.id]">
+          Read
+        </button>
+      }
     </div>
   </div>
 </div>

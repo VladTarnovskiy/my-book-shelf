@@ -7,11 +7,12 @@ import {
 } from '@angular/core';
 import { IFavoriteBook } from '../../models/favoriteBook';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-favorite-book',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

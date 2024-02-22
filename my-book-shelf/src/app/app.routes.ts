@@ -47,7 +47,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'reader/:isbnId',
+            path: 'reader/:readerId',
             loadComponent: () =>
               import(
                 './search/pages/api-book-reader/api-book-reader.component'

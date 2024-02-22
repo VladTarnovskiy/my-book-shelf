@@ -1,4 +1,4 @@
-@if (book) {
+@if (book$ | async; as book) {
   <div class="reader">
     <div class="reader-header">
       <div class="info">
@@ -34,12 +34,17 @@
         }
       </div>
     </div>
-    @if (isAvailable | async) {
-      <div class="book" #bookCanvas></div>
-    } @else {
-      <div class="not-available">Book not available</div>
-    }
+    <div class="book" #bookCanvas>
+      @if (isUnavailable$ | async) {
+        <div class="not-available">Book not available</div>
+      }
+      @if (isLoading$ | async) {
+        <div class="loader"></div>
+      }
+    </div>
   </div>
 } @else {
-  <div class="not-found">Book not found.</div>
+  @if ((isLoading$ | async) === false) {
+    <div class="not-found">Book not found.</div>
+  }
 }

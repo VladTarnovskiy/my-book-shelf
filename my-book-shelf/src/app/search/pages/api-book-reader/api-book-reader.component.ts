@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   inject,
@@ -14,6 +16,7 @@ import { SafePipe } from '../../../core/pipes/safe/safe.pipe';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { IBook } from '../../../shared/models/book.model';
 import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
+import { ReaderBookFacade } from '../../../store/api-reader/api-reader.facade';
 
 @Component({
   selector: 'app-api-book-reader',
@@ -22,27 +25,35 @@ import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
   templateUrl: './api-book-reader.component.html',
   styleUrl: './api-book-reader.component.scss',
   hostDirectives: [DestroyDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiBookReaderComponent implements OnInit, AfterViewInit {
-  book$: Observable<IBook | null> = this.booksFacade.bookByISBNId$;
+export class ApiBookReaderComponent implements OnInit, AfterViewChecked {
+  book$: Observable<IBook | null> = this.readerBookFacade.readerBook$;
   book: IBook | null = null;
   isFavorite = false;
-  isAvailable: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  isUnavailable$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   @ViewChild('bookCanvas') bookCanvas!: ElementRef;
 
   constructor(
+    private readerBookFacade: ReaderBookFacade,
+    private favoriteFacade: FavoriteFacade,
     private booksFacade: BooksFacade,
-    private favoriteFacade: FavoriteFacade
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.readerBookFacade.readerBookId$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((bookId) => {
+        if (bookId) {
+          this.readerBookFacade.fetchReaderBook(bookId);
+        }
+      });
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
-      if (book) {
-        this.book = book;
-        this.isFavorite = book.isFavorite;
-      }
+      this.book = book;
     });
   }
 
@@ -70,31 +81,49 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewChecked(): void {
     if (this.book) {
       if (document.body.querySelector('#google-script')) {
         const viewer = new window.google.books.DefaultViewer(
           this.bookCanvas.nativeElement
         );
-        viewer.load('ISBN:' + this.book?.ISBN, () => {
-          this.isAvailable.next(false);
-        });
+        viewer.load(
+          `ISBN:${this.book?.ISBN}`,
+          () => {
+            this.isUnavailable$.next(true);
+            this.isLoading$.next(false);
+            this.cd.detectChanges();
+          },
+          () => {
+            this.isUnavailable$.next(false);
+            this.isLoading$.next(false);
+            this.cd.detectChanges();
+          }
+        );
       } else {
         const scriptTag = document.createElement('script');
         scriptTag.src = 'https://www.google.com/books/jsapi.js';
         scriptTag.id = 'google-script';
         scriptTag.addEventListener('load', () => {
           window.google.books.load();
-
           setTimeout(() => {
             const viewer = new window.google.books.DefaultViewer(
               this.bookCanvas.nativeElement
             );
-            viewer.load('ISBN:' + this.book?.ISBN, () => {
-              this.isAvailable.next(false);
-              console.log(false);
-            });
-          }, 1000);
+            viewer.load(
+              `ISBN:${this.book?.ISBN}`,
+              () => {
+                this.isUnavailable$.next(true);
+                this.isLoading$.next(false);
+                this.cd.detectChanges();
+              },
+              () => {
+                this.isUnavailable$.next(false);
+                this.isLoading$.next(false);
+                this.cd.detectChanges();
+              }
+            );
+          }, 2000);
         });
         document.body.appendChild(scriptTag);
       }
