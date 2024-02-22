@@ -51,6 +51,21 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
           this.readerBookFacade.fetchReaderBook(bookId);
         }
       });
+
+    this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
+      if (book) {
+        this.favoriteFacade.favoriteBooks$
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((favBooks) => {
+            const favIDs = favBooks.map((favBook) => favBook.id);
+            if (favIDs.includes(book.id)) {
+              this.isFavorite = true;
+            } else {
+              this.isFavorite = false;
+            }
+          });
+      }
+    });
   }
 
   addToFavorite(book: IBook): void {
