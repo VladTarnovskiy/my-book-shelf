@@ -13,7 +13,7 @@
           class="form-item__input"
         />
       </label>
-      @if (title?.hasError('required')) {
+      @if (title?.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">please enter a title</div>
       }
     </div>
@@ -29,7 +29,7 @@
           class="form-item__input"
         />
       </label>
-      @if (author?.hasError('required')) {
+      @if (author?.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">please enter a author</div>
       }
     </div>
@@ -44,7 +44,7 @@
           class="form-item__input"
         ></textarea>
       </label>
-      @if (description?.hasError('required')) {
+      @if (description?.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">please enter a description</div>
       }
     </div>
@@ -57,14 +57,12 @@
           required
           type="file"
           class="form-item__input"
+          accept="application/pdf"
           (change)="onSetFile($event)"
         />
       </label>
-      @if (file?.hasError('required')) {
+      @if (file?.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">please choose a file</div>
-      }
-      @if (file?.hasError('forbiddenFileType')) {
-        {{ file?.errors?.['forbiddenFileType'].value }}
       }
     </div>
     <div class="form-item image">
@@ -76,10 +74,11 @@
           required
           type="file"
           class="form-item__input"
+          accept="image/png, image/gif, image/jpeg, .svg"
           (change)="onSetImage($event)"
         />
       </label>
-      @if (image?.hasError('required')) {
+      @if (image?.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">please choose a image</div>
       }
     </div>

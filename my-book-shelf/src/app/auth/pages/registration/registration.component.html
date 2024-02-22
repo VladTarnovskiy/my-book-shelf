@@ -17,15 +17,15 @@
             required
           />
         </label>
-        @if (name?.hasError('required')) {
+        @if (name?.hasError('required') && registerForm.touched) {
           <div class="invalid__message">please enter a username</div>
         }
-        @if (name?.hasError('maxlength')) {
+        @if (name?.hasError('maxlength') && registerForm.touched) {
           <div class="invalid__message">
             username should contains less then 40 symbols
           </div>
         }
-        @if (name?.hasError('forbiddenUsername')) {
+        @if (name?.hasError('forbiddenUsername') && registerForm.touched) {
           <div class="invalid__message">
             {{ name?.errors?.['forbiddenUsername'].value }}
           </div>
@@ -42,10 +42,10 @@
             class="form-item__input"
           />
         </label>
-        @if (email?.hasError('required')) {
+        @if (email?.hasError('required') && registerForm.touched) {
           <div class="invalid__message">please enter a email</div>
         }
-        @if (email?.hasError('email')) {
+        @if (email?.hasError('email') && registerForm.touched) {
           <div class="invalid__message">the email is invalid</div>
         }
       </div>
@@ -61,10 +61,10 @@
             class="form-item__input"
           />
         </label>
-        @if (password?.hasError('required')) {
+        @if (password?.hasError('required') && registerForm.touched) {
           <div class="invalid__message">please enter a password</div>
         }
-        @if (password?.hasError('forbiddenPassword')) {
+        @if (password?.hasError('forbiddenPassword') && registerForm.touched) {
           <div class="invalid__message">
             {{ password?.errors?.['forbiddenPassword'].value }}
           </div>
@@ -86,7 +86,7 @@
             }"
           />
         </label>
-        @if (registerForm.hasError('passwordNoMatch')) {
+        @if (registerForm.hasError('passwordNoMatch') && registerForm.touched) {
           <div class="invalid__message">Password does'nt match.</div>
         }
       </div>
