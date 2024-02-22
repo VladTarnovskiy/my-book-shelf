@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewChecked,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -27,9 +27,8 @@ import { ReaderBookFacade } from '../../../store/api-reader/api-reader.facade';
   hostDirectives: [DestroyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ApiBookReaderComponent implements OnInit, AfterViewChecked {
+export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   book$: Observable<IBook | null> = this.readerBookFacade.readerBook$;
-  book: IBook | null = null;
   isFavorite = false;
   isUnavailable$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -52,66 +51,38 @@ export class ApiBookReaderComponent implements OnInit, AfterViewChecked {
           this.readerBookFacade.fetchReaderBook(bookId);
         }
       });
-    this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
-      this.book = book;
-    });
   }
 
   addToFavorite(book: IBook): void {
     this.favoriteFacade.addFavoriteBook(book);
-    this.addFavoriteStatus();
+    this.addFavoriteStatus(book.id);
   }
 
   removeFromFavorite(bookId: string): void {
     this.favoriteFacade.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus();
+    this.removeFavoriteStatus(bookId);
   }
 
-  removeFavoriteStatus(): void {
-    if (this.book) {
-      this.booksFacade.removeFavoriteStatus(this.book.id);
-      this.isFavorite = false;
-    }
+  removeFavoriteStatus(bookId: string): void {
+    this.booksFacade.removeFavoriteStatus(bookId);
+    this.isFavorite = false;
   }
 
-  addFavoriteStatus(): void {
-    if (this.book) {
-      this.booksFacade.addFavoriteStatus(this.book.id);
-      this.isFavorite = true;
-    }
+  addFavoriteStatus(bookId: string): void {
+    this.booksFacade.addFavoriteStatus(bookId);
+    this.isFavorite = true;
   }
 
-  ngAfterViewChecked(): void {
-    if (this.book) {
-      if (document.body.querySelector('#google-script')) {
-        const viewer = new window.google.books.DefaultViewer(
-          this.bookCanvas.nativeElement
-        );
-        viewer.load(
-          `ISBN:${this.book?.ISBN}`,
-          () => {
-            this.isUnavailable$.next(true);
-            this.isLoading$.next(false);
-            this.cd.detectChanges();
-          },
-          () => {
-            this.isUnavailable$.next(false);
-            this.isLoading$.next(false);
-            this.cd.detectChanges();
-          }
-        );
-      } else {
-        const scriptTag = document.createElement('script');
-        scriptTag.src = 'https://www.google.com/books/jsapi.js';
-        scriptTag.id = 'google-script';
-        scriptTag.addEventListener('load', () => {
-          window.google.books.load();
-          setTimeout(() => {
+  ngAfterViewInit(): void {
+    this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
+      if (book) {
+        setTimeout(() => {
+          if (document.body.querySelector('#google-script')) {
             const viewer = new window.google.books.DefaultViewer(
               this.bookCanvas.nativeElement
             );
             viewer.load(
-              `ISBN:${this.book?.ISBN}`,
+              `ISBN:${book?.ISBN}`,
               () => {
                 this.isUnavailable$.next(true);
                 this.isLoading$.next(false);
@@ -123,10 +94,35 @@ export class ApiBookReaderComponent implements OnInit, AfterViewChecked {
                 this.cd.detectChanges();
               }
             );
-          }, 2000);
-        });
-        document.body.appendChild(scriptTag);
+          } else {
+            const scriptTag = document.createElement('script');
+            scriptTag.src = 'https://www.google.com/books/jsapi.js';
+            scriptTag.id = 'google-script';
+            scriptTag.addEventListener('load', () => {
+              window.google.books.load();
+              setTimeout(() => {
+                const viewer = new window.google.books.DefaultViewer(
+                  this.bookCanvas.nativeElement
+                );
+                viewer.load(
+                  `ISBN:${book?.ISBN}`,
+                  () => {
+                    this.isUnavailable$.next(true);
+                    this.isLoading$.next(false);
+                    this.cd.detectChanges();
+                  },
+                  () => {
+                    this.isUnavailable$.next(false);
+                    this.isLoading$.next(false);
+                    this.cd.detectChanges();
+                  }
+                );
+              }, 2000);
+            });
+            document.body.appendChild(scriptTag);
+          }
+        }, 100);
       }
-    }
+    });
   }
 }
