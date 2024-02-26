@@ -13,6 +13,7 @@ import { PreviewOptionsComponent } from '../../components/preview-options/previe
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { GoBackDirective } from '../../../core/directives/go-back/go-back.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +24,7 @@ import { GoBackDirective } from '../../../core/directives/go-back/go-back.direct
     PreviewSkeletonComponent,
     PreviewOptionsComponent,
     GoBackDirective,
+    TranslateModule,
   ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',

@@ -14,11 +14,12 @@ import { CommonModule } from '@angular/common';
 import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
 import { FirestoreService } from '../../../core/services/firestore/firestore.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -55,12 +56,7 @@ export class UploadComponent {
   onSubmit(): void {
     const formUserData = this.uploadForm.getRawValue();
     if (this.uploadForm.valid) {
-      // const readerFile = new FileReader();
-      // readerFile.readAsDataURL(formUserData.file!);
-      // const readerImg = new FileReader();
-      // readerImg.readAsDataURL(formUserData.file!);
-
-      const bookForStore = {
+      const bookForFirestore = {
         ...formUserData,
         id: crypto.randomUUID(),
         isFavorite: false,
@@ -69,16 +65,13 @@ export class UploadComponent {
       };
 
       const book = {
-        ...formUserData,
-        file: formUserData.file!.webkitRelativePath,
-        image: formUserData.image!.webkitRelativePath,
-        id: crypto.randomUUID(),
-        isFavorite: false,
-        borrowedOn: Date.now().toString(),
-        submissionDate: String(Date.now() + 259200000),
+        ...bookForFirestore,
+        file: URL.createObjectURL(formUserData.file!),
+        image: URL.createObjectURL(formUserData.image!),
       };
+
       this.myBooksFacade.addMyBook(book);
-      this.firestoreService.addMyBook(bookForStore);
+      this.firestoreService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
         title: 'My book',
@@ -91,27 +84,20 @@ export class UploadComponent {
   onSetImage(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
-    // const reader = new FileReader();
 
     if (fileList && fileList[0]) {
-      // reader.readAsDataURL(fileList[0]);
-      // reader.onloadend = () => {
       this.uploadForm.patchValue({
         image: fileList[0],
       });
       this.cd.detectChanges();
-      // };
     }
   }
 
   onSetFile(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
-    // const reader = new FileReader();
 
     if (fileList && fileList[0]) {
-      // reader.readAsDataURL(fileList[0]);
-      // reader.onloadend = () => {
       this.uploadForm.patchValue(
         {
           file: fileList[0],
@@ -119,7 +105,6 @@ export class UploadComponent {
         // { emitEvent: true }
       );
       this.cd.detectChanges();
-      // };
     }
   }
 

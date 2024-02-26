@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
     translate.setDefaultLang('en');
     translate.use('en');
   }
+
   ngOnInit(): void {
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'

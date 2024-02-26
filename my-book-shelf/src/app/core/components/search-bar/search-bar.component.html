@@ -17,7 +17,9 @@
       (click)="changeFilterType($event)"
     >
       @for (item of filterTypeList; track item) {
-        <div class="menu__item" [attr.data-filterType]="item">{{ item }}</div>
+        <div class="menu__item" [attr.data-filterType]="item">
+          {{ 'TYPE_FILTER.' + item | translate }}
+        </div>
       }
     </button>
   </button>
@@ -28,7 +30,7 @@
     (input)="onChange()"
     type="search"
     class="input"
-    placeholder="Search"
+    [placeholder]="'SEARCH_BAR.PLACEHOLDER' | translate"
     (keyup.enter)="onSearch()"
   />
   <button class="searchBut" (click)="onSearch()">

@@ -2,15 +2,17 @@
   <div class="login">
     <div class="description">
       <img src="assets/logo.svg" alt="Logo" class="description__icon" />
-      <div class="description__title">Welcome Back !</div>
+      <div class="description__title">{{ 'LOGIN.TITLE' | translate }}</div>
       <div class="description__info">
-        Sign in to continue to yourDigital Library
+        {{ 'LOGIN.DESCRIPTION' | translate }}
       </div>
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-item">
         <label for="email" class="form-item__label">
-          <div class="form-item__title">Email</div>
+          <div class="form-item__title">
+            {{ 'LOGIN.INPUT.EMAIL' | translate }}
+          </div>
           <input
             id="email"
             formControlName="email"
@@ -20,15 +22,21 @@
           />
         </label>
         @if (email?.hasError('required') && loginForm.touched) {
-          <div class="invalid__message">please enter a email</div>
+          <div class="invalid__message">
+            {{ 'LOGIN.ERRORS.EMAIL.REQUIRE' | translate }}
+          </div>
         }
         @if (email?.hasError('email') && loginForm.touched) {
-          <div class="invalid__message">the email is invalid</div>
+          <div class="invalid__message">
+            {{ 'LOGIN.ERRORS.EMAIL.INVALID' | translate }}
+          </div>
         }
       </div>
       <div class="form-item">
         <label for="password" class="form-item__label">
-          <div class="form-item__title">Password</div>
+          <div class="form-item__title">
+            {{ 'LOGIN.INPUT.PASSWORD' | translate }}
+          </div>
           <input
             id="password"
             formControlName="password"
@@ -39,7 +47,9 @@
           />
         </label>
         @if (password?.hasError('required') && loginForm.touched) {
-          <div class="invalid__message">please enter a password</div>
+          <div class="invalid__message">
+            {{ 'LOGIN.ERRORS.PASSWORD.REQUIRE' | translate }}
+          </div>
         }
         @if (password?.hasError('forbiddenPassword') && loginForm.touched) {
           <div class="invalid__message">
@@ -53,12 +63,14 @@
           class="buttons__login"
           [ngClass]="loginForm.valid ? '' : 'invalid-but'"
         >
-          Login
+          {{ 'LOGIN.LOGIN' | translate }}
         </button>
         <div class="user-check">
-          <div>New User?&ensp;</div>
+          <div>{{ 'LOGIN.NEW_USER' | translate }}&ensp;</div>
           <a routerLink="../registration">
-            <button type="button" class="register-link">Register here</button>
+            <button type="button" class="register-link">
+              {{ 'LOGIN.REG_USER' | translate }}
+            </button>
           </a>
         </div>
       </div>

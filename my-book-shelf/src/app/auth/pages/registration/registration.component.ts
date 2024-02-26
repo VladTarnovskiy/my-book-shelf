@@ -13,11 +13,18 @@ import { IUserDetailsRegistrationForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { RouterModule } from '@angular/router';
 import { confirmPasswordValidator } from '../../validators/confirmPassword';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+  ],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

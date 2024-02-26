@@ -1,11 +1,11 @@
 <div class="home">
   <app-quote />
-  <p class="greeting">Good Morning</p>
+  <p class="greeting">{{ 'HOME.GREETING.MORNING' | translate }}</p>
   <section class="recommended">
     <h3 class="recommended__description">
-      <h3 class="recommended__title">{{ 'HELLO' | translate }}</h3>
+      <h3 class="recommended__title">{{ 'HOME.RECOMMENDED' | translate }}</h3>
       <button class="recommended__showAll" [routerLink]="['/recommended']">
-        Show All
+        {{ 'HOME.SHOW_ALL' | translate }}
       </button>
     </h3>
     <div class="recommended__wrapper">
@@ -18,7 +18,7 @@
           @for (recBook of recommendedBooks$ | async; track recBook.id) {
             <app-home-book [bookData]="recBook" />
           } @empty {
-            Empty list of books
+            {{ 'COMMON.EMPTY' | translate }}
           }
         }
       </div>
@@ -26,9 +26,9 @@
   </section>
   <section class="recent">
     <h3 class="recent__description">
-      <h3 class="recent__title">Recent Readings</h3>
+      <h3 class="recent__title">{{ 'HOME.RECENT' | translate }}</h3>
       <button class="recent__showAll" [routerLink]="['/recent']">
-        Show All
+        {{ 'HOME.SHOW_ALL' | translate }}
       </button>
     </h3>
     <div class="recent__wrapper">
@@ -36,7 +36,7 @@
         @for (book of recentBooks$ | async; track book.id) {
           <app-home-book [bookData]="book" />
         } @empty {
-          Empty list of books
+          {{ 'COMMON.EMPTY' | translate }}
         }
       </div>
     </div>

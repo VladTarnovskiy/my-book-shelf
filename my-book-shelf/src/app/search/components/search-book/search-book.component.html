@@ -8,7 +8,7 @@
       {{ bookData.authors[0] }},
       <span class="book__year">{{ bookData.publishedDate | date: 'y' }}</span>
     </p>
-    <p class="description__edition">second edition</p>
+    <p class="description__edition">{{ 'SEARCH_BOOK.EDITION' | translate }}</p>
   </div>
   <div class="rating">4.5<span class="rating__total">/5</span></div>
   <div class="category">{{ bookData.categories[0] }}</div>
@@ -24,6 +24,6 @@
     }
   </div>
   <button class="preview-but" [routerLink]="['preview', bookData.id]">
-    Preview
+    {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
   </button>
 </div>

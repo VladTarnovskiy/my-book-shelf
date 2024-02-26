@@ -14,7 +14,7 @@
   <button class="profile-menu" [class.active]="isMenu">
     @for (item of navigationList; track item.title) {
       <div class="profile-menu__item" [routerLink]="[item.link]">
-        {{ item.title }}
+        {{ 'PROFILE.' + item.title | translate }}
       </div>
     }
   </button>

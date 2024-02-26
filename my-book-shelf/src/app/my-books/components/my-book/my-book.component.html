@@ -16,22 +16,22 @@
     </button>
     <div class="terms">
       <div class="borrowed">
-        <p class="borrowed__title">Borrowed on</p>
+        <p class="borrowed__title">{{ 'MY_BOOK.BORROWED' | translate }}</p>
         <p class="borrowed__desc">
           {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
         </p>
       </div>
       <div class="submission">
-        <p class="submission__title">Submission Due</p>
+        <p class="submission__title">{{ 'MY_BOOK.SUBMISSION' | translate }}</p>
         <p class="submission__desc">
           {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
         </p>
       </div>
     </div>
     <div class="links">
-      <button class="ebook">E-BOOK</button>
+      <button class="ebook">{{ 'COMMON.BTN.EBOOK' | translate }}</button>
       <button class="read" [routerLink]="['/my-books/reader', bookData.id]">
-        Read
+        {{ 'COMMON.BTN.READ' | translate }}
       </button>
     </div>
   </div>
@@ -40,14 +40,14 @@
   <app-modal (closeModal)="closeModal($event)">
     <div class="modal-content">
       <div class="modal-title">
-        Are you sure that you want to delete this book?
+        {{ 'MODAL.QUESTION' | translate }}
       </div>
       <div class="modal-buttons">
         <button class="modal-buttons__item" (click)="removeFromMyBook()">
-          Remove
+          {{ 'MODAL.BTN.REMOVE' | translate }}
         </button>
         <button class="modal-buttons__item" (click)="closeModal(false)">
-          Cancel
+          {{ 'MODAL.BTN.CANCEL' | translate }}
         </button>
       </div>
     </div>

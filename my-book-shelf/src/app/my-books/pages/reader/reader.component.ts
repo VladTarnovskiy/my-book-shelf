@@ -6,11 +6,12 @@ import { IUploadBook } from '../../models/upload';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { SafePipe } from '../../../core/pipes/safe/safe.pipe';
 import { GoBackDirective } from '../../../core/directives/go-back/go-back.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective],
+  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
   templateUrl: './reader.component.html',
   styleUrl: './reader.component.scss',
   hostDirectives: [DestroyDirective],

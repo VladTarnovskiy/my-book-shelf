@@ -7,7 +7,9 @@
       [routerLinkActiveOptions]="{ exact: true }"
     >
       <img class="item__img" [src]="item.icon" [alt]="item.title" />
-      <div class="item__title">{{ item.title }}</div>
+      <div class="item__title">
+        {{ 'NAVIGATION.' + item.title | translate }}
+      </div>
     </a>
   }
 </nav>

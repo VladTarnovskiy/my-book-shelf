@@ -4,7 +4,7 @@
       <div class="info">
         <button class="back" appGoBack>
           <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
-          <div class="back__title">Back</div>
+          <div class="back__title">{{ 'COMMON.BTN.BACK' | translate }}</div>
         </button>
         <div class="introduction">
           <img
@@ -13,11 +13,15 @@
             class="introduction__cover"
           />
           <div class="description">
-            <div class="description__title">INTRODUCTION</div>
+            <div class="description__title">
+              {{ 'API_READER.INTRODUCTION' | translate }}
+            </div>
             <p class="description__name">{{ book.title }}</p>
             <p class="description__author">
               {{ book.authors[0] }},
-              <span class="year">2024</span>
+              <span class="year">
+                {{ book.publishedDate | date: 'y' }}
+              </span>
             </p>
           </div>
         </div>
@@ -36,7 +40,9 @@
     </div>
     <div class="book" #bookCanvas>
       @if (isUnavailable$ | async) {
-        <div class="not-available">Book not available</div>
+        <div class="not-available">
+          {{ 'API_READER.NOT_AVAILABLE' | translate }}
+        </div>
       }
       @if (isLoading$ | async) {
         <div class="loader"></div>
@@ -45,6 +51,6 @@
   </div>
 } @else {
   @if ((isLoading$ | async) === false) {
-    <div class="not-found">Book not found.</div>
+    <div class="not-found">{{ 'API_READER.NOT_FOUND' | translate }}</div>
   }
 }

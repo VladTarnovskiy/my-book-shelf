@@ -10,11 +10,12 @@ import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.compone
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { QuotesFacade } from '../../../store/quotes/quotes.facade';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-quote',
   standalone: true,
-  imports: [QuoteSkeletonComponent, CommonModule],
+  imports: [QuoteSkeletonComponent, CommonModule, TranslateModule],
   templateUrl: './quote.component.html',
   styleUrl: './quote.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

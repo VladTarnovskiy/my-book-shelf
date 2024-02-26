@@ -1,5 +1,5 @@
 <div class="my-books">
-  <div class="title">My Books</div>
+  <div class="title">{{ 'MY_BOOKS.TITLE' | translate }}</div>
   <div class="books">
     @for (book of myBooks$ | async; track book.id) {
       <app-my-book
@@ -7,7 +7,7 @@
         (removeFromMyBookEvent)="removeFromMyBook($event)"
       />
     } @empty {
-      Empty list of books
+      {{ 'COMMON.EMPTY' | translate }}
     }
   </div>
 </div>
