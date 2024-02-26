@@ -7,7 +7,11 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -31,10 +35,24 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { authReducer } from './store/auth/auth.reducer';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: firebaseConfig.firebase },
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }).providers!,
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore({
@@ -63,19 +81,5 @@ export const appConfig: ApplicationConfig = {
       // provideMessaging(() => getMessaging()),
       provideStorage(() => getStorage()),
     ]),
-    // importProvidersFrom(
-    //   provideFirebaseApp(() =>
-    //     initializeApp({
-    //       projectId: 'prdlab-auth',
-    //       appId: '1:550419832425:web:e6de96a0b7ae1bc6550cf8',
-    //       storageBucket: 'prdlab-auth.appspot.com',
-    //       apiKey: 'AIzaSyBrscV9tcDXS9AVpnXIwcLU_X3Aibr4oh4',
-    //       authDomain: 'prdlab-auth.firebaseapp.com',
-    //       messagingSenderId: '550419832425',
-    //     })
-    //   )
-    // ),
-    // importProvidersFrom(provideFirestore(() => getFirestore())),
-    // importProvidersFrom(provideStorage(() => getStorage())),
   ],
 };
