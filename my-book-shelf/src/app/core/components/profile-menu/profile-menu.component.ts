@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { profileList } from './profile-menu.constant';
+import { AuthFacade } from '../../../store/auth/auth.facade';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile-menu',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './profile-menu.component.html',
   styleUrl: './profile-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,6 +15,9 @@ import { profileList } from './profile-menu.constant';
 export class ProfileMenuComponent {
   navigationList = profileList;
   isMenu = false;
+  userName$ = this.authFacade.userName$;
+
+  constructor(private authFacade: AuthFacade) {}
 
   onProfileToggle(): void {
     this.isMenu = !this.isMenu;

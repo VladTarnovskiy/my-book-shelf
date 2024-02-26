@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  RecaptchaVerifier,
+  // RecaptchaVerifier,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signInWithPhoneNumber,
+  // signInWithPhoneNumber,
   signOut,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterService } from '../toaster/toaster.service';
+import { FirestoreService } from '../firestore/firestore.service';
+import { IUserDetails } from '../../../auth/models/user';
+import { AuthFacade } from '../../../store/auth/auth.facade';
+import { IUserInfo } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -22,18 +26,15 @@ export class AuthService {
   constructor(
     private auth: Auth,
     private router: Router,
+    private authFacade: AuthFacade,
+    private fireStore: FirestoreService,
     private toaster: ToasterService
   ) {}
 
-  async signUp({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<void> {
+  async signUp({ email, password, name }: IUserDetails): Promise<void> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
+      this.fireStore.addUser(name);
       this.router.navigate(['auth/login']);
     } catch (error) {
       if (error instanceof Error) {
@@ -42,17 +43,17 @@ export class AuthService {
     }
   }
 
-  async login({
-    email,
-    password,
-  }: {
-    email: string;
-    password: string;
-  }): Promise<void> {
+  async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
     try {
-      await signInWithEmailAndPassword(this.auth, email, password);
-      this.auth.languageCode = 'it';
-      this.onSendCode(); //temporary solution
+      const user = await signInWithEmailAndPassword(this.auth, email, password);
+      this.fireStore.getUser(user.user.uid).subscribe((x) => {
+        const userInfo = x.map((item) =>
+          item.payload.doc.data()
+        ) as IUserInfo[];
+        if (userInfo[0]) {
+          this.authFacade.addUserName(userInfo[0].name);
+        }
+      });
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -60,34 +61,6 @@ export class AuthService {
         this.errorHandling(error);
       }
     }
-  }
-
-  onCaptchaVerify() {
-    if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        this.auth,
-        'recaptcha-container',
-        {
-          size: 'invisible',
-          callback: () => {
-            this.onSendCode();
-          },
-          'expired-callback': () => {},
-        }
-      );
-    }
-  }
-
-  onSendCode() {
-    this.onCaptchaVerify();
-    const appVerifier = window.recaptchaVerifier;
-    signInWithPhoneNumber(this.auth, '+375255011513', appVerifier)
-      .then((confirmationResult) => {
-        console.log(confirmationResult);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }
 
   async logout(): Promise<void> {

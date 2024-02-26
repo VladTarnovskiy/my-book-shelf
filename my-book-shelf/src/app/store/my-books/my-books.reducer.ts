@@ -16,11 +16,7 @@ export const myBooksReducer = createReducer(
     MY_BOOKS_ACTIONS.AddMyBook,
     (state, { book }): MyBooksState => ({
       ...state,
-      books: [...state.books].concat({
-        ...book,
-        borrowedOn: Date.now().toString(),
-        submissionDate: String(Date.now() + 259200000),
-      }),
+      books: [...state.books].concat(book),
     })
   ),
   on(

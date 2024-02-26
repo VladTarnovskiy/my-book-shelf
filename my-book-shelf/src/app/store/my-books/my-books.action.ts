@@ -6,7 +6,7 @@ const actionSource = '[My Book]';
 export const AddMyBook = createAction(
   `${actionSource} Add Book`,
   props<{
-    book: Omit<IUploadBook, 'borrowedOn' | 'submissionDate'>;
+    book: IUploadBook;
   }>()
 );
 

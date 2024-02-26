@@ -18,7 +18,7 @@ export class MyBooksFacade {
 
   constructor(private store: Store) {}
 
-  addMyBook(book: Omit<IUploadBook, 'borrowedOn' | 'submissionDate'>) {
+  addMyBook(book: IUploadBook) {
     this.store.dispatch(MY_BOOKS_ACTIONS.AddMyBook({ book }));
   }
 

@@ -56,6 +56,7 @@ export class RegistrationComponent {
       this.authService.signUp({
         email: formUserData.email,
         password: formUserData.password,
+        name: formUserData.name,
       });
     }
   }
