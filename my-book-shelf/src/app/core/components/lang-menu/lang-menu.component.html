@@ -8,7 +8,11 @@
     [class.active]="isMenu"
   />
   <button class="lang-menu" [class.active]="isMenu">
-    <div class="lang-menu__item">{{ 'LANG.EN' | translate }}</div>
-    <div class="lang-menu__item">{{ 'LANG.RU' | translate }}</div>
+    <button (click)="useLanguage('en')" class="lang-menu__item">
+      {{ 'LANG.EN' | translate }}
+    </button>
+    <button (click)="useLanguage('ru')" class="lang-menu__item">
+      {{ 'LANG.RU' | translate }}
+    </button>
   </button>
 </button>
