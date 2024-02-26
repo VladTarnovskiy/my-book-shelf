@@ -39,7 +39,7 @@
     "EDITION": "второе издание"
   },
   "API_READER": {
-    "INTRODUCTION": "ПРЕДСТАВЛЕНИЕ",
+    "INTRODUCTION": "ВВЕДЕНИЕ",
     "NOT_AVAILABLE": "Книга не доступна.",
     "NOT_FOUND": "Книга не найдена."
   },
@@ -53,7 +53,7 @@
     "SUBMISSION": "Срок подачи"
   },
   "READER": {
-    "INTRODUCTION": "ПРЕДСТАВЛЕНИЕ",
+    "INTRODUCTION": "ВВЕДЕНИЕ",
     "NOT_AVAILABLE": "Книга не доступна.",
     "NOT_FOUND": "Книга не найдена."
   },
@@ -69,7 +69,7 @@
     "INPUT": {
       "TITLE": "Название",
       "AUTHOR": "Автор",
-      "DESCRIPTION": "Описание",
+      "DESCRIPTION": "Назначение",
       "FILE": "Файл",
       "IMAGE": "Изображение"
     },

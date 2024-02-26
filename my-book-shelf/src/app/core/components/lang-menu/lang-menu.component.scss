@@ -60,5 +60,9 @@
     &:hover {
       background-color: $secondary-fourth;
     }
+
+    &.active {
+      background-color: $secondary-fourth;
+    }
   }
 }

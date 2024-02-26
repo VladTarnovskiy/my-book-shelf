@@ -8,10 +8,18 @@
     [class.active]="isMenu"
   />
   <button class="lang-menu" [class.active]="isMenu">
-    <button (click)="useLanguage('en')" class="lang-menu__item">
+    <button
+      (click)="useLanguage('en')"
+      class="lang-menu__item"
+      [ngClass]="{ active: activeLang === 'en' }"
+    >
       {{ 'LANG.EN' | translate }}
     </button>
-    <button (click)="useLanguage('ru')" class="lang-menu__item">
+    <button
+      (click)="useLanguage('ru')"
+      class="lang-menu__item"
+      [ngClass]="{ active: activeLang === 'ru' }"
+    >
       {{ 'LANG.RU' | translate }}
     </button>
   </button>

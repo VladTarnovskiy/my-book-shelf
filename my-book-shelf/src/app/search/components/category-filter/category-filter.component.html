@@ -4,7 +4,9 @@
     (mousedown)="onFilterToggle()"
     (blur)="onFilterClose()"
   >
-    <div class="filter__title">{{ filterCategory }}</div>
+    <div class="filter__title">
+      {{ 'CATEGORY_FILTER.' + filterCategory | translate }}
+    </div>
     <img
       class="filter__polygon"
       [class.active]="isFilter"
