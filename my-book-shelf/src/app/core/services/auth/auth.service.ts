@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   GithubAuthProvider,
+  sendEmailVerification,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -47,20 +48,18 @@ export class AuthService {
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
-      this.fireStore.getUser(user.user.uid).subscribe((x) => {
-        const userInfo = x.map((item) =>
-          item.payload.doc.data()
-        ) as IUserInfo[];
-        if (userInfo[0]) {
-          this.authFacade.addUserName(userInfo[0].name);
+      this.setUserName(user.user.uid);
+      await sendEmailVerification(user.user);
+      this.router.navigate(['auth/verification']);
+
+      const interval = setInterval(async () => {
+        if (user.user.emailVerified) {
+          clearInterval(interval);
+          this.isLoggedIn.next(true);
+          this.router.navigate(['/']);
         }
-      });
-      // await this.logout();
-      // await sendEmailVerification(user.user).then(() => {
-      //   console.log('Email sended!');
-      // });
-      this.isLoggedIn.next(true);
-      this.router.navigate(['/']);
+        await user.user.reload();
+      }, 2000);
     } catch (error) {
       if (error instanceof Error) {
         this.errorHandling(error);
@@ -68,12 +67,13 @@ export class AuthService {
     }
   }
 
-  async logInWithGoogle() {
+  async logInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(this.auth, provider);
       const user = result.user;
       this.fireStore.addUser(user.displayName || 'Unknown');
+      this.setUserName(user.uid);
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -83,12 +83,13 @@ export class AuthService {
     }
   }
 
-  async logInWithGitHub() {
+  async logInWithGitHub(): Promise<void> {
     const provider = new GithubAuthProvider();
     try {
       const result = await signInWithPopup(this.auth, provider);
       const user = result.user;
       this.fireStore.addUser(user.displayName || 'Unknown');
+      this.setUserName(user.uid);
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -108,7 +109,16 @@ export class AuthService {
     }
   }
 
-  errorHandling(error: Error) {
+  setUserName(userId: string): void {
+    this.fireStore.getUser(userId).subscribe((x) => {
+      const userInfo = x.map((item) => item.payload.doc.data()) as IUserInfo[];
+      if (userInfo[0]) {
+        this.authFacade.addUserName(userInfo[0].name);
+      }
+    });
+  }
+
+  errorHandling(error: Error): void {
     this.toasterService.show({
       type: 'error',
       title: error.name,
