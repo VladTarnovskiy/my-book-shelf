@@ -15,7 +15,6 @@ import { ToasterService } from '../toaster/toaster.service';
 import { FirestoreService } from '../firestore/firestore.service';
 import { IUserDetails } from '../../../auth/models/user';
 import { AuthFacade } from '../../../store/auth/auth.facade';
-import { IUserInfo } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -111,7 +110,7 @@ export class AuthService {
 
   setUserName(userId: string): void {
     this.fireStore.getUser(userId).subscribe((x) => {
-      const userInfo = x.map((item) => item.payload.doc.data()) as IUserInfo[];
+      const userInfo = x.map((item) => item.payload.doc.data());
       if (userInfo[0]) {
         this.authFacade.addUserName(userInfo[0].name);
       }
