@@ -8,11 +8,12 @@ import {
 import { IBook } from '../../../shared/models/book.model';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-book',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, TranslateModule],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

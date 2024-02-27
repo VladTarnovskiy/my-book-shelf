@@ -82,7 +82,32 @@
     font-family: 'Inter Semi Bold';
     color: $primary-third;
     border-radius: 8px;
-    margin-bottom: 79px;
+    margin-bottom: 39px;
+  }
+}
+
+.social {
+  &__title {
+    font-size: 15px;
+    color: $secondary-fifth;
+    margin-bottom: 10px;
+  }
+}
+
+.social-btn {
+  @extend %itemsCenter;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  &__item {
+    width: 45px;
+    height: 45px;
+    margin: 0 5px;
+  }
+
+  &__img {
+    width: 45px;
+    height: 45px;
   }
 }
 

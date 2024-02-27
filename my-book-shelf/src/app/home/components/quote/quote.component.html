@@ -1,7 +1,7 @@
 @if ((error$ | async) === null) {
   <div class="quote">
     @if (quote && (isLoading$ | async) === false) {
-      <h3 class="title">Today’s Quote</h3>
+      <h3 class="title">{{ 'HOME.QUOTES.TITLE' | translate }}</h3>
       <p class="content">
         {{ quote.quote }}
       </p>

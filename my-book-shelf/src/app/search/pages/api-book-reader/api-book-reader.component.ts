@@ -17,11 +17,12 @@ import { BooksFacade } from '../../../store/books/books.facade';
 import { IBook } from '../../../shared/models/book.model';
 import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
 import { ReaderBookFacade } from '../../../store/api-reader/api-reader.facade';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-api-book-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective],
+  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
   templateUrl: './api-book-reader.component.html',
   styleUrl: './api-book-reader.component.scss',
   hostDirectives: [DestroyDirective],

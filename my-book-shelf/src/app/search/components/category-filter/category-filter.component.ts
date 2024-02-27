@@ -9,12 +9,14 @@ import { Observable, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { filterCategoryList } from './category-filter.constant';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-category-filter',
   standalone: true,
   templateUrl: './category-filter.component.html',
   styleUrl: './category-filter.component.scss',
+  imports: [TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
 })

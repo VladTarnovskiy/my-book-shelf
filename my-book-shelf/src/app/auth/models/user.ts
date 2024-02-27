@@ -2,7 +2,6 @@ import { FormControl } from '@angular/forms';
 
 export interface IUserDetails {
   password: string;
-  confirmPassword: string;
   email: string;
   name: string;
 }

@@ -7,7 +7,11 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClient,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -24,9 +28,31 @@ import { myBooksReducer } from './store/my-books/my-books.reducer';
 import { QuotesEffects } from './store/quotes/quotes.effects';
 import { readerBookReducer } from './store/api-reader/api-reader.reducer';
 import { ReaderBookEffects } from './store/api-reader/api-reader.effects';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+// import { getDatabase, provideDatabase } from '@angular/fire/database';
+// import { getFunctions, provideFunctions } from '@angular/fire/functions';
+// import { getMessaging, provideMessaging } from '@angular/fire/messaging';
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { authReducer } from './store/auth/auth.reducer';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: FIREBASE_OPTIONS, useValue: firebaseConfig.firebase },
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }).providers!,
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideStore({
@@ -37,6 +63,7 @@ export const appConfig: ApplicationConfig = {
       myBooks: myBooksReducer,
       quotes: quotesReducer,
       readerBook: readerBookReducer,
+      auth: authReducer,
     }),
     provideEffects(
       ReaderBookEffects,
@@ -48,6 +75,11 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom([
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),
       provideAuth(() => getAuth()),
+      provideFirestore(() => getFirestore()),
+      // provideDatabase(() => getDatabase()),
+      // provideFunctions(() => getFunctions()),
+      // provideMessaging(() => getMessaging()),
+      provideStorage(() => getStorage()),
     ]),
   ],
 };

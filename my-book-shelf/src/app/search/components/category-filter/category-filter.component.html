@@ -4,7 +4,9 @@
     (mousedown)="onFilterToggle()"
     (blur)="onFilterClose()"
   >
-    <div class="filter__title">{{ filterCategory }}</div>
+    <div class="filter__title">
+      {{ 'CATEGORY_FILTER.' + filterCategory | translate }}
+    </div>
     <img
       class="filter__polygon"
       [class.active]="isFilter"
@@ -17,7 +19,9 @@
       (click)="changeFilterType($event)"
     >
       @for (item of filterCategoryList; track $index) {
-        <div class="menu__item" [attr.data-filterType]="item">{{ item }}</div>
+        <div class="menu__item" [attr.data-filterType]="item">
+          {{ 'CATEGORY_FILTER.' + item | translate }}
+        </div>
       }
     </button>
   </button>

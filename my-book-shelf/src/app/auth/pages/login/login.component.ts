@@ -11,11 +11,18 @@ import { CommonModule } from '@angular/common';
 import { IUserDetailsLoginForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    TranslateModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,6 +54,14 @@ export class LoginComponent implements OnInit {
         password: formUserData.password,
       });
     }
+  }
+
+  loginWithGoogle() {
+    this.authService.logInWithGoogle();
+  }
+
+  loginWithGitHub() {
+    this.authService.logInWithGitHub();
   }
 
   get email() {

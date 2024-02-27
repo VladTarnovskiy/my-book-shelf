@@ -2,7 +2,7 @@
   <div class="details">
     <button class="back-but" appGoBack>
       <img src="assets/arrow.svg" alt="Back" class="back-but__arrow" />
-      <div class="back-but__title">Back to results</div>
+      <div class="back-but__title">{{ 'COMMON.BTN.BACK' | translate }}</div>
     </button>
     <div class="content">
       <div class="book">
@@ -24,24 +24,30 @@
               >,
               {{ bookData.publishedDate | date: 'y' }}
             </p>
-            <p class="edition">Second Edition</p>
+            <p class="edition">{{ 'PREVIEW.EDITION' | translate }}</p>
             <div class="rating">
               <div class="stars">
                 @for (item of ratingItems; track item) {
                   <img src="assets/star.svg" alt="Star" class="stars__item" />
                 }
               </div>
-              <p class="rating__value"><span>5.0</span> Ratings</p>
+              <p class="rating__value">
+                <span>5.0</span> {{ 'PREVIEW.RATING' | translate }}
+              </p>
             </div>
             <div class="availability">
-              <div class="availability__title">Availability</div>
+              <div class="availability__title">
+                {{ 'PREVIEW.AVAILABILITY' | translate }}
+              </div>
               <div class="availability-item">
                 <img
                   src="assets/availability.svg"
                   alt="Availability"
                   class="availability-item__icon"
                 />
-                <div class="availability-item__title">Hard Copy</div>
+                <div class="availability-item__title">
+                  {{ 'PREVIEW.COPY' | translate }}
+                </div>
               </div>
             </div>
           </div>
@@ -51,10 +57,12 @@
                 class="buttons__read"
                 [routerLink]="['/search/reader', bookData.id]"
               >
-                Read
+                {{ 'COMMON.BTN.READ' | translate }}
               </button>
             }
-            <button class="buttons__listen">Listen</button>
+            <button class="buttons__epub">
+              {{ 'COMMON.BTN.EBOOK' | translate }}
+            </button>
           </div>
         </div>
       </div>

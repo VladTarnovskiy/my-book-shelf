@@ -4,11 +4,12 @@ import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { IUploadBook } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { MyBookComponent } from '../../components/my-book/my-book.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [CommonModule, MyBookComponent],
+  imports: [CommonModule, MyBookComponent, TranslateModule],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

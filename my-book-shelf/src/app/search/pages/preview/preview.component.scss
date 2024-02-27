@@ -125,7 +125,7 @@
   align-items: flex-start;
 
   &__read,
-  &__listen {
+  &__epub {
     width: 209px;
     height: 61px;
     border-radius: 5px;
@@ -137,7 +137,7 @@
     margin-right: 38px;
   }
 
-  &__listen {
+  &__epub {
     background: $secondary-third;
   }
 }

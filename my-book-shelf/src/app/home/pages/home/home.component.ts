@@ -9,6 +9,7 @@ import { BooksFacade } from '../../../store/books/books.facade';
 import { RecommendedBooksFacade } from '../../../store/recommendedBooks/recommendedBooks.facade';
 import { recommendedGenerator } from '../../../core/utils/recStubGenerator';
 import { HomeBookSkeletonComponent } from '../../components/home-book-skeleton/home-book-skeleton.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import { HomeBookSkeletonComponent } from '../../components/home-book-skeleton/h
     CommonModule,
     RouterModule,
     HomeBookSkeletonComponent,
+    TranslateModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

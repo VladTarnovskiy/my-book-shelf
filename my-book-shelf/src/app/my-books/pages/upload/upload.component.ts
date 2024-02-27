@@ -13,11 +13,13 @@ import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
+import { FirestoreService } from '../../../core/services/firestore/firestore.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, TranslateModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,10 +38,10 @@ export class UploadComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    file: new FormControl<string | ArrayBuffer | null>(null, {
+    file: new FormControl<File | null>(null, {
       validators: [Validators.required],
     }),
-    image: new FormControl<string | ArrayBuffer | null>(null, {
+    image: new FormControl<File | null>(null, {
       validators: [Validators.required],
     }),
   });
@@ -47,17 +49,29 @@ export class UploadComponent {
   constructor(
     private myBooksFacade: MyBooksFacade,
     private toasterService: ToasterService,
+    private firestoreService: FirestoreService,
     private cd: ChangeDetectorRef
   ) {}
 
   onSubmit(): void {
     const formUserData = this.uploadForm.getRawValue();
     if (this.uploadForm.valid) {
-      this.myBooksFacade.addMyBook({
+      const bookForFirestore = {
         ...formUserData,
         id: crypto.randomUUID(),
         isFavorite: false,
-      });
+        borrowedOn: Date.now().toString(),
+        submissionDate: String(Date.now() + 259200000),
+      };
+
+      const book = {
+        ...bookForFirestore,
+        file: URL.createObjectURL(formUserData.file!),
+        image: URL.createObjectURL(formUserData.image!),
+      };
+
+      this.myBooksFacade.addMyBook(book);
+      this.firestoreService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
         title: 'My book',
@@ -70,32 +84,27 @@ export class UploadComponent {
   onSetImage(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
-    const reader = new FileReader();
 
     if (fileList && fileList[0]) {
-      reader.readAsDataURL(fileList[0]);
-      reader.onload = () => {
-        this.uploadForm.patchValue({
-          image: reader.result,
-        });
-        this.cd.detectChanges();
-      };
+      this.uploadForm.patchValue({
+        image: fileList[0],
+      });
+      this.cd.detectChanges();
     }
   }
 
   onSetFile(event: Event) {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
-    const reader = new FileReader();
 
     if (fileList && fileList[0]) {
-      reader.readAsDataURL(fileList[0]);
-      reader.onload = () => {
-        this.uploadForm.patchValue({
-          file: reader.result,
-        });
-        this.cd.detectChanges();
-      };
+      this.uploadForm.patchValue(
+        {
+          file: fileList[0],
+        }
+        // { emitEvent: true }
+      );
+      this.cd.detectChanges();
     }
   }
 

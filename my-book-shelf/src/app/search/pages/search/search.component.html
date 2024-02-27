@@ -1,9 +1,9 @@
 <div class="search">
   <app-category-filter />
   <div class="titles">
-    <div class="titles__title">Title</div>
-    <div class="titles__rating">Rating</div>
-    <div class="titles__category">Category</div>
+    <div class="titles__title">{{ 'SEARCH.HEAD.TITLE' | translate }}</div>
+    <div class="titles__rating">{{ 'SEARCH.HEAD.RATING' | translate }}</div>
+    <div class="titles__category">{{ 'SEARCH.HEAD.CATEGORY' | translate }}</div>
   </div>
   <div class="books">
     @for (book of books; track book.id) {
@@ -18,13 +18,13 @@
         <app-search-book-skeleton />
       }
     } @else if (!books.length) {
-      Empty list of books
+      {{ 'COMMON.EMPTY' | translate }}
     }
   </div>
   @if (isShowMore) {
     <div class="show-more">
       <button class="show-more__button" (click)="getNextPage()">
-        Show More
+        {{ 'SEARCH.SHOW_MORE' | translate }}
       </button>
     </div>
   }

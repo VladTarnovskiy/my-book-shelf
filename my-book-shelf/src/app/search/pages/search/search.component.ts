@@ -14,6 +14,7 @@ import { ISearchOptions } from '../../interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search',
@@ -23,6 +24,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
     SearchBookComponent,
     CommonModule,
     SearchBookSkeletonComponent,
+    TranslateModule,
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',

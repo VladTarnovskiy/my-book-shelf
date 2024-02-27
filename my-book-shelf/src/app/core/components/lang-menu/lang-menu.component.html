@@ -1,6 +1,6 @@
 <button class="lang" (mousedown)="onLangToggle()" (blur)="onLangClose()">
   <img class="lang__img" src="assets/header/translate.svg" alt="Language" />
-  <p class="lang__title">Lang</p>
+  <p class="lang__title">{{ 'LANG.TITLE' | translate }}</p>
   <img
     class="lang__polygon"
     src="assets/header/polygon.svg"
@@ -8,7 +8,19 @@
     [class.active]="isMenu"
   />
   <button class="lang-menu" [class.active]="isMenu">
-    <div class="lang-menu__item">English</div>
-    <div class="lang-menu__item">Russian</div>
+    <button
+      (click)="useLanguage('en')"
+      class="lang-menu__item"
+      [ngClass]="{ active: activeLang === 'en' }"
+    >
+      {{ 'LANG.EN' | translate }}
+    </button>
+    <button
+      (click)="useLanguage('ru')"
+      class="lang-menu__item"
+      [ngClass]="{ active: activeLang === 'ru' }"
+    >
+      {{ 'LANG.RU' | translate }}
+    </button>
   </button>
 </button>
