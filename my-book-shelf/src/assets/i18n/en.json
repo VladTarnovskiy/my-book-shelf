@@ -116,6 +116,7 @@
     "TITLE": "Welcome Back !",
     "DESCRIPTION": "Sign in to continue to your Digital Library",
     "LOGIN": "Login",
+    "SOCIAL": "Or Login Using",
     "NEW_USER": "New User?",
     "REG_USER": "Register here",
     "INPUT": {
@@ -158,6 +159,11 @@
       },
       "CONFIRM": "passwords does'nt match"
     }
+  },
+  "VERIFICATION": {
+    "TITLE": "Verification",
+    "DESCRIPTION": "Check your E-mail for link",
+    "MESSAGE": "Please, follow the link to login"
   },
   "FOOTER": {
     "About": "About",

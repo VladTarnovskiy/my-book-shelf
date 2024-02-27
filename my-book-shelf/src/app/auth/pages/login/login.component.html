@@ -65,6 +65,25 @@
         >
           {{ 'LOGIN.LOGIN' | translate }}
         </button>
+        <div class="social">
+          <div class="social__title">{{ 'LOGIN.SOCIAL' | translate }}</div>
+          <div class="social-btn">
+            <button class="social-btn__item" (click)="loginWithGoogle()">
+              <img
+                class="social-btn__img"
+                src="assets/google.svg"
+                alt="Google"
+              />
+            </button>
+            <button class="social-btn__item" (click)="loginWithGitHub()">
+              <img
+                class="social-btn__img"
+                src="assets/github.svg"
+                alt="Google"
+              />
+            </button>
+          </div>
+        </div>
         <div class="user-check">
           <div>{{ 'LOGIN.NEW_USER' | translate }}&ensp;</div>
           <a routerLink="../registration">

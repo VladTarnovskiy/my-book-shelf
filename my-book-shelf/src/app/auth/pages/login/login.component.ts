@@ -56,6 +56,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  loginWithGoogle() {
+    this.authService.logInWithGoogle();
+  }
+
+  loginWithGitHub() {
+    this.authService.logInWithGitHub();
+  }
+
   get email() {
     return this.loginForm.get('email');
   }
