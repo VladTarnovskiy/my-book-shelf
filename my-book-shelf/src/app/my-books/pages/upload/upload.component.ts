@@ -13,8 +13,8 @@ import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
-import { FirestoreService } from '../../../core/services/firestore/firestore.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { MyBookService } from '../../../core/services/my-book/my-book.service';
 
 @Component({
   selector: 'app-upload',
@@ -49,7 +49,7 @@ export class UploadComponent {
   constructor(
     private myBooksFacade: MyBooksFacade,
     private toasterService: ToasterService,
-    private firestoreService: FirestoreService,
+    private myBookService: MyBookService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -71,7 +71,7 @@ export class UploadComponent {
       };
 
       this.myBooksFacade.addMyBook(book);
-      this.firestoreService.addMyBook(bookForFirestore);
+      this.myBookService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
         title: 'My book',
@@ -98,12 +98,9 @@ export class UploadComponent {
     const fileList: FileList | null = element.files;
 
     if (fileList && fileList[0]) {
-      this.uploadForm.patchValue(
-        {
-          file: fileList[0],
-        }
-        // { emitEvent: true }
-      );
+      this.uploadForm.patchValue({
+        file: fileList[0],
+      });
       this.cd.detectChanges();
     }
   }

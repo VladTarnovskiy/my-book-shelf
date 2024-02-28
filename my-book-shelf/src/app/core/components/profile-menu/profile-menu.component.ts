@@ -4,6 +4,7 @@ import { profileList } from './profile-menu.constant';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile-menu',
@@ -16,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
 export class ProfileMenuComponent {
   navigationList = profileList;
   isMenu = false;
-  userName$ = this.authFacade.userName$;
+  userName$: Observable<string> = this.authFacade.userName$;
 
   constructor(private authFacade: AuthFacade) {}
 

@@ -67,6 +67,7 @@
         </div>
       </div>
     </div>
+    <app-review [bookId]="bookData.id" />
   </div>
 } @else if (isLoading$ | async) {
   <app-preview-skeleton />

@@ -25,6 +25,7 @@
 .content {
   @extend %itemsCenter;
   justify-content: flex-start;
+  margin-bottom: 30px;
 }
 
 .book {

@@ -12,7 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterService } from '../toaster/toaster.service';
-import { FirestoreService } from '../firestore/firestore.service';
+import { UserService } from '../user/user.service';
 import { IUserDetails } from '../../../auth/models/user';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 
@@ -28,14 +28,19 @@ export class AuthService {
     private auth: Auth,
     private router: Router,
     private authFacade: AuthFacade,
-    private fireStore: FirestoreService,
+    private userService: UserService,
     private toasterService: ToasterService
   ) {}
 
   async signUp({ email, password, name }: IUserDetails): Promise<void> {
     try {
       await createUserWithEmailAndPassword(this.auth, email, password);
-      this.fireStore.addUser(name);
+      const userId = this.auth.currentUser?.uid || null;
+      const user = {
+        name: name,
+        userId,
+      };
+      this.userService.addUser(user);
       this.router.navigate(['auth/login']);
     } catch (error) {
       if (error instanceof Error) {
@@ -47,7 +52,6 @@ export class AuthService {
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
-      this.setUserName(user.user.uid);
       await sendEmailVerification(user.user);
       this.router.navigate(['auth/verification']);
 
@@ -70,9 +74,12 @@ export class AuthService {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(this.auth, provider);
-      const user = result.user;
-      this.fireStore.addUser(user.displayName || 'Unknown');
-      this.setUserName(user.uid);
+      const userId = this.auth.currentUser?.uid || null;
+      const user = {
+        name: result.user.displayName || 'Unknown',
+        userId,
+      };
+      this.userService.addUser(user);
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -86,9 +93,12 @@ export class AuthService {
     const provider = new GithubAuthProvider();
     try {
       const result = await signInWithPopup(this.auth, provider);
-      const user = result.user;
-      this.fireStore.addUser(user.displayName || 'Unknown');
-      this.setUserName(user.uid);
+      const userId = this.auth.currentUser?.uid || null;
+      const user = {
+        name: result.user.displayName || 'Unknown',
+        userId,
+      };
+      this.userService.addUser(user);
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
@@ -108,11 +118,20 @@ export class AuthService {
     }
   }
 
+  getUserAfterReload(): void {
+    this.auth.onAuthStateChanged((user) => {
+      if (user !== null) {
+        this.setUserName(user.uid);
+      }
+    });
+  }
+
   setUserName(userId: string): void {
-    this.fireStore.getUser(userId).subscribe((x) => {
+    this.userService.getUser(userId).subscribe((x) => {
       const userInfo = x.map((item) => item.payload.doc.data());
       if (userInfo[0]) {
         this.authFacade.addUserName(userInfo[0].name);
+        this.authFacade.addUserId(userInfo[0].userId);
       }
     });
   }

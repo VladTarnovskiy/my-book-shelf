@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  DocumentChangeAction,
-  DocumentReference,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   Storage,
   getDownloadURL,
@@ -12,41 +8,16 @@ import {
 } from '@angular/fire/storage';
 import { IFirestoreUploadBook } from '../../../my-books/models/upload';
 import { Auth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
-import { IUserInfo } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FirestoreService {
+export class MyBookService {
   constructor(
     private afs: AngularFirestore,
     private auth: Auth,
     private storage: Storage
   ) {}
-
-  addUser(name: string): Promise<DocumentReference<unknown>> {
-    const userInfo = {
-      name: name,
-      id: this.afs.createId(),
-    };
-    const userId = this.auth.currentUser?.uid || null;
-    return this.afs.collection(`/users/${userId}/userInfo`).add(userInfo);
-  }
-
-  // getAllUsers(): Observable<DocumentChangeAction<unknown>[]> {
-  //   return this.afs.collection('/users').snapshotChanges();
-  // }
-
-  getUser(userId: string): Observable<DocumentChangeAction<IUserInfo>[]> {
-    return this.afs
-      .collection<IUserInfo>(`/users/${userId}/userInfo`)
-      .snapshotChanges();
-  }
-
-  deleteUser(userId: string): void {
-    this.afs.doc('/users/' + userId).delete();
-  }
 
   async addMyBook(book: IFirestoreUploadBook) {
     const userId = this.auth.currentUser?.uid || null;
@@ -69,9 +40,4 @@ export class FirestoreService {
       image: storageImageUrl,
     });
   }
-
-  // updateUser(user: IUser) {
-  //   this.deleteUser(user);
-  //   this.addUser(user);
-  // }
 }

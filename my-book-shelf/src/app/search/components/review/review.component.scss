@@ -1,0 +1,47 @@
+@import 'placeholders';
+@import 'variables';
+
+.title {
+  margin-bottom: 10px;
+}
+
+.review {
+  @extend %itemsCenter;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  &__input {
+    padding: 10px 12px;
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    @extend %shadow;
+  }
+
+  &__send {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.review-item {
+  background-color: $primary-third;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+
+  &__header {
+    @extend %itemsCenter;
+    justify-content: space-between;
+    font-family: 'Inter Bold';
+  }
+
+  &__remove {
+    img {
+      height: 30px;
+      width: 30px;
+    }
+  }
+}

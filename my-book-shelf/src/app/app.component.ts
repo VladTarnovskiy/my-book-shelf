@@ -4,6 +4,7 @@ import { ToasterContainerComponent } from './core/components/toaster-container/t
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import englishLang from '../assets/i18n/en.json';
 import russianLang from '../assets/i18n/ru.json';
+import { AuthService } from './core/services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,10 @@ import russianLang from '../assets/i18n/ru.json';
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  constructor(translate: TranslateService) {
+  constructor(
+    translate: TranslateService,
+    private authService: AuthService
+  ) {
     translate.setTranslation('en', englishLang);
     translate.setTranslation('ru', russianLang);
     translate.setDefaultLang('en');
@@ -22,6 +26,7 @@ export class AppComponent implements OnInit {
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
+    this.authService.getUserAfterReload();
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     // );
