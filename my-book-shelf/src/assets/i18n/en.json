@@ -1,7 +1,10 @@
 {
   "HOME": {
     "GREETING": {
-      "MORNING": "Good morning"
+      "MORNING": "Good morning",
+      "AFTERNOON": "Good afternoon",
+      "EVENING": "Good evening",
+      "NIGHT": "Good night"
     },
     "RECOMMENDED": "Recommended for You",
     "RECENT": "Recent Readings",
