@@ -1,4 +1,4 @@
-@if (book) {
+@if (book$ | async; as book) {
   <div class="reader">
     <div class="reader-header">
       <div class="info">
@@ -21,12 +21,12 @@
         </div>
       </div>
       <div class="favorite">
-        @if (isFavorite) {
-          <button class="favorite__but" (click)="removeFromFavorite()">
+        @if (book.isFavorite) {
+          <button class="favorite__but" (click)="changeFavorite(false)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>
         } @else {
-          <button class="favorite__but" (click)="addToFavorite()">
+          <button class="favorite__but" (click)="changeFavorite(true)">
             <img src="assets/empty-heart.svg" alt="Favorite" />
           </button>
         }

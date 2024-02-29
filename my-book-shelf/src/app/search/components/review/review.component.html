@@ -6,26 +6,17 @@
       class="review__input"
       placeholder="Review"
       [(ngModel)]="reviewText"
+      (keyup.enter)="sendReview()"
     />
     <button class="review__send" (click)="sendReview()">
       <img src="assets/send.svg" alt="Send" class="review__send-img" />
     </button>
   </div>
   @for (review of reviews$ | async; track review.id) {
-    <div class="reviews">
-      <div class="review-item">
-        <div class="review-item__header">
-          <p class="username">{{ review.username }}</p>
-          @if ((userId$ | async) === review.userId) {
-            <button class="review-item__remove">
-              <img src="assets/close.svg" alt="Send" />
-            </button>
-          }
-        </div>
-        <div class="review-item__content">
-          {{ review.review }}
-        </div>
-      </div>
-    </div>
+    <app-review-item
+      [reviewData]="review"
+      [userId]="userId$ | async"
+      (removeReview)="removeReview($event)"
+    />
   }
 </div>

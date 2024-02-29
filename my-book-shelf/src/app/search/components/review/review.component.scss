@@ -25,23 +25,3 @@
     }
   }
 }
-
-.review-item {
-  background-color: $primary-third;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
-
-  &__header {
-    @extend %itemsCenter;
-    justify-content: space-between;
-    font-family: 'Inter Bold';
-  }
-
-  &__remove {
-    img {
-      height: 30px;
-      width: 30px;
-    }
-  }
-}

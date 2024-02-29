@@ -132,6 +132,7 @@ export class AuthService {
       if (userInfo[0]) {
         this.authFacade.addUserName(userInfo[0].name);
         this.authFacade.addUserId(userInfo[0].userId);
+        this.isLoggedIn.next(true);
       }
     });
   }

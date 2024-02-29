@@ -11,7 +11,6 @@ import {
 } from '@angular/forms';
 import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
-import { MyBooksFacade } from '../../../store/my-books/my-books.facade';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyBookService } from '../../../core/services/my-book/my-book.service';
@@ -47,7 +46,6 @@ export class UploadComponent {
   });
 
   constructor(
-    private myBooksFacade: MyBooksFacade,
     private toasterService: ToasterService,
     private myBookService: MyBookService,
     private cd: ChangeDetectorRef
@@ -63,14 +61,6 @@ export class UploadComponent {
         borrowedOn: Date.now().toString(),
         submissionDate: String(Date.now() + 259200000),
       };
-
-      const book = {
-        ...bookForFirestore,
-        file: URL.createObjectURL(formUserData.file!),
-        image: URL.createObjectURL(formUserData.image!),
-      };
-
-      this.myBooksFacade.addMyBook(book);
       this.myBookService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
