@@ -17,7 +17,7 @@
       @for (item of skeletonItems; track item) {
         <app-search-book-skeleton />
       }
-    } @else if ((books$ | async) === null) {
+    } @else if (!(books$ | async)?.length) {
       {{ 'COMMON.EMPTY' | translate }}
     }
   </div>

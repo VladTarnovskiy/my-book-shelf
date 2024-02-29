@@ -23,12 +23,7 @@
       <div class="profile-item__title">
         {{ 'PROFILE_PAGE.NAME' | translate }}:
       </div>
-      <input
-        type="text"
-        class="profile-item__input"
-        [(ngModel)]="userName"
-        [value]="userName$ | async"
-      />
+      <input type="text" class="profile-item__input" [(ngModel)]="userName" />
       <button
         class="profile-item__but"
         (click)="changeUserName()"

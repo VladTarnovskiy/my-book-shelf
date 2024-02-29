@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
   searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
   totalItems$: Observable<number> = this.booksFacade.searchTotalItems$;
   searchOptions!: ISearchOptions;
-  books$ = new BehaviorSubject<IBook[] | null>(null);
+  books$ = new BehaviorSubject<IBook[]>([]);
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
   private destroy$ = inject(DestroyDirective).destroy$;
