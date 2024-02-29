@@ -16,7 +16,7 @@ export class ReviewService {
     private auth: Auth
   ) {}
 
-  addReview(review: Omit<IReview, 'id' | 'userId'>): void {
+  addReview(review: Omit<IReview, 'id' | 'userId' | 'creationDate'>): void {
     const userId = this.auth.currentUser?.uid || null;
     console.log(userId);
     const reviewId = this.afs.createId();
@@ -24,6 +24,7 @@ export class ReviewService {
       ...review,
       userId,
       id: reviewId,
+      creationDate: Date.now(),
     };
     this.afs
       .collection(`/reviews/${review.bookId}/reviews`)

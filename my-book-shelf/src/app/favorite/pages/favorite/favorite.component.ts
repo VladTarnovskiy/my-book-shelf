@@ -14,11 +14,17 @@ import { IUploadBook } from '../../../my-books/models/upload';
 import { FavoriteUploadBookComponent } from '../../components/favorite-upload-book/favorite-upload-book.component';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { FavoriteService } from '../../../core/services/favorite/favorite.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorite',
   standalone: true,
-  imports: [FavoriteBookComponent, CommonModule, FavoriteUploadBookComponent],
+  imports: [
+    FavoriteBookComponent,
+    CommonModule,
+    FavoriteUploadBookComponent,
+    TranslateModule,
+  ],
   templateUrl: './favorite.component.html',
   styleUrl: './favorite.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

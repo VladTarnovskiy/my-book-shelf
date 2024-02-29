@@ -24,18 +24,18 @@ export class FavoriteService {
       submissionDate: String(Date.now() + 259200000),
     };
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.collection(`/user/${userId}/favorite`).doc(book.id).set(favBook);
+    this.afs.collection(`/users/${userId}/favorite`).doc(book.id).set(favBook);
   }
 
   removeFavoriteBook(bookId: string): void {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.doc(`/user/${userId}/favorite/${bookId}`).delete();
+    this.afs.doc(`/users/${userId}/favorite/${bookId}`).delete();
   }
 
   getFavoriteBooks(): Observable<DocumentChangeAction<IFavoriteBook>[]> {
     const userId = this.auth.currentUser?.uid || null;
     return this.afs
-      .collection<IFavoriteBook>(`/user/${userId}/favorite`)
+      .collection<IFavoriteBook>(`/users/${userId}/favorite`)
       .snapshotChanges();
   }
 }

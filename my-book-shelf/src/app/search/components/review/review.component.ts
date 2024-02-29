@@ -19,9 +19,11 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class ReviewComponent implements OnInit {
   username$: Observable<string> = this.authFacade.userName$;
+  userPhoto$: Observable<string | null> = this.authFacade.userPhoto$;
   userId$: Observable<string | null> = this.authFacade.userId$;
   reviews$ = new BehaviorSubject<null | IReview[]>(null);
   username = 'Unknown';
+  userPhoto: string | null = 'Unknown';
   reviewText = '';
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -33,22 +35,27 @@ export class ReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.username$.subscribe((name) => {
+    this.username$.pipe(takeUntil(this.destroy$)).subscribe((name) => {
       this.username = name;
+    });
+
+    this.userPhoto$.pipe(takeUntil(this.destroy$)).subscribe((photo) => {
+      this.userPhoto = photo;
     });
 
     this.reviewService
       .getReviews(this.bookId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((reviews) => {
-        const reviewsInfo = reviews.map((item) => item.payload.doc.data());
+        const reviewsInfo = reviews
+          .map((item) => item.payload.doc.data())
+          .sort((a, b) => Number(a.creationDate) - Number(b.creationDate));
         this.reviews$.next(reviewsInfo);
       });
   }
 
   sendReview(): void {
     const review = {
-      username: this.username,
       review: this.reviewText,
       bookId: this.bookId,
     };

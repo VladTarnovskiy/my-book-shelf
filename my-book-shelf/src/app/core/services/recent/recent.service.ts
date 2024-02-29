@@ -18,13 +18,13 @@ export class RecentService {
 
   addRecentBook(book: IBook): void {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.collection(`/user/${userId}/recent`).doc(book.id).set(book);
+    this.afs.collection(`/users/${userId}/recent`).doc(book.id).set(book);
   }
 
   getRecentBooks(): Observable<DocumentChangeAction<IBook>[]> {
     const userId = this.auth.currentUser?.uid || null;
     return this.afs
-      .collection<IBook>(`/user/${userId}/recent`)
+      .collection<IBook>(`/users/${userId}/recent`)
       .snapshotChanges();
   }
 }

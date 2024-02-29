@@ -128,11 +128,11 @@ export class AuthService {
 
   setUserName(userId: string): void {
     this.userService.getUser(userId).subscribe((x) => {
-      const userInfo = x.map((item) => item.payload.doc.data());
-      if (userInfo[0]) {
-        this.authFacade.addUserName(userInfo[0].name);
-        this.authFacade.addUserId(userInfo[0].userId);
-        this.authFacade.addUserPhoto(userInfo[0].photo);
+      const userInfo = x.payload.data();
+      if (userInfo) {
+        this.authFacade.addUserName(userInfo.name);
+        this.authFacade.addUserId(userInfo.userId);
+        this.authFacade.addUserPhoto(userInfo.photo);
         this.isLoggedIn.next(true);
       }
     });

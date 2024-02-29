@@ -21,6 +21,8 @@
   },
   "COMMON": {
     "EMPTY": "Книги не найдены",
+    "BORROWED": "Заимствовано",
+    "SUBMISSION": "Срок подачи",
     "BTN": {
       "BACK": "Вернуться назад",
       "READ": "Читать",
@@ -50,11 +52,10 @@
     "EDITION": "второе издание",
     "BTN_PREVIEW": "Просмотр"
   },
-  "MY_BOOK": {
-    "TITLE": "Мои Книги",
-    "BORROWED": "Заимствовано",
-    "SUBMISSION": "Срок подачи"
+  "MY_BOOKS": {
+    "TITLE": "Мои Книги"
   },
+  "FAVORITE": { "TITLE": "Ваше Избранное" },
   "READER": {
     "INTRODUCTION": "ВВЕДЕНИЕ",
     "NOT_AVAILABLE": "Книга не доступна.",
@@ -197,7 +198,8 @@
     "Logout": "Выйти"
   },
   "REVIEW": {
-    "TITLE": "Рецензии"
+    "TITLE": "Рецензии",
+    "PLACEHOLDER": "Обзор"
   },
   "PROFILE_PAGE": {
     "TITLE": "Профиль",

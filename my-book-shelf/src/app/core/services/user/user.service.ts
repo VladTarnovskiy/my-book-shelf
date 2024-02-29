@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {
+  Action,
   AngularFirestore,
-  DocumentChangeAction,
+  DocumentSnapshot,
 } from '@angular/fire/compat/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
@@ -39,9 +40,9 @@ export class UserService {
     }
   }
 
-  getUser(userId: string): Observable<DocumentChangeAction<IUserInfo>[]> {
+  getUser(userId: string): Observable<Action<DocumentSnapshot<IUserInfo>>> {
     return this.afs
-      .collection<IUserInfo>(`/users/${userId}/userInfo`)
+      .doc<IUserInfo>(`/users/${userId}/userInfo/${userId}`)
       .snapshotChanges();
   }
 

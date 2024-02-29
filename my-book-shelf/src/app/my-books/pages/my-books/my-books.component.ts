@@ -33,7 +33,6 @@ export class MyBooksComponent implements OnInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe((books) => {
         const booksInfo = books.map((item) => item.payload.doc.data());
-        console.log(booksInfo);
         this.myBooks$.next(booksInfo);
       });
   }

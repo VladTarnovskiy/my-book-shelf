@@ -1,5 +1,5 @@
 <div class="favorite">
-  <div class="title">Your Favorite</div>
+  <div class="title">{{ 'FAVORITE.TITLE' | translate }}</div>
   <div class="books">
     @for (uploadBook of uploadFavoriteBooks$ | async; track uploadBook.id) {
       <app-favorite-upload-book
@@ -18,7 +18,7 @@
       (uploadFavoriteBooks$ | async)?.length === 0 &&
       (favoriteBooks$ | async)?.length === 0
     ) {
-      Empty list of books
+      {{ 'COMMON.EMPTY' | translate }}
     }
   </div>
 </div>
