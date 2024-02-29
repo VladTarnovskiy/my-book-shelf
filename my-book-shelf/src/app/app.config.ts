@@ -17,7 +17,6 @@ import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { booksReducer } from './store/books/books.reducer';
 import { BooksEffects } from './store/books/books.effects';
-import { favoriteBooksReducer } from './store/favorite/favorite.reducer';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { firebaseConfig } from '../environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -53,7 +52,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({
       books: booksReducer,
       recommendedBooks: recommendedBooksReducer,
-      favoriteBooks: favoriteBooksReducer,
       router: routerReducer,
       quotes: quotesReducer,
       readerBook: readerBookReducer,

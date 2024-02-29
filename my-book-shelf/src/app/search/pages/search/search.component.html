@@ -6,7 +6,7 @@
     <div class="titles__category">{{ 'SEARCH.HEAD.CATEGORY' | translate }}</div>
   </div>
   <div class="books">
-    @for (book of books; track book.id) {
+    @for (book of books$ | async; track book.id) {
       <app-search-book
         [bookData]="book"
         (addToFavoriteEvent)="addToFavorite($event)"
@@ -17,7 +17,7 @@
       @for (item of skeletonItems; track item) {
         <app-search-book-skeleton />
       }
-    } @else if (!books.length) {
+    } @else if ((books$ | async) === null) {
       {{ 'COMMON.EMPTY' | translate }}
     }
   </div>

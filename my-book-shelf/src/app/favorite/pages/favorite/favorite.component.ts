@@ -6,14 +6,14 @@ import {
   inject,
 } from '@angular/core';
 import { FavoriteBookComponent } from '../../components/favorite-book/favorite-book.component';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { IFavoriteBook } from '../../models/favoriteBook';
-import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { IUploadBook } from '../../../my-books/models/upload';
 import { FavoriteUploadBookComponent } from '../../components/favorite-upload-book/favorite-upload-book.component';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
+import { FavoriteService } from '../../../core/services/favorite/favorite.service';
 
 @Component({
   selector: 'app-favorite',
@@ -25,13 +25,12 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
   hostDirectives: [DestroyDirective],
 })
 export class FavoriteComponent implements OnInit {
-  favoriteBooks$: Observable<IFavoriteBook[]> =
-    this.favoriteFacade.favoriteBooks$;
+  favoriteBooks$ = new BehaviorSubject<IFavoriteBook[] | null>(null);
   uploadFavoriteBooks$ = new BehaviorSubject<IUploadBook[] | null>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
-    private favoriteFacade: FavoriteFacade,
+    private favoriteService: FavoriteService,
     private myBookService: MyBookService,
     private booksFacade: BooksFacade
   ) {}
@@ -46,10 +45,18 @@ export class FavoriteComponent implements OnInit {
           .filter((item) => item.isFavorite === true);
         this.uploadFavoriteBooks$.next(booksInfo);
       });
+
+    this.favoriteService
+      .getFavoriteBooks()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((books) => {
+        const booksInfo = books.map((item) => item.payload.doc.data());
+        this.favoriteBooks$.next(booksInfo);
+      });
   }
 
   removeFromFavorite(bookId: string): void {
-    this.favoriteFacade.removeFavoriteBook(bookId);
+    this.favoriteService.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 

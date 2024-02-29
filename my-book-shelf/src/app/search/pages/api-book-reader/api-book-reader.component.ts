@@ -15,9 +15,9 @@ import { GoBackDirective } from '../../../core/directives/go-back/go-back.direct
 import { SafePipe } from '../../../core/pipes/safe/safe.pipe';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { IBook } from '../../../shared/models/book.model';
-import { FavoriteFacade } from '../../../store/favorite/favorite.facade';
 import { ReaderBookFacade } from '../../../store/api-reader/api-reader.facade';
 import { TranslateModule } from '@ngx-translate/core';
+import { FavoriteService } from '../../../core/services/favorite/favorite.service';
 
 @Component({
   selector: 'app-api-book-reader',
@@ -39,7 +39,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readerBookFacade: ReaderBookFacade,
-    private favoriteFacade: FavoriteFacade,
+    private favoriteService: FavoriteService,
     private booksFacade: BooksFacade,
     private cd: ChangeDetectorRef
   ) {}
@@ -55,10 +55,13 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
       if (book) {
-        this.favoriteFacade.favoriteBooks$
+        this.favoriteService
+          .getFavoriteBooks()
           .pipe(takeUntil(this.destroy$))
           .subscribe((favBooks) => {
-            const favIDs = favBooks.map((favBook) => favBook.id);
+            const favIDs = favBooks.map(
+              (favBook) => favBook.payload.doc.data().id
+            );
             if (favIDs.includes(book.id)) {
               this.isFavorite = true;
             } else {
@@ -70,12 +73,12 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   }
 
   addToFavorite(book: IBook): void {
-    this.favoriteFacade.addFavoriteBook(book);
+    this.favoriteService.addFavoriteBook(book);
     this.addFavoriteStatus(book.id);
   }
 
   removeFromFavorite(bookId: string): void {
-    this.favoriteFacade.removeFavoriteBook(bookId);
+    this.favoriteService.removeFavoriteBook(bookId);
     this.removeFavoriteStatus(bookId);
   }
 
