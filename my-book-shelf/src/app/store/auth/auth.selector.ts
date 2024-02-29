@@ -12,3 +12,8 @@ export const selectUserId = createSelector(
   selectAuthStore,
   (state: AuthState) => state.userId
 );
+
+export const selectUserPhoto = createSelector(
+  selectAuthStore,
+  (state: AuthState) => state.photo
+);

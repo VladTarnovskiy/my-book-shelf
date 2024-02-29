@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { ReviewService } from '../../../core/services/review/review.service';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { ReviewItemComponent } from '../review-item/review-item.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReviewItemComponent],
+  imports: [FormsModule, CommonModule, ReviewItemComponent, TranslateModule],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
   hostDirectives: [DestroyDirective],

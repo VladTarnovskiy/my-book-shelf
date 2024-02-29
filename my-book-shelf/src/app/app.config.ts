@@ -24,7 +24,6 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { recommendedBooksReducer } from './store/recommendedBooks/recommendedBooks.reducer';
 import { RecommendedBooksEffects } from './store/recommendedBooks/recommendedBooks.effects';
-import { myBooksReducer } from './store/my-books/my-books.reducer';
 import { QuotesEffects } from './store/quotes/quotes.effects';
 import { readerBookReducer } from './store/api-reader/api-reader.reducer';
 import { ReaderBookEffects } from './store/api-reader/api-reader.effects';
@@ -43,7 +42,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: firebaseConfig.firebase },
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -57,7 +55,6 @@ export const appConfig: ApplicationConfig = {
       recommendedBooks: recommendedBooksReducer,
       favoriteBooks: favoriteBooksReducer,
       router: routerReducer,
-      myBooks: myBooksReducer,
       quotes: quotesReducer,
       readerBook: readerBookReducer,
       auth: authReducer,

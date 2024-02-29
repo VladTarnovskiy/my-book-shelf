@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IReview } from '../../models/review';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,6 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [CommonModule, ModalComponent, TranslateModule],
   templateUrl: './review-item.component.html',
   styleUrl: './review-item.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewItemComponent {
   @Input({ required: true }) reviewData!: IReview;

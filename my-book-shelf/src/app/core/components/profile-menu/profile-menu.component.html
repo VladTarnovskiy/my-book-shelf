@@ -3,7 +3,11 @@
   (mousedown)="onProfileToggle()"
   (blur)="onProfileClose()"
 >
-  <img class="profile__img" src="assets/header/profile.svg" alt="Profile" />
+  @if (photo$ | async; as photo) {
+    <img class="profile__img" [src]="photo" alt="Profile" />
+  } @else {
+    <img class="profile__img" src="assets/header/profile.svg" alt="Profile" />
+  }
   <p class="profile__title">{{ userName$ | async }}</p>
   <img
     class="profile__polygon"

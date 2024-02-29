@@ -11,3 +11,8 @@ export const AddUserId = createAction(
   `${actionSource} Add UserId`,
   props<{ userId: string | null }>()
 );
+
+export const AddUserPhoto = createAction(
+  `${actionSource} Add User Photo`,
+  props<{ photo: string | null }>()
+);

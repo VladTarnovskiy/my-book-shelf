@@ -18,6 +18,7 @@ export class ProfileMenuComponent {
   navigationList = profileList;
   isMenu = false;
   userName$: Observable<string> = this.authFacade.userName$;
+  photo$: Observable<string | null> = this.authFacade.userPhoto$;
 
   constructor(private authFacade: AuthFacade) {}
 

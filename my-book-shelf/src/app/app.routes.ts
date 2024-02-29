@@ -22,6 +22,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'profile',
+        loadComponent: () =>
+          import('./core/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
+      },
+      {
         path: 'recommended',
         loadComponent: () =>
           import('./home/pages/recommended/recommended.component').then(
