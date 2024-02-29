@@ -142,7 +142,7 @@ export class AuthService {
     this.toasterService.show({
       type: 'error',
       title: error.name,
-      body: error.message,
+      message: error.message,
     });
   }
 }
