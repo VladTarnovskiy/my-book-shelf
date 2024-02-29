@@ -2,26 +2,26 @@
 @import 'variables';
 
 .wrapper {
-  margin-bottom: 73px;
+  margin-bottom: 7.3rem;
 }
 
 .filter {
   @extend %itemsCenter;
   @extend %shadow;
-  border-radius: 40px;
-  height: 47px;
-  padding: 11px 0 10px 27px;
-  margin-right: 25px;
+  border-radius: 4rem;
+  height: 4.7rem;
+  padding: 1.1rem 0 1rem 2.7rem;
+  margin-right: 2.5rem;
   background-color: $primary-third;
   position: relative;
 
   &__title {
-    min-width: 91px;
-    margin-right: 11px;
+    min-width: 9.1rem;
+    margin-right: 1.1rem;
   }
 
   &__polygon {
-    margin-right: 29px;
+    margin-right: 2.9rem;
     @extend %transition;
 
     &.active {
@@ -40,10 +40,10 @@
   left: 0;
   bottom: 0;
   transform: translateY(105%);
-  width: 170px;
-  height: 320px;
-  border-radius: 10px;
-  line-height: 26px;
+  width: 17rem;
+  height: 32rem;
+  border-radius: 1rem;
+  line-height: 2.6rem;
   background-color: $primary-third;
   opacity: 0;
   text-align: start;
@@ -56,7 +56,7 @@
   }
 
   &__item {
-    padding: 12px 9px;
+    padding: 1.2rem 0.9rem;
 
     &:hover {
       background-color: $secondary-fourth;

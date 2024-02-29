@@ -3,17 +3,17 @@
 
 .review-item {
   background-color: $primary-third;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
   @extend %itemsCenter;
   justify-content: flex-start;
 
   &__photo {
-    width: 43px;
-    height: 43px;
-    border-radius: 22px;
-    margin-right: 10px;
+    width: 4.3rem;
+    height: 4.3rem;
+    border-radius: 2.2rem;
+    margin-right: 1rem;
     align-self: flex-start;
   }
 
@@ -32,8 +32,8 @@
 
   &__remove {
     img {
-      height: 30px;
-      width: 30px;
+      height: 3rem;
+      width: 3rem;
     }
   }
 }

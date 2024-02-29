@@ -2,37 +2,37 @@
 @import 'variables';
 
 .upload {
-  padding: 46px 89px 28px 100px;
-  width: 732px;
-  min-height: 845px;
-  border-radius: 10px;
+  padding: 4.6rem 8.9rem 2.8rem 10rem;
+  width: 73.2rem;
+  min-height: 84.5rem;
+  border-radius: 1rem;
   color: $primary-fifth;
   background-color: $primary-third;
   margin: auto;
-  margin-bottom: 38px;
+  margin-bottom: 3.8rem;
 }
 
 .title {
   font-family: 'Inter Semi Bold';
   width: fit-content;
   margin: auto;
-  margin-bottom: 39px;
+  margin-bottom: 3.9rem;
 }
 
 .form-item {
-  margin-bottom: 20px;
-  font-size: 16px;
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
 
   &__title {
     font-family: 'Inter Semi Bold';
-    margin-bottom: 22px;
+    margin-bottom: 2.2rem;
   }
 
   &__input {
     width: 100%;
-    height: 59px;
-    border-radius: 10px;
-    padding: 20px 30px;
+    height: 5.9rem;
+    border-radius: 1rem;
+    padding: 2rem 3rem;
     border: 1px solid $primary-sixth;
   }
 }
@@ -40,17 +40,17 @@
 .form-item.file,
 .form-item.image {
   .form-item__title {
-    margin-bottom: 12px;
+    margin-bottom: 1.2rem;
   }
 
   .form-item__input {
-    padding: 13px 30px;
+    padding: 1.3rem 3rem;
   }
 
   .form-item__input::file-selector-button {
-    padding: 5px;
+    padding: 0.5rem;
     border: 1px solid $primary-sixth;
-    border-radius: 3px;
+    border-radius: 0.3rem;
 
     &:hover {
       cursor: pointer;
@@ -60,21 +60,21 @@
 
 .form-item.description {
   .form-item__input {
-    min-height: 108px;
+    min-height: 10.8rem;
   }
 }
 
 .buttons {
-  padding-top: 7px;
+  padding-top: 0.7rem;
 
   &__submit {
     display: block;
-    height: 65px;
-    width: 316px;
+    height: 6.5rem;
+    width: 31.6rem;
     margin: auto;
     background-color: $primary-first;
     font-family: 'Inter Semi Bold';
     color: $primary-third;
-    border-radius: 5px;
+    border-radius: 0.5rem;
   }
 }

@@ -2,19 +2,19 @@
 @import 'variables';
 
 .recommended {
-  padding: 18px 45px;
+  padding: 1.8rem 4.5rem;
 }
 
 .title {
-  font-size: 25px;
+  font-size: 2.5rem;
   font-family: 'Inter Bold';
   color: $primary-second;
-  margin-bottom: 51px;
+  margin-bottom: 5.1rem;
 }
 
 .books {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(308px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30.8rem, 1fr));
   justify-items: center;
-  gap: 28px;
+  gap: 2.8rem;
 }

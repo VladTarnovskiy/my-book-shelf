@@ -2,53 +2,53 @@
 @import 'variables';
 
 .details {
-  padding: 91px 45px;
+  padding: 9.1rem 4.5rem;
 }
 
 .back-but {
   @extend %itemsCenter;
   justify-content: flex-start;
-  height: 22px;
-  margin-bottom: 22px;
+  height: 2.2rem;
+  margin-bottom: 2.2rem;
 
   &__arrow {
-    width: 12px;
-    height: 12px;
-    margin-right: 13px;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 1.3rem;
   }
   &__title {
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 }
 
 .content {
   @extend %itemsCenter;
   justify-content: flex-start;
-  margin-bottom: 30px;
+  margin-bottom: 3rem;
 }
 
 .book {
   @extend %itemsCenter;
   justify-content: flex-start;
   align-items: flex-start;
-  font-size: 15px;
+  font-size: 1.5rem;
 }
 
 .cover {
-  width: 278px;
-  height: 445px;
-  margin-right: 71px;
-  padding: 24px 34px;
+  width: 27.8rem;
+  height: 44.5rem;
+  margin-right: 7.1rem;
+  padding: 2.4rem 3.4rem;
   background-color: $primary-third;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 1rem;
 
   &__img {
-    width: 209px;
-    height: 277px;
-    margin-bottom: 27px;
+    width: 20.9rem;
+    height: 27.7rem;
+    margin-bottom: 2.7rem;
   }
 }
 
@@ -59,14 +59,14 @@
 }
 
 .title {
-  font-size: 35px;
-  line-height: 45px;
-  margin-bottom: 8px;
+  font-size: 3.5rem;
+  line-height: 4.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .author {
-  line-height: 18px;
-  margin-bottom: 18px;
+  line-height: 1.8rem;
+  margin-bottom: 1.8rem;
 
   &__name {
     text-decoration: underline;
@@ -75,11 +75,11 @@
 
 .edition {
   color: $secondary-fifth;
-  margin-bottom: 42px;
+  margin-bottom: 4.2rem;
 }
 
 .rating {
-  margin-bottom: 35px;
+  margin-bottom: 3.5rem;
   @extend %itemsCenter;
   justify-content: flex-start;
 
@@ -89,33 +89,33 @@
 }
 
 .stars {
-  margin-right: 8px;
+  margin-right: 0.8rem;
 
   &__item {
-    width: 14px;
-    height: 14px;
-    margin-right: 3px;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.3rem;
   }
 }
 
 .availability {
-  margin-bottom: 44px;
+  margin-bottom: 4.4rem;
 
   &__title {
     font-family: 'Inter Bold';
-    margin-bottom: 11px;
+    margin-bottom: 1.1rem;
   }
 }
 
 .availability-item {
   @extend %itemsCenter;
   justify-content: flex-start;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 
   &__icon {
-    width: 15px;
-    height: 15px;
-    margin-right: 8px;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.8rem;
   }
 }
 
@@ -126,15 +126,15 @@
 
   &__read,
   &__epub {
-    width: 209px;
-    height: 61px;
-    border-radius: 5px;
-    font-size: 20px;
+    width: 20.9rem;
+    height: 6.1rem;
+    border-radius: 0.5rem;
+    font-size: 2rem;
     background: $primary-first;
     color: $primary-third;
     text-transform: uppercase;
     font-family: 'Inter Semi Bold';
-    margin-right: 38px;
+    margin-right: 3.8rem;
   }
 
   &__epub {

@@ -2,24 +2,24 @@
 @import 'variables';
 
 .title {
-  width: 150px;
-  height: 26px;
-  margin-bottom: 26px;
+  width: 15rem;
+  height: 2.6rem;
+  margin-bottom: 2.6rem;
   @extend %skeletonBackgroundAnimation;
 }
 
 .content,
 .content-second {
-  margin-bottom: 8px;
-  width: 754px;
-  height: 24px;
-  margin-bottom: 4px;
+  margin-bottom: 0.8rem;
+  width: 75.4rem;
+  height: 2.4rem;
+  margin-bottom: 0.4rem;
   @extend %skeletonBackgroundAnimation;
 }
 
 .content-second {
-  margin-bottom: 8px;
-  width: 454px;
+  margin-bottom: 0.8rem;
+  width: 45.4rem;
 }
 
 .description {
@@ -30,8 +30,8 @@
 .slider {
   @extend %itemsCenter;
   justify-content: space-between;
-  width: 70px;
-  height: 10px;
+  width: 7rem;
+  height: 1rem;
   @extend %skeletonBackgroundAnimation;
 
   &__but:last-child {
@@ -44,7 +44,7 @@
 }
 
 .author {
-  width: 140px;
-  height: 16px;
+  width: 14rem;
+  height: 1.6rem;
   @extend %skeletonBackgroundAnimation;
 }

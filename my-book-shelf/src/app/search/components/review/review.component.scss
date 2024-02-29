@@ -2,26 +2,26 @@
 @import 'variables';
 
 .title {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .review {
   @extend %itemsCenter;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   &__input {
-    padding: 10px 12px;
-    height: 40px;
+    padding: 1rem 1.2rem;
+    height: 4rem;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     @extend %shadow;
   }
 
   &__send {
     img {
-      width: 40px;
-      height: 40px;
+      width: 4rem;
+      height: 4rem;
     }
   }
 }

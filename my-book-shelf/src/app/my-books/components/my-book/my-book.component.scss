@@ -2,47 +2,47 @@
 @import 'variables';
 
 .book {
-  padding: 16px 20px 13px 15px;
+  padding: 1.6rem 2rem 1.3rem 1.5rem;
   background-color: $primary-third;
-  width: 308px;
-  min-height: 260px;
+  width: 30.8rem;
+  min-height: 26rem;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 
 .book-info {
-  width: 123px;
-  border-radius: 5px;
-  margin-right: 25px;
+  width: 12.3rem;
+  border-radius: 0.5rem;
+  margin-right: 2.5rem;
 }
 
 .cover {
   @extend %itemsCenter;
   justify-items: center;
-  width: 123px;
-  height: 170px;
+  width: 12.3rem;
+  height: 17rem;
 
   &__img {
     width: 100%;
-    border-radius: 5px;
-    margin-bottom: 12px;
+    border-radius: 0.5rem;
+    margin-bottom: 1.2rem;
   }
 }
 
 .title {
-  font-size: 12px;
-  margin-bottom: 5px;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .author {
-  font-size: 10px;
-  margin-bottom: 5px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .rating {
-  font-size: 10px;
+  font-size: 1rem;
 
   .rating__total {
     color: $secondary-fifth;
@@ -54,7 +54,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 11px;
+  padding-bottom: 1.1rem;
   height: 100%;
 }
 
@@ -62,58 +62,58 @@
   margin-left: auto;
   @extend %itemsCenter;
   justify-content: center;
-  width: 25px;
-  height: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
 
   &__img {
-    width: 30px;
-    height: 30px;
+    width: 3rem;
+    height: 3rem;
   }
 }
 
 .terms {
-  padding: 0 5px 5px 5px;
+  padding: 0 0.5rem 0.5rem 0.5rem;
 }
 
 .borrowed,
 .submission {
-  margin-bottom: 12px;
+  margin-bottom: 1.2rem;
 
   &__title {
-    font-size: 15px;
-    margin-bottom: 10px;
-    line-height: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 2rem;
   }
 
   &__desc {
-    font-size: 10px;
+    font-size: 1rem;
     color: $secondary-fifth;
-    line-height: 13px;
+    line-height: 1.3rem;
   }
 }
 
 .links {
   .ebook {
-    width: 125px;
-    height: 40px;
+    width: 12.5rem;
+    height: 4rem;
     background-color: $secondary-third;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     @extend %itemsCenter;
     justify-content: center;
     font-family: 'Inter Semi Bold';
-    font-size: 15px;
+    font-size: 1.5rem;
     color: $primary-third;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
   }
 
   .read {
     @extend %itemsCenter;
     justify-content: center;
-    width: 125px;
-    height: 40px;
+    width: 12.5rem;
+    height: 4rem;
     border: 1px solid $primary-first;
-    font-size: 15px;
+    font-size: 1.5rem;
     color: $primary-first;
-    border-radius: 5px;
+    border-radius: 0.5rem;
   }
 }

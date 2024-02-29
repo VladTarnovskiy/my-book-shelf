@@ -3,21 +3,21 @@
 @import 'placeholders';
 
 .wrapper {
-  border-radius: 10px;
-  margin: 45px 36px;
+  border-radius: 1rem;
+  margin: 4.5rem 3.6rem;
   display: flex;
   background-color: $secondary-fourth;
 
   @include desktop {
-    margin: 45px 36px;
+    margin: 4.5rem 3.6rem;
   }
 
   @include small-desktop {
-    margin: 35px 20px;
+    margin: 3.5rem 2rem;
   }
 
   @include tablet {
-    margin: 15px 10px;
+    margin: 1.5rem 1rem;
   }
 }
 
@@ -26,7 +26,7 @@
 }
 
 .header {
-  padding: 38px 48px 25px 46px;
+  padding: 3.8rem 4.8rem 2.5rem 4.6rem;
   @extend %itemsCenter;
   justify-content: space-between;
   width: 100%;
@@ -38,12 +38,12 @@
 }
 
 .sidebar {
-  min-width: 306px;
-  padding-left: 68px;
-  padding-top: 38px;
+  min-width: 30.6rem;
+  padding-left: 6.8rem;
+  padding-top: 3.8rem;
   display: flex;
   flex-direction: column;
-  border-radius: 10px 0px 0px 10px;
+  border-radius: 1rem 0 0 1rem;
   justify-content: flex-start;
   align-items: flex-start;
   background-color: $primary-third;
@@ -51,7 +51,7 @@
 }
 
 .logo {
-  width: 120px;
-  height: 74px;
-  margin-bottom: 100px;
+  width: 12rem;
+  height: 7.4rem;
+  margin-bottom: 10rem;
 }

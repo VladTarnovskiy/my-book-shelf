@@ -2,15 +2,15 @@
 @import 'variables';
 
 .details {
-  padding: 93px 45px;
+  padding: 9.3rem 4.5rem;
 }
 
 .back-but {
   @extend %itemsCenter;
   justify-content: flex-start;
-  height: 22px;
-  margin-bottom: 22px;
-  width: 151px;
+  height: 2.2rem;
+  margin-bottom: 2.2rem;
+  width: 15.1rem;
   @extend %skeletonBackgroundAnimation;
 }
 
@@ -26,20 +26,20 @@
 }
 
 .cover {
-  width: 278px;
-  height: 445px;
-  margin-right: 71px;
-  padding: 24px 34px;
+  width: 27.8rem;
+  height: 44.5rem;
+  margin-right: 7.1rem;
+  padding: 2.4rem 3.4rem;
   background-color: $primary-third;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 1rem;
 
   &__img {
-    width: 209px;
-    height: 277px;
-    margin-bottom: 27px;
+    width: 20.9rem;
+    height: 27.7rem;
+    margin-bottom: 2.7rem;
     @extend %skeletonBackgroundAnimation;
   }
 }
@@ -47,8 +47,8 @@
 .options {
   @extend %itemsCenter;
   justify-content: space-between;
-  width: 193px;
-  padding: 6px;
+  width: 19.3rem;
+  padding: 0.6rem;
 
   .option {
     display: flex;
@@ -56,15 +56,15 @@
     align-items: center;
 
     &__icon {
-      width: 25px;
-      height: 25px;
-      margin-bottom: 7px;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 0.7rem;
       @extend %skeletonBackgroundAnimation;
     }
 
     &__title {
-      width: 31px;
-      height: 12px;
+      width: 3.1rem;
+      height: 1.2rem;
       @extend %skeletonBackgroundAnimation;
     }
   }
@@ -77,50 +77,50 @@
 }
 
 .title {
-  height: 40px;
-  width: 380px;
-  margin-bottom: 8px;
+  height: 4rem;
+  width: 38rem;
+  margin-bottom: 0.8rem;
   @extend %skeletonBackgroundAnimation;
 }
 
 .author {
-  margin-bottom: 18px;
-  width: 140px;
-  height: 15px;
+  margin-bottom: 1.8rem;
+  width: 14rem;
+  height: 1.5rem;
   @extend %skeletonBackgroundAnimation;
 }
 
 .edition {
-  width: 120px;
-  height: 14px;
-  margin-bottom: 42px;
+  width: 12rem;
+  height: 1.4rem;
+  margin-bottom: 4.2rem;
   @extend %skeletonBackgroundAnimation;
 }
 
 .rating {
-  margin-bottom: 35px;
+  margin-bottom: 3.5rem;
   @extend %itemsCenter;
   @extend %skeletonBackgroundAnimation;
   justify-content: flex-start;
-  width: 173px;
-  height: 16px;
+  width: 17.3rem;
+  height: 1.6rem;
 }
 
 .availability {
-  margin-bottom: 44px;
+  margin-bottom: 4.4rem;
 
   &__title {
-    width: 100px;
-    height: 16px;
-    margin-bottom: 11px;
+    width: 10rem;
+    height: 1.6rem;
+    margin-bottom: 1.1rem;
     @extend %skeletonBackgroundAnimation;
   }
 }
 
 .availability-item {
-  width: 160px;
-  height: 20px;
-  margin-bottom: 8px;
+  width: 16rem;
+  height: 2rem;
+  margin-bottom: 0.8rem;
   @extend %skeletonBackgroundAnimation;
 }
 
@@ -131,10 +131,10 @@
 
   &__read,
   &__listen {
-    width: 209px;
-    height: 61px;
-    border-radius: 5px;
-    margin-right: 38px;
+    width: 20.9rem;
+    height: 6.1rem;
+    border-radius: 0.5rem;
+    margin-right: 3.8rem;
     @extend %skeletonBackgroundAnimation;
   }
 }

@@ -2,13 +2,13 @@
 @import 'variables';
 
 .book {
-  padding: 13px 25px 13px 22px;
+  padding: 1.3rem 2.5rem 1.3rem 2.2rem;
   background-color: $primary-third;
   @extend %itemsCenter;
   justify-content: flex-start;
-  border-radius: 10px;
-  min-height: 125px;
-  margin-bottom: 23px;
+  border-radius: 1rem;
+  min-height: 12.5rem;
+  margin-bottom: 2.3rem;
 
   &:hover {
     background-color: $secondary-fourth;
@@ -16,71 +16,71 @@
 }
 
 .cover {
-  width: 75px;
-  height: 99px;
-  margin-right: 47px;
+  width: 7.5rem;
+  height: 9.9rem;
+  margin-right: 4.7rem;
 
   &__img {
-    width: 75px;
-    height: 99px;
+    width: 7.5rem;
+    height: 9.9rem;
   }
 }
 
 .description {
-  max-width: 490px;
+  max-width: 49rem;
   width: 100%;
 
   &__title {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
 
   &__author {
-    font-size: 15px;
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   &__edition {
-    font-size: 10px;
+    font-size: 1rem;
   }
 }
 
 .category {
-  max-width: 480px;
+  max-width: 48rem;
   width: 100%;
   margin-right: auto;
 }
 
 .rating {
-  margin-right: 72px;
-  min-width: 60px;
+  margin-right: 7.2rem;
+  min-width: 6rem;
 
   &__total {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: $secondary-fifth;
   }
 }
 
 .favorite {
-  width: 30px;
-  height: 30px;
-  margin-right: 67px;
+  width: 3rem;
+  height: 3rem;
+  margin-right: 6.7rem;
 
   &__but {
     @extend %itemsCenter;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 3rem;
+    height: 3rem;
   }
 }
 
 .preview-but {
   @extend %itemsCenter;
   justify-content: center;
-  min-width: 85px;
-  height: 30px;
+  min-width: 8.5rem;
+  height: 3rem;
   border: 1px solid $primary-first;
-  font-size: 15px;
+  font-size: 1.5rem;
   color: $primary-first;
-  border-radius: 5px;
-  padding: 6px 12px;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
 }

@@ -3,14 +3,14 @@
 
 .home {
   color: $primary-second;
-  margin-left: 28px;
-  margin-top: 22px;
+  margin-left: 2.8rem;
+  margin-top: 2.2rem;
 }
 
 .greeting {
   font-family: 'Inter Semi Bold';
-  font-size: 35px;
-  margin-bottom: 24px;
+  font-size: 3.5rem;
+  margin-bottom: 2.4rem;
 }
 
 .recommended,
@@ -18,12 +18,12 @@
   &__description {
     @extend %itemsCenter;
     justify-content: space-between;
-    margin-right: 48px;
+    margin-right: 4.8rem;
   }
 
   &__title {
-    font-size: 25px;
-    margin-bottom: 24px;
+    font-size: 2.5rem;
+    margin-bottom: 2.4rem;
   }
 
   &__showAll {
@@ -36,8 +36,8 @@
 
   &__wrapper {
     position: relative;
-    height: 273px;
-    margin-bottom: 53px;
+    height: 27.3rem;
+    margin-bottom: 5.3rem;
   }
 
   &__books {
@@ -46,8 +46,8 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    column-gap: 39px;
-    margin-bottom: 53px;
+    column-gap: 3.9rem;
+    margin-bottom: 5.3rem;
     overflow: hidden;
     overflow-x: auto;
   }
