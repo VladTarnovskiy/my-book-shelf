@@ -100,3 +100,13 @@ button:hover {
     border-radius: 0.8rem;
   }
 }
+
+//buttons
+
+.disabled {
+  opacity: 0.6;
+
+  &:hover {
+    cursor: default;
+  }
+}

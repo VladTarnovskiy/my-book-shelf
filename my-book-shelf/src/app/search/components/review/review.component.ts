@@ -55,12 +55,14 @@ export class ReviewComponent implements OnInit {
   }
 
   sendReview(): void {
-    const review = {
-      review: this.reviewText,
-      bookId: this.bookId,
-    };
-    this.reviewText = '';
-    this.reviewService.addReview(review);
+    if (this.reviewText !== '') {
+      const review = {
+        review: this.reviewText,
+        bookId: this.bookId,
+      };
+      this.reviewText = '';
+      this.reviewService.addReview(review);
+    }
   }
 
   removeReview(reviewId: string) {

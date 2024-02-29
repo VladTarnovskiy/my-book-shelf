@@ -25,11 +25,13 @@ export class ProfileComponent {
   ) {}
 
   changeUserName(): void {
-    this.userService.changeUsername(this.userName);
+    if (this.userName !== '') {
+      this.userService.changeUsername(this.userName);
+    }
   }
 
   changePhoto(): void {
-    if (this.file) {
+    if (this.file !== null) {
       this.userService.changeUserPhoto(this.file);
     }
   }

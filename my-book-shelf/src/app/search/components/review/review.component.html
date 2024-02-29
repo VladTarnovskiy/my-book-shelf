@@ -8,7 +8,11 @@
       [(ngModel)]="reviewText"
       (keyup.enter)="sendReview()"
     />
-    <button class="review__send" (click)="sendReview()">
+    <button
+      class="review__send"
+      (click)="sendReview()"
+      [ngClass]="{ disabled: reviewText === '' }"
+    >
       <img src="assets/send.svg" alt="Send" class="review__send-img" />
     </button>
   </div>

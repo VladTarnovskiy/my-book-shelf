@@ -11,7 +11,11 @@
         class="profile-item__input"
         (change)="onSetPhoto($event)"
       />
-      <button class="profile-item__but" (click)="changePhoto()">
+      <button
+        class="profile-item__but"
+        (click)="changePhoto()"
+        [ngClass]="{ disabled: file === null }"
+      >
         {{ 'PROFILE_PAGE.BUTTON' | translate }}
       </button>
     </div>
@@ -25,7 +29,11 @@
         [(ngModel)]="userName"
         [value]="userName$ | async"
       />
-      <button class="profile-item__but" (click)="changeUserName()">
+      <button
+        class="profile-item__but"
+        (click)="changeUserName()"
+        [ngClass]="{ disabled: userName === '' }"
+      >
         {{ 'PROFILE_PAGE.BUTTON' | translate }}
       </button>
     </div>
