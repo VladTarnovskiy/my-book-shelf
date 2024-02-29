@@ -65,7 +65,7 @@ export class UploadComponent {
       this.toasterService.show({
         type: 'success',
         title: 'My book',
-        body: 'The book was created!',
+        message: 'The book was created!',
       });
       this.uploadForm.reset();
     }
