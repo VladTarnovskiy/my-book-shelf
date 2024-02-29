@@ -1,0 +1,67 @@
+@import 'placeholders';
+@import 'variables';
+
+.container {
+  padding-top: 75px;
+}
+
+.verification {
+  width: 565px;
+  min-height: 917px;
+  padding: 63px 71px 87px 71px;
+  margin: auto;
+  @extend %shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 20px;
+  background-color: $primary-third;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 62px;
+
+  &__icon {
+    width: 150px;
+    height: 92px;
+    margin-bottom: 55px;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__info {
+    font-size: 15px;
+    color: $secondary-fifth;
+  }
+}
+
+.message {
+  font-size: 18px;
+  font-family: 'Inter Semi Bold';
+  color: $primary-second;
+  margin-bottom: 102px;
+}
+
+.success-icon {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto;
+  margin-bottom: 81px;
+}
+
+.button-login {
+  height: 48px;
+  width: 100%;
+  background-color: $primary-first;
+  font-family: 'Inter Semi Bold';
+  color: $primary-third;
+  border-radius: 8px;
+  margin-bottom: 39px;
+}

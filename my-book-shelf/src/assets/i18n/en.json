@@ -173,6 +173,11 @@
     "DESCRIPTION": "Check your E-mail for link",
     "MESSAGE": "Please, follow the link to login"
   },
+  "VERIFICATION_SUC": {
+    "TITLE": "Verification",
+    "DESCRIPTION": "Thank you",
+    "MESSAGE": "You are Verified"
+  },
   "FOOTER": {
     "About": "About",
     "Support": "Support",

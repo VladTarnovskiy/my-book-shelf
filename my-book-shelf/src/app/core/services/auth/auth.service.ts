@@ -59,7 +59,7 @@ export class AuthService {
         if (user.user.emailVerified) {
           clearInterval(interval);
           this.isLoggedIn.next(true);
-          this.router.navigate(['/']);
+          this.router.navigate(['auth/verification/success']);
         }
         await user.user.reload();
       }, 2000);
