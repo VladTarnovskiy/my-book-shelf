@@ -2,26 +2,26 @@
 @import 'variables';
 
 .search {
-  padding-right: 35px;
-  padding-left: 45px;
-  margin-top: 10px;
+  padding-right: 3.5rem;
+  padding-left: 4.5rem;
+  margin-top: 1rem;
 }
 
 .titles {
   @extend %itemsCenter;
   justify-content: flex-start;
   font-family: 'Inter Medium';
-  margin-bottom: 23px;
-  padding-right: 25px;
+  margin-bottom: 2.3rem;
+  padding-right: 2.5rem;
 
   &__title {
-    max-width: 621px;
+    max-width: 62.1rem;
     width: 100%;
   }
 
   &__rating {
-    min-width: 100px;
-    margin-right: 78px;
+    min-width: 10rem;
+    margin-right: 7.8rem;
   }
 
   &__category {
@@ -33,17 +33,17 @@
   width: 100%;
   @extend %itemsCenter;
   justify-content: center;
-  margin-bottom: 23px;
+  margin-bottom: 2.3rem;
 
   &__button {
-    width: 209px;
-    height: 61px;
-    border-radius: 5px;
-    font-size: 20px;
+    width: 20.9rem;
+    height: 6.1rem;
+    border-radius: 0.5rem;
+    font-size: 2rem;
     background: $primary-first;
     color: $primary-third;
     text-transform: uppercase;
     font-family: 'Inter Semi Bold';
-    margin-right: 38px;
+    margin-right: 3.8rem;
   }
 }

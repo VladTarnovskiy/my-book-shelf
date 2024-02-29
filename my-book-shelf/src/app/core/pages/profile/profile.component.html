@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="title">{{ 'PROFILE_PAGE.TITLE' | translate }}</div>
+  <div class="content">
+    <div class="profile-item">
+      <div class="profile-item__title">
+        {{ 'PROFILE_PAGE.PHOTO' | translate }}:
+      </div>
+      <input
+        type="file"
+        accept="image/png, image/gif, image/jpeg, .svg"
+        class="profile-item__input"
+        (change)="onSetPhoto($event)"
+      />
+      <button
+        class="profile-item__but"
+        (click)="changePhoto()"
+        [ngClass]="{ disabled: file === null }"
+      >
+        {{ 'PROFILE_PAGE.BUTTON' | translate }}
+      </button>
+    </div>
+    <div class="profile-item">
+      <div class="profile-item__title">
+        {{ 'PROFILE_PAGE.NAME' | translate }}:
+      </div>
+      <input type="text" class="profile-item__input" [(ngModel)]="userName" />
+      <button
+        class="profile-item__but"
+        (click)="changeUserName()"
+        [ngClass]="{ disabled: userName === '' }"
+      >
+        {{ 'PROFILE_PAGE.BUTTON' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <div class="home">
   <app-quote />
-  <p class="greeting">{{ 'HOME.GREETING.MORNING' | translate }}</p>
+  <p class="greeting">{{ 'HOME.GREETING.' + getTimeOfDay() | translate }}</p>
   <section class="recommended">
     <h3 class="recommended__description">
       <h3 class="recommended__title">{{ 'HOME.RECOMMENDED' | translate }}</h3>

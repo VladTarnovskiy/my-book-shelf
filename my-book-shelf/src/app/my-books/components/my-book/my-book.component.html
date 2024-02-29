@@ -16,13 +16,13 @@
     </button>
     <div class="terms">
       <div class="borrowed">
-        <p class="borrowed__title">{{ 'MY_BOOK.BORROWED' | translate }}</p>
+        <p class="borrowed__title">{{ 'COMMON.BORROWED' | translate }}</p>
         <p class="borrowed__desc">
           {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
         </p>
       </div>
       <div class="submission">
-        <p class="submission__title">{{ 'MY_BOOK.SUBMISSION' | translate }}</p>
+        <p class="submission__title">{{ 'COMMON.SUBMISSION' | translate }}</p>
         <p class="submission__desc">
           {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
         </p>
@@ -40,7 +40,7 @@
   <app-modal (closeModal)="closeModal($event)">
     <div class="modal-content">
       <div class="modal-title">
-        {{ 'MODAL.QUESTION' | translate }}
+        {{ 'MODAL.MY_BOOK.QUESTION' | translate }}
       </div>
       <div class="modal-buttons">
         <button class="modal-buttons__item" (click)="removeFromMyBook()">

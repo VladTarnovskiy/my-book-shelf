@@ -2,23 +2,23 @@
 @import 'variables';
 
 .quote {
-  border-radius: 10px;
-  padding: 15px 15px 25px 44px;
+  border-radius: 1rem;
+  padding: 1.5rem 1.5rem 2.5rem 4.4rem;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     linear-gradient(140.88deg, #eb5231 -29.15%, #571fcf 151.64%);
   color: $primary-third;
-  max-width: 811px;
-  margin-bottom: 42px;
+  max-width: 81.1rem;
+  margin-bottom: 4.2rem;
 }
 
 .title {
   font-family: 'Inter Medium';
-  font-size: 25px;
-  margin-bottom: 24px;
+  font-size: 2.5rem;
+  margin-bottom: 2.4rem;
 }
 
 .content {
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 .description {
@@ -32,10 +32,10 @@
 
   &__but {
     border: 1px solid $primary-third;
-    margin-right: 10px;
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.5rem;
 
     &:hover {
       cursor: pointer;

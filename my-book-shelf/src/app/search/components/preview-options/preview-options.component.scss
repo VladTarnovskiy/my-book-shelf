@@ -4,8 +4,8 @@
 .options {
   @extend %itemsCenter;
   justify-content: space-between;
-  width: 193px;
-  padding: 6px;
+  width: 19.3rem;
+  padding: 0.6rem;
 
   .option {
     display: flex;
@@ -13,14 +13,14 @@
     align-items: center;
 
     &__icon {
-      width: 25px;
-      height: 25px;
-      margin-bottom: 7px;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 0.7rem;
     }
 
     &__title {
       font-family: 'Inter Bold';
-      font-size: 11px;
+      font-size: 1.1rem;
     }
   }
 }

@@ -2,20 +2,20 @@
 @import 'variables';
 
 .container {
-  padding-top: 75px;
+  padding-top: 7.5rem;
 }
 
 .registration {
-  width: 565px;
-  min-height: 917px;
-  padding: 63px 71px 87px 71px;
+  width: 56.5rem;
+  min-height: 91.7rem;
+  padding: 6.3rem 7.1rem 8.7rem 7.1rem;
   margin: auto;
   @extend %shadow;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 2rem;
   background-color: $primary-third;
 }
 
@@ -24,20 +24,20 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 31px;
+  margin-bottom: 3.1rem;
 
   &__icon {
-    width: 150px;
-    height: 92px;
-    margin-bottom: 55px;
+    width: 15rem;
+    height: 9.2rem;
+    margin-bottom: 5.5rem;
   }
 
   &__title {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
 
   &__info {
-    font-size: 15px;
+    font-size: 1.5rem;
     color: $secondary-fifth;
   }
 }
@@ -47,22 +47,22 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 
 .form-item {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 
   &__title {
     font-family: 'Inter Semi Bold';
-    margin-bottom: 8px;
+    margin-bottom: 0.8rem;
   }
 
   &__input {
-    width: 422px;
-    height: 56px;
-    border-radius: 8px;
-    padding: 16px;
+    width: 42.2rem;
+    height: 5.6rem;
+    border-radius: 0.8rem;
+    padding: 1.6rem;
     border: 1px solid $primary-sixth;
   }
 }
@@ -73,16 +73,16 @@
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  margin-top: 18px;
+  margin-top: 1.8rem;
 
   &__reg {
-    height: 48px;
+    height: 4.8rem;
     width: 100%;
     background-color: $primary-first;
     font-family: 'Inter Semi Bold';
     color: $primary-third;
-    border-radius: 8px;
-    margin-bottom: 38px;
+    border-radius: 0.8rem;
+    margin-bottom: 3.8rem;
   }
 }
 

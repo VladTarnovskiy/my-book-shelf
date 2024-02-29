@@ -1,0 +1,41 @@
+<div class="review-item">
+  @if (userPhoto$ | async; as userPhoto) {
+    <img [src]="userPhoto" alt="User photo" class="review-item__photo" />
+  } @else {
+    <img
+      src="assets/header/profile.svg"
+      alt="User photo"
+      class="review-item__photo"
+    />
+  }
+  <div class="review-item__description">
+    <div class="review-item__header">
+      <p class="username">{{ username$ | async }}</p>
+      @if (userId === reviewData.userId) {
+        <button class="review-item__remove" (click)="openModal()">
+          <img src="assets/close.svg" alt="Send" />
+        </button>
+      }
+    </div>
+    <div class="review-item__content">
+      {{ reviewData.review }}
+    </div>
+  </div>
+</div>
+@if (isRemoveModal) {
+  <app-modal (closeModal)="closeModal($event)">
+    <div class="modal-content">
+      <div class="modal-title">
+        {{ 'MODAL.REVIEW.QUESTION' | translate }}
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-buttons__item" (click)="removeFromReview()">
+          {{ 'MODAL.BTN.REMOVE' | translate }}
+        </button>
+        <button class="modal-buttons__item" (click)="closeModal(false)">
+          {{ 'MODAL.BTN.CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+  </app-modal>
+}

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="title">{{ 'REVIEW.TITLE' | translate }}:</div>
+  <div class="review">
+    <input
+      type="text"
+      class="review__input"
+      [placeholder]="'REVIEW.PLACEHOLDER' | translate"
+      [(ngModel)]="reviewText"
+      (keyup.enter)="sendReview()"
+    />
+    <button
+      class="review__send"
+      (click)="sendReview()"
+      [ngClass]="{ disabled: reviewText === '' }"
+    >
+      <img src="assets/send.svg" alt="Send" class="review__send-img" />
+    </button>
+  </div>
+  @for (review of reviews$ | async; track review.id) {
+    <app-review-item
+      [reviewData]="review"
+      [userId]="userId$ | async"
+      (removeReview)="removeReview($event)"
+    />
+  }
+</div>

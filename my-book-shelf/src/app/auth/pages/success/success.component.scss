@@ -1,0 +1,67 @@
+@import 'placeholders';
+@import 'variables';
+
+.container {
+  padding-top: 7.5rem;
+}
+
+.verification {
+  width: 56.5rem;
+  min-height: 91.7rem;
+  padding: 6.3rem 7.1rem 8.7rem 7.1rem;
+  margin: auto;
+  @extend %shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 2rem;
+  background-color: $primary-third;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 6.2rem;
+
+  &__icon {
+    width: 15rem;
+    height: 9.2rem;
+    margin-bottom: 5.5rem;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+
+  &__info {
+    font-size: 1.5rem;
+    color: $secondary-fifth;
+  }
+}
+
+.message {
+  font-size: 1.8rem;
+  font-family: 'Inter Semi Bold';
+  color: $primary-second;
+  margin-bottom: 10.2rem;
+}
+
+.success-icon {
+  width: 14rem;
+  height: 14rem;
+  margin: 0 auto;
+  margin-bottom: 8.1rem;
+}
+
+.button-login {
+  height: 4.8rem;
+  width: 100%;
+  background-color: $primary-first;
+  font-family: 'Inter Semi Bold';
+  color: $primary-third;
+  border-radius: 0.8rem;
+  margin-bottom: 3.9rem;
+}

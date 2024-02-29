@@ -8,11 +8,12 @@ import {
 import { IFavoriteBook } from '../../models/favoriteBook';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorite-book',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

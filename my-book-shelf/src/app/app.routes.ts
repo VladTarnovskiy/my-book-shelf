@@ -22,6 +22,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'profile',
+        loadComponent: () =>
+          import('./core/pages/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
+      },
+      {
         path: 'recommended',
         loadComponent: () =>
           import('./home/pages/recommended/recommended.component').then(
@@ -109,10 +116,22 @@ export const routes: Routes = [
       },
       {
         path: 'verification',
-        loadComponent: () =>
-          import('./auth/pages/verification/verification.component').then(
-            (m) => m.VerificationComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./auth/pages/verification/verification.component').then(
+                (m) => m.VerificationComponent
+              ),
+          },
+          {
+            path: 'success',
+            loadComponent: () =>
+              import('./auth/pages/success/success.component').then(
+                (m) => m.SuccessComponent
+              ),
+          },
+        ],
       },
     ],
   },

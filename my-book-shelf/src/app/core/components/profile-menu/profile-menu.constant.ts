@@ -1,5 +1,5 @@
 export const profileList = [
-  { link: '/', title: 'Profile' },
+  { link: '/profile', title: 'Profile' },
   { link: '/favorite', title: 'Favorite' },
   {
     link: '/my-books',

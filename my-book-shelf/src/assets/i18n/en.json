@@ -1,7 +1,10 @@
 {
   "HOME": {
     "GREETING": {
-      "MORNING": "Good morning"
+      "MORNING": "Good morning",
+      "AFTERNOON": "Good afternoon",
+      "EVENING": "Good evening",
+      "NIGHT": "Good night"
     },
     "RECOMMENDED": "Recommended for You",
     "RECENT": "Recent Readings",
@@ -18,10 +21,12 @@
   },
   "COMMON": {
     "EMPTY": "Empty list of books",
+    "BORROWED": "Borrowed on",
+    "SUBMISSION": "Submission Due",
     "BTN": {
       "BACK": "Back to results",
       "READ": "Read",
-      "EBOOK": "E-BOOk"
+      "EBOOK": "E-BOOK"
     }
   },
   "SEARCH": {
@@ -50,24 +55,25 @@
   "MY_BOOKS": {
     "TITLE": "My Books"
   },
-  "MY_BOOK": {
-    "TITLE": "My Books",
-    "BORROWED": "Borrowed on",
-    "SUBMISSION": "Submission Due"
-  },
+  "FAVORITE": { "TITLE": "Your Favorite" },
   "READER": {
     "INTRODUCTION": "INTRODUCTION",
     "NOT_AVAILABLE": "Book not available.",
     "NOT_FOUND": "Book not found."
   },
   "MODAL": {
-    "QUESTION": "Are you sure that you want to delete this book?",
     "BTN": {
       "REMOVE": "Remove",
       "CANCEL": "Cancel"
     },
     "NOT_AVAILABLE": "Book not available.",
-    "NOT_FOUND": "Book not found."
+    "NOT_FOUND": "Book not found.",
+    "MY_BOOK": {
+      "QUESTION": "Are you sure that you want to delete this book?"
+    },
+    "REVIEW": {
+      "QUESTION": "Are you sure that you want to delete this review?"
+    }
   },
   "UPLOAD": {
     "TITLE": "Upload Your Book",
@@ -165,6 +171,11 @@
     "DESCRIPTION": "Check your E-mail for link",
     "MESSAGE": "Please, follow the link to login"
   },
+  "VERIFICATION_SUC": {
+    "TITLE": "Verification",
+    "DESCRIPTION": "Thank you",
+    "MESSAGE": "You are Verified"
+  },
   "FOOTER": {
     "About": "About",
     "Support": "Support",
@@ -187,5 +198,15 @@
     "Favorite": "Favorite",
     "My Books": "My Books",
     "Logout": "Logout"
+  },
+  "REVIEW": {
+    "TITLE": "Reviews",
+    "PLACEHOLDER": "Review"
+  },
+  "PROFILE_PAGE": {
+    "TITLE": "Profile",
+    "PHOTO": "Profile photo",
+    "NAME": "Username",
+    "BUTTON": "Save"
   }
 }

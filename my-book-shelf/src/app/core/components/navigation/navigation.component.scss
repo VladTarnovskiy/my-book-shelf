@@ -2,23 +2,23 @@
 @import 'variables';
 
 .nav {
-  margin-bottom: 383px;
+  margin-bottom: 38.3rem;
 }
 
 .item {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 37px;
+  margin-bottom: 3.7rem;
 
   &:last-child {
     margin-bottom: 0;
   }
 
   &__img {
-    width: 23px;
-    height: 23px;
-    margin-right: 14px;
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-right: 1.4rem;
   }
 
   &:hover {

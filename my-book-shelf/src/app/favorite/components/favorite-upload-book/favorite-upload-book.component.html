@@ -16,25 +16,25 @@
     </button>
     <div class="terms">
       <div class="borrowed">
-        <p class="borrowed__title">Borrowed on</p>
+        <p class="borrowed__title">{{ 'COMMON.BORROWED' | translate }}</p>
         <p class="borrowed__desc">
           {{ uploadBookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
         </p>
       </div>
       <div class="submission">
-        <p class="submission__title">Submission Due</p>
+        <p class="submission__title">{{ 'COMMON.SUBMISSION' | translate }}</p>
         <p class="submission__desc">
           {{ uploadBookData.submissionDate | date: 'dd MMM yyyy' }}
         </p>
       </div>
     </div>
     <div class="links">
-      <button class="ebook">E-BOOK</button>
+      <button class="ebook">{{ 'COMMON.BTN.EBOOK' | translate }}</button>
       <button
         class="read"
         [routerLink]="['/my-books/reader', uploadBookData.id]"
       >
-        Read
+        {{ 'COMMON.BTN.READ' | translate }}
       </button>
     </div>
   </div>

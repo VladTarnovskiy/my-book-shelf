@@ -6,15 +6,15 @@
   @extend %shadow;
   position: relative;
   justify-content: center;
-  height: 49px;
-  border-radius: 40px;
+  height: 4.9rem;
+  border-radius: 4rem;
   background-color: $primary-third;
 }
 
 .input {
   height: 100%;
-  width: 362px;
-  padding: 12px 21px;
+  width: 36.2rem;
+  padding: 1.2rem 2.1rem;
   color: $primary-fourth;
 }
 
@@ -23,17 +23,17 @@
   @extend %itemsCenter;
   justify-content: center;
   height: 100%;
-  border-radius: 40px 0 0 40px;
+  border-radius: 4rem 0 0 4rem;
   background-color: $secondary-fourth;
 
   &__title {
-    min-width: 27px;
-    margin-left: 37px;
-    margin-right: 10px;
+    min-width: 2.7rem;
+    margin-left: 3.7rem;
+    margin-right: 1rem;
   }
 
   &__img {
-    margin-right: 11px;
+    margin-right: 1.1rem;
     @extend %transition;
 
     &.active {
@@ -48,10 +48,10 @@
   left: 0;
   bottom: 0;
   transform: translateY(105%);
-  width: 170px;
-  height: 272px;
-  border-radius: 10px;
-  line-height: 26px;
+  width: 17rem;
+  height: 27.2rem;
+  border-radius: 1rem;
+  line-height: 2.6rem;
   background-color: $primary-third;
   opacity: 0;
   text-align: start;
@@ -65,7 +65,7 @@
   }
 
   &__item {
-    padding: 12px 9px;
+    padding: 1.2rem 0.9rem;
 
     &:hover {
       background-color: $secondary-fourth;
@@ -74,30 +74,30 @@
 }
 
 .searchBut {
-  width: 29px;
-  height: 33px;
-  padding-right: 9px;
+  width: 2.9rem;
+  height: 3.3rem;
+  padding-right: 0.9rem;
   border-right: 1px solid $secondary-fourth;
   @extend %itemsCenter;
   justify-content: center;
 
   &__img {
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
 .scanner {
   height: 100%;
-  width: 48px;
-  border-radius: 0 40px 40px 0;
-  padding: 0 17px 0 11px;
+  width: 4.8rem;
+  border-radius: 0 4rem 4rem 0;
+  padding: 0 1.7rem 0 1.1rem;
   @extend %itemsCenter;
   justify-content: center;
 
   &__img {
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -109,13 +109,13 @@
   bottom: 0;
   transform: translateY(105%);
   background-color: $primary-third;
-  border-radius: 8px;
-  padding: 8px 0;
+  border-radius: 0.8rem;
+  padding: 0.8rem 0;
   z-index: 2;
 }
 
 .elastic-item {
-  padding: 4px 5px;
+  padding: 0.4rem 0.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

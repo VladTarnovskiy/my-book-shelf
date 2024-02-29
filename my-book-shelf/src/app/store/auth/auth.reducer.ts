@@ -3,10 +3,14 @@ import * as AUTH_ACTIONS from './auth.action';
 
 export interface AuthState {
   userName: string;
+  userId: string | null;
+  photo: string | null;
 }
 
 export const initialState: AuthState = {
   userName: 'Unknown',
+  userId: null,
+  photo: null,
 };
 
 export const authReducer = createReducer(
@@ -16,6 +20,20 @@ export const authReducer = createReducer(
     (state, { userName }): AuthState => ({
       ...state,
       userName,
+    })
+  ),
+  on(
+    AUTH_ACTIONS.AddUserId,
+    (state, { userId }): AuthState => ({
+      ...state,
+      userId,
+    })
+  ),
+  on(
+    AUTH_ACTIONS.AddUserPhoto,
+    (state, { photo }): AuthState => ({
+      ...state,
+      photo,
     })
   )
 );

@@ -27,11 +27,6 @@ export const FetchBooksFailed = createAction(
   props<{ error: string }>()
 );
 
-export const AddRecentBook = createAction(
-  `${actionSource} Add Recent Book`,
-  props<{ recentBook: IBook }>()
-);
-
 export const SetFilterType = createAction(
   `${actionSource} Filter `,
   props<{ filterType: FilterTypesKeys }>()

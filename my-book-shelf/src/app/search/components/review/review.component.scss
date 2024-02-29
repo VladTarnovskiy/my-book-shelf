@@ -1,0 +1,27 @@
+@import 'placeholders';
+@import 'variables';
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.review {
+  @extend %itemsCenter;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  &__input {
+    padding: 1rem 1.2rem;
+    height: 4rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    @extend %shadow;
+  }
+
+  &__send {
+    img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+}
