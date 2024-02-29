@@ -15,6 +15,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
 import { GoBackDirective } from '../../../core/directives/go-back/go-back.directive';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReviewComponent } from '../../components/review/review.component';
+import { RecentService } from '../../../core/services/recent/recent.service';
 
 @Component({
   selector: 'app-details',
@@ -39,7 +40,10 @@ export class PreviewComponent implements OnInit {
   isLoading$: Observable<boolean> = this.booksFacade.previewBookLoader$;
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  constructor(private booksFacade: BooksFacade) {}
+  constructor(
+    private booksFacade: BooksFacade,
+    private recentService: RecentService
+  ) {}
 
   ngOnInit(): void {
     this.booksFacade.previewBookId$
@@ -51,7 +55,7 @@ export class PreviewComponent implements OnInit {
       });
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
       if (book) {
-        this.booksFacade.addRecentBook(book);
+        this.recentService.addRecentBook(book);
       }
     });
   }

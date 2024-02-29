@@ -7,7 +7,6 @@ import {
   selectBooksLoading,
   selectPreviewBook,
   selectPreviewBookLoader,
-  selectRecentBooks,
   selectSearchOptions,
   selectSearchPage,
   selectSearchTotalItems,
@@ -17,7 +16,6 @@ import {
   FilterTypesKeys,
   CategoryFilterKeys,
 } from '../../core/interfaces/filters';
-import { IBook } from '../../shared/models/book.model';
 import * as BOOKS_ACTIONS from './books.action';
 import { IBooksSearchParams } from '../../core/interfaces/bookParams';
 
@@ -26,7 +24,6 @@ import { IBooksSearchParams } from '../../core/interfaces/bookParams';
 })
 export class BooksFacade {
   books$ = this.store.select(selectBooks);
-  recentBooks$ = this.store.select(selectRecentBooks);
   booksLoading$ = this.store.select(selectBooksLoading);
   searchValue$ = this.store.select(selectSearchValue);
   searchPage$ = this.store.select(selectSearchPage);
@@ -53,10 +50,6 @@ export class BooksFacade {
         page,
       })
     );
-  }
-
-  addRecentBook(recentBook: IBook) {
-    this.store.dispatch(BOOKS_ACTIONS.AddRecentBook({ recentBook }));
   }
 
   setFilterType(filterType: FilterTypesKeys) {

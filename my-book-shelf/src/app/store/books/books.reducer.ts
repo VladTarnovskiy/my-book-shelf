@@ -8,7 +8,6 @@ import {
 
 export interface BooksState {
   books: IBook[];
-  recentBooks: IBook[];
   totalItems: number;
   page: number;
   previewBook: IBook | null;
@@ -23,7 +22,6 @@ export interface BooksState {
 
 export const initialState: BooksState = {
   books: [],
-  recentBooks: [],
   totalItems: 0,
   previewBook: null,
   page: 1,
@@ -112,27 +110,6 @@ export const booksReducer = createReducer(
       isPreviewLoading: false,
     })
   ),
-  on(BOOKS_ACTIONS.AddRecentBook, (state, { recentBook }): BooksState => {
-    const hasRecentBook = state.recentBooks
-      .map((book) => book.id)
-      .includes(recentBook.id);
-    if (hasRecentBook) {
-      return {
-        ...state,
-      };
-    }
-    if (state.recentBooks.length === 10) {
-      return {
-        ...state,
-        recentBooks: [...state.recentBooks.slice(1), recentBook],
-      };
-    } else {
-      return {
-        ...state,
-        recentBooks: [...state.recentBooks, recentBook],
-      };
-    }
-  }),
   on(
     BOOKS_ACTIONS.SetSearchPage,
     (state, { page }): BooksState => ({
