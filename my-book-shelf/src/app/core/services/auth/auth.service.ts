@@ -53,16 +53,19 @@ export class AuthService {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       await sendEmailVerification(user.user);
-      this.router.navigate(['auth/verification']);
-
-      const interval = setInterval(async () => {
-        if (user.user.emailVerified) {
-          clearInterval(interval);
-          this.isLoggedIn.next(true);
-          this.router.navigate(['auth/verification/success']);
-        }
-        await user.user.reload();
-      }, 2000);
+      if (user.user.emailVerified) {
+        this.router.navigate(['auth/verification/success']);
+      } else {
+        this.router.navigate(['auth/verification']);
+        const interval = setInterval(async () => {
+          if (user.user.emailVerified) {
+            clearInterval(interval);
+            this.isLoggedIn.next(true);
+            this.router.navigate(['auth/verification/success']);
+          }
+          await user.user.reload();
+        }, 2000);
+      }
     } catch (error) {
       if (error instanceof Error) {
         this.errorHandling(error);
