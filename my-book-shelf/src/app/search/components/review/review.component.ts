@@ -18,10 +18,9 @@ import { TranslateModule } from '@ngx-translate/core';
   hostDirectives: [DestroyDirective],
 })
 export class ReviewComponent implements OnInit {
-  username$: Observable<string> = this.authFacade.userName$;
   userPhoto$: Observable<string | null> = this.authFacade.userPhoto$;
-  userId$: Observable<string | null> = this.authFacade.userId$;
   reviews$ = new BehaviorSubject<null | IReview[]>(null);
+  userId$: Observable<string | null> = this.authFacade.userId$;
   username = 'Unknown';
   userPhoto: string | null = 'Unknown';
   reviewText = '';
@@ -35,13 +34,17 @@ export class ReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.username$.pipe(takeUntil(this.destroy$)).subscribe((name) => {
-      this.username = name;
-    });
+    this.authFacade.userName$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((name) => {
+        this.username = name;
+      });
 
-    this.userPhoto$.pipe(takeUntil(this.destroy$)).subscribe((photo) => {
-      this.userPhoto = photo;
-    });
+    this.authFacade.userPhoto$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((photo) => {
+        this.userPhoto = photo;
+      });
 
     this.reviewService
       .getReviews(this.bookId)
@@ -65,7 +68,7 @@ export class ReviewComponent implements OnInit {
     }
   }
 
-  removeReview(reviewId: string) {
+  removeReview(reviewId: string): void {
     this.reviewService.removeReview(this.bookId, reviewId);
   }
 }

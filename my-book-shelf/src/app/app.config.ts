@@ -5,7 +5,6 @@ import {
   provideRouter,
   withPreloading,
 } from '@angular/router';
-
 import { routes } from './app.routes';
 import {
   HttpClient,

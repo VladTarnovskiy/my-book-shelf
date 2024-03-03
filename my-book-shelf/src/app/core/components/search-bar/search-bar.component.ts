@@ -2,8 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
-import { ISearchOptions } from '../../../search/interfaces/search';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
@@ -18,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;
@@ -26,7 +26,6 @@ export class SearchBarComponent implements OnInit {
   isFocus = false;
   filterType: FilterTypesKeys = 'All';
   filterCategory: CategoryFilterKeys = 'Browse';
-  searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
   elasticValues = new BehaviorSubject<string[] | null>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -37,11 +36,13 @@ export class SearchBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
-      this.filterCategory = options.categoryFilterType;
-      this.searchValue = options.searchValue;
-      this.filterType = options.filterType;
-    });
+    this.booksFacade.searchOptions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((options) => {
+        this.filterCategory = options.categoryFilterType;
+        this.searchValue = options.searchValue;
+        this.filterType = options.filterType;
+      });
   }
 
   onFocus(): void {
@@ -73,6 +74,7 @@ export class SearchBarComponent implements OnInit {
         categoryFilterType: this.filterCategory,
         page: 1,
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe((searchValues) => {
         this.elasticValues.next(searchValues);
       });
