@@ -4,7 +4,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../services/user/user.service';
 import { AuthFacade } from '../../../store/auth/auth.facade';
@@ -15,14 +15,17 @@ import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [TranslateModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, TranslateModule, CommonModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
 })
 export class ProfileComponent implements OnInit {
-  userName = '';
+  userName = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
   file: File | null = null;
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -35,13 +38,13 @@ export class ProfileComponent implements OnInit {
     this.authFacade.userName$
       .pipe(takeUntil(this.destroy$))
       .subscribe((username) => {
-        this.userName = username;
+        this.userName.setValue(username);
       });
   }
 
   changeUserName(): void {
-    if (this.userName !== '') {
-      this.userService.changeUsername(this.userName);
+    if (this.userName.valid) {
+      this.userService.changeUsername(this.userName.value);
     }
   }
 
@@ -51,7 +54,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onSetPhoto(event: Event) {
+  onSetPhoto(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
 

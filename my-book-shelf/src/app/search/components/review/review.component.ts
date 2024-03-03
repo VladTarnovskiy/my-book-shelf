@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 import { Observable, BehaviorSubject, takeUntil } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IReview } from '../../models/review';
 import { CommonModule } from '@angular/common';
 import { ReviewService } from '../../../core/services/review/review.service';
@@ -12,7 +12,12 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-review',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReviewItemComponent, TranslateModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    ReviewItemComponent,
+    TranslateModule,
+  ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
   hostDirectives: [DestroyDirective],
@@ -21,9 +26,10 @@ export class ReviewComponent implements OnInit {
   userPhoto$: Observable<string | null> = this.authFacade.userPhoto$;
   reviews$ = new BehaviorSubject<null | IReview[]>(null);
   userId$: Observable<string | null> = this.authFacade.userId$;
-  username = 'Unknown';
-  userPhoto: string | null = 'Unknown';
-  reviewText = '';
+  reviewText = new FormControl<string>('', {
+    nonNullable: true,
+    validators: [Validators.required],
+  });
   private destroy$ = inject(DestroyDirective).destroy$;
 
   @Input({ required: true }) bookId!: string;
@@ -34,18 +40,6 @@ export class ReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authFacade.userName$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((name) => {
-        this.username = name;
-      });
-
-    this.authFacade.userPhoto$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((photo) => {
-        this.userPhoto = photo;
-      });
-
     this.reviewService
       .getReviews(this.bookId)
       .pipe(takeUntil(this.destroy$))
@@ -58,12 +52,12 @@ export class ReviewComponent implements OnInit {
   }
 
   sendReview(): void {
-    if (this.reviewText !== '') {
+    if (this.reviewText.valid) {
       const review = {
-        review: this.reviewText,
+        review: this.reviewText.value,
         bookId: this.bookId,
       };
-      this.reviewText = '';
+      this.reviewText.setValue('');
       this.reviewService.addReview(review);
     }
   }

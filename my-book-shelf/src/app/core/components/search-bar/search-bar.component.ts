@@ -4,7 +4,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
 import { BehaviorSubject, takeUntil } from 'rxjs';
@@ -28,7 +28,6 @@ export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;
   searchValue = new FormControl<string>('', {
     nonNullable: true,
-    validators: [Validators.required],
   });
   isFilter = false;
   isFocus = false;
