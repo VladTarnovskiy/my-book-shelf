@@ -8,10 +8,9 @@ describe('QuoteSkeletonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [QuoteSkeletonComponent]
-    })
-    .compileComponents();
-    
+      imports: [QuoteSkeletonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(QuoteSkeletonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

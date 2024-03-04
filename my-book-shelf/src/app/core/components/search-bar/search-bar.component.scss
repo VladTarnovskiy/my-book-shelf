@@ -1,5 +1,6 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .searchBar {
   @extend %itemsCenter;
@@ -16,6 +17,10 @@
   width: 36.2rem;
   padding: 1.2rem 2.1rem;
   color: $primary-fourth;
+
+  @include small-desktop {
+    width: 25rem;
+  }
 }
 
 .filters {
