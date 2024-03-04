@@ -21,6 +21,10 @@
   @include small-desktop {
     width: 25rem;
   }
+
+  @include tablet-middle {
+    width: 16rem;
+  }
 }
 
 .filters {
@@ -35,6 +39,11 @@
     min-width: 2.7rem;
     margin-left: 3.7rem;
     margin-right: 1rem;
+
+    @include tablet-big {
+      width: 2rem;
+      overflow: hidden;
+    }
   }
 
   &__img {

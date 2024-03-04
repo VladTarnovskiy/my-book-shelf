@@ -27,3 +27,41 @@
     {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
   </button>
 </div>
+
+<div class="book book_mobile">
+  <div class="item">
+    <div class="cover">
+      <img class="cover__img" [src]="bookData.images.small" alt="Cover" />
+    </div>
+    <div class="description">
+      <p class="description__title">{{ bookData.title }}</p>
+      <p class="description__author">
+        {{ bookData.authors[0] }},
+        <span class="book__year">{{ bookData.publishedDate | date: 'y' }}</span>
+      </p>
+      <p class="description__edition">
+        {{ 'SEARCH_BOOK.EDITION' | translate }}
+      </p>
+    </div>
+  </div>
+  <div class="item">
+    <div class="rating">4.5<span class="rating__total">/5</span></div>
+    <div class="category">{{ bookData.categories[0] }}</div>
+  </div>
+  <div class="item item_buttons">
+    <button class="preview-but" [routerLink]="['preview', bookData.id]">
+      {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
+    </button>
+    <div class="favorite">
+      @if (bookData.isFavorite) {
+        <button class="favorite__but" (click)="removeFromFavorite()">
+          <img src="assets/heart.svg" alt="Favorite" />
+        </button>
+      } @else {
+        <button class="favorite__but" (click)="addToFavorite()">
+          <img src="assets/empty-heart.svg" alt="Favorite" />
+        </button>
+      }
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .profile {
   @extend %itemsCenter;
@@ -18,6 +19,10 @@
 
   &__title {
     margin-right: 2.6rem;
+
+    @include tablet-middle {
+      display: none;
+    }
   }
 
   &__polygon {
