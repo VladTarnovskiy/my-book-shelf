@@ -100,7 +100,7 @@
     justify-content: center;
     width: 12.5rem;
     height: 4rem;
-    border: 1px solid $primary-first;
+    @extend %base-border;
     font-size: 1.5rem;
     color: $primary-first;
     border-radius: 0.5rem;

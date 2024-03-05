@@ -71,7 +71,7 @@
     height: 5.6rem;
     border-radius: 0.8rem;
     padding: 1.6rem;
-    border: 1px solid $primary-sixth;
+    @extend %form-border;
   }
 }
 
