@@ -1,5 +1,6 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .book {
   padding: 1.3rem 2.5rem 1.3rem 2.2rem;
@@ -12,6 +13,10 @@
 
   &:hover {
     background-color: $secondary-fourth;
+  }
+
+  @include desktop-middle {
+    display: none;
   }
 }
 
@@ -78,9 +83,33 @@
   justify-content: center;
   min-width: 8.5rem;
   height: 3rem;
-  border: 1px solid $primary-first;
+  @extend %base-border;
   font-size: 1.5rem;
   color: $primary-first;
   border-radius: 0.5rem;
   padding: 0.6rem 1.2rem;
+}
+
+.book_mobile {
+  display: none;
+  align-items: flex-start;
+
+  @include desktop-middle {
+    display: block;
+  }
+
+  .item {
+    @extend %itemsCenter;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .item_buttons {
+    justify-content: space-around;
+
+    .preview-but {
+      margin-right: 2rem;
+    }
+  }
 }

@@ -1,0 +1,26 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.not-found {
+  @extend %itemsCenter;
+  justify-content: center;
+  margin-top: 20rem;
+  flex-direction: row;
+
+  img {
+    height: 40rem;
+    width: 40rem;
+  }
+}
+
+.description {
+  padding-top: 3.5rem;
+  font-size: 3rem;
+  font-family: 'Inter Bold';
+  color: $primary-fifth;
+}
+
+.code {
+  font-size: 3.75rem;
+}

@@ -5,6 +5,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { LangMenuComponent } from '../../components/lang-menu/lang-menu.component';
 import { ProfileMenuComponent } from '../../components/profile-menu/profile-menu.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -16,9 +17,16 @@ import { ProfileMenuComponent } from '../../components/profile-menu/profile-menu
     SearchBarComponent,
     LangMenuComponent,
     ProfileMenuComponent,
+    CommonModule,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent {}
+export class LayoutComponent {
+  isActiveHamburger = false;
+
+  toggleHamburger(): void {
+    this.isActiveHamburger = !this.isActiveHamburger;
+  }
+}

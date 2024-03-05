@@ -5,7 +5,7 @@
     (blur)="onFilterClose()"
   >
     <div class="filters__title">
-      {{ 'TYPE_FILTER.' + filterType | translate }}
+      {{ 'TYPE_FILTER.' + (filterType | async) | translate }}
     </div>
     <img
       class="filters__img"
@@ -26,7 +26,7 @@
     </button>
   </button>
   <input
-    [(ngModel)]="searchValue"
+    [formControl]="searchValue"
     (focus)="onFocus()"
     (blur)="onBlur()"
     (input)="onChange()"

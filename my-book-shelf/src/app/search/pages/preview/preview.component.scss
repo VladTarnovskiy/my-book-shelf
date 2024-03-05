@@ -1,8 +1,13 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .details {
   padding: 9.1rem 4.5rem;
+
+  @include desktop-middle {
+    padding: 5.1rem 4.5rem;
+  }
 }
 
 .back-but {
@@ -32,11 +37,14 @@
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 1.5rem;
+
+  @include tablet-big {
+    flex-direction: column;
+  }
 }
 
 .cover {
-  width: 27.8rem;
-  height: 44.5rem;
+  min-height: 34.5rem;
   margin-right: 7.1rem;
   padding: 2.4rem 3.4rem;
   background-color: $primary-third;
@@ -47,8 +55,12 @@
 
   &__img {
     width: 20.9rem;
-    height: 27.7rem;
     margin-bottom: 2.7rem;
+
+    @include tablet-big {
+      width: 15rem;
+      line-height: 20rem;
+    }
   }
 }
 
@@ -62,6 +74,11 @@
   font-size: 3.5rem;
   line-height: 4.5rem;
   margin-bottom: 0.8rem;
+
+  @include desktop-middle {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
 }
 
 .author {
@@ -124,6 +141,10 @@
   justify-content: flex-start;
   align-items: flex-start;
 
+  @include desktop-middle {
+    flex-direction: column;
+  }
+
   &__read,
   &__epub {
     width: 20.9rem;
@@ -135,6 +156,10 @@
     text-transform: uppercase;
     font-family: 'Inter Semi Bold';
     margin-right: 3.8rem;
+
+    @include desktop-middle {
+      margin-bottom: 1.5rem;
+    }
   }
 
   &__epub {

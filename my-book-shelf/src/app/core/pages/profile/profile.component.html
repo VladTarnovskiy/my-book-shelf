@@ -23,11 +23,11 @@
       <div class="profile-item__title">
         {{ 'PROFILE_PAGE.NAME' | translate }}:
       </div>
-      <input type="text" class="profile-item__input" [(ngModel)]="userName" />
+      <input type="text" class="profile-item__input" [formControl]="userName" />
       <button
         class="profile-item__but"
         (click)="changeUserName()"
-        [ngClass]="{ disabled: userName === '' }"
+        [ngClass]="{ disabled: userName.hasError('required') }"
       >
         {{ 'PROFILE_PAGE.BUTTON' | translate }}
       </button>

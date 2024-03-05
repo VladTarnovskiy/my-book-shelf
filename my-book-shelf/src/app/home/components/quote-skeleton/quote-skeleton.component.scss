@@ -1,8 +1,13 @@
 @import 'placeholders';
 @import 'variables';
 
+.container {
+  margin-right: 2.8rem;
+}
+
 .title {
-  width: 15rem;
+  width: 100%;
+  max-width: 15rem;
   height: 2.6rem;
   margin-bottom: 2.6rem;
   @extend %skeletonBackgroundAnimation;
@@ -11,7 +16,8 @@
 .content,
 .content-second {
   margin-bottom: 0.8rem;
-  width: 75.4rem;
+  width: 100%;
+  max-width: 75.4rem;
   height: 2.4rem;
   margin-bottom: 0.4rem;
   @extend %skeletonBackgroundAnimation;
@@ -19,7 +25,8 @@
 
 .content-second {
   margin-bottom: 0.8rem;
-  width: 45.4rem;
+  width: 100%;
+  max-width: 45.4rem;
 }
 
 .description {
@@ -30,7 +37,8 @@
 .slider {
   @extend %itemsCenter;
   justify-content: space-between;
-  width: 7rem;
+  width: 100%;
+  max-width: 7rem;
   height: 1rem;
   @extend %skeletonBackgroundAnimation;
 
@@ -44,7 +52,8 @@
 }
 
 .author {
-  width: 14rem;
+  width: 100%;
+  max-width: 14rem;
   height: 1.6rem;
   @extend %skeletonBackgroundAnimation;
 }

@@ -5,13 +5,13 @@
       type="text"
       class="review__input"
       [placeholder]="'REVIEW.PLACEHOLDER' | translate"
-      [(ngModel)]="reviewText"
+      [formControl]="reviewText"
       (keyup.enter)="sendReview()"
     />
     <button
       class="review__send"
       (click)="sendReview()"
-      [ngClass]="{ disabled: reviewText === '' }"
+      [ngClass]="{ disabled: reviewText.hasError('required') }"
     >
       <img src="assets/send.svg" alt="Send" class="review__send-img" />
     </button>

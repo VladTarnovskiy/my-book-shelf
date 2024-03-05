@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CategoryFilterComponent } from '../../components/category-filter/category-filter.component';
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, takeUntil } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
 import { CommonModule } from '@angular/common';
 import { ISearchOptions } from '../../interfaces/search';
@@ -32,10 +32,7 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
   hostDirectives: [DestroyDirective],
 })
 export class SearchComponent implements OnInit {
-  selectedBooks$: Observable<IBook[]> = this.booksFacade.books$;
   isLoading$: Observable<boolean> = this.booksFacade.booksLoading$;
-  searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
-  totalItems$: Observable<number> = this.booksFacade.searchTotalItems$;
   searchOptions!: ISearchOptions;
   books$ = new BehaviorSubject<IBook[]>([]);
   skeletonItems = [...Array(10).keys()];
@@ -48,38 +45,42 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selectedBooks$.pipe(takeUntil(this.destroy$)).subscribe((books) => {
-      if (books) {
-        this.favoriteService
-          .getFavoriteBooks()
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((favBooks) => {
-            const favIDs = favBooks.map(
-              (favBook) => favBook.payload.doc.data().id
-            );
-            const checkedBooks = books?.map((book) => {
-              if (favIDs.includes(book.id)) {
-                return { ...book, isFavorite: true };
-              } else {
-                return book;
-              }
-            });
-            this.books$.next(checkedBooks);
+    combineLatest([
+      this.booksFacade.books$,
+      this.favoriteService.getFavoriteBooks(),
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([books, favBooks]) => {
+        if (books) {
+          const favIDs = favBooks.map(
+            (favBook) => favBook.payload.doc.data().id
+          );
+          const checkedBooks = books?.map((book) => {
+            if (favIDs.includes(book.id)) {
+              return { ...book, isFavorite: true };
+            } else {
+              return book;
+            }
           });
-      }
-    });
+          this.books$.next(checkedBooks);
+        }
+      });
 
-    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
-      this.searchOptions = options;
-    });
+    this.booksFacade.searchOptions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((options) => {
+        this.searchOptions = options;
+      });
 
-    this.totalItems$.pipe(takeUntil(this.destroy$)).subscribe((totalItems) => {
-      if (totalItems - 10 * this.searchOptions.page > 10) {
-        this.isShowMore = true;
-      } else {
-        this.isShowMore = false;
-      }
-    });
+    this.booksFacade.searchTotalItems$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((totalItems) => {
+        if (totalItems - 10 * this.searchOptions.page > 10) {
+          this.isShowMore = true;
+        } else {
+          this.isShowMore = false;
+        }
+      });
   }
 
   addToFavorite(book: IBook): void {

@@ -5,7 +5,6 @@ import {
   provideRouter,
   withPreloading,
 } from '@angular/router';
-
 import { routes } from './app.routes';
 import {
   HttpClient,
@@ -68,9 +67,6 @@ export const appConfig: ApplicationConfig = {
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),
       provideAuth(() => getAuth()),
       provideFirestore(() => getFirestore()),
-      // provideDatabase(() => getDatabase()),
-      // provideFunctions(() => getFunctions()),
-      // provideMessaging(() => getMessaging()),
       provideStorage(() => getStorage()),
     ]),
   ],

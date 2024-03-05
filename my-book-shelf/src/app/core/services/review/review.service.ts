@@ -18,7 +18,6 @@ export class ReviewService {
 
   addReview(review: Omit<IReview, 'id' | 'userId' | 'creationDate'>): void {
     const userId = this.auth.currentUser?.uid || null;
-    console.log(userId);
     const reviewId = this.afs.createId();
     const reviewInfo = {
       ...review,

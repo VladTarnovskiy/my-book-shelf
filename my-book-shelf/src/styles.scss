@@ -2,9 +2,14 @@
 @import 'fonts';
 @import 'variables';
 @import 'placeholders';
+@import 'mixins';
 
 html {
   font-size: 10px;
+
+  @include tablet {
+    font-size: 8px;
+  }
 }
 
 body {
@@ -68,7 +73,7 @@ button:hover {
   opacity: 0.7;
 }
 
-//modal
+//modal content
 
 .modal-content {
   display: flex;
@@ -77,10 +82,14 @@ button:hover {
   align-items: center;
   justify-content: flex-start;
   width: 60rem;
-  height: 22rem;
+  min-height: 22rem;
   background-color: $primary-third;
   border-radius: 1rem;
   font-family: 'Inter Semi Bold';
+
+  @include tablet-middle {
+    width: 40rem;
+  }
 }
 
 .modal-title {

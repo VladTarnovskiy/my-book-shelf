@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { CategoryFilterKeys } from '../../../core/interfaces/filters';
-import { Observable, takeUntil } from 'rxjs';
+import { takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { filterCategoryList } from './category-filter.constant';
@@ -24,16 +24,16 @@ export class CategoryFilterComponent implements OnInit {
   filterCategoryList = filterCategoryList;
   isFilter = false;
   filterCategory: CategoryFilterKeys = 'Browse';
-  filterCategory$: Observable<CategoryFilterKeys> =
-    this.booksFacade.filterCategoryType$;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(private booksFacade: BooksFacade) {}
 
   ngOnInit(): void {
-    this.filterCategory$.pipe(takeUntil(this.destroy$)).subscribe((value) => {
-      this.filterCategory = value;
-    });
+    this.booksFacade.filterCategoryType$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value) => {
+        this.filterCategory = value;
+      });
   }
 
   onFilterToggle(): void {

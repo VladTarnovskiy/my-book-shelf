@@ -1,5 +1,6 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .reader {
   color: $primary-third;
@@ -11,12 +12,21 @@
   justify-content: space-between;
   padding: 2.3rem 7.2rem 2.3rem 1.8rem;
   margin-bottom: 2rem;
+
+  @include tablet {
+    padding-right: 1.8rem;
+  }
 }
 
 .favorite {
   width: 3rem;
   height: 3rem;
   margin-right: 6.7rem;
+
+  @include tablet {
+    margin-right: 0;
+    margin-left: 2rem;
+  }
 
   &__but {
     @extend %itemsCenter;

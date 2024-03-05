@@ -1,9 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
-import { ISearchOptions } from '../../../search/interfaces/search';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
@@ -14,19 +18,21 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, AsyncPipe, TranslateModule],
+  imports: [ReactiveFormsModule, AsyncPipe, TranslateModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;
-  searchValue = '';
+  searchValue = new FormControl<string>('', {
+    nonNullable: true,
+  });
   isFilter = false;
   isFocus = false;
-  filterType: FilterTypesKeys = 'All';
+  filterType = new BehaviorSubject<FilterTypesKeys>('All');
   filterCategory: CategoryFilterKeys = 'Browse';
-  searchOptions$: Observable<ISearchOptions> = this.booksFacade.searchOptions$;
   elasticValues = new BehaviorSubject<string[] | null>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -37,11 +43,13 @@ export class SearchBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.searchOptions$.pipe(takeUntil(this.destroy$)).subscribe((options) => {
-      this.filterCategory = options.categoryFilterType;
-      this.searchValue = options.searchValue;
-      this.filterType = options.filterType;
-    });
+    this.booksFacade.searchOptions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((options) => {
+        this.filterCategory = options.categoryFilterType;
+        this.filterType.next(options.filterType);
+        this.searchValue.setValue(options.searchValue);
+      });
   }
 
   onFocus(): void {
@@ -54,8 +62,8 @@ export class SearchBarComponent implements OnInit {
 
   onSearch(): void {
     this.booksFacade.fetchBooks({
-      searchValue: this.searchValue,
-      filterType: this.filterType,
+      searchValue: this.searchValue.value,
+      filterType: this.filterType.getValue(),
       categoryFilterType: this.filterCategory,
       page: 1,
     });
@@ -68,18 +76,19 @@ export class SearchBarComponent implements OnInit {
   onChange(): void {
     this.searchService
       .getSearchData({
-        searchValue: this.searchValue,
-        filterType: this.filterType,
+        searchValue: this.searchValue.value,
+        filterType: this.filterType.getValue(),
         categoryFilterType: this.filterCategory,
         page: 1,
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe((searchValues) => {
         this.elasticValues.next(searchValues);
       });
   }
 
   elasticSearch(value: string): void {
-    this.searchValue = value;
+    this.searchValue.setValue(value);
     this.onSearch();
   }
 
@@ -94,8 +103,10 @@ export class SearchBarComponent implements OnInit {
   changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
     if (el.className === 'menu__item') {
-      this.filterType = el.getAttribute('data-filterType') as FilterTypesKeys;
-      this.booksFacade.setFilterType(this.filterType);
+      this.filterType.next(
+        el.getAttribute('data-filterType') as FilterTypesKeys
+      );
+      this.booksFacade.setFilterType(this.filterType.getValue());
     }
   }
 }

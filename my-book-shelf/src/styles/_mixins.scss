@@ -1,5 +1,11 @@
-@mixin desktop {
+@mixin max-desktop {
   @media (max-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: 1400px) {
     @content;
   }
 }
@@ -11,7 +17,7 @@
 }
 
 @mixin small-desktop {
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     @content;
   }
 }
@@ -23,7 +29,7 @@
 }
 
 @mixin tablet-middle {
-  @media (max-width: 640px) {
+  @media (max-width: 620px) {
     @content;
   }
 }
