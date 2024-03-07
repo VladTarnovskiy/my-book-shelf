@@ -29,7 +29,7 @@ describe('FavoriteUploadBookComponent', () => {
       image:
         'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
       file: 'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-      description: 'descripption',
+      description: 'description',
     };
     fixture.detectChanges();
   });

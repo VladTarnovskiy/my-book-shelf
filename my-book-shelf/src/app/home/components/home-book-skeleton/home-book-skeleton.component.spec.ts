@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeBookSkeletonComponent } from './home-book-skeleton.component';
 
 describe('HomeBookSkeletonComponent', () => {
@@ -8,10 +7,9 @@ describe('HomeBookSkeletonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeBookSkeletonComponent]
-    })
-    .compileComponents();
-    
+      imports: [HomeBookSkeletonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HomeBookSkeletonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

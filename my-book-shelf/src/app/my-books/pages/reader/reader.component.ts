@@ -28,17 +28,19 @@ export class ReaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const myBookId = this.route.snapshot.params['myBookId'];
-    this.myBookService
-      .getMyBook(myBookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((book) => {
-        const bookData = book.payload.data();
-        if (bookData) {
-          this.book = bookData;
-          this.book$.next(bookData);
-        }
-      });
+    const myBookId = this.route.snapshot.params['myBookId'] as string;
+    if (myBookId) {
+      this.myBookService
+        .getMyBook(myBookId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((book) => {
+          const bookData = book.payload.data();
+          if (bookData) {
+            this.book = bookData;
+            this.book$.next(bookData);
+          }
+        });
+    }
   }
 
   changeFavorite(isFavorite: boolean): void {

@@ -12,7 +12,7 @@
           [placeholder]="'UPLOAD.PLACEHOLDERS.TITLE' | translate"
           required
           type="text"
-          class="form-item__input"
+          class="form-item__input form-item__input_title"
         />
       </label>
       @if (title?.hasError('required') && uploadForm.touched) {
@@ -32,7 +32,7 @@
           [placeholder]="'UPLOAD.PLACEHOLDERS.AUTHOR' | translate"
           required
           type="text"
-          class="form-item__input"
+          class="form-item__input form-item__input_author"
         />
       </label>
       @if (author?.hasError('required') && uploadForm.touched) {
@@ -51,7 +51,7 @@
           formControlName="description"
           [placeholder]="'UPLOAD.PLACEHOLDERS.DESCRIPTION' | translate"
           required
-          class="form-item__input"
+          class="form-item__input form-item__input_description"
         ></textarea>
       </label>
       @if (description?.hasError('required') && uploadForm.touched) {
@@ -70,7 +70,7 @@
           [placeholder]="'UPLOAD.PLACEHOLDERS.FILE' | translate"
           required
           type="file"
-          class="form-item__input"
+          class="form-item__input form-item__input_file"
           accept="application/pdf"
           (change)="onSetFile($event)"
         />
@@ -91,7 +91,7 @@
           [placeholder]="'UPLOAD.PLACEHOLDERS.IMAGE' | translate"
           required
           type="file"
-          class="form-item__input"
+          class="form-item__input form-item__input_image"
           accept="image/png, image/gif, image/jpeg, .svg"
           (change)="onSetImage($event)"
         />
