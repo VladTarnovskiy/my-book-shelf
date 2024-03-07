@@ -17,18 +17,13 @@ describe('ProfileComponent', () => {
     },
   };
 
-  class MockUserService {
-    isLoggedIn = true;
-    user = { name: 'Test User' };
-  }
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
         provideMockStore({
           initialState,
         }),
-        { provide: UserService, useValue: MockUserService },
+        { provide: UserService, useValue: '' },
       ],
       imports: [ProfileComponent, TranslateModule.forRoot()],
     }).compileComponents();

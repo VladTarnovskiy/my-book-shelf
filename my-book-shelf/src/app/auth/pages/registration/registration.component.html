@@ -17,7 +17,7 @@
             id="name"
             type="text"
             formControlName="name"
-            class="form-item__input"
+            class="form-item__input form-item__input_name"
             required
           />
         </label>
@@ -47,7 +47,7 @@
             formControlName="email"
             required
             type="email"
-            class="form-item__input"
+            class="form-item__input form-item__input_email"
           />
         </label>
         @if (email?.hasError('required') && registerForm.touched) {
@@ -72,7 +72,7 @@
             type="password"
             required
             autoComplete="on"
-            class="form-item__input"
+            class="form-item__input form-item__input_password"
           />
         </label>
         @if (password?.hasError('required') && registerForm.touched) {
@@ -97,7 +97,7 @@
             type="password"
             required
             autoComplete="on"
-            class="form-item__input"
+            class="form-item__input form-item__input_confirm-pass"
             [ngClass]="{
               'ng-invalid': registerForm.errors?.['passwordNoMatch'],
               'ng-valid': !registerForm.errors?.['passwordNoMatch']
