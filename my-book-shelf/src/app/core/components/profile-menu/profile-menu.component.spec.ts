@@ -1,9 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProfileMenuComponent } from './profile-menu.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { provideRouter } from '@angular/router';
 import { provideMockStore } from '@ngrx/store/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ProfileMenuComponent', () => {
   let component: ProfileMenuComponent;
@@ -21,7 +20,7 @@ describe('ProfileMenuComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProfileMenuComponent, TranslateModule.forRoot()],
       providers: [
-        provideRouter([]),
+        RouterTestingModule,
         provideMockStore({
           initialState,
         }),

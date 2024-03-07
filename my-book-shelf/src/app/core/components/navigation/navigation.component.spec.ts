@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavigationComponent } from './navigation.component';
-import { RouterLink, provideRouter } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -9,7 +10,11 @@ describe('NavigationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavigationComponent, RouterLink, TranslateModule.forRoot()],
+      imports: [
+        NavigationComponent,
+        RouterTestingModule,
+        TranslateModule.forRoot(),
+      ],
       providers: [provideRouter([])],
     }).compileComponents();
 
