@@ -1,31 +1,32 @@
-// import { TestBed } from '@angular/core/testing';
-// import { AppComponent } from './app.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from './core/services/auth/auth.service';
 
-// describe('AppComponent', () => {
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       imports: [AppComponent],
-//     }).compileComponents();
-//   });
+describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
 
-//   it('should create the app', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.componentInstance;
-//     expect(app).toBeTruthy();
-//   });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppComponent, TranslateModule.forRoot(), RouterTestingModule],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            getUserAfterReload: () => {},
+          },
+        },
+      ],
+    }).compileComponents();
 
-//   it(`should have the 'my-book-shelf' title`, () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.componentInstance;
-//     expect(app.title).toEqual('my-book-shelf');
-//   });
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-//   it('should render title', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     fixture.detectChanges();
-//     const compiled = fixture.nativeElement as HTMLElement;
-//     expect(compiled.querySelector('h1')?.textContent).toContain(
-//       'Hello, my-book-shelf'
-//     );
-//   });
-// });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

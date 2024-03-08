@@ -21,19 +21,8 @@ describe('ReaderComponent', () => {
         {
           provide: MyBookService,
           useValue: {
-            getMyBooks: (bookId: string) => {
-              return of({
-                borrowedOn: '2024',
-                submissionDate: '2024',
-                id: bookId,
-                isFavorite: false,
-                title: 'Brandsmoor',
-                author: 'Roman Helinski',
-                image:
-                  'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-                file: 'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-                description: 'descripption',
-              });
+            getMyBooks: () => {
+              return of();
             },
           },
         },
@@ -42,6 +31,18 @@ describe('ReaderComponent', () => {
 
     fixture = TestBed.createComponent(ReaderComponent);
     component = fixture.componentInstance;
+    component.book$.next({
+      borrowedOn: '2024',
+      submissionDate: '2024',
+      id: 'edq32',
+      isFavorite: false,
+      title: 'Brandsmoor',
+      author: 'Roman Helinski',
+      image:
+        'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+      file: 'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+      description: 'descripption',
+    });
     fixture.detectChanges();
   });
 
@@ -49,9 +50,9 @@ describe('ReaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should contain title', () => {
-  //   const titleEl: HTMLInputElement =
-  //     fixture.nativeElement.querySelector('.description__name');
-  //   expect(titleEl.textContent).toBe('Brandsmoor');
-  // });
+  it('should contain title', () => {
+    const titleEl: HTMLInputElement =
+      fixture.nativeElement.querySelector('.description__name');
+    expect(titleEl.textContent).toBe('Brandsmoor');
+  });
 });

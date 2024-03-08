@@ -18,7 +18,11 @@ describe('ProfileMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProfileMenuComponent, TranslateModule.forRoot()],
+      imports: [
+        ProfileMenuComponent,
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+      ],
       providers: [
         RouterTestingModule,
         provideMockStore({
