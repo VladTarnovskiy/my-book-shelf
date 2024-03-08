@@ -69,10 +69,6 @@
   }
 }
 
-.main {
-  min-height: 87rem;
-}
-
 .sidebar.sidebar_mobile {
   display: none;
   position: fixed;
@@ -95,6 +91,10 @@
   @include tablet {
     top: 1.5rem;
   }
+}
+
+.main {
+  min-height: 87rem;
 }
 
 .logo {

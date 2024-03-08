@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
     translate.use('en');
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
     this.authService.getUserAfterReload();
     // alert(

@@ -18,7 +18,7 @@
             formControlName="email"
             required
             type="email"
-            class="form-item__input"
+            class="form-item__input form-item__input_email"
           />
         </label>
         @if (email?.hasError('required') && loginForm.touched) {
@@ -27,7 +27,7 @@
           </div>
         }
         @if (email?.hasError('email') && loginForm.touched) {
-          <div class="invalid__message">
+          <div class="invalid__message email-error">
             {{ 'LOGIN.ERRORS.EMAIL.INVALID' | translate }}
           </div>
         }
@@ -43,7 +43,7 @@
             type="password"
             required
             autoComplete="on"
-            class="form-item__input"
+            class="form-item__input form-item__input_password"
           />
         </label>
         @if (password?.hasError('required') && loginForm.touched) {
@@ -52,7 +52,7 @@
           </div>
         }
         @if (password?.hasError('forbiddenPassword') && loginForm.touched) {
-          <div class="invalid__message">
+          <div class="invalid__message password-error">
             {{ password?.errors?.['forbiddenPassword'].value }}
           </div>
         }

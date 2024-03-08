@@ -8,10 +8,9 @@ describe('PreviewSkeletonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PreviewSkeletonComponent]
-    })
-    .compileComponents();
-    
+      imports: [PreviewSkeletonComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(PreviewSkeletonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
