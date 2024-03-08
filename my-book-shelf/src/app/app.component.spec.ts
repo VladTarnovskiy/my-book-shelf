@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from './core/services/auth/auth.service';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -12,6 +13,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent, TranslateModule.forRoot(), RouterTestingModule],
       providers: [
+        provideMockStore(),
         {
           provide: AuthService,
           useValue: {

@@ -5,18 +5,30 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import englishLang from '../assets/i18n/en.json';
 import russianLang from '../assets/i18n/ru.json';
 import { AuthService } from './core/services/auth/auth.service';
+import { AuthFacade } from './store/auth/auth.facade';
+import { AsyncPipe } from '@angular/common';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ToasterContainerComponent, TranslateModule],
+  imports: [
+    RouterOutlet,
+    ToasterContainerComponent,
+    TranslateModule,
+    AsyncPipe,
+    LoaderComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  userIsLoading$ = this.authFacade.userIsLoading$;
+
   constructor(
     translate: TranslateService,
-    private authService: AuthService
+    private authService: AuthService,
+    private authFacade: AuthFacade
   ) {
     translate.setTranslation('en', englishLang);
     translate.setTranslation('ru', russianLang);

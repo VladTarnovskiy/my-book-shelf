@@ -16,3 +16,8 @@ export const AddUserPhoto = createAction(
   `${actionSource} Add User Photo`,
   props<{ photo: string | null }>()
 );
+
+export const ChangeUserIsLoading = createAction(
+  `${actionSource} Change User Loading`,
+  props<{ isLoading: boolean }>()
+);
