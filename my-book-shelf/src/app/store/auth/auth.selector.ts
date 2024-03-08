@@ -17,3 +17,8 @@ export const selectUserPhoto = createSelector(
   selectAuthStore,
   (state: AuthState) => state.photo
 );
+
+export const selectUserIsLoading = createSelector(
+  selectAuthStore,
+  (state: AuthState) => state.isLoading
+);

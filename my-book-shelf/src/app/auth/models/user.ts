@@ -17,3 +17,9 @@ export interface IUserDetailsLoginForm {
   password: FormControl<string>;
   email: FormControl<string>;
 }
+
+export interface IUserLocalStorage {
+  name: string;
+  userId: string;
+  photo: string;
+}

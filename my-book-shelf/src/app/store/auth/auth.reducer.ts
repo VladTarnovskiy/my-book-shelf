@@ -5,12 +5,14 @@ export interface AuthState {
   userName: string;
   userId: string | null;
   photo: string | null;
+  isLoading: boolean;
 }
 
 export const initialState: AuthState = {
   userName: 'Unknown',
   userId: null,
   photo: null,
+  isLoading: false,
 };
 
 export const authReducer = createReducer(
@@ -34,6 +36,13 @@ export const authReducer = createReducer(
     (state, { photo }): AuthState => ({
       ...state,
       photo,
+    })
+  ),
+  on(
+    AUTH_ACTIONS.ChangeUserIsLoading,
+    (state, { isLoading }): AuthState => ({
+      ...state,
+      isLoading,
     })
   )
 );

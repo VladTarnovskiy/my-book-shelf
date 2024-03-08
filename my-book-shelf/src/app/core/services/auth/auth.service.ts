@@ -122,9 +122,12 @@ export class AuthService {
   }
 
   getUserAfterReload(): void {
+    this.authFacade.changeUserIsLoading(true);
     this.auth.onAuthStateChanged((user) => {
       if (user !== null) {
         this.setUserName(user.uid);
+      } else {
+        this.isLoggedIn.next(false);
       }
     });
   }
@@ -138,6 +141,7 @@ export class AuthService {
         this.authFacade.addUserPhoto(userInfo.photo);
         this.isLoggedIn.next(true);
       }
+      this.authFacade.changeUserIsLoading(false);
     });
   }
 
