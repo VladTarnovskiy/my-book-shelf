@@ -128,11 +128,13 @@ export class AuthService {
         this.setUserName(user.uid);
       } else {
         this.isLoggedIn.next(false);
+        this.authFacade.changeUserIsLoading(false);
       }
     });
   }
 
   setUserName(userId: string): void {
+    console.log('here');
     this.userService.getUser(userId).subscribe((x) => {
       const userInfo = x.payload.data();
       if (userInfo) {
