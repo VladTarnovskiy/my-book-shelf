@@ -89,24 +89,13 @@
   .ebook {
     width: 12.5rem;
     height: 4rem;
-    background-color: $secondary-third;
-    border-radius: 0.5rem;
-    @extend %itemsCenter;
-    justify-content: center;
-    font-family: 'Inter Semi Bold';
     font-size: 1.5rem;
-    color: $primary-third;
     margin-bottom: 1.5rem;
   }
 
   .read {
-    @extend %itemsCenter;
-    justify-content: center;
     width: 12.5rem;
     height: 4rem;
-    @extend %base-border;
     font-size: 1.5rem;
-    color: $primary-first;
-    border-radius: 0.5rem;
   }
 }

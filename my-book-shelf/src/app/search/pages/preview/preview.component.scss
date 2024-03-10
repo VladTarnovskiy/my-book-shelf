@@ -146,23 +146,15 @@
   }
 
   &__read,
-  &__epub {
+  &__ebook {
     width: 20.9rem;
     height: 6.1rem;
-    border-radius: 0.5rem;
     font-size: 2rem;
-    background: $primary-first;
-    color: $primary-third;
     text-transform: uppercase;
-    font-family: 'Inter Semi Bold';
     margin-right: 3.8rem;
 
     @include desktop-middle {
       margin-bottom: 1.5rem;
     }
-  }
-
-  &__epub {
-    background: $secondary-third;
   }
 }

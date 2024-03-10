@@ -54,7 +54,7 @@
           <div class="buttons">
             @if (bookData.ISBN) {
               <button
-                class="buttons__read"
+                class="buttons__read btn-third"
                 [routerLink]="['/search/reader', bookData.id]"
               >
                 {{ 'COMMON.BTN.READ' | translate }}
@@ -62,7 +62,7 @@
             }
             @if (bookData.epub.isAvailable) {
               <a [href]="bookData.epub.link">
-                <button class="buttons__epub">
+                <button class="buttons__ebook btn-second">
                   {{ 'COMMON.BTN.EBOOK' | translate }}
                 </button>
               </a>

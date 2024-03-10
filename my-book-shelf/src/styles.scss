@@ -112,6 +112,32 @@ button:hover {
 
 //buttons
 
+.btn-first {
+  @extend %itemsCenter;
+  justify-content: center;
+  @extend %base-border;
+  color: $primary-first;
+  border-radius: 0.5rem;
+}
+
+.btn-second,
+.btn-third {
+  border-radius: 0.5rem;
+  @extend %itemsCenter;
+  justify-content: center;
+  font-family: 'Inter Semi Bold';
+}
+
+.btn-second {
+  background-color: $secondary-third;
+  color: $primary-third;
+}
+
+.btn-third {
+  background: $primary-first;
+  color: $primary-third;
+}
+
 .disabled {
   opacity: 0.6;
 
