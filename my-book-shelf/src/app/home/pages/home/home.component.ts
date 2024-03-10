@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  getTimeOfDay() {
+  getTimeOfDay(): string {
     const date = new Date();
     const hours = date.getHours();
     let timeOfDay;
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
       timeOfDay = 'AFTERNOON';
     } else if (18 <= hours && hours <= 24) {
       timeOfDay = 'EVENING';
-    } else if (0 <= hours && hours < 6) {
+    } else {
       timeOfDay = 'NIGHT';
     }
     return timeOfDay;

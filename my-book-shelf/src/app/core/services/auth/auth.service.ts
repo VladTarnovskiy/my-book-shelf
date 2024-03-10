@@ -20,7 +20,6 @@ import { AuthFacade } from '../../../store/auth/auth.facade';
   providedIn: 'root',
 })
 export class AuthService {
-  //only for a develop term the isLogin field is true
   private isLoggedIn = new BehaviorSubject<boolean>(true);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 

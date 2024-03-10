@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { IUploadBook } from '../../models/upload';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
@@ -16,6 +21,7 @@ import { MyBookService } from '../../../core/services/my-book/my-book.service';
   templateUrl: './reader.component.html',
   styleUrl: './reader.component.scss',
   hostDirectives: [DestroyDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReaderComponent implements OnInit {
   book$ = new BehaviorSubject<IUploadBook | null>(null);

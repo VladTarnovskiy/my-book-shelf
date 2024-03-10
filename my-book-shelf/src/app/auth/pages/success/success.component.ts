@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -8,5 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [RouterModule, TranslateModule],
   templateUrl: './success.component.html',
   styleUrl: './success.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SuccessComponent {}

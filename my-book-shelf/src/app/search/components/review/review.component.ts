@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 import { Observable, BehaviorSubject, takeUntil } from 'rxjs';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -21,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './review.component.html',
   styleUrl: './review.component.scss',
   hostDirectives: [DestroyDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewComponent implements OnInit {
   userPhoto$: Observable<string | null> = this.authFacade.userPhoto$;

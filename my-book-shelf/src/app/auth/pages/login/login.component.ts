@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     this.authService.logInWithGoogle();
   }
 
-  loginWithGitHub() {
+  loginWithGitHub(): void {
     this.authService.logInWithGitHub();
   }
 

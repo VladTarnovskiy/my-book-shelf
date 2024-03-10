@@ -71,7 +71,7 @@ export class UploadComponent {
     }
   }
 
-  onSetImage(event: Event) {
+  onSetImage(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
 
@@ -83,7 +83,7 @@ export class UploadComponent {
     }
   }
 
-  onSetFile(event: Event) {
+  onSetFile(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
 
