@@ -214,5 +214,8 @@
     "PHOTO": "Profile photo",
     "NAME": "Username",
     "BUTTON": "Save"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page not found"
   }
 }
