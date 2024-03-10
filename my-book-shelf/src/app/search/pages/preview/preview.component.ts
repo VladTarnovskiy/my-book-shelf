@@ -58,6 +58,7 @@ export class PreviewComponent implements OnInit {
         this.recentService.addRecentBook(book);
       }
     });
+    console.log(window.location.href);
   }
 
   searchAuthorBooks(author: string): void {

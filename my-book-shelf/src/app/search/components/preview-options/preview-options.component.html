@@ -2,7 +2,9 @@
   @for (item of optionsList; track item.title) {
     <div class="option">
       <img [src]="item.src" [alt]="item.title" class="option__icon" />
-      <div class="option__title">{{ item.title }}</div>
+      <div class="option__title">
+        {{ 'PREVIEW.OPTIONS.' + item.title | translate }}
+      </div>
     </div>
   }
 </div>

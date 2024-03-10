@@ -43,7 +43,12 @@
     "RATING": "Рейтинг",
     "AVAILABILITY": "Наличие",
     "COPY": "Копия",
-    "EDITION": "второе издание"
+    "EDITION": "второе издание",
+    "OPTIONS": {
+      "Review": "Обзоры",
+      "Notes": "Заметки",
+      "Share": "Ссылка"
+    }
   },
   "API_READER": {
     "INTRODUCTION": "ВВЕДЕНИЕ",

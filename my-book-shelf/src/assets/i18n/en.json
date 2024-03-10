@@ -43,7 +43,12 @@
     "RATING": "Ratings",
     "AVAILABILITY": "Availability",
     "COPY": "Hard Copy",
-    "EDITION": "second edition"
+    "EDITION": "second edition",
+    "OPTIONS": {
+      "Review": "Review",
+      "Notes": "Notes",
+      "Share": "Share"
+    }
   },
   "API_READER": {
     "INTRODUCTION": "INTRODUCTION",
