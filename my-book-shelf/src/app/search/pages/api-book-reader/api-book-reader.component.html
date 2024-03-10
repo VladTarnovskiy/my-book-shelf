@@ -1,5 +1,5 @@
 @if (book$ | async; as book) {
-  <div class="reader">
+  <div class="reader" [ngClass]="{ full: isFullScreen | async }">
     <div class="reader-header">
       <div class="info">
         <button class="back" appGoBack>
@@ -26,27 +26,38 @@
           </div>
         </div>
       </div>
-      <div class="favorite">
+      <div class="buttons">
         @if (isFavorite) {
-          <button class="favorite__but" (click)="removeFromFavorite(book.id)">
+          <button class="buttons__fav" (click)="removeFromFavorite(book.id)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>
         } @else {
-          <button class="favorite__but" (click)="addToFavorite(book)">
+          <button class="buttons__fav" (click)="addToFavorite(book)">
             <img src="assets/empty-heart.svg" alt="Favorite" />
+          </button>
+        }
+        @if (isFullScreen | async) {
+          <button class="buttons__screen" (click)="switchFullScreen(false)">
+            {{ 'COMMON.BTN.SHORT' | translate }}
+          </button>
+        } @else {
+          <button class="buttons__screen" (click)="switchFullScreen(true)">
+            {{ 'COMMON.BTN.FULL' | translate }}
           </button>
         }
       </div>
     </div>
-    <div class="book" #bookCanvas>
-      @if (isUnavailable$ | async) {
-        <div class="not-available">
-          {{ 'API_READER.NOT_AVAILABLE' | translate }}
-        </div>
-      }
-      @if (isLoading$ | async) {
-        <div class="loader"></div>
-      }
+    <div class="content">
+      <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
+        @if (isUnavailable$ | async) {
+          <div class="not-available">
+            {{ 'API_READER.NOT_AVAILABLE' | translate }}
+          </div>
+        }
+        @if (isLoading$ | async) {
+          <div class="loader"></div>
+        }
+      </div>
     </div>
   </div>
 } @else {

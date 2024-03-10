@@ -38,7 +38,7 @@
     height: 5.9rem;
     border-radius: 1rem;
     padding: 2rem 3rem;
-    @extend %form-border;
+    @extend %second-border;
   }
 }
 
@@ -54,7 +54,7 @@
 
   .form-item__input::file-selector-button {
     padding: 0.5rem;
-    @extend %form-border;
+    @extend %second-border;
     border-radius: 0.3rem;
 
     &:hover {

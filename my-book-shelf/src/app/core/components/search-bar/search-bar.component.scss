@@ -9,18 +9,16 @@
   justify-content: center;
   height: 4.9rem;
   border-radius: 4rem;
+  margin-right: 2rem;
   background-color: $primary-third;
 }
 
 .input {
   height: 100%;
-  width: 36.2rem;
+  max-width: 36.2rem;
+  width: 100%;
   padding: 1.2rem 2.1rem;
   color: $primary-fourth;
-
-  @include small-desktop {
-    width: 25rem;
-  }
 
   @include tablet-middle {
     width: 16rem;

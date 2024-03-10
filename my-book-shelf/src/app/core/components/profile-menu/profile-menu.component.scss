@@ -17,8 +17,12 @@
     margin-right: 1.9rem;
   }
 
-  &__title {
+  &__name {
     margin-right: 2.6rem;
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     @include tablet-middle {
       display: none;

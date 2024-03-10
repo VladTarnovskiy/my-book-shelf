@@ -20,6 +20,7 @@ import { MyBookService } from '../../../core/services/my-book/my-book.service';
 export class ReaderComponent implements OnInit {
   book$ = new BehaviorSubject<IUploadBook | null>(null);
   book: IUploadBook | null = null;
+  isFullScreen = new BehaviorSubject<boolean>(false);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -47,5 +48,9 @@ export class ReaderComponent implements OnInit {
     if (this.book) {
       this.myBookService.changeFavoriteStatus(isFavorite, this.book.id);
     }
+  }
+
+  switchFullScreen(isFullScreen: boolean): void {
+    this.isFullScreen.next(isFullScreen);
   }
 }
