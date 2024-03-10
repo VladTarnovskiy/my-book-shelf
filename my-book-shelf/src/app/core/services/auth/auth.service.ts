@@ -134,9 +134,8 @@ export class AuthService {
   }
 
   setUserName(userId: string): void {
-    console.log('here');
-    this.userService.getUser(userId).subscribe((x) => {
-      const userInfo = x.payload.data();
+    this.userService.getUser(userId).subscribe((user) => {
+      const userInfo = user.payload.data();
       if (userInfo) {
         this.authFacade.addUserName(userInfo.name);
         this.authFacade.addUserId(userInfo.userId);
