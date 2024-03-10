@@ -22,7 +22,8 @@ describe('NotFoundComponent', () => {
   });
 
   it('should contain not found message', () => {
-    const messageEl: HTMLElement = fixture.nativeElement.querySelector('p');
+    const messageEl: HTMLElement =
+      fixture.nativeElement.querySelector('.title');
     expect(messageEl.textContent).toBeTruthy();
   });
 });
