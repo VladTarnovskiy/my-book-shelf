@@ -12,7 +12,7 @@ import {
 import { IUpLoadBookForm } from '../../models/upload';
 import { CommonModule } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyBookService } from '../../../core/services/my-book/my-book.service';
 
 @Component({
@@ -48,6 +48,7 @@ export class UploadComponent {
   constructor(
     private toasterService: ToasterService,
     private myBookService: MyBookService,
+    private translateService: TranslateService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -64,8 +65,8 @@ export class UploadComponent {
       this.myBookService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
-        title: 'My book',
-        message: 'The book was created!',
+        title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
+        message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
       });
       this.uploadForm.reset();
     }

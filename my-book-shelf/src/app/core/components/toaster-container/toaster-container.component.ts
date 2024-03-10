@@ -3,6 +3,7 @@ import { Toaster } from '../../models/toaster';
 import { ToasterComponent } from '../toaster/toaster.component';
 import { ToasterService } from '../../services/toaster/toaster.service';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-toaster-container',
@@ -13,18 +14,21 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToasterContainerComponent implements OnInit {
-  toasts: Toaster[] = [];
+  toasts = new BehaviorSubject<Toaster[]>([]);
 
   constructor(private toasterService: ToasterService) {}
 
   ngOnInit(): void {
     this.toasterService.toast$.subscribe((toast) => {
-      this.toasts = [...this.toasts, toast];
-      setTimeout(() => this.toasts.pop(), 4000);
+      this.toasts.next([...this.toasts.getValue(), toast]);
+      setTimeout(
+        () => this.toasts.next([...this.toasts.getValue()].slice(1)),
+        4000
+      );
     });
   }
 
   remove(index: number): void {
-    this.toasts = this.toasts.filter((_, i) => i !== index);
+    this.toasts.next([...this.toasts.getValue()].filter((_, i) => i !== index));
   }
 }

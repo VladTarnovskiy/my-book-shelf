@@ -100,6 +100,10 @@
       "DESCRIPTION": "please enter a description",
       "FILE": "please choose a file",
       "IMAGE": "please choose a image"
+    },
+    "MESSAGES": {
+      "TITLE": "My book",
+      "MESSAGE": "The book was created!"
     }
   },
   "SEARCH_BAR": {
