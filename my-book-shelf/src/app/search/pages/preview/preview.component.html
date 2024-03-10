@@ -60,9 +60,13 @@
                 {{ 'COMMON.BTN.READ' | translate }}
               </button>
             }
-            <button class="buttons__epub">
-              {{ 'COMMON.BTN.EBOOK' | translate }}
-            </button>
+            @if (bookData.epub.isAvailable) {
+              <a [href]="bookData.epub.link">
+                <button class="buttons__epub">
+                  {{ 'COMMON.BTN.EBOOK' | translate }}
+                </button>
+              </a>
+            }
           </div>
         </div>
       </div>

@@ -55,6 +55,7 @@
 
 .favorite-but {
   margin-left: auto;
+  margin-bottom: 0.8rem;
   @extend %itemsCenter;
   justify-content: center;
   width: 2.5rem;
@@ -83,6 +84,8 @@
 }
 
 .links {
+  margin-top: auto;
+
   .ebook {
     width: 12.5rem;
     height: 4rem;
