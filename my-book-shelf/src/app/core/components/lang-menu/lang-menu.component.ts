@@ -5,6 +5,8 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
+import { ILanguage } from '../../interfaces/language';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-lang-menu',
@@ -16,13 +18,18 @@ import {
 })
 export class LangMenuComponent implements OnInit {
   isMenu = false;
-  activeLang = 'en';
+  activeLang = new BehaviorSubject<string>('en');
 
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
+    const lang = localStorage.getItem('lang');
+    if (lang) {
+      this.activeLang.next(lang);
+    }
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.activeLang = event.lang;
+      this.activeLang.next(event.lang);
+      console.log(event.lang);
     });
   }
 
@@ -34,7 +41,8 @@ export class LangMenuComponent implements OnInit {
     this.isMenu = false;
   }
 
-  useLanguage(language: string): void {
+  useLanguage(language: ILanguage): void {
+    localStorage.setItem('lang', language);
     this.translate.use(language);
   }
 }

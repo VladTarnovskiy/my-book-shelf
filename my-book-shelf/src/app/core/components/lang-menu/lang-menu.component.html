@@ -11,14 +11,14 @@
     <button
       (click)="useLanguage('en')"
       class="lang-menu__item"
-      [ngClass]="{ active: activeLang === 'en' }"
+      [ngClass]="{ active: (activeLang | async) === 'en' }"
     >
       {{ 'LANG.EN' | translate }}
     </button>
     <button
       (click)="useLanguage('ru')"
       class="lang-menu__item"
-      [ngClass]="{ active: activeLang === 'ru' }"
+      [ngClass]="{ active: (activeLang | async) === 'ru' }"
     >
       {{ 'LANG.RU' | translate }}
     </button>
