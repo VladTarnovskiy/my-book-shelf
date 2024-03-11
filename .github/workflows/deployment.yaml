@@ -7,10 +7,6 @@ jobs:
     steps:
       - name: Get repository code
         uses: actions/checkout@v4
-      - name: node version
-        uses: actions/setup-node@v4
-        with:
-          node-version: "latest"
       - name: Go to root folder
         run: cd my-book-shelf
       - name: Install dependencies
