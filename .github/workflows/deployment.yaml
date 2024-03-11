@@ -1,6 +1,6 @@
-name: Deploy React App
-on:
-  push:
+name: Deploy Angular App
+run-name: ${{ github.actor }} is pushed updates
+on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
