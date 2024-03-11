@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,7 +22,14 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
 @Component({
   selector: 'app-api-book-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    NgClass,
+    SafePipe,
+    GoBackDirective,
+    TranslateModule,
+  ],
   templateUrl: './api-book-reader.component.html',
   styleUrl: './api-book-reader.component.scss',
   hostDirectives: [DestroyDirective],

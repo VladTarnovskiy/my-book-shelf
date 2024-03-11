@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RecentService } from '../../../core/services/recent/recent.service';
@@ -15,7 +15,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
 @Component({
   selector: 'app-recent',
   standalone: true,
-  imports: [CommonModule, HomeBookComponent, TranslateModule],
+  imports: [AsyncPipe, HomeBookComponent, TranslateModule],
   templateUrl: './recent.component.html',
   styleUrl: './recent.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

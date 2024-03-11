@@ -6,10 +6,10 @@ import {
 } from '@angular/core';
 import { QuoteComponent } from '../../components/quote/quote.component';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { RecommendedBooksFacade } from '../../../store/recommendedBooks/recommendedBooks.facade';
 import { recommendedGenerator } from '../../../core/utils/recStubGenerator';
 import { HomeBookSkeletonComponent } from '../../components/home-book-skeleton/home-book-skeleton.component';
@@ -23,10 +23,10 @@ import { RecentService } from '../../../core/services/recent/recent.service';
   imports: [
     QuoteComponent,
     HomeBookComponent,
-    CommonModule,
-    RouterModule,
+    RouterLink,
     HomeBookSkeletonComponent,
     TranslateModule,
+    AsyncPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

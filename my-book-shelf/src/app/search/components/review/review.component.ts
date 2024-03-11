@@ -9,7 +9,7 @@ import { AuthFacade } from '../../../store/auth/auth.facade';
 import { Observable, BehaviorSubject, takeUntil } from 'rxjs';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IReview } from '../../models/review';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ReviewService } from '../../../core/services/review/review.service';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { ReviewItemComponent } from '../review-item/review-item.component';
@@ -20,7 +20,8 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule,
+    NgClass,
+    AsyncPipe,
     ReviewItemComponent,
     TranslateModule,
   ],

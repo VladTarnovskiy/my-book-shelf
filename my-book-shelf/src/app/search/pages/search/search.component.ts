@@ -9,7 +9,7 @@ import { CategoryFilterComponent } from '../../components/category-filter/catego
 import { SearchBookComponent } from '../../components/search-book/search-book.component';
 import { BehaviorSubject, Observable, combineLatest, takeUntil } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ISearchOptions } from '../../interfaces/search';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
@@ -22,7 +22,7 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
   imports: [
     CategoryFilterComponent,
     SearchBookComponent,
-    CommonModule,
+    AsyncPipe,
     SearchBookSkeletonComponent,
     TranslateModule,
   ],

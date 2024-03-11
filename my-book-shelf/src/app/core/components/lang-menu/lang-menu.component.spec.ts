@@ -21,11 +21,15 @@ describe('LangMenuComponent', () => {
   });
 
   it('should switch lang', () => {
-    expect(component.activeLang).toBe('en');
-    const switchElement: HTMLElement =
-      fixture.nativeElement.querySelectorAll('.lang-menu__item')[1];
-    switchElement.dispatchEvent(new Event('click'));
+    const switchEnElement: HTMLElement =
+      fixture.nativeElement.querySelectorAll('.lang-menu__item')[0];
+    switchEnElement.dispatchEvent(new Event('click'));
     fixture.detectChanges();
-    expect(component.activeLang).toBe('ru');
+    expect(component.activeLang.getValue()).toBe('en');
+    const switchRuElement: HTMLElement =
+      fixture.nativeElement.querySelectorAll('.lang-menu__item')[1];
+    switchRuElement.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(component.activeLang.getValue()).toBe('ru');
   });
 });

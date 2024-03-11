@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   LangChangeEvent,
@@ -11,7 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-lang-menu',
   standalone: true,
-  imports: [TranslateModule, CommonModule],
+  imports: [TranslateModule, AsyncPipe, NgClass],
   templateUrl: './lang-menu.component.html',
   styleUrl: './lang-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +29,6 @@ export class LangMenuComponent implements OnInit {
     }
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.activeLang.next(event.lang);
-      console.log(event.lang);
     });
   }
 

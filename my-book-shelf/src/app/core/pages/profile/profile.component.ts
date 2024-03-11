@@ -9,13 +9,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UserService } from '../../services/user/user.service';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 import { takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule, TranslateModule, CommonModule],
+  imports: [ReactiveFormsModule, TranslateModule, NgClass],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

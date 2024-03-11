@@ -6,14 +6,14 @@ import {
   Output,
 } from '@angular/core';
 import { IFavoriteBook } from '../../models/favoriteBook';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorite-book',
   standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
+  imports: [RouterLink, TranslateModule, DatePipe],
   templateUrl: './favorite-book.component.html',
   styleUrl: './favorite-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

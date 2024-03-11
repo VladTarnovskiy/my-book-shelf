@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Toaster } from '../../models/toaster';
 import { ToasterComponent } from '../toaster/toaster.component';
 import { ToasterService } from '../../services/toaster/toaster.service';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-toaster-container',
   standalone: true,
-  imports: [ToasterComponent, CommonModule],
+  imports: [ToasterComponent, AsyncPipe],
   templateUrl: './toaster-container.component.html',
   styleUrl: './toaster-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

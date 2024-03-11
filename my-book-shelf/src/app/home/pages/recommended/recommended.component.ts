@@ -3,13 +3,13 @@ import { Observable } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
 import { RecommendedBooksFacade } from '../../../store/recommendedBooks/recommendedBooks.facade';
 import { HomeBookComponent } from '../../components/home-book/home-book.component';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recommended',
   standalone: true,
-  imports: [HomeBookComponent, CommonModule, TranslateModule],
+  imports: [HomeBookComponent, AsyncPipe, TranslateModule],
   templateUrl: './recommended.component.html',
   styleUrl: './recommended.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

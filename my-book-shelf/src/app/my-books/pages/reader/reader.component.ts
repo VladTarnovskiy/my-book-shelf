@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +17,7 @@ import { MyBookService } from '../../../core/services/my-book/my-book.service';
 @Component({
   selector: 'app-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
+  imports: [SafePipe, GoBackDirective, TranslateModule, AsyncPipe, NgClass],
   templateUrl: './reader.component.html',
   styleUrl: './reader.component.scss',
   hostDirectives: [DestroyDirective],

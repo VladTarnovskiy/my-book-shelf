@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IUpLoadBookForm } from '../../models/upload';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyBookService } from '../../../core/services/my-book/my-book.service';
@@ -18,7 +18,7 @@ import { MyBookService } from '../../../core/services/my-book/my-book.service';
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule],
+  imports: [ReactiveFormsModule, NgClass, TranslateModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

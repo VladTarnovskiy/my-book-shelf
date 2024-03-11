@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,7 +18,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
 @Component({
   selector: 'app-review-item',
   standalone: true,
-  imports: [CommonModule, ModalComponent, TranslateModule],
+  imports: [AsyncPipe, ModalComponent, TranslateModule],
   templateUrl: './review-item.component.html',
   styleUrl: './review-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
