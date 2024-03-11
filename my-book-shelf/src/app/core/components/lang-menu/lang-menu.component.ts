@@ -7,6 +7,7 @@ import {
 } from '@ngx-translate/core';
 import { ILanguage } from '../../interfaces/language';
 import { BehaviorSubject } from 'rxjs';
+import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-lang-menu',
@@ -15,6 +16,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './lang-menu.component.html',
   styleUrl: './lang-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [switchMenuAnimation],
 })
 export class LangMenuComponent implements OnInit {
   isMenu = false;

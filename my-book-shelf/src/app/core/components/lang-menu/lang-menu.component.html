@@ -7,7 +7,7 @@
     alt="Polygon"
     [class.active]="isMenu"
   />
-  <button class="lang-menu" [class.active]="isMenu">
+  <button class="lang-menu" [@switchMenu]="isMenu">
     <button
       (click)="useLanguage('en')"
       class="lang-menu__item"

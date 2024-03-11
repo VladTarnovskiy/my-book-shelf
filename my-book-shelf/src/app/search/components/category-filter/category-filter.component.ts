@@ -10,6 +10,7 @@ import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 import { filterCategoryList } from './category-filter.constant';
 import { TranslateModule } from '@ngx-translate/core';
+import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-category-filter',
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [DestroyDirective],
+  animations: [switchMenuAnimation],
 })
 export class CategoryFilterComponent implements OnInit {
   filterCategoryList = filterCategoryList;

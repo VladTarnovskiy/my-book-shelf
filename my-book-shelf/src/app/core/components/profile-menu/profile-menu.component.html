@@ -15,7 +15,7 @@
     alt="Polygon"
     [class.active]="isMenu"
   />
-  <button class="profile-menu" [class.active]="isMenu">
+  <button class="profile-menu" [@switchMenu]="isMenu">
     @for (item of navigationList; track item.title) {
       <div class="profile-menu__item" [routerLink]="[item.link]">
         {{ 'PROFILE.' + item.title | translate }}

@@ -21,6 +21,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StateModule } from './store/state.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -39,6 +40,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideRouterStore(),
+    provideAnimationsAsync(),
     importProvidersFrom([
       StateModule,
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),

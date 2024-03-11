@@ -5,6 +5,7 @@ import { AuthFacade } from '../../../store/auth/auth.facade';
 import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-profile-menu',
@@ -13,6 +14,7 @@ import { Observable } from 'rxjs';
   templateUrl: './profile-menu.component.html',
   styleUrl: './profile-menu.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [switchMenuAnimation],
 })
 export class ProfileMenuComponent {
   navigationList = profileList;

@@ -39,21 +39,14 @@
   visibility: hidden;
   left: 0;
   bottom: 0;
-  transform: translateY(105%);
   width: 17rem;
   height: 32rem;
   border-radius: 1rem;
   line-height: 2.6rem;
   background-color: $primary-third;
-  opacity: 0;
   text-align: start;
   @extend %shadow;
   @extend %transition;
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 
   &__item {
     padding: 1.2rem 0.9rem;
