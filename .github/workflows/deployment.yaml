@@ -6,9 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cache deps
         uses: actions/cache@v3
+        name: node version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
         with:
           path: ~/.npm
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
