@@ -7,9 +7,8 @@ jobs:
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
-      - name: Go to root folder
-        working-directory: ./my-book-shelf
       - name: Install dependencies
+        working-directory: ./my-book-shelf
         run: npm ci
       - name: Lint application
         run: npm run lint
