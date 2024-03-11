@@ -1,5 +1,4 @@
 name: Deploy Angular App
-run-name: ${{ github.actor }} is pushed updates
 on: [push]
 jobs:
   lint:
