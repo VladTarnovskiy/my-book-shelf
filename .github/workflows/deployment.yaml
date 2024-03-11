@@ -11,6 +11,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "latest"
+      - name: Go to root folder
+        run: cd my-book-shelf
       - name: Install dependencies
         run: npm ci
       - name: Lint application
