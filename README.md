@@ -83,9 +83,9 @@
 
 Добавить валидацию полей email, password, а также выводить информацию, если пользователь не верно ввёл данные.
 
-3. (опционально)[Страница подтверждения кода](https://www.figma.com/file/GHSR513UofUe9Gba3tVvUJ/Untitled?type=design&node-id=1-2837&mode=design&t=OLBB9a7CYcz2EmDP-4).
+3. (опционально)[Страница верификации почты](https://www.figma.com/file/GHSR513UofUe9Gba3tVvUJ/Untitled?type=design&node-id=1-2837&mode=design&t=OLBB9a7CYcz2EmDP-4).
 
-Страница логина должна реализовывать поле для ввода кода подтверждения и затем перенаправлять пользователя на главную страницу.
+Страница логина должна реализовывать поле для подтверждения почты и затем перенаправлять пользователя на главную страницу.
 
 4. [Главная страница](https://www.figma.com/file/GHSR513UofUe9Gba3tVvUJ/Untitled?type=design&node-id=1-57&mode=design&t=OLBB9a7CYcz2EmDP-4).
 
