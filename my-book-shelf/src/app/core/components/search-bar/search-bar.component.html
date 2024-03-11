@@ -15,7 +15,7 @@
     />
     <button
       class="menu"
-      [class.active]="isFilter"
+      [@switchMenu]="isFilter"
       (click)="changeFilterType($event)"
     >
       @for (item of filterTypeList; track item) {

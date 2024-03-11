@@ -14,6 +14,7 @@ import { filterTypeList } from './search-bar.constant';
 import { SearchService } from '../../services/search/search.service';
 import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-search-bar',
@@ -23,6 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './search-bar.component.scss',
   hostDirectives: [DestroyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [switchMenuAnimation],
 })
 export class SearchBarComponent implements OnInit {
   filterTypeList = filterTypeList;

@@ -38,23 +38,16 @@
 
 .lang-menu {
   position: absolute;
-  visibility: hidden;
+  display: none;
   right: 0;
   bottom: 0;
-  transform: translateY(110%);
   width: 15.5rem;
   min-height: 7rem;
   border-radius: 1rem;
   background-color: $primary-third;
-  opacity: 0;
   @extend %shadow;
   @extend %transition;
   z-index: 2;
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 
   &__item {
     padding: 0.5rem 3.5rem 0.5rem 1.9rem;

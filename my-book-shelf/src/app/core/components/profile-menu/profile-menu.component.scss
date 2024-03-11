@@ -45,25 +45,18 @@
 
 .profile-menu {
   position: absolute;
-  visibility: hidden;
+  display: none;
   right: 0;
   bottom: 0;
-  transform: translateY(105%);
   width: 15.5rem;
   min-height: 14.5rem;
   border-radius: 1rem;
   line-height: 2.6rem;
   background-color: $primary-third;
-  opacity: 0;
   text-align: start;
   @extend %shadow;
   @extend %transition;
   z-index: 2;
-
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
 
   &__item {
     padding: 0.2rem 3.5rem 0.2rem 1.9rem;
