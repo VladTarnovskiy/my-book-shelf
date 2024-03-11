@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test --code-coverage",
     "lint": "ng lint --fix",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
