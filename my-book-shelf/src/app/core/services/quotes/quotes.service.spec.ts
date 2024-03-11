@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { QuotesService } from './quotes.service';
 import {
   HttpClientTestingModule,
