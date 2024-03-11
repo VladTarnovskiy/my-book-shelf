@@ -1,7 +1,7 @@
-name: Deploy Angular App
+name: Lint and testing my-book-shelf app
 on: [push, pull_request]
 jobs:
-  lint:
+  lint-testing:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
