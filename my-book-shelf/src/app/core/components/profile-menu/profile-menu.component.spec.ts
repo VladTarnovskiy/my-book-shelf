@@ -42,7 +42,7 @@ describe('ProfileMenuComponent', () => {
 
   it('should contain username', () => {
     const userNameEl: HTMLElement =
-      fixture.nativeElement.querySelector('.profile__title');
+      fixture.nativeElement.querySelector('.profile__name');
     expect(userNameEl.textContent).toBe('Jake');
   });
 

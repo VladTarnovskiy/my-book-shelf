@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { IUploadBook } from '../../models/upload';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MyBookComponent } from '../../components/my-book/my-book.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MyBookService } from '../../../core/services/my-book/my-book.service';
@@ -15,7 +15,7 @@ import { DestroyDirective } from '../../../core/directives/destroy/destroy.direc
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [CommonModule, MyBookComponent, TranslateModule],
+  imports: [AsyncPipe, MyBookComponent, TranslateModule],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

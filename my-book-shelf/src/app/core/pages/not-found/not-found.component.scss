@@ -6,21 +6,29 @@
   @extend %itemsCenter;
   justify-content: center;
   margin-top: 20rem;
-  flex-direction: row;
-
-  img {
-    height: 40rem;
-    width: 40rem;
-  }
-}
-
-.description {
-  padding-top: 3.5rem;
+  flex-direction: column;
   font-size: 3rem;
   font-family: 'Inter Bold';
   color: $primary-fifth;
+
+  @include tablet {
+    margin-top: 10rem;
+  }
 }
 
 .code {
   font-size: 3.75rem;
+}
+
+.title {
+  margin-bottom: 3rem;
+}
+
+.error-animation {
+  background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+  border-radius: 1rem;
+  background-repeat: no-repeat;
+  max-width: 100rem;
+  width: 100%;
+  background-position: center;
 }

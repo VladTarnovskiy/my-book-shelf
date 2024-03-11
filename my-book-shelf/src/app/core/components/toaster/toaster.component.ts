@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Toaster } from '../../models/toaster';
 
 @Component({
@@ -7,6 +13,7 @@ import { Toaster } from '../../models/toaster';
   imports: [],
   templateUrl: './toaster.component.html',
   styleUrl: './toaster.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToasterComponent {
   @Input() toast!: Toaster;

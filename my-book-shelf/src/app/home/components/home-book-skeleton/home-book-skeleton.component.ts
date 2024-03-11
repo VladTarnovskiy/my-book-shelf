@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-home-book-skeleton',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './home-book-skeleton.component.html',
   styleUrl: './home-book-skeleton.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeBookSkeletonComponent {}

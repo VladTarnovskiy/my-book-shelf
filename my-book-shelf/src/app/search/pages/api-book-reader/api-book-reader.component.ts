@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,7 +22,14 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
 @Component({
   selector: 'app-api-book-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    NgClass,
+    SafePipe,
+    GoBackDirective,
+    TranslateModule,
+  ],
   templateUrl: './api-book-reader.component.html',
   styleUrl: './api-book-reader.component.scss',
   hostDirectives: [DestroyDirective],
@@ -31,6 +38,7 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
 export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   book$: Observable<IBook | null> = this.readerBookFacade.readerBook$;
   isFavorite = false;
+  isFullScreen = new BehaviorSubject<boolean>(false);
   isUnavailable$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   private destroy$ = inject(DestroyDirective).destroy$;
@@ -90,6 +98,10 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   addFavoriteStatus(bookId: string): void {
     this.booksFacade.addFavoriteStatus(bookId);
     this.isFavorite = true;
+  }
+
+  switchFullScreen(isFullScreen: boolean): void {
+    this.isFullScreen.next(isFullScreen);
   }
 
   ngAfterViewInit(): void {

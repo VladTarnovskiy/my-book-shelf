@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,7 +9,7 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotFoundComponent],
+      imports: [NotFoundComponent, TranslateModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);
@@ -21,7 +22,8 @@ describe('NotFoundComponent', () => {
   });
 
   it('should contain not found message', () => {
-    const messageEl: HTMLElement = fixture.nativeElement.querySelector('p');
-    expect(messageEl.textContent).toBe('Page not found');
+    const messageEl: HTMLElement =
+      fixture.nativeElement.querySelector('.title');
+    expect(messageEl.textContent).toBeTruthy();
   });
 });

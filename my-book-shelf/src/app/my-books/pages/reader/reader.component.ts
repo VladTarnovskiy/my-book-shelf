@@ -1,5 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { AsyncPipe, NgClass } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 import { IUploadBook } from '../../models/upload';
 import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
@@ -12,14 +17,16 @@ import { MyBookService } from '../../../core/services/my-book/my-book.service';
 @Component({
   selector: 'app-reader',
   standalone: true,
-  imports: [CommonModule, SafePipe, GoBackDirective, TranslateModule],
+  imports: [SafePipe, GoBackDirective, TranslateModule, AsyncPipe, NgClass],
   templateUrl: './reader.component.html',
   styleUrl: './reader.component.scss',
   hostDirectives: [DestroyDirective],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReaderComponent implements OnInit {
   book$ = new BehaviorSubject<IUploadBook | null>(null);
   book: IUploadBook | null = null;
+  isFullScreen = new BehaviorSubject<boolean>(false);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -47,5 +54,9 @@ export class ReaderComponent implements OnInit {
     if (this.book) {
       this.myBookService.changeFavoriteStatus(isFavorite, this.book.id);
     }
+  }
+
+  switchFullScreen(isFullScreen: boolean): void {
+    this.isFullScreen.next(isFullScreen);
   }
 }

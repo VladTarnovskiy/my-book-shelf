@@ -31,9 +31,18 @@
       </div>
     </div>
     <div class="links">
-      <button class="ebook">{{ 'COMMON.BTN.EBOOK' | translate }}</button>
+      @if (bookData.epub.isAvailable) {
+        <a [href]="bookData.epub.link">
+          <button class="ebook btn-second">
+            {{ 'COMMON.BTN.EBOOK' | translate }}
+          </button>
+        </a>
+      }
       @if (bookData.ISBN) {
-        <button class="read" [routerLink]="['/search/reader', bookData.id]">
+        <button
+          class="read btn-first"
+          [routerLink]="['/search/reader', bookData.id]"
+        >
           {{ 'COMMON.BTN.READ' | translate }}
         </button>
       }

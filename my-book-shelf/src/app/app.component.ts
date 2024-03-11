@@ -26,18 +26,21 @@ export class AppComponent implements OnInit {
   userIsLoading$ = this.authFacade.userIsLoading$;
 
   constructor(
-    translate: TranslateService,
+    private translate: TranslateService,
     private authService: AuthService,
     private authFacade: AuthFacade
   ) {
     translate.setTranslation('en', englishLang);
     translate.setTranslation('ru', russianLang);
     translate.setDefaultLang('en');
-    translate.use('en');
   }
 
   ngOnInit(): void {
     this.authService.getUserAfterReload();
+    const lang = localStorage.getItem('lang');
+    if (lang) {
+      this.translate.use(lang);
+    }
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     // );

@@ -71,7 +71,7 @@
     height: 5.6rem;
     border-radius: 0.8rem;
     padding: 1.6rem;
-    @extend %form-border;
+    @extend %second-border;
   }
 }
 
@@ -86,9 +86,6 @@
   &__login {
     height: 4.8rem;
     width: 100%;
-    background-color: $primary-first;
-    font-family: 'Inter Semi Bold';
-    color: $primary-third;
     border-radius: 0.8rem;
     margin-bottom: 3.9rem;
   }

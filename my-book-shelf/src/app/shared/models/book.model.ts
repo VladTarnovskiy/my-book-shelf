@@ -8,6 +8,10 @@ export interface IBook {
     small: string;
     normal: string;
   };
+  epub: {
+    link: string | null;
+    isAvailable: boolean | null;
+  };
   categories: string[];
   ISBN: string | null;
 }

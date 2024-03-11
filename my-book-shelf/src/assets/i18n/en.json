@@ -26,7 +26,9 @@
     "BTN": {
       "BACK": "Back to results",
       "READ": "Read",
-      "EBOOK": "E-BOOK"
+      "EBOOK": "E-BOOK",
+      "FULL": "Full Screen",
+      "SHORT": "Regular Screen"
     }
   },
   "SEARCH": {
@@ -41,7 +43,12 @@
     "RATING": "Ratings",
     "AVAILABILITY": "Availability",
     "COPY": "Hard Copy",
-    "EDITION": "second edition"
+    "EDITION": "second edition",
+    "OPTIONS": {
+      "Review": "Review",
+      "Notes": "Notes",
+      "Share": "Share"
+    }
   },
   "API_READER": {
     "INTRODUCTION": "INTRODUCTION",
@@ -98,6 +105,10 @@
       "DESCRIPTION": "please enter a description",
       "FILE": "please choose a file",
       "IMAGE": "please choose a image"
+    },
+    "MESSAGES": {
+      "TITLE": "My book",
+      "MESSAGE": "The book was created!"
     }
   },
   "SEARCH_BAR": {
@@ -208,5 +219,8 @@
     "PHOTO": "Profile photo",
     "NAME": "Username",
     "BUTTON": "Save"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page not found"
   }
 }

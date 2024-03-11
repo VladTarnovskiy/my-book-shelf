@@ -7,10 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ValidatePassword } from '../../validators/password';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { IUserDetailsLoginForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -18,10 +18,10 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule,
     FormsModule,
-    RouterModule,
+    RouterLink,
     TranslateModule,
+    NgClass,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -56,11 +56,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     this.authService.logInWithGoogle();
   }
 
-  loginWithGitHub() {
+  loginWithGitHub(): void {
     this.authService.logInWithGitHub();
   }
 

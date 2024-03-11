@@ -1,5 +1,5 @@
 <div class="container">
-  @for (toast of toasts; track toast; let i = $index) {
+  @for (toast of toasts | async; track toast; let i = $index) {
     <app-toaster
       [toast]="toast"
       [index]="i"

@@ -38,7 +38,7 @@
     height: 5.9rem;
     border-radius: 1rem;
     padding: 2rem 3rem;
-    @extend %form-border;
+    @extend %second-border;
   }
 }
 
@@ -54,7 +54,7 @@
 
   .form-item__input::file-selector-button {
     padding: 0.5rem;
-    @extend %form-border;
+    @extend %second-border;
     border-radius: 0.3rem;
 
     &:hover {
@@ -77,9 +77,5 @@
     height: 6.5rem;
     width: 31.6rem;
     margin: auto;
-    background-color: $primary-first;
-    font-family: 'Inter Semi Bold';
-    color: $primary-third;
-    border-radius: 0.5rem;
   }
 }

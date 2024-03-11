@@ -13,11 +13,15 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
         small: book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
         normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
       },
+      epub: {
+        link: book.accessInfo.epub?.acsTokenLink || null,
+        isAvailable: book.accessInfo?.epub.isAvailable || null,
+      },
       categories: book.volumeInfo.categories || ['unknown'],
       ISBN: book.volumeInfo.industryIdentifiers
         ? book.volumeInfo.industryIdentifiers.find(
             (item) => item.type === 'ISBN_10'
-          )?.identifier || ''
+          )?.identifier || null
         : null,
     };
     return transBook;
@@ -37,11 +41,15 @@ export const transformRespBookData = (book: IBookResp): IBook => {
       small: book.volumeInfo.imageLinks?.smallThumbnail || 'assets/logo.svg',
       normal: book.volumeInfo.imageLinks?.thumbnail || 'assets/logo.svg',
     },
+    epub: {
+      link: book.accessInfo.epub?.acsTokenLink || null,
+      isAvailable: book.accessInfo?.epub.isAvailable || null,
+    },
     categories: book.volumeInfo.categories || ['unknown'],
     ISBN: book.volumeInfo.industryIdentifiers
       ? book.volumeInfo.industryIdentifiers.find(
           (item) => item.type === 'ISBN_10'
-        )?.identifier || ''
+        )?.identifier || null
       : null,
   };
 

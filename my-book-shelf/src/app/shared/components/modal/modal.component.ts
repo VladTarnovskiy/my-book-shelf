@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -6,6 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   imports: [],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
   @Output() closeModal = new EventEmitter<boolean>();

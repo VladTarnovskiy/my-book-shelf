@@ -10,15 +10,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { IUpLoadBookForm } from '../../models/upload';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ToasterService } from '../../../core/services/toaster/toaster.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MyBookService } from '../../../core/services/my-book/my-book.service';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, TranslateModule],
+  imports: [ReactiveFormsModule, NgClass, TranslateModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,6 +48,7 @@ export class UploadComponent {
   constructor(
     private toasterService: ToasterService,
     private myBookService: MyBookService,
+    private translateService: TranslateService,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -64,14 +65,14 @@ export class UploadComponent {
       this.myBookService.addMyBook(bookForFirestore);
       this.toasterService.show({
         type: 'success',
-        title: 'My book',
-        message: 'The book was created!',
+        title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
+        message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
       });
       this.uploadForm.reset();
     }
   }
 
-  onSetImage(event: Event) {
+  onSetImage(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
 
@@ -83,7 +84,7 @@ export class UploadComponent {
     }
   }
 
-  onSetFile(event: Event) {
+  onSetFile(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
     const fileList: FileList | null = element.files;
 

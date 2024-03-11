@@ -10,4 +10,4 @@ import { BooksEffects } from './books.effects';
     EffectsModule.forFeature(BooksEffects),
   ],
 })
-export class BookModule {}
+export class BooksStoreModule {}

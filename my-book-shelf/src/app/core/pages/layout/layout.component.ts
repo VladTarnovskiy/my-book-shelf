@@ -5,7 +5,7 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { LangMenuComponent } from '../../components/lang-menu/lang-menu.component';
 import { ProfileMenuComponent } from '../../components/profile-menu/profile-menu.component';
-import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-layout',
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
     SearchBarComponent,
     LangMenuComponent,
     ProfileMenuComponent,
-    CommonModule,
+    NgClass,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

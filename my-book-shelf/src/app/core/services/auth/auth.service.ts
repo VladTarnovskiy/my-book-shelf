@@ -20,7 +20,6 @@ import { AuthFacade } from '../../../store/auth/auth.facade';
   providedIn: 'root',
 })
 export class AuthService {
-  //only for a develop term the isLogin field is true
   private isLoggedIn = new BehaviorSubject<boolean>(true);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
@@ -134,9 +133,8 @@ export class AuthService {
   }
 
   setUserName(userId: string): void {
-    console.log('here');
-    this.userService.getUser(userId).subscribe((x) => {
-      const userInfo = x.payload.data();
+    this.userService.getUser(userId).subscribe((user) => {
+      const userInfo = user.payload.data();
       if (userInfo) {
         this.authFacade.addUserName(userInfo.name);
         this.authFacade.addUserId(userInfo.userId);

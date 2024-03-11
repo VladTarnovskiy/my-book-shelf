@@ -1,5 +1,5 @@
 @if (book$ | async; as book) {
-  <div class="reader">
+  <div class="reader" [ngClass]="{ full: isFullScreen | async }">
     <div class="reader-header">
       <div class="info">
         <button class="back" appGoBack>
@@ -20,19 +20,28 @@
           </div>
         </div>
       </div>
-      <div class="favorite">
+      <div class="buttons">
         @if (book.isFavorite) {
-          <button class="favorite__but" (click)="changeFavorite(false)">
+          <button class="buttons__fav" (click)="changeFavorite(false)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>
         } @else {
-          <button class="favorite__but" (click)="changeFavorite(true)">
+          <button class="buttons__fav" (click)="changeFavorite(true)">
             <img src="assets/empty-heart.svg" alt="Favorite" />
+          </button>
+        }
+        @if (isFullScreen | async) {
+          <button class="buttons__screen" (click)="switchFullScreen(false)">
+            {{ 'COMMON.BTN.SHORT' | translate }}
+          </button>
+        } @else {
+          <button class="buttons__screen" (click)="switchFullScreen(true)">
+            {{ 'COMMON.BTN.FULL' | translate }}
           </button>
         }
       </div>
     </div>
-    <div class="book">
+    <div class="book" [ngClass]="{ full: isFullScreen | async }">
       <object
         aria-label="Book"
         class="book__reader"

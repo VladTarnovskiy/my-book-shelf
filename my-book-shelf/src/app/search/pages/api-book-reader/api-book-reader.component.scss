@@ -1,9 +1,18 @@
 @import 'placeholders';
 @import 'variables';
+@import 'mixins';
 
 .reader {
   color: $primary-third;
   background-color: $primary-second;
+
+  &.full {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .reader-header {
@@ -11,24 +20,57 @@
   justify-content: space-between;
   padding: 2.3rem 7.2rem 2.3rem 1.8rem;
   margin-bottom: 2rem;
+
+  @include tablet-big {
+    flex-direction: column-reverse;
+  }
+
+  @include tablet {
+    padding-right: 1.8rem;
+  }
 }
 
-.favorite {
+.buttons {
   width: 3rem;
   height: 3rem;
   margin-right: 6.7rem;
+  @extend %itemsCenter;
+  justify-content: center;
 
-  &__but {
+  @include tablet-big {
+    margin-left: auto;
+    margin-bottom: 2rem;
+  }
+
+  &__fav {
     @extend %itemsCenter;
     justify-content: center;
     width: 3rem;
     height: 3rem;
+    margin-right: 2.2rem;
+  }
+
+  &__screen {
+    @extend %itemsCenter;
+    justify-content: center;
+    min-width: 8.5rem;
+    width: 100%;
+    text-wrap: nowrap;
+    border-radius: 0.5rem;
+    height: 3rem;
+    @extend %second-border;
+    font-size: 1rem;
+    color: $primary-third;
   }
 }
 
 .info {
   @extend %itemsCenter;
   justify-content: flex-start;
+
+  @include tablet-big {
+    margin-right: auto;
+  }
 }
 
 .back {
@@ -77,13 +119,28 @@
   }
 }
 
-.book {
+.content {
+  padding: 0rem 2rem 2rem 2rem;
+  height: 100%;
   width: 100%;
+}
+
+.book {
+  width: 90%;
+  margin: auto;
   height: 80rem;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  justify-content: center;
+
+  @include small-desktop {
+    width: 100%;
+  }
+
+  @include tablet-big {
+    height: 60rem;
+  }
+
+  &.full {
+    height: 80%;
+  }
 }
 
 .not-found,
@@ -98,9 +155,9 @@
 
 .loader {
   height: 100%;
-  width: 68rem;
+  max-width: 68rem;
+  width: 100%;
   margin: auto;
-  margin-bottom: 2.3rem;
   border-radius: 1rem;
   @extend %skeletonBackgroundAnimation;
 }

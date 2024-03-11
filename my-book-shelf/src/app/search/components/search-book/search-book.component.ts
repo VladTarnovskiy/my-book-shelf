@@ -6,14 +6,14 @@ import {
   Output,
 } from '@angular/core';
 import { IBook } from '../../../shared/models/book.model';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-search-book',
   standalone: true,
-  imports: [RouterModule, CommonModule, TranslateModule],
+  imports: [RouterLink, DatePipe, TranslateModule],
   templateUrl: './search-book.component.html',
   styleUrl: './search-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

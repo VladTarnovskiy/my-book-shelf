@@ -8,21 +8,21 @@ import {
 } from '@angular/forms';
 import { ValidateName } from '../../validators/name';
 import { ValidatePassword } from '../../validators/password';
-import { CommonModule } from '@angular/common';
 import { IUserDetailsRegistrationForm } from '../../models/user';
 import { AuthService } from '../../../core/services/auth/auth.service';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { confirmPasswordValidator } from '../../validators/confirmPassword';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    CommonModule,
+    NgClass,
     FormsModule,
-    RouterModule,
+    RouterLink,
     TranslateModule,
   ],
   templateUrl: './registration.component.html',

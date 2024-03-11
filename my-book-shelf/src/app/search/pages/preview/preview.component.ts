@@ -4,10 +4,10 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { IBook } from '../../../shared/models/book.model';
 import { Observable, takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { PreviewSkeletonComponent } from '../../components/preview-skeleton/preview-skeleton.component';
 import { PreviewOptionsComponent } from '../../components/preview-options/preview-options.component';
 import { BooksFacade } from '../../../store/books/books.facade';
@@ -21,13 +21,14 @@ import { RecentService } from '../../../core/services/recent/recent.service';
   selector: 'app-details',
   standalone: true,
   imports: [
-    RouterModule,
-    CommonModule,
     PreviewSkeletonComponent,
     PreviewOptionsComponent,
     GoBackDirective,
     TranslateModule,
     ReviewComponent,
+    AsyncPipe,
+    RouterLink,
+    DatePipe,
   ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
@@ -65,7 +66,7 @@ export class PreviewComponent implements OnInit {
       searchValue: author,
       filterType: 'Author',
       categoryFilterType: 'Browse',
-      page: 1,
+      page: 0,
     });
   }
 }

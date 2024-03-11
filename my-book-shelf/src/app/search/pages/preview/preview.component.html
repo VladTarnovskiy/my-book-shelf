@@ -54,15 +54,19 @@
           <div class="buttons">
             @if (bookData.ISBN) {
               <button
-                class="buttons__read"
+                class="buttons__read btn-third"
                 [routerLink]="['/search/reader', bookData.id]"
               >
                 {{ 'COMMON.BTN.READ' | translate }}
               </button>
             }
-            <button class="buttons__epub">
-              {{ 'COMMON.BTN.EBOOK' | translate }}
-            </button>
+            @if (bookData.epub.isAvailable) {
+              <a [href]="bookData.epub.link">
+                <button class="buttons__ebook btn-second">
+                  {{ 'COMMON.BTN.EBOOK' | translate }}
+                </button>
+              </a>
+            }
           </div>
         </div>
       </div>

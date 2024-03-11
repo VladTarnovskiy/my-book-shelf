@@ -5,16 +5,16 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { IUploadBook } from '../../models/upload';
-import { RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-book',
   standalone: true,
-  imports: [CommonModule, RouterModule, ModalComponent, TranslateModule],
+  imports: [DatePipe, RouterLink, ModalComponent, TranslateModule],
   templateUrl: './my-book.component.html',
   styleUrl: './my-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FavoriteBookComponent } from '../../components/favorite-book/favorite-book.component';
 import { BehaviorSubject, takeUntil } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { IFavoriteBook } from '../../models/favoriteBook';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { IUploadBook } from '../../../my-books/models/upload';
@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [
     FavoriteBookComponent,
-    CommonModule,
+    AsyncPipe,
     FavoriteUploadBookComponent,
     TranslateModule,
   ],
