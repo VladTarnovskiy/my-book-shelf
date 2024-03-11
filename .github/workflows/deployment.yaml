@@ -1,5 +1,5 @@
 name: Deploy Angular App
-on: [push]
+on: [push, pull_request]
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -18,4 +18,4 @@ jobs:
         run: npm run lint
       - name: Test application
         working-directory: ./my-book-shelf
-        run: npm run test
+        run: npm run ci-test
