@@ -65,7 +65,7 @@ export class SearchBarComponent implements OnInit {
       searchValue: this.searchValue.value,
       filterType: this.filterType.getValue(),
       categoryFilterType: this.filterCategory,
-      page: 1,
+      page: 0,
     });
 
     if (this.router.url !== '/search') {
@@ -79,7 +79,7 @@ export class SearchBarComponent implements OnInit {
         searchValue: this.searchValue.value,
         filterType: this.filterType.getValue(),
         categoryFilterType: this.filterCategory,
-        page: 1,
+        page: 0,
       })
       .pipe(takeUntil(this.destroy$))
       .subscribe((searchValues) => {

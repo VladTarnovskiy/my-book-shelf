@@ -66,7 +66,7 @@ export class PreviewComponent implements OnInit {
       searchValue: author,
       filterType: 'Author',
       categoryFilterType: 'Browse',
-      page: 1,
+      page: 0,
     });
   }
 }

@@ -75,6 +75,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },

@@ -49,7 +49,10 @@
     <div class="category">{{ bookData.categories[0] }}</div>
   </div>
   <div class="item item_buttons">
-    <button class="preview-but" [routerLink]="['preview', bookData.id]">
+    <button
+      class="preview-but btn-first"
+      [routerLink]="['preview', bookData.id]"
+    >
       {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
     </button>
     <div class="favorite">

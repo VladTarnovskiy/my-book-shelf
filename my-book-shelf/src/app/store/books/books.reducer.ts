@@ -24,7 +24,7 @@ export const initialState: BooksState = {
   books: [],
   totalItems: 0,
   previewBook: null,
-  page: 1,
+  page: 0,
   searchValue: '',
   isLoading: false,
   isPreviewLoading: false,
@@ -42,7 +42,7 @@ export const booksReducer = createReducer(
       state,
       { searchValue, filterType, categoryFilterType, page }
     ): BooksState => {
-      if (page === 1) {
+      if (page === 0) {
         return {
           ...state,
           books: [],
@@ -63,7 +63,7 @@ export const booksReducer = createReducer(
     }
   ),
   on(BOOKS_ACTIONS.FetchBooksSuccess, (state, { books, page }): BooksState => {
-    if (page === 1) {
+    if (page === 0) {
       return {
         ...state,
         books,
