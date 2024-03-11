@@ -10,7 +10,7 @@ export const switchMenuAnimation = trigger('switchMenu', [
   state(
     'false',
     style({
-      display: 'none',
+      visibility: 'hidden',
       opacity: 0,
       transform: 'translateY(200%)',
     })
@@ -18,7 +18,7 @@ export const switchMenuAnimation = trigger('switchMenu', [
   state(
     'true',
     style({
-      display: 'block',
+      visibility: 'visible',
       opacity: 1,
       transform: 'translateY(100%)',
       bottom: '-10px',
