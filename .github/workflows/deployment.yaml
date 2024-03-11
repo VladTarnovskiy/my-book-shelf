@@ -5,8 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
+        working-directory: ./my-book-shelf
         run: npm ci
       - name: Lint application
         run: npm run lint
