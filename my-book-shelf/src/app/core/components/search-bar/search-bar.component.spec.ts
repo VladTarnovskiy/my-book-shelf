@@ -4,7 +4,6 @@ import { SearchBarComponent } from './search-bar.component';
 import { SearchService } from '../../services/search/search.service';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
-// import { MockAnimationDriver } from '@angular/animations/browser/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SearchBarComponent', () => {
@@ -49,6 +48,7 @@ describe('SearchBarComponent', () => {
 
     fixture = TestBed.createComponent(SearchBarComponent);
     component = fixture.componentInstance;
+    component.elasticValues.next(['lorem', 'lorem']);
     fixture.detectChanges();
   });
 
