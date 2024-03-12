@@ -19,7 +19,6 @@
   @extend %itemsCenter;
   justify-content: space-between;
   padding: 2.3rem 7.2rem 2.3rem 1.8rem;
-  margin-bottom: 2rem;
 
   @include tablet-big {
     flex-direction: column-reverse;
@@ -122,6 +121,14 @@
 .book {
   width: 100%;
   height: 80rem;
+
+  @include tablet-big {
+    height: 60rem;
+  }
+
+  @include tablet-big {
+    height: 40rem;
+  }
 
   &.full {
     height: 80%;

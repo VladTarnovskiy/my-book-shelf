@@ -107,52 +107,50 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
       if (book) {
-        setTimeout(() => {
-          if (document.body.querySelector('#google-script')) {
-            const viewer = new window.google.books.DefaultViewer(
-              this.bookCanvas.nativeElement
-            );
-            viewer.load(
-              `ISBN:${book?.ISBN}`,
-              () => {
-                this.isUnavailable$.next(true);
-                this.isLoading$.next(false);
-                this.cd.detectChanges();
-              },
-              () => {
-                this.isUnavailable$.next(false);
-                this.isLoading$.next(false);
-                this.cd.detectChanges();
-              }
-            );
-          } else {
-            const scriptTag = document.createElement('script');
-            scriptTag.src = 'https://www.google.com/books/jsapi.js';
-            scriptTag.id = 'google-script';
-            scriptTag.addEventListener('load', () => {
-              window.google.books.load();
-              setTimeout(() => {
-                const viewer = new window.google.books.DefaultViewer(
-                  this.bookCanvas.nativeElement
-                );
-                viewer.load(
-                  `ISBN:${book?.ISBN}`,
-                  () => {
-                    this.isUnavailable$.next(true);
-                    this.isLoading$.next(false);
-                    this.cd.detectChanges();
-                  },
-                  () => {
-                    this.isUnavailable$.next(false);
-                    this.isLoading$.next(false);
-                    this.cd.detectChanges();
-                  }
-                );
-              }, 2000);
-            });
-            document.body.appendChild(scriptTag);
-          }
-        }, 100);
+        if (document.body.querySelector('#google-script')) {
+          const viewer = new window.google.books.DefaultViewer(
+            this.bookCanvas.nativeElement
+          );
+          viewer.load(
+            `ISBN:${book?.ISBN}`,
+            () => {
+              this.isUnavailable$.next(true);
+              this.isLoading$.next(false);
+              this.cd.detectChanges();
+            },
+            () => {
+              this.isUnavailable$.next(false);
+              this.isLoading$.next(false);
+              this.cd.detectChanges();
+            }
+          );
+        } else {
+          const scriptTag = document.createElement('script');
+          scriptTag.src = 'https://www.google.com/books/jsapi.js';
+          scriptTag.id = 'google-script';
+          scriptTag.addEventListener('load', () => {
+            window.google.books.load();
+            setTimeout(() => {
+              const viewer = new window.google.books.DefaultViewer(
+                this.bookCanvas.nativeElement
+              );
+              viewer.load(
+                `ISBN:${book?.ISBN}`,
+                () => {
+                  this.isUnavailable$.next(true);
+                  this.isLoading$.next(false);
+                  this.cd.detectChanges();
+                },
+                () => {
+                  this.isUnavailable$.next(false);
+                  this.isLoading$.next(false);
+                  this.cd.detectChanges();
+                }
+              );
+            }, 2000);
+          });
+          document.body.appendChild(scriptTag);
+        }
       }
     });
   }

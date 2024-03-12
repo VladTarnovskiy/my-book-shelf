@@ -1,5 +1,5 @@
-@if (book$ | async; as book) {
-  <div class="reader" [ngClass]="{ full: isFullScreen | async }">
+<div class="reader" [ngClass]="{ full: isFullScreen | async }">
+  @if (book$ | async; as book) {
     <div class="reader-header">
       <div class="info">
         <button class="back" appGoBack>
@@ -47,21 +47,17 @@
         }
       </div>
     </div>
-    <div class="content">
-      <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
-        @if (isUnavailable$ | async) {
-          <div class="not-available">
-            {{ 'API_READER.NOT_AVAILABLE' | translate }}
-          </div>
-        }
-        @if (isLoading$ | async) {
-          <div class="loader"></div>
-        }
-      </div>
+  }
+  <div class="content">
+    <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
+      @if (isUnavailable$ | async) {
+        <div class="not-available">
+          {{ 'API_READER.NOT_AVAILABLE' | translate }}
+        </div>
+      }
+      @if (isLoading$ | async) {
+        <div class="loader"></div>
+      }
     </div>
   </div>
-} @else {
-  @if ((isLoading$ | async) === false) {
-    <div class="not-found">{{ 'API_READER.NOT_FOUND' | translate }}</div>
-  }
-}
+</div>
