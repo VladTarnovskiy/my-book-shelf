@@ -24,5 +24,6 @@ export const switchMenuAnimation = trigger('switchMenu', [
       bottom: '-10px',
     })
   ),
-  transition('false <=> true', [animate(300)]),
+  transition('false => true', [animate('0.3s')]),
+  transition('true => false', [animate('0.3s 0.3s')]),
 ]);

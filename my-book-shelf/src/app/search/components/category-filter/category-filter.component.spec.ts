@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFilterComponent } from './category-filter.component';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('CategoryFilterComponent', () => {
   let component: CategoryFilterComponent;
@@ -25,7 +26,11 @@ describe('CategoryFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoryFilterComponent, TranslateModule.forRoot()],
+      imports: [
+        CategoryFilterComponent,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+      ],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
 

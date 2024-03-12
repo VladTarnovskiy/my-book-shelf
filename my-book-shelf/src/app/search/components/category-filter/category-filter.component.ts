@@ -48,7 +48,7 @@ export class CategoryFilterComponent implements OnInit {
 
   changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
-    if (el.className === 'menu__item') {
+    if (el.classList.contains('menu__item')) {
       this.filterCategory = el.getAttribute(
         'data-filterType'
       ) as CategoryFilterKeys;

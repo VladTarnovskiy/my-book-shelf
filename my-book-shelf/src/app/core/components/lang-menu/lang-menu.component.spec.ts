@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LangMenuComponent } from './lang-menu.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LangMenuComponent', () => {
   let component: LangMenuComponent;
@@ -8,7 +9,11 @@ describe('LangMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LangMenuComponent, TranslateModule.forRoot()],
+      imports: [
+        LangMenuComponent,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LangMenuComponent);
