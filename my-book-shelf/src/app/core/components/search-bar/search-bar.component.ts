@@ -7,7 +7,12 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryFilterKeys, FilterTypesKeys } from '../../interfaces/filters';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  debounceTime,
+  distinctUntilChanged,
+  takeUntil,
+} from 'rxjs';
 import { BooksFacade } from '../../../store/books/books.facade';
 import { DestroyDirective } from '../../directives/destroy/destroy.directive';
 import { filterTypeList } from './search-bar.constant';
@@ -35,7 +40,7 @@ export class SearchBarComponent implements OnInit {
   isFocus = false;
   filterType = new BehaviorSubject<FilterTypesKeys>('All');
   filterCategory: CategoryFilterKeys = 'Browse';
-  elasticValues = new BehaviorSubject<string[] | null>(null);
+  elasticValues = new BehaviorSubject<string[]>([]);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -51,6 +56,22 @@ export class SearchBarComponent implements OnInit {
         this.filterCategory = options.categoryFilterType;
         this.filterType.next(options.filterType);
         this.searchValue.setValue(options.searchValue);
+      });
+
+    this.searchValue.valueChanges
+      .pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
+      .subscribe(() => {
+        this.searchService
+          .getSearchData({
+            searchValue: this.searchValue.value,
+            filterType: this.filterType.getValue(),
+            categoryFilterType: this.filterCategory,
+            page: 0,
+          })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((searchValues) => {
+            this.elasticValues.next(searchValues);
+          });
       });
   }
 
@@ -73,20 +94,6 @@ export class SearchBarComponent implements OnInit {
     if (this.router.url !== '/search') {
       this.router.navigateByUrl('search');
     }
-  }
-
-  onChange(): void {
-    this.searchService
-      .getSearchData({
-        searchValue: this.searchValue.value,
-        filterType: this.filterType.getValue(),
-        categoryFilterType: this.filterCategory,
-        page: 0,
-      })
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((searchValues) => {
-        this.elasticValues.next(searchValues);
-      });
   }
 
   elasticSearch(value: string): void {
