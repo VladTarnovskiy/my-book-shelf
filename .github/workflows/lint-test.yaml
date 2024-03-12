@@ -1,5 +1,5 @@
 name: Lint and testing my-book-shelf app
-on: [push, pull_request]
+on: [push]
 jobs:
   lint-testing:
     runs-on: ubuntu-latest
