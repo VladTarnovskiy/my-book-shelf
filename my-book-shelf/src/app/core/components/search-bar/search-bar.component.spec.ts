@@ -4,6 +4,8 @@ import { SearchBarComponent } from './search-bar.component';
 import { SearchService } from '../../services/search/search.service';
 import { of } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
+// import { MockAnimationDriver } from '@angular/animations/browser/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -32,7 +34,11 @@ describe('SearchBarComponent', () => {
     searchService.getSearchData.and.returnValue(of(['lorem', 'lorem']));
 
     await TestBed.configureTestingModule({
-      imports: [SearchBarComponent, TranslateModule.forRoot()],
+      imports: [
+        SearchBarComponent,
+        BrowserAnimationsModule,
+        TranslateModule.forRoot(),
+      ],
       providers: [
         provideMockStore({
           initialState,

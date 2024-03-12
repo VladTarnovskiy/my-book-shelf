@@ -104,7 +104,7 @@ export class SearchBarComponent implements OnInit {
 
   changeFilterType(event: Event): void {
     const el = event.target as HTMLDivElement;
-    if (el.className === 'menu__item') {
+    if (el.classList.contains('menu__item')) {
       this.filterType.next(
         el.getAttribute('data-filterType') as FilterTypesKeys
       );

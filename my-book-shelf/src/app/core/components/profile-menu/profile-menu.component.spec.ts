@@ -3,6 +3,7 @@ import { ProfileMenuComponent } from './profile-menu.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { provideMockStore } from '@ngrx/store/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('ProfileMenuComponent', () => {
   let component: ProfileMenuComponent;
@@ -22,6 +23,7 @@ describe('ProfileMenuComponent', () => {
         ProfileMenuComponent,
         TranslateModule.forRoot(),
         RouterTestingModule,
+        BrowserAnimationsModule,
       ],
       providers: [
         RouterTestingModule,
