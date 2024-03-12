@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="buttons">
-        @if (isFavorite) {
+        @if (isFavorite | async) {
           <button class="buttons__fav" (click)="removeFromFavorite(book.id)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>

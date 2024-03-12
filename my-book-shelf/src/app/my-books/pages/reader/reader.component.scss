@@ -44,9 +44,13 @@
   &__fav {
     @extend %itemsCenter;
     justify-content: center;
-    width: 3rem;
-    height: 3rem;
+    min-width: 3rem;
+    min-height: 3rem;
     margin-right: 2.2rem;
+
+    img {
+      height: 100%;
+    }
   }
 
   &__screen {
