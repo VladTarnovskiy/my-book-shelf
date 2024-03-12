@@ -2,7 +2,6 @@ import { AsyncPipe, DatePipe, NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   inject,
@@ -37,7 +36,7 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
 })
 export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   book$: Observable<IBook | null> = this.readerBookFacade.readerBook$;
-  isFavorite = false;
+  isFavorite = new BehaviorSubject<boolean>(false);
   isFullScreen = new BehaviorSubject<boolean>(false);
   isUnavailable$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -48,8 +47,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   constructor(
     private readerBookFacade: ReaderBookFacade,
     private favoriteService: FavoriteService,
-    private booksFacade: BooksFacade,
-    private cd: ChangeDetectorRef
+    private booksFacade: BooksFacade
   ) {}
 
   ngOnInit(): void {
@@ -71,9 +69,9 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
               (favBook) => favBook.payload.doc.data().id
             );
             if (favIDs.includes(book.id)) {
-              this.isFavorite = true;
+              this.isFavorite.next(true);
             } else {
-              this.isFavorite = false;
+              this.isFavorite.next(false);
             }
           });
       }
@@ -92,12 +90,12 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
   removeFavoriteStatus(bookId: string): void {
     this.booksFacade.removeFavoriteStatus(bookId);
-    this.isFavorite = false;
+    this.isFavorite.next(false);
   }
 
   addFavoriteStatus(bookId: string): void {
     this.booksFacade.addFavoriteStatus(bookId);
-    this.isFavorite = true;
+    this.isFavorite.next(true);
   }
 
   switchFullScreen(isFullScreen: boolean): void {
@@ -107,52 +105,46 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
       if (book) {
-        setTimeout(() => {
-          if (document.body.querySelector('#google-script')) {
-            const viewer = new window.google.books.DefaultViewer(
-              this.bookCanvas.nativeElement
-            );
-            viewer.load(
-              `ISBN:${book?.ISBN}`,
-              () => {
-                this.isUnavailable$.next(true);
-                this.isLoading$.next(false);
-                this.cd.detectChanges();
-              },
-              () => {
-                this.isUnavailable$.next(false);
-                this.isLoading$.next(false);
-                this.cd.detectChanges();
-              }
-            );
-          } else {
-            const scriptTag = document.createElement('script');
-            scriptTag.src = 'https://www.google.com/books/jsapi.js';
-            scriptTag.id = 'google-script';
-            scriptTag.addEventListener('load', () => {
-              window.google.books.load();
-              setTimeout(() => {
-                const viewer = new window.google.books.DefaultViewer(
-                  this.bookCanvas.nativeElement
-                );
-                viewer.load(
-                  `ISBN:${book?.ISBN}`,
-                  () => {
-                    this.isUnavailable$.next(true);
-                    this.isLoading$.next(false);
-                    this.cd.detectChanges();
-                  },
-                  () => {
-                    this.isUnavailable$.next(false);
-                    this.isLoading$.next(false);
-                    this.cd.detectChanges();
-                  }
-                );
-              }, 2000);
-            });
-            document.body.appendChild(scriptTag);
-          }
-        }, 100);
+        if (document.body.querySelector('#google-script')) {
+          const viewer = new window.google.books.DefaultViewer(
+            this.bookCanvas.nativeElement
+          );
+          viewer.load(
+            `ISBN:${book?.ISBN}`,
+            () => {
+              this.isUnavailable$.next(true);
+              this.isLoading$.next(false);
+            },
+            () => {
+              this.isUnavailable$.next(false);
+              this.isLoading$.next(false);
+            }
+          );
+        } else {
+          const scriptTag = document.createElement('script');
+          scriptTag.src = 'https://www.google.com/books/jsapi.js';
+          scriptTag.id = 'google-script';
+          scriptTag.addEventListener('load', () => {
+            window.google.books.load();
+            setTimeout(() => {
+              const viewer = new window.google.books.DefaultViewer(
+                this.bookCanvas.nativeElement
+              );
+              viewer.load(
+                `ISBN:${book?.ISBN}`,
+                () => {
+                  this.isUnavailable$.next(true);
+                  this.isLoading$.next(false);
+                },
+                () => {
+                  this.isUnavailable$.next(false);
+                  this.isLoading$.next(false);
+                }
+              );
+            }, 4000);
+          });
+          document.body.appendChild(scriptTag);
+        }
       }
     });
   }
