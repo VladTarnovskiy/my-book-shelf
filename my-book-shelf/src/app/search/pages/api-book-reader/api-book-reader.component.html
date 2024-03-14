@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="buttons">
-        @if (isFavorite | async) {
+        @if (isFavorite$ | async) {
           <button class="buttons__fav" (click)="removeFromFavorite(book.id)">
             <img src="assets/heart.svg" alt="Favorite" />
           </button>
@@ -36,15 +36,12 @@
             <img src="assets/empty-heart.svg" alt="Favorite" />
           </button>
         }
-        @if (isFullScreen | async) {
-          <button class="buttons__screen" (click)="switchFullScreen(false)">
-            {{ 'COMMON.BTN.SHORT' | translate }}
-          </button>
-        } @else {
-          <button class="buttons__screen" (click)="switchFullScreen(true)">
-            {{ 'COMMON.BTN.FULL' | translate }}
-          </button>
-        }
+        <button class="buttons__screen" (click)="toggleFullScreen()">
+          {{
+            ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')
+              | translate
+          }}
+        </button>
       </div>
     </div>
   }

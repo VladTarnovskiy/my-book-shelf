@@ -36,7 +36,7 @@ import { FavoriteService } from '../../../core/services/favorite/favorite.servic
 })
 export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   book$: Observable<IBook | null> = this.readerBookFacade.readerBook$;
-  isFavorite = new BehaviorSubject<boolean>(false);
+  isFavorite$ = new BehaviorSubject<boolean>(false);
   isFullScreen = new BehaviorSubject<boolean>(false);
   isUnavailable$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -69,9 +69,9 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
               (favBook) => favBook.payload.doc.data().id
             );
             if (favIDs.includes(book.id)) {
-              this.isFavorite.next(true);
+              this.isFavorite$.next(true);
             } else {
-              this.isFavorite.next(false);
+              this.isFavorite$.next(false);
             }
           });
       }
@@ -90,16 +90,16 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
   removeFavoriteStatus(bookId: string): void {
     this.booksFacade.removeFavoriteStatus(bookId);
-    this.isFavorite.next(false);
+    this.isFavorite$.next(false);
   }
 
   addFavoriteStatus(bookId: string): void {
     this.booksFacade.addFavoriteStatus(bookId);
-    this.isFavorite.next(true);
+    this.isFavorite$.next(true);
   }
 
-  switchFullScreen(isFullScreen: boolean): void {
-    this.isFullScreen.next(isFullScreen);
+  toggleFullScreen(): void {
+    this.isFullScreen.next(!this.isFullScreen.getValue());
   }
 
   ngAfterViewInit(): void {

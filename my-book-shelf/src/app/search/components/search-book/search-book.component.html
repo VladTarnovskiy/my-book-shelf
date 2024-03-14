@@ -13,15 +13,17 @@
   <div class="rating">4.5<span class="rating__total">/5</span></div>
   <div class="category">{{ bookData.categories[0] }}</div>
   <div class="favorite">
-    @if (bookData.isFavorite) {
-      <button class="favorite__but" (click)="removeFromFavorite()">
-        <img src="assets/heart.svg" alt="Favorite" />
-      </button>
-    } @else {
-      <button class="favorite__but" (click)="addToFavorite()">
-        <img src="assets/empty-heart.svg" alt="Favorite" />
-      </button>
-    }
+    <button
+      class="favorite__but"
+      (click)="bookData.isFavorite ? removeFromFavorite() : addToFavorite()"
+    >
+      <img
+        [src]="
+          bookData.isFavorite ? 'assets/heart.svg' : 'assets/empty-heart.svg'
+        "
+        alt="Favorite"
+      />
+    </button>
   </div>
   <button class="preview-but btn-first" [routerLink]="['preview', bookData.id]">
     {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
@@ -56,15 +58,17 @@
       {{ 'SEARCH_BOOK.BTN_PREVIEW' | translate }}
     </button>
     <div class="favorite">
-      @if (bookData.isFavorite) {
-        <button class="favorite__but" (click)="removeFromFavorite()">
-          <img src="assets/heart.svg" alt="Favorite" />
-        </button>
-      } @else {
-        <button class="favorite__but" (click)="addToFavorite()">
-          <img src="assets/empty-heart.svg" alt="Favorite" />
-        </button>
-      }
+      <button
+        class="favorite__but"
+        (click)="bookData.isFavorite ? removeFromFavorite() : addToFavorite()"
+      >
+        <img
+          [src]="
+            bookData.isFavorite ? 'assets/heart.svg' : 'assets/empty-heart.svg'
+          "
+          alt="Favorite"
+        />
+      </button>
     </div>
   </div>
 </div>

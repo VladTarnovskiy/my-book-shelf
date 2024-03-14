@@ -50,13 +50,16 @@ export class ReaderComponent implements OnInit {
     }
   }
 
-  changeFavorite(isFavorite: boolean): void {
+  toggleFavorite(): void {
     if (this.book) {
-      this.myBookService.changeFavoriteStatus(isFavorite, this.book.id);
+      this.myBookService.changeFavoriteStatus(
+        !this.book.isFavorite,
+        this.book.id
+      );
     }
   }
 
-  switchFullScreen(isFullScreen: boolean): void {
-    this.isFullScreen.next(isFullScreen);
+  toggleFullScreen(): void {
+    this.isFullScreen.next(!this.isFullScreen.getValue());
   }
 }

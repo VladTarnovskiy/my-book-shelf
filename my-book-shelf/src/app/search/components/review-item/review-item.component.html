@@ -1,13 +1,9 @@
 <div class="review-item">
-  @if (userPhoto$ | async; as userPhoto) {
-    <img [src]="userPhoto" alt="User photo" class="review-item__photo" />
-  } @else {
-    <img
-      src="assets/header/profile.svg"
-      alt="User photo"
-      class="review-item__photo"
-    />
-  }
+  <img
+    [src]="(userPhoto$ | async) ?? 'assets/header/profile.svg'"
+    alt="User photo"
+    class="review-item__photo"
+  />
   <div class="review-item__description">
     <div class="review-item__header">
       <p class="username">{{ username$ | async }}</p>

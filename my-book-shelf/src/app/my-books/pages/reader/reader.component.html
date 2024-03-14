@@ -21,24 +21,20 @@
         </div>
       </div>
       <div class="buttons">
-        @if (book.isFavorite) {
-          <button class="buttons__fav" (click)="changeFavorite(false)">
-            <img src="assets/heart.svg" alt="Favorite" />
-          </button>
-        } @else {
-          <button class="buttons__fav" (click)="changeFavorite(true)">
-            <img src="assets/empty-heart.svg" alt="Favorite" />
-          </button>
-        }
-        @if (isFullScreen | async) {
-          <button class="buttons__screen" (click)="switchFullScreen(false)">
-            {{ 'COMMON.BTN.SHORT' | translate }}
-          </button>
-        } @else {
-          <button class="buttons__screen" (click)="switchFullScreen(true)">
-            {{ 'COMMON.BTN.FULL' | translate }}
-          </button>
-        }
+        <button class="buttons__fav" (click)="toggleFavorite()">
+          <img
+            [src]="
+              book.isFavorite ? 'assets/heart.svg' : 'assets/empty-heart.svg'
+            "
+            alt="Favorite"
+          />
+        </button>
+        <button class="buttons__screen" (click)="toggleFullScreen()">
+          {{
+            ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')
+              | translate
+          }}
+        </button>
       </div>
     </div>
     <div class="book" [ngClass]="{ full: isFullScreen | async }">
