@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as QUOTE_ACTIONS from './quotes.action';
-import { IQuote } from '../../search/models/quote';
+import { IQuote } from '../../shared/models/quote';
 
 export interface QuotesState {
   quote: IQuote | null;

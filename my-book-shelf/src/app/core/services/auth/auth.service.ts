@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ToasterService } from '../toaster/toaster.service';
 import { UserService } from '../user/user.service';
-import { IUserDetails } from '../../../auth/models/user';
+import { IUserDetails } from '../../../shared/models/user';
 import { AuthFacade } from '../../../store/auth/auth.facade';
 
 @Injectable({

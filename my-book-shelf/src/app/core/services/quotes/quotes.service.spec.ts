@@ -4,7 +4,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { IQuote } from '../../../search/models/quote';
+import { IQuote } from '../../../shared/models/quote';
 
 describe('QuotesService', () => {
   let service: QuotesService;

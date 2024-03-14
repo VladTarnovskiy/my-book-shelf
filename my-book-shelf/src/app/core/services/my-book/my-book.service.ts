@@ -14,7 +14,7 @@ import {
 import {
   IFirestoreUploadBook,
   IUploadBook,
-} from '../../../my-books/models/upload';
+} from '../../../shared/models/upload';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 

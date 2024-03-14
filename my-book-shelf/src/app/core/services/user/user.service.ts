@@ -6,13 +6,13 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import { IUserInfo } from '../../models/user';
 import {
   getDownloadURL,
   ref,
   uploadBytes,
   Storage,
 } from '@angular/fire/storage';
+import { IUserInfo } from '../../../shared/models/user';
 
 @Injectable({
   providedIn: 'root',
