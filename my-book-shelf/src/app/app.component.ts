@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToasterContainerComponent } from './core/components/toaster-container/toaster-container.component';
+import { ToasterContainerComponent } from './components/core/toaster-container/toaster-container.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import englishLang from '../assets/i18n/en.json';
 import russianLang from '../assets/i18n/ru.json';
 import { AuthService } from './core/services/auth/auth.service';
 import { AuthFacade } from './store/auth/auth.facade';
 import { AsyncPipe } from '@angular/common';
-import { LoaderComponent } from './shared/components/loader/loader.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,25 @@
+<button
+  class="profile"
+  (mousedown)="onProfileToggle()"
+  (blur)="onProfileClose()"
+>
+  <img
+    class="profile__img"
+    [src]="(photo$ | async) ?? 'assets/header/profile.svg'"
+    alt="Profile"
+  />
+  <p class="profile__name">{{ userName$ | async }}</p>
+  <img
+    class="profile__polygon"
+    src="assets/header/polygon.svg"
+    alt="Polygon"
+    [class.active]="isMenu"
+  />
+  <button class="profile-menu" [@switchMenu]="isMenu">
+    @for (item of navigationList; track item.title) {
+      <div class="profile-menu__item" [routerLink]="[item.link]">
+        {{ 'PROFILE.' + item.title | translate }}
+      </div>
+    }
+  </button>
+</button>

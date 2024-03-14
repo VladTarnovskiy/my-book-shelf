@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IQuote } from '../../../search/models/quote';
+import { IQuote } from '../../../shared/models/quote';
 import {
   HttpClient,
   HttpErrorResponse,

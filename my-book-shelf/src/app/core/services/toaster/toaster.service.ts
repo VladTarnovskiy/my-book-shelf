@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { Toaster } from '../../models/toaster';
+import { Toaster } from '../../../shared/models/toaster';
 import { Injectable } from '@angular/core';
 
 @Injectable({

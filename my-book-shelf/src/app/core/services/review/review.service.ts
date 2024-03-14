@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import { IReview } from '../../../search/models/review';
+import { IReview } from '../../../shared/models/review';
 
 @Injectable({
   providedIn: 'root',

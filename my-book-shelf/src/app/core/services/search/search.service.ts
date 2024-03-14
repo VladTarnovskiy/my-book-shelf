@@ -5,16 +5,16 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { IBookResp, ISearchResp } from '../../interfaces/booksResp';
+import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
 import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
 import { IBook } from '../../../shared/models/book.model';
 import {
   transformRespBookData,
   transformRespBooksData,
-} from '../../utils/transformRespData';
-import { getBooksSearchHeaders } from '../../utils/getBooksSearchHeaders';
-import { IBooksSearchParams } from '../../interfaces/bookParams';
+} from '../../../shared/utils/transformRespData';
+import { getBooksSearchHeaders } from '../../../shared/utils/getBooksSearchHeaders';
+import { IBooksSearchParams } from '../../../shared/interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',

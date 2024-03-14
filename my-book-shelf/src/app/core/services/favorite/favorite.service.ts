@@ -6,7 +6,7 @@ import {
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { IBook } from '../../../shared/models/book.model';
-import { IFavoriteBook } from '../../../favorite/models/favoriteBook';
+import { IFavoriteBook } from '../../../shared/models/favoriteBook';
 
 @Injectable({
   providedIn: 'root',

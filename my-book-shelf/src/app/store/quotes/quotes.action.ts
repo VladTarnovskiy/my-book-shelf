@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IQuote } from '../../search/models/quote';
+import { IQuote } from '../../shared/models/quote';
 
 const actionSource = '[Quotes]';
 

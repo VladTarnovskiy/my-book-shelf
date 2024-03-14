@@ -15,9 +15,9 @@ import {
 import {
   FilterTypesKeys,
   CategoryFilterKeys,
-} from '../../core/interfaces/filters';
+} from '../../shared/interfaces/filters';
 import * as BOOKS_ACTIONS from './books.action';
-import { IBooksSearchParams } from '../../core/interfaces/bookParams';
+import { IBooksSearchParams } from '../../shared/interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',
