@@ -1,8 +1,4 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   IBooksInfoData,
@@ -93,12 +89,5 @@ export class SearchService {
         return transData;
       })
     );
-  }
-
-  handleError(error: HttpErrorResponse): string {
-    if (error.status === 0) {
-      return `An error occurred:', ${error.error}`;
-    }
-    return `Backend returned code ${error.status}, body was: , ${error.error} `;
   }
 }

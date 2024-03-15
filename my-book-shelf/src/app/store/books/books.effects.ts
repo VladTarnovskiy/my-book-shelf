@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToasterService } from '@core/services/toaster';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
@@ -10,7 +11,8 @@ import * as BOOKS_ACTIONS from './books.action';
 export class BooksEffects {
   constructor(
     private actions$: Actions,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private toasterService: ToasterService
   ) {}
 
   fetchBooks$ = createEffect(() => {
@@ -28,8 +30,12 @@ export class BooksEffects {
               })
             ),
             catchError((error: HttpErrorResponse) => {
-              const handleError = this.searchService.handleError(error);
-              return of(BOOKS_ACTIONS.FetchBooksFailed({ error: handleError }));
+              this.toasterService.showHttpsError(error);
+              return of(
+                BOOKS_ACTIONS.FetchBooksFailed({
+                  error: error,
+                })
+              );
             })
           )
       )
@@ -45,9 +51,11 @@ export class BooksEffects {
             BOOKS_ACTIONS.FetchPreviewBookSuccess({ previewBook })
           ),
           catchError((error: HttpErrorResponse) => {
-            const handleError = this.searchService.handleError(error);
+            this.toasterService.showHttpsError(error);
             return of(
-              BOOKS_ACTIONS.FetchPreviewBookFailed({ error: handleError })
+              BOOKS_ACTIONS.FetchPreviewBookFailed({
+                error: error,
+              })
             );
           })
         )

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Auth,
@@ -41,8 +42,8 @@ export class AuthService {
       this.userService.addUser(user);
       this.router.navigate(['auth/login']);
     } catch (error) {
-      if (error instanceof Error) {
-        this.errorHandling(error);
+      if (error instanceof HttpErrorResponse) {
+        this.toasterService.showHttpsError(error);
       }
     }
   }
@@ -65,8 +66,8 @@ export class AuthService {
         }, 2000);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        this.errorHandling(error);
+      if (error instanceof HttpErrorResponse) {
+        this.toasterService.showHttpsError(error);
       }
     }
   }
@@ -84,8 +85,8 @@ export class AuthService {
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
-      if (error instanceof Error) {
-        this.errorHandling(error);
+      if (error instanceof HttpErrorResponse) {
+        this.toasterService.showHttpsError(error);
       }
     }
   }
@@ -103,8 +104,8 @@ export class AuthService {
       this.isLoggedIn.next(true);
       this.router.navigate(['/']);
     } catch (error) {
-      if (error instanceof Error) {
-        this.errorHandling(error);
+      if (error instanceof HttpErrorResponse) {
+        this.toasterService.showHttpsError(error);
       }
     }
   }
@@ -113,17 +114,9 @@ export class AuthService {
     try {
       await signOut(this.auth);
     } catch (error) {
-      if (error instanceof Error) {
-        this.errorHandling(error);
+      if (error instanceof HttpErrorResponse) {
+        this.toasterService.showHttpsError(error);
       }
     }
-  }
-
-  errorHandling(error: Error): void {
-    this.toasterService.show({
-      type: 'error',
-      title: error.name,
-      message: error.message,
-    });
   }
 }

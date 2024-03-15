@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
 import {
@@ -25,7 +26,7 @@ export const FetchBooksSuccess = createAction(
 
 export const FetchBooksFailed = createAction(
   `${actionSource} Fetch Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );
 
 export const SetFilterType = createAction(
@@ -67,5 +68,5 @@ export const FetchPreviewBookSuccess = createAction(
 
 export const FetchPreviewBookFailed = createAction(
   `${actionSource} Fetch Preview Book Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );

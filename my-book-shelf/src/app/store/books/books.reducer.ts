@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
 
 import {
@@ -15,8 +16,8 @@ export interface BooksState {
   searchValue: string;
   isLoading: boolean;
   isPreviewLoading: boolean;
-  previewError: string | null;
-  error: string | null;
+  previewError: HttpErrorResponse | null;
+  error: HttpErrorResponse | null;
   filterType: FilterTypesKeys;
   categoryFilterType: CategoryFilterKeys;
 }

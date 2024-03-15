@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
 import { IQuote } from '../../shared/models/quote';
@@ -13,5 +14,5 @@ export const FetchQuoteSuccess = createAction(
 
 export const FetchQuoteFailed = createAction(
   `${actionSource} Fetch Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );

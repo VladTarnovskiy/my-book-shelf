@@ -25,7 +25,6 @@ import { QuoteSkeletonComponent } from '../quote-skeleton';
 export class QuoteComponent implements OnInit {
   quote!: null | IQuote;
   isLoading$: Observable<boolean> = this.quotesFacade.isLoading$;
-  error$: Observable<string | null> = this.quotesFacade.error$;
   isActive = [true, false, false, false];
   private destroy$ = inject(DestroyDirective).destroy$;
 

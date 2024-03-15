@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
 
 import { IBook } from '../../shared/models/book';
@@ -6,7 +7,7 @@ import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 export interface RecommendedBooksState {
   books: IBook[];
   isLoading: boolean;
-  error: string | null;
+  error: HttpErrorResponse | null;
 }
 
 export const initialState: RecommendedBooksState = {
