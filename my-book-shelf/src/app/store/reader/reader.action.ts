@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { IBook } from '../../shared/models/book.model';
 
-const actionSource = '[Api Reader]';
+import { IBook } from '../../shared/models/book';
+
+const actionSource = '[Reader]';
 
 export const FetchBookForReader = createAction(
   `${actionSource} Fetch Book`,
@@ -17,5 +19,5 @@ export const FetchBookForReaderSuccess = createAction(
 
 export const FetchBookForReaderFailed = createAction(
   `${actionSource} Fetch Book Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );

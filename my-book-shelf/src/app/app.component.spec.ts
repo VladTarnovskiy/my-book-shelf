@@ -1,9 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { Auth } from '@angular/fire/auth';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AuthService } from './core/services/auth/auth.service';
+import { AuthService } from '@core/services/auth';
+import { UserService } from '@core/services/user';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -19,6 +23,16 @@ describe('AppComponent', () => {
           useValue: {
             getUserAfterReload: () => {},
           },
+        },
+        {
+          provide: Auth,
+          useValue: {
+            onAuthStateChanged: () => of(),
+          },
+        },
+        {
+          provide: UserService,
+          useValue: {},
         },
       ],
     }).compileComponents();

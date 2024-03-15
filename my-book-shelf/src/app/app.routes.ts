@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './pages/layout/layout.component';
-import { authGuard } from './core/quards/auth/auth.guard';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { authGuard } from '@core/quards/auth';
+import { LayoutComponent } from '@pages/layout';
+
 export const routes: Routes = [
   {
     path: '',
@@ -11,28 +11,22 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./pages/home/home.component').then((m) => m.HomeComponent),
+          import('./pages/home').then((m) => m.HomeComponent),
       },
       {
         path: 'recent',
         loadComponent: () =>
-          import('./pages/recent/recent.component').then(
-            (m) => m.RecentComponent
-          ),
+          import('./pages/recent').then((m) => m.RecentComponent),
       },
       {
         path: 'profile',
         loadComponent: () =>
-          import('./pages/profile/profile.component').then(
-            (m) => m.ProfileComponent
-          ),
+          import('./pages/profile').then((m) => m.ProfileComponent),
       },
       {
         path: 'recommended',
         loadComponent: () =>
-          import('./pages/recommended/recommended.component').then(
-            (m) => m.RecommendedComponent
-          ),
+          import('./pages/recommended').then((m) => m.RecommendedComponent),
       },
 
       {
@@ -41,21 +35,17 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./pages/search/search.component').then(
-                (m) => m.SearchComponent
-              ),
+              import('./pages/search').then((m) => m.SearchComponent),
           },
           {
             path: 'preview/:previewId',
             loadComponent: () =>
-              import('./pages/preview/preview.component').then(
-                (m) => m.PreviewComponent
-              ),
+              import('./pages/preview').then((m) => m.PreviewComponent),
           },
           {
             path: 'reader/:readerId',
             loadComponent: () =>
-              import('./pages/api-book-reader/api-book-reader.component').then(
+              import('./pages/api-book-reader').then(
                 (m) => m.ApiBookReaderComponent
               ),
           },
@@ -64,16 +54,12 @@ export const routes: Routes = [
       {
         path: 'favorite',
         loadComponent: () =>
-          import('./pages/favorite/favorite.component').then(
-            (m) => m.FavoriteComponent
-          ),
+          import('./pages/favorite').then((m) => m.FavoriteComponent),
       },
       {
         path: 'upload',
         loadComponent: () =>
-          import('./pages/upload/upload.component').then(
-            (m) => m.UploadComponent
-          ),
+          import('./pages/upload').then((m) => m.UploadComponent),
       },
       {
         path: 'my-books',
@@ -81,16 +67,12 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./pages/my-books/my-books.component').then(
-                (m) => m.MyBooksComponent
-              ),
+              import('./pages/my-books').then((m) => m.MyBooksComponent),
           },
           {
             path: 'reader/:myBookId',
             loadComponent: () =>
-              import('./pages/reader/reader.component').then(
-                (m) => m.ReaderComponent
-              ),
+              import('./pages/reader').then((m) => m.ReaderComponent),
           },
         ],
       },
@@ -102,14 +84,12 @@ export const routes: Routes = [
       {
         path: 'registration',
         loadComponent: () =>
-          import('./pages/registration/registration.component').then(
-            (m) => m.RegistrationComponent
-          ),
+          import('./pages/registration').then((m) => m.RegistrationComponent),
       },
       {
         path: 'login',
         loadComponent: () =>
-          import('./pages/login/login.component').then((m) => m.LoginComponent),
+          import('./pages/login').then((m) => m.LoginComponent),
       },
       {
         path: 'verification',
@@ -117,16 +97,14 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./pages/verification/verification.component').then(
+              import('./pages/verification').then(
                 (m) => m.VerificationComponent
               ),
           },
           {
             path: 'success',
             loadComponent: () =>
-              import('./pages/success/success.component').then(
-                (m) => m.SuccessComponent
-              ),
+              import('./pages/success').then((m) => m.SuccessComponent),
           },
         ],
       },
@@ -134,6 +112,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./pages/not-found').then((m) => m.NotFoundComponent),
   },
 ];

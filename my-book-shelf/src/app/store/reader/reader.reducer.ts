@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import * as READER_BOOKS_ACTIONS from './api-reader.action';
-import { IBook } from '../../shared/models/book.model';
+
+import { IBook } from '../../shared/models/book';
+import * as READER_BOOKS_ACTIONS from './reader.action';
 
 export interface ReaderBookState {
   book: IBook | null;
   isLoading: boolean;
-  error: string | null;
+  error: HttpErrorResponse | null;
 }
 
 export const initialState: ReaderBookState = {

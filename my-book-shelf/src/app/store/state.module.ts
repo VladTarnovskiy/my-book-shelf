@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { ReaderBookStoreModule } from './api-reader/api-reader.module';
-import { AuthStoreModule } from './auth/auth.module';
-import { BooksStoreModule } from './books/books.module';
-import { QuotesStoreModule } from './quotes/quotes.module';
-import { RecommendedBooksStoreModule } from './recommendedBooks/recommendedBooks.module';
-import { RouterStoreModule } from './router/router.module';
+
+import { AuthStoreModule } from './auth';
+import { BooksStoreModule } from './books';
+import { QuotesStoreModule } from './quotes';
+import { ReaderBookStoreModule } from './reader';
+import { RecommendedBooksStoreModule } from './recommendedBooks';
+import { RouterStoreModule } from './router';
 
 @NgModule({
   imports: [

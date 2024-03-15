@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { navigationList } from './navigation.constant';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { navigationList } from './navigation.constant';
 
 @Component({
   selector: 'app-navigation',

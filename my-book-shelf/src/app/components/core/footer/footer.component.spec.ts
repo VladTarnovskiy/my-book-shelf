@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FooterComponent } from './footer.component';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { FooterComponent } from '.';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;

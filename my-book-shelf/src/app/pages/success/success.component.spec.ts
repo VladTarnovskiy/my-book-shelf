@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SuccessComponent } from './success.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { SuccessComponent } from '.';
 
 describe('SuccessComponent', () => {
   let component: SuccessComponent;

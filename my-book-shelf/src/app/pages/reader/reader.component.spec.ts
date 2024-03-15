@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ReaderComponent } from './reader.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MyBooksService } from '@core/services/my-books';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { RouterTestingModule } from '@angular/router/testing';
+
+import { ReaderComponent } from '.';
 
 describe('ReaderComponent', () => {
   let component: ReaderComponent;
@@ -18,8 +19,9 @@ describe('ReaderComponent', () => {
         RouterTestingModule,
       ],
       providers: [
+        provideMockStore(),
         {
-          provide: MyBookService,
+          provide: MyBooksService,
           useValue: {
             getMyBooks: () => {
               return of();

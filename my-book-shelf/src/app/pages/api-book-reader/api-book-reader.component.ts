@@ -8,15 +8,15 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
-import { GoBackDirective } from '../../core/directives/go-back/go-back.directive';
-import { SafePipe } from '../../core/pipes/safe/safe.pipe';
-import { BooksFacade } from '../../store/books/books.facade';
-import { IBook } from '../../shared/models/book.model';
-import { ReaderBookFacade } from '../../store/api-reader/api-reader.facade';
+import { DestroyDirective } from '@core/directives/destroy';
+import { GoBackDirective } from '@core/directives/go-back';
+import { SafePipe } from '@core/pipes/safe';
+import { FavoriteService } from '@core/services/favorite';
 import { TranslateModule } from '@ngx-translate/core';
-import { FavoriteService } from '../../core/services/favorite/favorite.service';
+import { IBook } from '@shared/models/book';
+import { BooksFacade } from '@store/books';
+import { ReaderBookFacade } from '@store/reader';
+import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-api-book-reader',

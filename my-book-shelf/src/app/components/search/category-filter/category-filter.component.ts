@@ -1,16 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { CategoryFilterKeys } from '../../../shared/interfaces/filters';
-import { takeUntil } from 'rxjs';
-import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
-import { filterCategoryList } from './category-filter.constant';
+import { DestroyDirective } from '@core/directives/destroy';
 import { TranslateModule } from '@ngx-translate/core';
-import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
+import { switchMenuAnimation } from '@shared/animation';
+import { CategoryFilterKeys } from '@shared/interfaces/filters';
+import { BooksFacade } from '@store/books';
+import { takeUntil } from 'rxjs';
+
+import { filterCategoryList } from './category-filter.constant';
 
 @Component({
   selector: 'app-category-filter',

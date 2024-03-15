@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
-import { Auth } from '@angular/fire/auth';
+import { IReview } from '@shared/models/review';
 import { Observable } from 'rxjs';
-import { IReview } from '../../../shared/models/review';
 
 @Injectable({
   providedIn: 'root',

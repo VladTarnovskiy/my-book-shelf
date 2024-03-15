@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ToasterService } from './toaster.service';
-import { Toaster } from '../../../shared/models/toaster';
+import { IToaster } from '@shared/models/toaster';
+
+import { ToasterService } from '.';
 
 describe('ToasterService', () => {
   let service: ToasterService;
@@ -15,12 +16,12 @@ describe('ToasterService', () => {
   });
 
   it('should add toaster', () => {
-    const toastMock: Toaster = {
+    const toastMock: IToaster = {
       message: 'test',
       title: 'test',
       type: 'success',
     };
-    let res!: Toaster;
+    let res!: IToaster;
     service.toast$.subscribe((toast) => {
       res = toast;
     });

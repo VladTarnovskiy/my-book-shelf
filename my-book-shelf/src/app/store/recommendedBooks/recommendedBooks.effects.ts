@@ -1,15 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToasterService } from '@core/services/toaster';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
+
 import { SearchService } from '../../core/services/search/search.service';
+import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 
 @Injectable()
 export class RecommendedBooksEffects {
   constructor(
     private actions$: Actions,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private toasterService: ToasterService
   ) {}
 
   fetchRecommendedBooks$ = createEffect(() => {
@@ -21,10 +24,10 @@ export class RecommendedBooksEffects {
             RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooksSuccess({ books })
           ),
           catchError((error: HttpErrorResponse) => {
-            const handleError = this.searchService.handleError(error);
+            this.toasterService.showHttpsError(error);
             return of(
               RECOMMENDED_BOOKS_ACTIONS.FetchRecommendedBooksFailed({
-                error: handleError,
+                error: error,
               })
             );
           })

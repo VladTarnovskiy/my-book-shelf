@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   Action,
   AngularFirestore,
   DocumentSnapshot,
 } from '@angular/fire/compat/firestore';
-import { Auth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
 import {
   getDownloadURL,
   ref,
-  uploadBytes,
   Storage,
+  uploadBytes,
 } from '@angular/fire/storage';
-import { IUserInfo } from '../../../shared/models/user';
+import { IUserInfo } from '@shared/models/user';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

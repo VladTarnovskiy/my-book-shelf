@@ -1,4 +1,4 @@
-import { IBook } from './book.model';
+import { IBook } from './book';
 
 export type IFavoriteBook = IBook & {
   borrowedOn: string;

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { recommendedBooksReducer } from './recommendedBooks.reducer';
+import { StoreModule } from '@ngrx/store';
+
 import { RecommendedBooksEffects } from './recommendedBooks.effects';
+import { recommendedBooksReducer } from './recommendedBooks.reducer';
 
 @NgModule({
   imports: [

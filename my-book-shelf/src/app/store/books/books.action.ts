@@ -1,9 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { IBook } from '../../shared/models/book.model';
+
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../shared/interfaces/filters';
+import { IBook } from '../../shared/models/book';
 
 const actionSource = '[Books]';
 
@@ -19,12 +21,12 @@ export const FetchBooks = createAction(
 
 export const FetchBooksSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ books: IBook[]; page: number }>()
+  props<{ books: IBook[]; page: number; totalBooks: number }>()
 );
 
 export const FetchBooksFailed = createAction(
   `${actionSource} Fetch Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );
 
 export const SetFilterType = createAction(
@@ -40,11 +42,6 @@ export const SetCategoryFilterType = createAction(
 export const SetSearchPage = createAction(
   `${actionSource} Set Search Page`,
   props<{ page: number }>()
-);
-
-export const SetTotalsItems = createAction(
-  `${actionSource} Set Total Items`,
-  props<{ totalItems: number }>()
 );
 
 export const AddFavoriteStatus = createAction(
@@ -71,5 +68,5 @@ export const FetchPreviewBookSuccess = createAction(
 
 export const FetchPreviewBookFailed = createAction(
   `${actionSource} Fetch Preview Book Failed`,
-  props<{ error: string }>()
+  props<{ error: HttpErrorResponse }>()
 );

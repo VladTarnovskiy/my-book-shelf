@@ -1,10 +1,11 @@
-import { TestBed } from '@angular/core/testing';
-import { QuotesService } from './quotes.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { IQuote } from '../../../shared/models/quote';
+import { TestBed } from '@angular/core/testing';
+import { IQuote } from '@shared/models/quote';
+
+import { QuotesService } from '.';
 
 describe('QuotesService', () => {
   let service: QuotesService;

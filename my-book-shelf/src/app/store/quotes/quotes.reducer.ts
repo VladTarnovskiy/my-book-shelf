@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import * as QUOTE_ACTIONS from './quotes.action';
+
 import { IQuote } from '../../shared/models/quote';
+import * as QUOTE_ACTIONS from './quotes.action';
 
 export interface QuotesState {
   quote: IQuote | null;
   isLoading: boolean;
-  error: string | null;
+  error: HttpErrorResponse | null;
 }
 
 export const initialState: QuotesState = {

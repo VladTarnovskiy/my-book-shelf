@@ -1,11 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReviewComponent } from './review.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { ReviewItemComponent } from '../review-item/review-item.component';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReviewService } from '@core/services/review';
 import { provideMockStore } from '@ngrx/store/testing';
-import { ReviewService } from '../../../core/services/review/review.service';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
+
+import { ReviewItemComponent } from '../review-item';
+import { ReviewComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-review-item', template: '' })
 class ReviewItemStubComponent {}

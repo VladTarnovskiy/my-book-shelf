@@ -2,71 +2,67 @@
   <div class="title">{{ 'UPLOAD.TITLE' | translate }}</div>
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="form">
     <div class="form-item">
-      <label for="title" class="form-item__label">
+      <label class="form-item__label">
         <div class="form-item__title">
           {{ 'UPLOAD.INPUT.TITLE' | translate }}
         </div>
         <input
-          id="title"
-          formControlName="title"
+          [formControl]="title"
           [placeholder]="'UPLOAD.PLACEHOLDERS.TITLE' | translate"
           required
           type="text"
           class="form-item__input form-item__input_title"
         />
       </label>
-      @if (title?.hasError('required') && uploadForm.touched) {
+      @if (title.hasError('required') && title.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.TITLE' | translate }}
         </div>
       }
     </div>
     <div class="form-item">
-      <label for="author" class="form-item__label">
+      <label class="form-item__label">
         <div class="form-item__title">
           {{ 'UPLOAD.INPUT.AUTHOR' | translate }}
         </div>
         <input
-          id="author"
-          formControlName="author"
+          [formControl]="author"
           [placeholder]="'UPLOAD.PLACEHOLDERS.AUTHOR' | translate"
           required
           type="text"
           class="form-item__input form-item__input_author"
         />
       </label>
-      @if (author?.hasError('required') && uploadForm.touched) {
+      @if (author.hasError('required') && author.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.AUTHOR' | translate }}
         </div>
       }
     </div>
     <div class="form-item description">
-      <label for="description" class="form-item__label">
+      <label class="form-item__label">
         <div class="form-item__title">
           {{ 'UPLOAD.INPUT.DESCRIPTION' | translate }}
         </div>
         <textarea
-          id="description"
-          formControlName="description"
+          [formControl]="description"
           [placeholder]="'UPLOAD.PLACEHOLDERS.DESCRIPTION' | translate"
           required
           class="form-item__input form-item__input_description"
         ></textarea>
       </label>
-      @if (description?.hasError('required') && uploadForm.touched) {
+      @if (description.hasError('required') && description.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.DESCRIPTION' | translate }}
         </div>
       }
     </div>
     <div class="form-item file">
-      <label for="file" class="form-item__label">
+      <label class="form-item__label">
         <div class="form-item__title">
           {{ 'UPLOAD.INPUT.FILE' | translate }}
         </div>
         <input
-          id="file"
           [placeholder]="'UPLOAD.PLACEHOLDERS.FILE' | translate"
           required
           type="file"
@@ -75,19 +71,18 @@
           (change)="onSetFile($event)"
         />
       </label>
-      @if (file?.hasError('required') && uploadForm.touched) {
+      @if (file.hasError('required') && file.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.FILE' | translate }}
         </div>
       }
     </div>
     <div class="form-item image">
-      <label for="image" class="form-item__label">
+      <label class="form-item__label">
         <div class="form-item__title">
           {{ 'UPLOAD.INPUT.IMAGE' | translate }}
         </div>
         <input
-          id="image"
           [placeholder]="'UPLOAD.PLACEHOLDERS.IMAGE' | translate"
           required
           type="file"
@@ -96,7 +91,7 @@
           (change)="onSetImage($event)"
         />
       </label>
-      @if (image?.hasError('required') && uploadForm.touched) {
+      @if (image.hasError('required') && image.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.IMAGE' | translate }}
         </div>

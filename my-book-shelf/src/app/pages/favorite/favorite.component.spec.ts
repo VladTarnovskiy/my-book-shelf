@@ -1,13 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FavoriteComponent } from './favorite.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { Component } from '@angular/core';
-import { FavoriteBookComponent } from '../../components/favorite/favorite-book/favorite-book.component';
-import { FavoriteUploadBookComponent } from '../../components/favorite/favorite-upload-book/favorite-upload-book.component';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { FavoriteService } from '../../core/services/favorite/favorite.service';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FavoriteBookComponent } from '@components/favorite/favorite-book';
+import { FavoriteUploadBookComponent } from '@components/favorite/favorite-upload-book';
+import { FavoriteService } from '@core/services/favorite';
+import { MyBooksService } from '@core/services/my-books';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
+
+import { FavoriteComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-favorite-book', template: '' })
 class FavoriteBookStubComponent {}
@@ -37,7 +38,7 @@ describe('FavoriteComponent', () => {
           },
         },
         {
-          provide: MyBookService,
+          provide: MyBooksService,
           useValue: {
             getMyBooks: () => {
               return of();

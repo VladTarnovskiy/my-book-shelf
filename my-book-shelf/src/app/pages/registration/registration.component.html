@@ -9,91 +9,87 @@
     </div>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-item">
-        <label for="name" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'REGISTER.INPUT.NAME' | translate }}
           </div>
           <input
-            id="name"
             type="text"
-            formControlName="name"
+            [formControl]="name"
             class="form-item__input form-item__input_name"
             required
           />
         </label>
-        @if (name?.hasError('required') && registerForm.touched) {
+        @if (name.hasError('required') && name.touched) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.NAME.REQUIRE' | translate }}
           </div>
         }
-        @if (name?.hasError('maxlength') && registerForm.touched) {
+        @if (name.hasError('maxlength') && name.touched) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.NAME.LENGTH' | translate }}
           </div>
         }
-        @if (name?.hasError('forbiddenUsername') && registerForm.touched) {
+        @if (name.hasError('forbiddenUsername') && name.touched) {
           <div class="invalid__message">
-            {{ name?.errors?.['forbiddenUsername'].value }}
+            {{ name.errors?.['forbiddenUsername'].value }}
           </div>
         }
       </div>
       <div class="form-item">
-        <label for="email" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'REGISTER.INPUT.EMAIL' | translate }}
           </div>
           <input
-            id="email"
-            formControlName="email"
+            [formControl]="email"
             required
             type="email"
             class="form-item__input form-item__input_email"
           />
         </label>
-        @if (email?.hasError('required') && registerForm.touched) {
+        @if (email.hasError('required') && email.touched) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.EMAIL.REQUIRE' | translate }}
           </div>
         }
-        @if (email?.hasError('email') && registerForm.touched) {
+        @if (email.hasError('email') && email.touched) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.EMAIL.INVALID' | translate }}
           </div>
         }
       </div>
       <div class="form-item">
-        <label for="password" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'REGISTER.INPUT.PASSWORD' | translate }}
           </div>
           <input
-            id="password"
-            formControlName="password"
+            [formControl]="password"
             type="password"
             required
             autoComplete="on"
             class="form-item__input form-item__input_password"
           />
         </label>
-        @if (password?.hasError('required') && registerForm.touched) {
+        @if (password.hasError('required') && password.touched) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.PASSWORD.REQUIRE' | translate }}
           </div>
         }
-        @if (password?.hasError('forbiddenPassword') && registerForm.touched) {
+        @if (password.hasError('forbiddenPassword') && password.touched) {
           <div class="invalid__message">
-            {{ password?.errors?.['forbiddenPassword'].value }}
+            {{ password.errors?.['forbiddenPassword'].value }}
           </div>
         }
       </div>
       <div class="form-item">
-        <label for="confirmPassword" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'REGISTER.INPUT.CONFIRM' | translate }}
           </div>
           <input
-            id="confirmPassword"
-            formControlName="confirmPassword"
+            [formControl]="confirmPassword"
             type="password"
             required
             autoComplete="on"
@@ -104,7 +100,9 @@
             }"
           />
         </label>
-        @if (registerForm.hasError('passwordNoMatch') && registerForm.touched) {
+        @if (
+          registerForm.hasError('passwordNoMatch') && confirmPassword.touched
+        ) {
           <div class="invalid__message">
             {{ 'REGISTER.ERRORS.CONFIRM' | translate }}
           </div>

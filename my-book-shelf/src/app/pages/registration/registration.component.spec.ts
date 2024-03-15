@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RegistrationComponent } from './registration.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../core/services/auth/auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AuthService } from '@core/services/auth';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { RegistrationComponent } from '.';
 
 describe('RegistrationComponent', () => {
   let component: RegistrationComponent;

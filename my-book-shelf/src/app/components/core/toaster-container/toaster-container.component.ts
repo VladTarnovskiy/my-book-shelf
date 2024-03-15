@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Toaster } from '../../../shared/models/toaster';
-import { ToasterComponent } from '../toaster/toaster.component';
-import { ToasterService } from '../../../core/services/toaster/toaster.service';
 import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ToasterService } from '@core/services/toaster';
+import { IToaster } from '@shared/models/toaster';
 import { BehaviorSubject } from 'rxjs';
+
+import { ToasterComponent } from '../toaster';
 
 @Component({
   selector: 'app-toaster-container',
@@ -14,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToasterContainerComponent implements OnInit {
-  toasts = new BehaviorSubject<Toaster[]>([]);
+  toasts = new BehaviorSubject<IToaster[]>([]);
 
   constructor(private toasterService: ToasterService) {}
 

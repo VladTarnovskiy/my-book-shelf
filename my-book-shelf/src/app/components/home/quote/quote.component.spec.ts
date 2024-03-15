@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { QuoteComponent } from './quote.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { QuoteComponent } from '.';
 
 describe('QuoteComponent', () => {
   let component: QuoteComponent;

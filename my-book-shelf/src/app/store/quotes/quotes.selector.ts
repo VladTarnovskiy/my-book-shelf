@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+
 import { QuotesState } from './quotes.reducer';
 
 export const selectQuotesStore = createFeatureSelector<QuotesState>('quotes');

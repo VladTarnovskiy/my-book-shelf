@@ -1,12 +1,13 @@
-import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { SearchService } from './search.service';
+import { TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { IBook } from '../../../shared/models/book.model';
-import { mockBooksDataResponse } from '../../../shared/tests/booksDataResponse';
+import { IBook } from '@shared/models/book';
+import { mockBooksDataResponse } from '@shared/tests';
+
+import { SearchService } from '.';
 
 describe('SearchService', () => {
   let service: SearchService;
@@ -38,7 +39,7 @@ describe('SearchService', () => {
         page: 0,
       })
       .subscribe((books) => {
-        booksData = books;
+        booksData = books.books;
       });
 
     const requestOne = controller.expectOne(expectedUrl);

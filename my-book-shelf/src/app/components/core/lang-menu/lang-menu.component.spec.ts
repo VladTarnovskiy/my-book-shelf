@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LangMenuComponent } from './lang-menu.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { LangMenuComponent } from '.';
 
 describe('LangMenuComponent', () => {
   let component: LangMenuComponent;

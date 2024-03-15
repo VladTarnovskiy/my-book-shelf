@@ -1,3 +1,5 @@
+import { IBook } from '@shared/models/book';
+
 import { CategoryFilterKeys, FilterTypesKeys } from './filters';
 
 export interface IBooksSearchParams {
@@ -5,4 +7,9 @@ export interface IBooksSearchParams {
   filterType: FilterTypesKeys;
   categoryFilterType: CategoryFilterKeys;
   page: number;
+}
+
+export interface IBooksInfoData {
+  books: IBook[];
+  totalBooks: number;
 }

@@ -1,37 +1,31 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
-import { SetTotalsItems } from '../../../store/books/books.action';
-import { Store } from '@ngrx/store';
-import { IBook } from '../../../shared/models/book.model';
 import {
+  IBooksInfoData,
+  IBooksSearchParams,
+} from '@shared/interfaces/bookParams';
+import { IBookResp, ISearchResp } from '@shared/interfaces/booksResp';
+import { IBook } from '@shared/models/book';
+import {
+  getBooksSearchHeaders,
   transformRespBookData,
   transformRespBooksData,
-} from '../../../shared/utils/transformRespData';
-import { getBooksSearchHeaders } from '../../../shared/utils/getBooksSearchHeaders';
-import { IBooksSearchParams } from '../../../shared/interfaces/bookParams';
+} from '@shared/utils';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
   private searchURL = 'https://www.googleapis.com/books/v1/volumes';
-  constructor(
-    private http: HttpClient,
-    private store: Store
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getBooks({
     searchValue,
     filterType,
     categoryFilterType,
     page,
-  }: IBooksSearchParams): Observable<IBook[]> {
+  }: IBooksSearchParams): Observable<IBooksInfoData> {
     const options = getBooksSearchHeaders({
       searchValue,
       filterType,
@@ -41,9 +35,8 @@ export class SearchService {
 
     return this.http.get<ISearchResp>(this.searchURL, options).pipe(
       map((resp) => {
-        this.store.dispatch(SetTotalsItems({ totalItems: resp.totalItems }));
         const transData = transformRespBooksData(resp);
-        return transData;
+        return { books: transData, totalBooks: resp.totalItems };
       })
     );
   }
@@ -96,12 +89,5 @@ export class SearchService {
         return transData;
       })
     );
-  }
-
-  handleError(error: HttpErrorResponse): string {
-    if (error.status === 0) {
-      return `An error occurred:', ${error.error}`;
-    }
-    return `Backend returned code ${error.status}, body was: , ${error.error} `;
   }
 }

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReviewItemComponent } from './review-item.component';
+import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserService } from '../../../core/services/user/user.service';
 import { of } from 'rxjs';
+
+import { ReviewItemComponent } from '.';
 
 describe('ReviewItemComponent', () => {
   let component: ReviewItemComponent;

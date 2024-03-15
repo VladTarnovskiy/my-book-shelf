@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearchBookSkeletonComponent } from './search-book-skeleton.component';
+import { SearchBookSkeletonComponent } from '.';
 
 describe('SearchBookSkeletonComponent', () => {
   let component: SearchBookSkeletonComponent;

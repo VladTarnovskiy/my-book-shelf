@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IBook } from '../../shared/models/book.model';
-import { RecommendedBooksFacade } from '../../store/recommendedBooks/recommendedBooks.facade';
-import { HomeBookComponent } from '../../components/home/home-book/home-book.component';
 import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HomeBookComponent } from '@components/home/home-book';
 import { TranslateModule } from '@ngx-translate/core';
+import { IBook } from '@shared/models/book';
+import { RecommendedBooksFacade } from '@store/recommendedBooks';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-recommended',

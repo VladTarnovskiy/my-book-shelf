@@ -1,13 +1,16 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import { RouterOutlet } from '@angular/router';
-import { ToasterContainerComponent } from './components/core/toaster-container/toaster-container.component';
+import { ToasterContainerComponent } from '@components/core/toaster-container';
+import { LoaderComponent } from '@components/shared/loader';
+import { AuthService } from '@core/services/auth';
+import { UserService } from '@core/services/user';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthFacade } from '@store/auth';
+
 import englishLang from '../assets/i18n/en.json';
 import russianLang from '../assets/i18n/ru.json';
-import { AuthService } from './core/services/auth/auth.service';
-import { AuthFacade } from './store/auth/auth.facade';
-import { AsyncPipe } from '@angular/common';
-import { LoaderComponent } from './components/shared/loader/loader.component';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +31,9 @@ export class AppComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private authService: AuthService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private auth: Auth,
+    private userService: UserService
   ) {
     translate.setTranslation('en', englishLang);
     translate.setTranslation('ru', russianLang);
@@ -36,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.getUserAfterReload();
+    this.getUserAfterReload();
     const lang = localStorage.getItem('lang');
     if (lang) {
       this.translate.use(lang);
@@ -44,5 +49,30 @@ export class AppComponent implements OnInit {
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     // );
+  }
+
+  getUserAfterReload(): void {
+    this.authFacade.changeUserIsLoading(true);
+    this.auth.onAuthStateChanged((user) => {
+      if (user !== null) {
+        this.setUserName(user.uid);
+      } else {
+        this.authService.isLoggedIn.next(false);
+        this.authFacade.changeUserIsLoading(false);
+      }
+    });
+  }
+
+  setUserName(userId: string): void {
+    this.userService.getUser(userId).subscribe((user) => {
+      const userInfo = user.payload.data();
+      if (userInfo) {
+        this.authFacade.addUserName(userInfo.name);
+        this.authFacade.addUserId(userInfo.userId);
+        this.authFacade.addUserPhoto(userInfo.photo);
+        this.authService.isLoggedIn.next(true);
+      }
+      this.authFacade.changeUserIsLoading(false);
+    });
   }
 }

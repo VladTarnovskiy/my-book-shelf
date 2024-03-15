@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { quotesReducer } from './quotes.reducer';
+import { StoreModule } from '@ngrx/store';
+
 import { QuotesEffects } from './quotes.effects';
+import { quotesReducer } from './quotes.reducer';
 
 @NgModule({
   imports: [

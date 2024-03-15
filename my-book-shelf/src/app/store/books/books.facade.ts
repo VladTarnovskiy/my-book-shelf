@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import { IBooksSearchParams } from '../../shared/interfaces/bookParams';
+import {
+  CategoryFilterKeys,
+  FilterTypesKeys,
+} from '../../shared/interfaces/filters';
+import * as BOOKS_ACTIONS from './books.action';
 import {
   selectBookFilterCategoryType,
   selectBookId,
   selectBooks,
   selectBooksLoading,
+  selectMyBookId,
   selectPreviewBook,
   selectPreviewBookLoader,
   selectSearchOptions,
   selectSearchPage,
-  selectSearchTotalItems,
+  selectSearchTotalBooks,
   selectSearchValue,
 } from './books.selector';
-import {
-  FilterTypesKeys,
-  CategoryFilterKeys,
-} from '../../shared/interfaces/filters';
-import * as BOOKS_ACTIONS from './books.action';
-import { IBooksSearchParams } from '../../shared/interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +30,12 @@ export class BooksFacade {
   searchValue$ = this.store.select(selectSearchValue);
   searchPage$ = this.store.select(selectSearchPage);
   filterCategoryType$ = this.store.select(selectBookFilterCategoryType);
-  searchTotalItems$ = this.store.select(selectSearchTotalItems);
+  searchTotalBooks$ = this.store.select(selectSearchTotalBooks);
   searchOptions$ = this.store.select(selectSearchOptions);
   previewBook$ = this.store.select(selectPreviewBook);
   previewBookLoader$ = this.store.select(selectPreviewBookLoader);
   previewBookId$ = this.store.select(selectBookId);
+  myBookId$ = this.store.select(selectMyBookId);
 
   constructor(private store: Store) {}
 
@@ -64,10 +67,6 @@ export class BooksFacade {
 
   setSearchPage(page: number) {
     this.store.dispatch(BOOKS_ACTIONS.SetSearchPage({ page }));
-  }
-
-  setTotalsItems(totalItems: number) {
-    this.store.dispatch(BOOKS_ACTIONS.SetTotalsItems({ totalItems }));
   }
 
   addFavoriteStatus(bookId: string) {

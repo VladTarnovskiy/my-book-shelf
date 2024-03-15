@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { optionsList } from './preview-options.constant';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { optionsList } from './preview-options.constant';
 
 @Component({
   selector: 'app-preview-options',

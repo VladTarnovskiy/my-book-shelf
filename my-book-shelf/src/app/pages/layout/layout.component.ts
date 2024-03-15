@@ -1,11 +1,11 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavigationComponent } from '../../components/core/navigation/navigation.component';
-import { FooterComponent } from '../../components/core/footer/footer.component';
-import { SearchBarComponent } from '../../components/core/search-bar/search-bar.component';
-import { LangMenuComponent } from '../../components/core/lang-menu/lang-menu.component';
-import { ProfileMenuComponent } from '../../components/core/profile-menu/profile-menu.component';
-import { NgClass } from '@angular/common';
+import { FooterComponent } from '@components/core/footer';
+import { LangMenuComponent } from '@components/core/lang-menu';
+import { NavigationComponent } from '@components/core/navigation';
+import { ProfileMenuComponent } from '@components/core/profile-menu';
+import { SearchBarComponent } from '@components/core/search-bar';
 
 @Component({
   selector: 'app-layout',

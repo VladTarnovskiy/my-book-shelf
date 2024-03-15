@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeBookSkeletonComponent } from './home-book-skeleton.component';
+
+import { HomeBookSkeletonComponent } from '.';
 
 describe('HomeBookSkeletonComponent', () => {
   let component: HomeBookSkeletonComponent;

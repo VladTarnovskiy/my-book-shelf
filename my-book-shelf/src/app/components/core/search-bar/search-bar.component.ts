@@ -1,28 +1,29 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DestroyDirective } from '@core/directives/destroy';
+import { SearchService } from '@core/services/search';
+import { TranslateModule } from '@ngx-translate/core';
+import { switchMenuAnimation } from '@shared/animation';
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
-} from '../../../shared/interfaces/filters';
+} from '@shared/interfaces/filters';
+import { BooksFacade } from '@store/books';
 import {
   BehaviorSubject,
   debounceTime,
   distinctUntilChanged,
   takeUntil,
 } from 'rxjs';
-import { BooksFacade } from '../../../store/books/books.facade';
-import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
+
 import { filterTypeList } from './search-bar.constant';
-import { SearchService } from '../../../core/services/search/search.service';
-import { AsyncPipe } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
-import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-search-bar',

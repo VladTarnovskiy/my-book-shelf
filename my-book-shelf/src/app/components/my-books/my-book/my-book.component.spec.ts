@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MyBookComponent } from './my-book.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { myBookStub } from '../../../shared/tests/bookStub';
+import { TranslateModule } from '@ngx-translate/core';
+import { myBookStub } from '@shared/tests';
+
+import { MyBookComponent } from '.';
 
 describe('MyBookComponent', () => {
   let component: MyBookComponent;

@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProfileMenuComponent } from './profile-menu.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { provideMockStore } from '@ngrx/store/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { ProfileMenuComponent } from '.';
 
 describe('ProfileMenuComponent', () => {
   let component: ProfileMenuComponent;

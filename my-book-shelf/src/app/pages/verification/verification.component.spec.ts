@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { VerificationComponent } from './verification.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { VerificationComponent } from '.';
 
 describe('VerificationComponent', () => {
   let component: VerificationComponent;

@@ -1,28 +1,30 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { createReducer, on } from '@ngrx/store';
-import * as BOOKS_ACTIONS from './books.action';
-import { IBook } from '../../shared/models/book.model';
+
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../shared/interfaces/filters';
+import { IBook } from '../../shared/models/book';
+import * as BOOKS_ACTIONS from './books.action';
 
 export interface BooksState {
   books: IBook[];
-  totalItems: number;
+  totalBooks: number;
   page: number;
   previewBook: IBook | null;
   searchValue: string;
   isLoading: boolean;
   isPreviewLoading: boolean;
-  previewError: string | null;
-  error: string | null;
+  previewError: HttpErrorResponse | null;
+  error: HttpErrorResponse | null;
   filterType: FilterTypesKeys;
   categoryFilterType: CategoryFilterKeys;
 }
 
 export const initialState: BooksState = {
   books: [],
-  totalItems: 0,
+  totalBooks: 0,
   previewBook: null,
   page: 0,
   searchValue: '',
@@ -62,21 +64,26 @@ export const booksReducer = createReducer(
       }
     }
   ),
-  on(BOOKS_ACTIONS.FetchBooksSuccess, (state, { books, page }): BooksState => {
-    if (page === 0) {
-      return {
-        ...state,
-        books,
-        isLoading: false,
-      };
-    } else {
-      return {
-        ...state,
-        books: [...state.books, ...books],
-        isLoading: false,
-      };
+  on(
+    BOOKS_ACTIONS.FetchBooksSuccess,
+    (state, { books, page, totalBooks }): BooksState => {
+      if (page === 0) {
+        return {
+          ...state,
+          books,
+          totalBooks,
+          isLoading: false,
+        };
+      } else {
+        return {
+          ...state,
+          books: [...state.books, ...books],
+          totalBooks,
+          isLoading: false,
+        };
+      }
     }
-  }),
+  ),
   on(
     BOOKS_ACTIONS.FetchBooksFailed,
     (state, { error }): BooksState => ({
@@ -129,13 +136,6 @@ export const booksReducer = createReducer(
     (state, { filterType }): BooksState => ({
       ...state,
       filterType,
-    })
-  ),
-  on(
-    BOOKS_ACTIONS.SetTotalsItems,
-    (state, { totalItems }): BooksState => ({
-      ...state,
-      totalItems,
     })
   ),
   on(

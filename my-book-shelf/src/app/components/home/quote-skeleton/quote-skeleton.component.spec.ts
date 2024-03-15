@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QuoteSkeletonComponent } from './quote-skeleton.component';
+import { QuoteSkeletonComponent } from '.';
 
 describe('QuoteSkeletonComponent', () => {
   let component: QuoteSkeletonComponent;

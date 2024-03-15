@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 import {
   selectRecommendedBooks,
   selectRecommendedBooksError,
   selectRecommendedBooksIsLoading,
 } from './recommendedBooks.selector';
-import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 
 @Injectable({
   providedIn: 'root',

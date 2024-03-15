@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,10 +6,9 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IUploadBook } from '../../../shared/models/upload';
-import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { IUploadBook } from '@shared/models/upload';
 
 @Component({
   selector: 'app-favorite-upload-book',

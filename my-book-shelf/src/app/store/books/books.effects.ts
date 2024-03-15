@@ -1,15 +1,18 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToasterService } from '@core/services/toaster';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as BOOKS_ACTIONS from './books.action';
+
 import { SearchService } from '../../core/services/search/search.service';
+import * as BOOKS_ACTIONS from './books.action';
 
 @Injectable()
 export class BooksEffects {
   constructor(
     private actions$: Actions,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private toasterService: ToasterService
   ) {}
 
   fetchBooks$ = createEffect(() => {
@@ -19,10 +22,20 @@ export class BooksEffects {
         this.searchService
           .getBooks({ searchValue, filterType, categoryFilterType, page })
           .pipe(
-            map((books) => BOOKS_ACTIONS.FetchBooksSuccess({ books, page })),
+            map((booksInfo) =>
+              BOOKS_ACTIONS.FetchBooksSuccess({
+                books: booksInfo.books,
+                totalBooks: booksInfo.totalBooks,
+                page,
+              })
+            ),
             catchError((error: HttpErrorResponse) => {
-              const handleError = this.searchService.handleError(error);
-              return of(BOOKS_ACTIONS.FetchBooksFailed({ error: handleError }));
+              this.toasterService.showHttpsError(error);
+              return of(
+                BOOKS_ACTIONS.FetchBooksFailed({
+                  error: error,
+                })
+              );
             })
           )
       )
@@ -38,9 +51,11 @@ export class BooksEffects {
             BOOKS_ACTIONS.FetchPreviewBookSuccess({ previewBook })
           ),
           catchError((error: HttpErrorResponse) => {
-            const handleError = this.searchService.handleError(error);
+            this.toasterService.showHttpsError(error);
             return of(
-              BOOKS_ACTIONS.FetchPreviewBookFailed({ error: handleError })
+              BOOKS_ACTIONS.FetchPreviewBookFailed({
+                error: error,
+              })
             );
           })
         )

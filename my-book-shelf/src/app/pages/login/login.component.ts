@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -6,12 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ValidatePassword } from '../../shared/validators/password';
-import { NgClass } from '@angular/common';
-import { IUserDetailsLoginForm } from '../../shared/models/user';
-import { AuthService } from '../../core/services/auth/auth.service';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '@core/services/auth';
 import { TranslateModule } from '@ngx-translate/core';
+import { IUserDetailsLoginForm } from '@shared/models/user';
+import { ValidatePassword } from '@shared/validators';
 
 @Component({
   selector: 'app-login',
@@ -65,10 +65,10 @@ export class LoginComponent implements OnInit {
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.loginForm.controls.email;
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm.controls.password;
   }
 }
