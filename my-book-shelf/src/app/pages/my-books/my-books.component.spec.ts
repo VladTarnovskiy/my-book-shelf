@@ -1,10 +1,11 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MyBooksComponent } from './my-books.component';
+import { MyBookComponent } from '@components/my-books/my-book';
+import { MyBookService } from '@core/services/my-book';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { Component } from '@angular/core';
-import { MyBookComponent } from '../../components/my-books/my-book/my-book.component';
+
+import { MyBooksComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-my-book', template: '' })
 class MyBookStubComponent {}

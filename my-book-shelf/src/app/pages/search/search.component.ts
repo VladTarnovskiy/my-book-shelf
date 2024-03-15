@@ -1,20 +1,20 @@
-import { SearchBookSkeletonComponent } from '../../components/search/search-book-skeleton/search-book-skeleton.component';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { CategoryFilterComponent } from '../../components/search/category-filter/category-filter.component';
-import { SearchBookComponent } from '../../components/search/search-book/search-book.component';
-import { BehaviorSubject, Observable, combineLatest, takeUntil } from 'rxjs';
-import { IBook } from '../../shared/models/book.model';
-import { AsyncPipe } from '@angular/common';
-import { ISearchOptions } from '../../shared/interfaces/search';
-import { BooksFacade } from '../../store/books/books.facade';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
+import { CategoryFilterComponent } from '@components/search/category-filter';
+import { SearchBookComponent } from '@components/search/search-book';
+import { SearchBookSkeletonComponent } from '@components/search/search-book-skeleton';
+import { DestroyDirective } from '@core/directives/destroy';
+import { FavoriteService } from '@core/services/favorite';
 import { TranslateModule } from '@ngx-translate/core';
-import { FavoriteService } from '../../core/services/favorite/favorite.service';
+import { ISearchOptions } from '@shared/interfaces/search';
+import { IBook } from '@shared/models/book';
+import { BooksFacade } from '@store/books';
+import { BehaviorSubject, combineLatest, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-search',

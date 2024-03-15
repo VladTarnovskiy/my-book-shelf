@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+
+import { IBook } from '../../shared/models/book';
 import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
-import { IBook } from '../../shared/models/book.model';
 
 export interface RecommendedBooksState {
   books: IBook[];

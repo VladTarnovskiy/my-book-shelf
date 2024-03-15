@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { IQuote } from '../../../shared/models/quote';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IQuote } from '@shared/models/quote';
 import { Observable } from 'rxjs';
 
 @Injectable({

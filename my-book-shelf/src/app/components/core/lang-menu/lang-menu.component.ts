@@ -5,9 +5,9 @@ import {
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
-import { ILanguage } from '../../../shared/interfaces/language';
+import { switchMenuAnimation } from '@shared/animation';
+import { ILanguage } from '@shared/interfaces/language';
 import { BehaviorSubject } from 'rxjs';
-import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
 
 @Component({
   selector: 'app-lang-menu',

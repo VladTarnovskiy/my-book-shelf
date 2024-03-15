@@ -1,16 +1,16 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { BehaviorSubject, takeUntil } from 'rxjs';
-import { IUploadBook } from '../../shared/models/upload';
-import { AsyncPipe } from '@angular/common';
-import { MyBookComponent } from '../../components/my-books/my-book/my-book.component';
+import { MyBookComponent } from '@components/my-books/my-book';
+import { DestroyDirective } from '@core/directives/destroy';
+import { MyBookService } from '@core/services/my-book';
 import { TranslateModule } from '@ngx-translate/core';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
+import { IUploadBook } from '@shared/models/upload';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-my-books',

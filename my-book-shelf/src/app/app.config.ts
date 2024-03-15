@@ -1,27 +1,28 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import {
-  PreloadAllModules,
-  provideRouter,
-  withPreloading,
-} from '@angular/router';
-import { routes } from './app.routes';
 import {
   HttpClient,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import { authInterceptor } from './core/interceptors/auth.interceptor';
-import { provideRouterStore } from '@ngrx/router-store';
-import { firebaseConfig } from '../environments/environment';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withPreloading,
+} from '@angular/router';
+import { authInterceptor } from '@core/interceptors';
+import { provideRouterStore } from '@ngrx/router-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { StateModule } from './store/state.module';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { StateModule } from '@store/state.module';
+
+import { firebaseConfig } from '../environments/environment';
+import { routes } from './app.routes';
 
 function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

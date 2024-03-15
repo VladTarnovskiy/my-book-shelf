@@ -1,21 +1,21 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { QuoteComponent } from '../../components/home/quote/quote.component';
-import { HomeBookComponent } from '../../components/home/home-book/home-book.component';
-import { AsyncPipe } from '@angular/common';
-import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
-import { IBook } from '../../shared/models/book.model';
 import { RouterLink } from '@angular/router';
-import { RecommendedBooksFacade } from '../../store/recommendedBooks/recommendedBooks.facade';
-import { recommendedGenerator } from '../../shared/utils/recStubGenerator';
-import { HomeBookSkeletonComponent } from '../../components/home/home-book-skeleton/home-book-skeleton.component';
+import { HomeBookComponent } from '@components/home/home-book';
+import { HomeBookSkeletonComponent } from '@components/home/home-book-skeleton';
+import { QuoteComponent } from '@components/home/quote';
+import { DestroyDirective } from '@core/directives/destroy';
+import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
-import { RecentService } from '../../core/services/recent/recent.service';
+import { IBook } from '@shared/models/book';
+import { recommendedGenerator } from '@shared/utils';
+import { RecommendedBooksFacade } from '@store/recommendedBooks';
+import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',

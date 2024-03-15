@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { RecommendedComponent } from './recommended.component';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { RecommendedComponent } from '.';
 
 describe('RecommendedComponent', () => {
   let component: RecommendedComponent;

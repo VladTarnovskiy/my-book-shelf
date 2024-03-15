@@ -1,19 +1,19 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
 } from '@angular/core';
 import {
-  ReactiveFormsModule,
-  FormGroup,
   FormControl,
+  FormGroup,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IUpLoadBookForm } from '../../shared/models/upload';
-import { NgClass } from '@angular/common';
-import { ToasterService } from '../../core/services/toaster/toaster.service';
+import { MyBookService } from '@core/services/my-book';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
+import { IUpLoadBookForm } from '@shared/models/upload';
 
 @Component({
   selector: 'app-upload',

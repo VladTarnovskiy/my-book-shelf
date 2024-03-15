@@ -1,21 +1,21 @@
+import { AsyncPipe, DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IBook } from '../../shared/models/book.model';
-import { Observable, takeUntil } from 'rxjs';
-import { AsyncPipe, DatePipe } from '@angular/common';
-import { PreviewSkeletonComponent } from '../../components/preview/preview-skeleton/preview-skeleton.component';
-import { PreviewOptionsComponent } from '../../components/preview/preview-options/preview-options.component';
-import { BooksFacade } from '../../store/books/books.facade';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
-import { GoBackDirective } from '../../core/directives/go-back/go-back.directive';
+import { PreviewOptionsComponent } from '@components/preview/preview-options';
+import { PreviewSkeletonComponent } from '@components/preview/preview-skeleton';
+import { ReviewComponent } from '@components/preview/review';
+import { DestroyDirective } from '@core/directives/destroy';
+import { GoBackDirective } from '@core/directives/go-back';
+import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
-import { ReviewComponent } from '../../components/preview/review/review.component';
-import { RecentService } from '../../core/services/recent/recent.service';
+import { IBook } from '@shared/models/book';
+import { BooksFacade } from '@store/books';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',

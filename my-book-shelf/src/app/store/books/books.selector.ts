@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BooksState } from './books.reducer';
+
 import { selectRouteParams } from '../router/router.selectors';
+import { BooksState } from './books.reducer';
 
 export const selectBooksStore = createFeatureSelector<BooksState>('books');
 export const selectBooks = createSelector(

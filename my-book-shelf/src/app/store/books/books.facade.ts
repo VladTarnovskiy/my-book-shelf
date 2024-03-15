@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
+import { IBooksSearchParams } from '../../shared/interfaces/bookParams';
+import {
+  CategoryFilterKeys,
+  FilterTypesKeys,
+} from '../../shared/interfaces/filters';
+import * as BOOKS_ACTIONS from './books.action';
 import {
   selectBookFilterCategoryType,
   selectBookId,
@@ -12,12 +19,6 @@ import {
   selectSearchTotalItems,
   selectSearchValue,
 } from './books.selector';
-import {
-  FilterTypesKeys,
-  CategoryFilterKeys,
-} from '../../shared/interfaces/filters';
-import * as BOOKS_ACTIONS from './books.action';
-import { IBooksSearchParams } from '../../shared/interfaces/bookParams';
 
 @Injectable({
   providedIn: 'root',

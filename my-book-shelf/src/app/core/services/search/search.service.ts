@@ -4,17 +4,17 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { IBookResp, ISearchResp } from '../../../shared/interfaces/booksResp';
-import { SetTotalsItems } from '../../../store/books/books.action';
 import { Store } from '@ngrx/store';
-import { IBook } from '../../../shared/models/book.model';
+import { IBooksSearchParams } from '@shared/interfaces/bookParams';
+import { IBookResp, ISearchResp } from '@shared/interfaces/booksResp';
+import { IBook } from '@shared/models/book';
 import {
+  getBooksSearchHeaders,
   transformRespBookData,
   transformRespBooksData,
-} from '../../../shared/utils/transformRespData';
-import { getBooksSearchHeaders } from '../../../shared/utils/getBooksSearchHeaders';
-import { IBooksSearchParams } from '../../../shared/interfaces/bookParams';
+} from '@shared/utils';
+import { SetTotalsItems } from '@store/books/books.action';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

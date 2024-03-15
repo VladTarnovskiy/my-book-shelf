@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FavoriteBookComponent } from './favorite-book.component';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { favoriteBookDataStub } from '../../../shared/tests/bookStub';
+import { TranslateModule } from '@ngx-translate/core';
+import { favoriteBookDataStub } from '@shared/tests';
+
+import { FavoriteBookComponent } from '.';
 
 describe('FavoriteBookComponent', () => {
   let component: FavoriteBookComponent;

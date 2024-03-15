@@ -3,17 +3,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  inject,
   Input,
   OnInit,
   Output,
-  inject,
 } from '@angular/core';
-import { IReview } from '../../../shared/models/review';
-import { ModalComponent } from '../../shared/modal/modal.component';
+import { ModalComponent } from '@components/shared/modal';
+import { DestroyDirective } from '@core/directives/destroy';
+import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserService } from '../../../core/services/user/user.service';
+import { IReview } from '@shared/models/review';
 import { BehaviorSubject, takeUntil } from 'rxjs';
-import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-review-item',

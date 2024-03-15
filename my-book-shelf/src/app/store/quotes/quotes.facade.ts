@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import * as QUOTE_ACTIONS from './quotes.action';
 import {
   selectQuote,
-  selectQuoteIsLoading,
   selectQuoteError,
+  selectQuoteIsLoading,
 } from './quotes.selector';
 
 @Injectable({

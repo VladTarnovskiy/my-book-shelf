@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
-import * as BOOKS_ACTIONS from './books.action';
-import { IBook } from '../../shared/models/book.model';
+
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../shared/interfaces/filters';
+import { IBook } from '../../shared/models/book';
+import * as BOOKS_ACTIONS from './books.action';
 
 export interface BooksState {
   books: IBook[];

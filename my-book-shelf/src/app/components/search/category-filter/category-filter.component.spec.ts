@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CategoryFilterComponent } from './category-filter.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { CategoryFilterComponent } from '.';
 
 describe('CategoryFilterComponent', () => {
   let component: CategoryFilterComponent;

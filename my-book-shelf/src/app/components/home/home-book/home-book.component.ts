@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IBook } from '../../../shared/models/book.model';
+import { IBook } from '@shared/models/book';
 
 @Component({
   selector: 'app-home-book',

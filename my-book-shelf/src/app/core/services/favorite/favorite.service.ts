@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   AngularFirestore,
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
-import { Auth } from '@angular/fire/auth';
+import { IBook } from '@shared/models/book';
+import { IFavoriteBook } from '@shared/models/favoriteBook';
 import { Observable } from 'rxjs';
-import { IBook } from '../../../shared/models/book.model';
-import { IFavoriteBook } from '../../../shared/models/favoriteBook';
 
 @Injectable({
   providedIn: 'root',

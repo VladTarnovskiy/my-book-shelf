@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormControl,
@@ -6,14 +7,15 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ValidateName } from '../../shared/validators/name';
-import { ValidatePassword } from '../../shared/validators/password';
-import { IUserDetailsRegistrationForm } from '../../shared/models/user';
-import { AuthService } from '../../core/services/auth/auth.service';
 import { RouterLink } from '@angular/router';
-import { confirmPasswordValidator } from '../../shared/validators/confirmPassword';
+import { AuthService } from '@core/services/auth';
 import { TranslateModule } from '@ngx-translate/core';
-import { NgClass } from '@angular/common';
+import { IUserDetailsRegistrationForm } from '@shared/models/user';
+import {
+  ValidateConfirmPassword,
+  ValidateName,
+  ValidatePassword,
+} from '@shared/validators';
 
 @Component({
   selector: 'app-registration',
@@ -54,7 +56,7 @@ export class RegistrationComponent {
         nonNullable: true,
       }),
     },
-    { validators: [confirmPasswordValidator] }
+    { validators: [ValidateConfirmPassword] }
   );
 
   onSubmit(): void {

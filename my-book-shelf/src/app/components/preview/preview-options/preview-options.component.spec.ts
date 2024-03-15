@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PreviewOptionsComponent } from './preview-options.component';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { PreviewOptionsComponent } from '.';
 
 describe('PreviewOptionsComponent', () => {
   let component: PreviewOptionsComponent;

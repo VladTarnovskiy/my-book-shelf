@@ -1,14 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PreviewComponent } from './preview.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { provideMockStore } from '@ngrx/store/testing';
-import { RecentService } from '../../core/services/recent/recent.service';
-import { PreviewOptionsComponent } from '../../components/preview/preview-options/preview-options.component';
 import { Component } from '@angular/core';
-import { PreviewSkeletonComponent } from '../../components/preview/preview-skeleton/preview-skeleton.component';
-import { ReviewComponent } from '../../components/preview/review/review.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PreviewOptionsComponent } from '@components/preview/preview-options';
+import { PreviewSkeletonComponent } from '@components/preview/preview-skeleton';
+import { ReviewComponent } from '@components/preview/review';
+import { RecentService } from '@core/services/recent';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { PreviewComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-preview-skeleton', template: '' })
 class PreviewSkeletonStubComponent {}

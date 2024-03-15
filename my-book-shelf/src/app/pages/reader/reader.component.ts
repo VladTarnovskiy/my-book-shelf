@@ -2,17 +2,17 @@ import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { BehaviorSubject, takeUntil } from 'rxjs';
-import { IUploadBook } from '../../shared/models/upload';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
-import { SafePipe } from '../../core/pipes/safe/safe.pipe';
-import { GoBackDirective } from '../../core/directives/go-back/go-back.directive';
-import { TranslateModule } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
+import { DestroyDirective } from '@core/directives/destroy';
+import { GoBackDirective } from '@core/directives/go-back';
+import { SafePipe } from '@core/pipes/safe';
+import { MyBookService } from '@core/services/my-book';
+import { TranslateModule } from '@ngx-translate/core';
+import { IUploadBook } from '@shared/models/upload';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-reader',

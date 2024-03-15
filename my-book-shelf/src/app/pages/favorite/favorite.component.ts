@@ -1,20 +1,20 @@
-import { MyBookService } from '../../core/services/my-book/my-book.service';
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { FavoriteBookComponent } from '../../components/favorite/favorite-book/favorite-book.component';
-import { BehaviorSubject, takeUntil } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { IFavoriteBook } from '../../shared/models/favoriteBook';
-import { BooksFacade } from '../../store/books/books.facade';
-import { IUploadBook } from '../../shared/models/upload';
-import { FavoriteUploadBookComponent } from '../../components/favorite/favorite-upload-book/favorite-upload-book.component';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
-import { FavoriteService } from '../../core/services/favorite/favorite.service';
+import { FavoriteBookComponent } from '@components/favorite/favorite-book';
+import { FavoriteUploadBookComponent } from '@components/favorite/favorite-upload-book';
+import { DestroyDirective } from '@core/directives/destroy';
+import { FavoriteService } from '@core/services/favorite';
+import { MyBookService } from '@core/services/my-book';
 import { TranslateModule } from '@ngx-translate/core';
+import { IFavoriteBook } from '@shared/models/favoriteBook';
+import { IUploadBook } from '@shared/models/upload';
+import { BooksFacade } from '@store/books';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-favorite',

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UploadComponent } from './upload.component';
+import { MyBookService } from '@core/services/my-book';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { ToasterService } from '../../core/services/toaster/toaster.service';
+
+import { UploadComponent } from '.';
 
 describe('UploadComponent', () => {
   let component: UploadComponent;

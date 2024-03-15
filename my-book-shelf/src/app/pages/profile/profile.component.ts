@@ -1,16 +1,16 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { DestroyDirective } from '@core/directives/destroy';
+import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
-import { UserService } from '../../core/services/user/user.service';
-import { AuthFacade } from '../../store/auth/auth.facade';
+import { AuthFacade } from '@store/auth';
 import { takeUntil } from 'rxjs';
-import { NgClass } from '@angular/common';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-profile',

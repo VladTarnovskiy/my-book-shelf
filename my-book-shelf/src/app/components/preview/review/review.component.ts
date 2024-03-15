@@ -1,19 +1,20 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   Input,
   OnInit,
-  inject,
 } from '@angular/core';
-import { AuthFacade } from '../../../store/auth/auth.facade';
-import { Observable, BehaviorSubject, takeUntil } from 'rxjs';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IReview } from '../../../shared/models/review';
-import { AsyncPipe, NgClass } from '@angular/common';
-import { ReviewService } from '../../../core/services/review/review.service';
-import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
-import { ReviewItemComponent } from '../review-item/review-item.component';
+import { DestroyDirective } from '@core/directives/destroy';
+import { ReviewService } from '@core/services/review';
 import { TranslateModule } from '@ngx-translate/core';
+import { IReview } from '@shared/models/review';
+import { AuthFacade } from '@store/auth';
+import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+
+import { ReviewItemComponent } from '../review-item';
 
 @Component({
   selector: 'app-review',

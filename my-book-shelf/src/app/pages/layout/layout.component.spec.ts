@@ -1,12 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LayoutComponent } from './layout.component';
 import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from '../../components/core/footer/footer.component';
-import { LangMenuComponent } from '../../components/core/lang-menu/lang-menu.component';
-import { NavigationComponent } from '../../components/core/navigation/navigation.component';
-import { ProfileMenuComponent } from '../../components/core/profile-menu/profile-menu.component';
-import { SearchBarComponent } from '../../components/core/search-bar/search-bar.component';
+import { FooterComponent } from '@components/core/footer';
+import { LangMenuComponent } from '@components/core/lang-menu';
+import { NavigationComponent } from '@components/core/navigation';
+import { ProfileMenuComponent } from '@components/core/profile-menu';
+import { SearchBarComponent } from '@components/core/search-bar';
+
+import { LayoutComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-navigation', template: '' })
 class NavigationStubComponent {}

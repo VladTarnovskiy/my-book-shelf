@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeBookComponent } from './home-book.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { bookDataStub } from '../../../shared/tests/bookStub';
+import { bookDataStub } from '@shared/tests';
+
+import { HomeBookComponent } from '.';
 
 describe('HomeBookComponent', () => {
   let component: HomeBookComponent;

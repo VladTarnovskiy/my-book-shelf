@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { IBook } from '../../shared/models/book.model';
+
 import {
   CategoryFilterKeys,
   FilterTypesKeys,
 } from '../../shared/interfaces/filters';
+import { IBook } from '../../shared/models/book';
 
 const actionSource = '[Books]';
 

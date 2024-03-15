@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as READER_BOOKS_ACTIONS from './api-reader.action';
+
 import { SearchService } from '../../core/services/search/search.service';
+import * as READER_BOOKS_ACTIONS from './api-reader.action';
 
 @Injectable()
 export class ReaderBookEffects {

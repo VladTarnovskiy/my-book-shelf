@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+
+import { IBook } from '../../shared/models/book';
 import * as READER_BOOKS_ACTIONS from './api-reader.action';
-import { IBook } from '../../shared/models/book.model';
 
 export interface ReaderBookState {
   book: IBook | null;

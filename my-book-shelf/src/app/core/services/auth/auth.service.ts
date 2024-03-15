@@ -2,19 +2,20 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
   GithubAuthProvider,
+  GoogleAuthProvider,
   sendEmailVerification,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { IUserDetails } from '@shared/models/user';
+import { AuthFacade } from '@store/auth';
 import { BehaviorSubject } from 'rxjs';
-import { ToasterService } from '../toaster/toaster.service';
-import { UserService } from '../user/user.service';
-import { IUserDetails } from '../../../shared/models/user';
-import { AuthFacade } from '../../../store/auth/auth.facade';
+
+import { ToasterService } from '../toaster';
+import { UserService } from '../user';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ToasterComponent } from './toaster.component';
 import { TranslateModule } from '@ngx-translate/core';
+
+import { ToasterComponent } from '.';
 
 describe('ToasterComponent', () => {
   let component: ToasterComponent;

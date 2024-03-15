@@ -1,5 +1,5 @@
 import { IBookResp, ISearchResp } from '../interfaces/booksResp';
-import { IBook } from '../models/book.model';
+import { IBook } from '../models/book';
 
 export const transformRespBooksData = (data: ISearchResp): IBook[] => {
   const transData = data.items.map((book) => {

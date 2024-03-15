@@ -1,16 +1,17 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject,
-} from '@angular/core';
-import { Observable, takeUntil } from 'rxjs';
-import { IQuote } from '../../../shared/models/quote';
-import { QuoteSkeletonComponent } from '../quote-skeleton/quote-skeleton.component';
-import { DestroyDirective } from '../../../core/directives/destroy/destroy.directive';
-import { QuotesFacade } from '../../../store/quotes/quotes.facade';
 import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
+import { DestroyDirective } from '@core/directives/destroy';
 import { TranslateModule } from '@ngx-translate/core';
+import { IQuote } from '@shared/models/quote';
+import { QuotesFacade } from '@store/quotes';
+import { Observable, takeUntil } from 'rxjs';
+
+import { QuoteSkeletonComponent } from '../quote-skeleton';
 
 @Component({
   selector: 'app-quote',

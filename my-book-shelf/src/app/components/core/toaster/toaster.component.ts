@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Toaster } from '../../../shared/models/toaster';
+import { IToaster } from '@shared/models/toaster';
 
 @Component({
   selector: 'app-toaster',
@@ -16,7 +16,7 @@ import { Toaster } from '../../../shared/models/toaster';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToasterComponent {
-  @Input() toast!: Toaster;
+  @Input() toast!: IToaster;
   @Input() index!: number;
   @Output() remove = new EventEmitter<number>();
 

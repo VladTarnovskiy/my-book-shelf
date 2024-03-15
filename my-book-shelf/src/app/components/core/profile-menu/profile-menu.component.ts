@@ -1,11 +1,12 @@
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { profileList } from './profile-menu.constant';
-import { AuthFacade } from '../../../store/auth/auth.facade';
-import { AsyncPipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { switchMenuAnimation } from '@shared/animation';
+import { AuthFacade } from '@store/auth';
 import { Observable } from 'rxjs';
-import { switchMenuAnimation } from '../../../shared/animation/switchMenu';
+
+import { profileList } from './profile-menu.constant';
 
 @Component({
   selector: 'app-profile-menu',

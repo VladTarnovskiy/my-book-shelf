@@ -1,16 +1,16 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   inject,
+  OnInit,
 } from '@angular/core';
-import { BehaviorSubject, takeUntil } from 'rxjs';
-import { IBook } from '../../shared/models/book.model';
-import { AsyncPipe } from '@angular/common';
-import { HomeBookComponent } from '../../components/home/home-book/home-book.component';
+import { HomeBookComponent } from '@components/home/home-book';
+import { DestroyDirective } from '@core/directives/destroy';
+import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
-import { RecentService } from '../../core/services/recent/recent.service';
-import { DestroyDirective } from '../../core/directives/destroy/destroy.directive';
+import { IBook } from '@shared/models/book';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-recent',

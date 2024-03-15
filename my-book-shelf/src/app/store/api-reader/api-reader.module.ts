@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { readerBookReducer } from './api-reader.reducer';
-import { ReaderBookEffects } from './api-reader.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
+import { ReaderBookEffects } from './api-reader.effects';
+import { readerBookReducer } from './api-reader.reducer';
 
 @NgModule({
   imports: [

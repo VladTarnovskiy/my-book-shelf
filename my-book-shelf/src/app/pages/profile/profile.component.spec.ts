@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ProfileComponent } from './profile.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { UserService } from '@core/services/user';
 import { provideMockStore } from '@ngrx/store/testing';
-import { UserService } from '../../core/services/user/user.service';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { ProfileComponent } from '.';
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;

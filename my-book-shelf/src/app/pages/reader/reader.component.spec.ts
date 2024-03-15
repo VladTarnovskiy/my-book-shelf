@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ReaderComponent } from './reader.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MyBookService } from '@core/services/my-book';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { MyBookService } from '../../core/services/my-book/my-book.service';
-import { RouterTestingModule } from '@angular/router/testing';
+
+import { ReaderComponent } from '.';
 
 describe('ReaderComponent', () => {
   let component: ReaderComponent;

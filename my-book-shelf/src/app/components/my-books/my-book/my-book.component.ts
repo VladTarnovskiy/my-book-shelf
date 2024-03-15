@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,11 +6,10 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { IUploadBook } from '../../../shared/models/upload';
 import { RouterLink } from '@angular/router';
-import { ModalComponent } from '../../shared/modal/modal.component';
+import { ModalComponent } from '@components/shared/modal';
 import { TranslateModule } from '@ngx-translate/core';
+import { IUploadBook } from '@shared/models/upload';
 
 @Component({
   selector: 'app-my-book',

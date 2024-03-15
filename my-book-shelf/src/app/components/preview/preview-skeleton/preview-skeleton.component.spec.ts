@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreviewSkeletonComponent } from './preview-skeleton.component';
+import { PreviewSkeletonComponent } from '.';
 
 describe('PreviewSkeletonComponent', () => {
   let component: PreviewSkeletonComponent;

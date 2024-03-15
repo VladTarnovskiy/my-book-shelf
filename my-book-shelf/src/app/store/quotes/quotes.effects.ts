@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as QUOTE_ACTIONS from './quotes.action';
+
 import { QuotesService } from '../../core/services/quotes/quotes.service';
+import * as QUOTE_ACTIONS from './quotes.action';
 
 @Injectable()
 export class QuotesEffects {

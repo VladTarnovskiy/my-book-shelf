@@ -1,6 +1,7 @@
 import { HttpParams } from '@angular/common/http';
-import { filterCategoryTypes, filterTypes } from '../interfaces/filters';
+
 import { IBooksSearchParams } from '../interfaces/bookParams';
+import { filterCategoryTypes, filterTypes } from '../interfaces/filters';
 
 export const getBooksSearchHeaders = ({
   searchValue,

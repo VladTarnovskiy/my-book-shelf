@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,10 +6,9 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IFavoriteBook } from '../../../shared/models/favoriteBook';
-import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { IFavoriteBook } from '@shared/models/favoriteBook';
 
 @Component({
   selector: 'app-favorite-book',

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,10 +6,9 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IBook } from '../../../shared/models/book.model';
 import { RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { IBook } from '@shared/models/book';
 
 @Component({
   selector: 'app-search-book',

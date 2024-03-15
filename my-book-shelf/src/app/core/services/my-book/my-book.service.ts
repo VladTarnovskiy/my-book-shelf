@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
 import {
   Action,
   AngularFirestore,
@@ -6,16 +7,12 @@ import {
   DocumentSnapshot,
 } from '@angular/fire/compat/firestore';
 import {
-  Storage,
   getDownloadURL,
   ref,
+  Storage,
   uploadBytes,
 } from '@angular/fire/storage';
-import {
-  IFirestoreUploadBook,
-  IUploadBook,
-} from '../../../shared/models/upload';
-import { Auth } from '@angular/fire/auth';
+import { IFirestoreUploadBook, IUploadBook } from '@shared/models/upload';
 import { Observable } from 'rxjs';
 
 @Injectable({

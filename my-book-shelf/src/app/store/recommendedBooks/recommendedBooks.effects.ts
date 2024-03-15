@@ -1,9 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
+
 import { SearchService } from '../../core/services/search/search.service';
+import * as RECOMMENDED_BOOKS_ACTIONS from './recommendedBooks.action';
 
 @Injectable()
 export class RecommendedBooksEffects {

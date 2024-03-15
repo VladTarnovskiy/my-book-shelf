@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavigationComponent } from './navigation.component';
 import { provideRouter } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { NavigationComponent } from '.';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;

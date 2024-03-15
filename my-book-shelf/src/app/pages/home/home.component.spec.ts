@@ -1,15 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { HomeComponent } from './home.component';
-import { TranslateModule } from '@ngx-translate/core';
-import { provideMockStore } from '@ngrx/store/testing';
 import { Component } from '@angular/core';
-import { HomeBookSkeletonComponent } from '../../components/home/home-book-skeleton/home-book-skeleton.component';
-import { HomeBookComponent } from '../../components/home/home-book/home-book.component';
-import { QuoteComponent } from '../../components/home/quote/quote.component';
-import { RecentService } from '../../core/services/recent/recent.service';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HomeBookComponent } from '@components/home/home-book';
+import { HomeBookSkeletonComponent } from '@components/home/home-book-skeleton';
+import { QuoteComponent } from '@components/home/quote';
+import { RecentService } from '@core/services/recent';
+import { provideMockStore } from '@ngrx/store/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { of } from 'rxjs';
+
+import { HomeComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-quote', template: '' })
 class QuoteStubComponent {}

@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RecentComponent } from './recent.component';
+import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
-import { RecentService } from '../../core/services/recent/recent.service';
+
+import { RecentComponent } from '.';
 
 describe('RecentComponent', () => {
   let component: RecentComponent;

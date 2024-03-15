@@ -1,14 +1,14 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SearchComponent } from './search.component';
+import { CategoryFilterComponent } from '@components/search/category-filter';
+import { SearchBookComponent } from '@components/search/search-book';
+import { SearchBookSkeletonComponent } from '@components/search/search-book-skeleton';
+import { FavoriteService } from '@core/services/favorite';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { FavoriteService } from '../../core/services/favorite/favorite.service';
 import { of } from 'rxjs';
-import { Component } from '@angular/core';
-import { CategoryFilterComponent } from '../../components/search/category-filter/category-filter.component';
-import { SearchBookSkeletonComponent } from '../../components/search/search-book-skeleton/search-book-skeleton.component';
-import { SearchBookComponent } from '../../components/search/search-book/search-book.component';
+
+import { SearchComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-category-filter', template: '' })
 class CategoryFilterStubComponent {}
