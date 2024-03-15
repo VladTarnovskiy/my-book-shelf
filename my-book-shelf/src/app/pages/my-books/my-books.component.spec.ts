@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MyBookComponent } from '@components/my-books/my-book';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
@@ -19,7 +19,7 @@ describe('MyBooksComponent', () => {
       imports: [MyBooksComponent, TranslateModule.forRoot()],
       providers: [
         {
-          provide: MyBookService,
+          provide: MyBooksService,
           useValue: {
             getMyBooks: () => {
               return of();

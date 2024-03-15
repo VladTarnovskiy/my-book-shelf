@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MyBookComponent } from '@components/my-books/my-book';
 import { DestroyDirective } from '@core/directives/destroy';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BehaviorSubject, takeUntil } from 'rxjs';
@@ -25,7 +25,7 @@ export class MyBooksComponent implements OnInit {
   myBooks$ = new BehaviorSubject<null | IUploadBook[]>(null);
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  constructor(private myBookService: MyBookService) {}
+  constructor(private myBookService: MyBooksService) {}
 
   ngOnInit(): void {
     this.myBookService

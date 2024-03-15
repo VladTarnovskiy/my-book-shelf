@@ -9,7 +9,7 @@ import { FavoriteBookComponent } from '@components/favorite/favorite-book';
 import { FavoriteUploadBookComponent } from '@components/favorite/favorite-upload-book';
 import { DestroyDirective } from '@core/directives/destroy';
 import { FavoriteService } from '@core/services/favorite';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IFavoriteBook } from '@shared/models/favoriteBook';
 import { IUploadBook } from '@shared/models/upload';
@@ -37,7 +37,7 @@ export class FavoriteComponent implements OnInit {
 
   constructor(
     private favoriteService: FavoriteService,
-    private myBookService: MyBookService,
+    private myBookService: MyBooksService,
     private booksFacade: BooksFacade
   ) {}
 

@@ -10,7 +10,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IUpLoadBookForm } from '@shared/models/upload';
@@ -47,7 +47,7 @@ export class UploadComponent {
 
   constructor(
     private toasterService: ToasterService,
-    private myBookService: MyBookService,
+    private myBookService: MyBooksService,
     private translateService: TranslateService,
     private cd: ChangeDetectorRef
   ) {}

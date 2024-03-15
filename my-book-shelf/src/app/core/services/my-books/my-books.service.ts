@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class MyBookService {
+export class MyBooksService {
   constructor(
     private afs: AngularFirestore,
     private auth: Auth,

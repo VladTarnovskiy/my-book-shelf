@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FavoriteBookComponent } from '@components/favorite/favorite-book';
 import { FavoriteUploadBookComponent } from '@components/favorite/favorite-upload-book';
 import { FavoriteService } from '@core/services/favorite';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
@@ -38,7 +38,7 @@ describe('FavoriteComponent', () => {
           },
         },
         {
-          provide: MyBookService,
+          provide: MyBooksService,
           useValue: {
             getMyBooks: () => {
               return of();

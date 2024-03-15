@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DestroyDirective } from '@core/directives/destroy';
 import { GoBackDirective } from '@core/directives/go-back';
 import { SafePipe } from '@core/pipes/safe';
-import { MyBookService } from '@core/services/my-book';
+import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BehaviorSubject, takeUntil } from 'rxjs';
@@ -31,7 +31,7 @@ export class ReaderComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private myBookService: MyBookService
+    private myBookService: MyBooksService
   ) {}
 
   ngOnInit(): void {
