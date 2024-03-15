@@ -9,51 +9,49 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-item">
-        <label for="email" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'LOGIN.INPUT.EMAIL' | translate }}
           </div>
           <input
-            id="email"
-            formControlName="email"
+            [formControl]="email"
             required
             type="email"
             class="form-item__input form-item__input_email"
           />
         </label>
-        @if (email?.hasError('required') && loginForm.touched) {
+        @if (email.hasError('required') && email.touched) {
           <div class="invalid__message">
             {{ 'LOGIN.ERRORS.EMAIL.REQUIRE' | translate }}
           </div>
         }
-        @if (email?.hasError('email') && loginForm.touched) {
+        @if (email.hasError('email') && email.touched) {
           <div class="invalid__message email-error">
             {{ 'LOGIN.ERRORS.EMAIL.INVALID' | translate }}
           </div>
         }
       </div>
       <div class="form-item">
-        <label for="password" class="form-item__label">
+        <label class="form-item__label">
           <div class="form-item__title">
             {{ 'LOGIN.INPUT.PASSWORD' | translate }}
           </div>
           <input
-            id="password"
-            formControlName="password"
+            [formControl]="password"
             type="password"
             required
             autoComplete="on"
             class="form-item__input form-item__input_password"
           />
         </label>
-        @if (password?.hasError('required') && loginForm.touched) {
+        @if (password.hasError('required') && password.touched) {
           <div class="invalid__message">
             {{ 'LOGIN.ERRORS.PASSWORD.REQUIRE' | translate }}
           </div>
         }
-        @if (password?.hasError('forbiddenPassword') && loginForm.touched) {
+        @if (password.hasError('forbiddenPassword') && password.touched) {
           <div class="invalid__message password-error">
-            {{ password?.errors?.['forbiddenPassword'].value }}
+            {{ password.errors?.['forbiddenPassword'].value }}
           </div>
         }
       </div>

@@ -97,22 +97,22 @@ export class UploadComponent {
   }
 
   get title() {
-    return this.uploadForm.get('title');
+    return this.uploadForm.controls.title;
   }
 
   get author() {
-    return this.uploadForm.get('author');
+    return this.uploadForm.controls.author;
   }
 
   get description() {
-    return this.uploadForm.get('description');
+    return this.uploadForm.controls.description;
   }
 
   get file() {
-    return this.uploadForm.get('file');
+    return this.uploadForm.controls.file;
   }
 
   get image() {
-    return this.uploadForm.get('image');
+    return this.uploadForm.controls.image;
   }
 }

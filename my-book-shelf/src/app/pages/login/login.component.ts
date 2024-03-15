@@ -65,10 +65,10 @@ export class LoginComponent implements OnInit {
   }
 
   get email() {
-    return this.loginForm.get('email');
+    return this.loginForm.controls.email;
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm.controls.password;
   }
 }

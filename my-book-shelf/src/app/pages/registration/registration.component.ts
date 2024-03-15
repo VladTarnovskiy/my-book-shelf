@@ -71,14 +71,18 @@ export class RegistrationComponent {
   }
 
   get name() {
-    return this.registerForm.get('name');
+    return this.registerForm.controls.name;
   }
 
   get email() {
-    return this.registerForm.get('email');
+    return this.registerForm.controls.email;
   }
 
   get password() {
-    return this.registerForm.get('password');
+    return this.registerForm.controls.password;
+  }
+
+  get confirmPassword() {
+    return this.registerForm.controls.confirmPassword;
   }
 }

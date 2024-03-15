@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { recommendedGenerator } from '@shared/utils';
 import { RecommendedBooksFacade } from '@store/recommendedBooks';
-import { BehaviorSubject, Observable, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
     this.recommendedBooksFacade.recommendedBooks$;
   recommendedBooksIsLoading$: Observable<boolean> =
     this.recommendedBooksFacade.recBooksIsLoading$;
-  subscription!: Subscription;
   skeletonItems = [...Array(10).keys()];
   private destroy$ = inject(DestroyDirective).destroy$;
 
