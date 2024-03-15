@@ -9,7 +9,7 @@ import * as BOOKS_ACTIONS from './books.action';
 
 export interface BooksState {
   books: IBook[];
-  totalItems: number;
+  totalBooks: number;
   page: number;
   previewBook: IBook | null;
   searchValue: string;
@@ -23,7 +23,7 @@ export interface BooksState {
 
 export const initialState: BooksState = {
   books: [],
-  totalItems: 0,
+  totalBooks: 0,
   previewBook: null,
   page: 0,
   searchValue: '',
@@ -63,21 +63,26 @@ export const booksReducer = createReducer(
       }
     }
   ),
-  on(BOOKS_ACTIONS.FetchBooksSuccess, (state, { books, page }): BooksState => {
-    if (page === 0) {
-      return {
-        ...state,
-        books,
-        isLoading: false,
-      };
-    } else {
-      return {
-        ...state,
-        books: [...state.books, ...books],
-        isLoading: false,
-      };
+  on(
+    BOOKS_ACTIONS.FetchBooksSuccess,
+    (state, { books, page, totalBooks }): BooksState => {
+      if (page === 0) {
+        return {
+          ...state,
+          books,
+          totalBooks,
+          isLoading: false,
+        };
+      } else {
+        return {
+          ...state,
+          books: [...state.books, ...books],
+          totalBooks,
+          isLoading: false,
+        };
+      }
     }
-  }),
+  ),
   on(
     BOOKS_ACTIONS.FetchBooksFailed,
     (state, { error }): BooksState => ({
@@ -130,13 +135,6 @@ export const booksReducer = createReducer(
     (state, { filterType }): BooksState => ({
       ...state,
       filterType,
-    })
-  ),
-  on(
-    BOOKS_ACTIONS.SetTotalsItems,
-    (state, { totalItems }): BooksState => ({
-      ...state,
-      totalItems,
     })
   ),
   on(

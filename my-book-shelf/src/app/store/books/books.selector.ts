@@ -29,9 +29,9 @@ export const selectBookFilterCategoryType = createSelector(
   (state: BooksState) => state.categoryFilterType
 );
 
-export const selectSearchTotalItems = createSelector(
+export const selectSearchTotalBooks = createSelector(
   selectBooksStore,
-  (state: BooksState) => state.totalItems
+  (state: BooksState) => state.totalBooks
 );
 
 export const selectSearchOptions = createSelector(

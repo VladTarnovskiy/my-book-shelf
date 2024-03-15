@@ -20,7 +20,13 @@ export class BooksEffects {
         this.searchService
           .getBooks({ searchValue, filterType, categoryFilterType, page })
           .pipe(
-            map((books) => BOOKS_ACTIONS.FetchBooksSuccess({ books, page })),
+            map((booksInfo) =>
+              BOOKS_ACTIONS.FetchBooksSuccess({
+                books: booksInfo.books,
+                totalBooks: booksInfo.totalBooks,
+                page,
+              })
+            ),
             catchError((error: HttpErrorResponse) => {
               const handleError = this.searchService.handleError(error);
               return of(BOOKS_ACTIONS.FetchBooksFailed({ error: handleError }));

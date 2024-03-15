@@ -17,7 +17,7 @@ import {
   selectPreviewBookLoader,
   selectSearchOptions,
   selectSearchPage,
-  selectSearchTotalItems,
+  selectSearchTotalBooks,
   selectSearchValue,
 } from './books.selector';
 
@@ -30,7 +30,7 @@ export class BooksFacade {
   searchValue$ = this.store.select(selectSearchValue);
   searchPage$ = this.store.select(selectSearchPage);
   filterCategoryType$ = this.store.select(selectBookFilterCategoryType);
-  searchTotalItems$ = this.store.select(selectSearchTotalItems);
+  searchTotalBooks$ = this.store.select(selectSearchTotalBooks);
   searchOptions$ = this.store.select(selectSearchOptions);
   previewBook$ = this.store.select(selectPreviewBook);
   previewBookLoader$ = this.store.select(selectPreviewBookLoader);
@@ -67,10 +67,6 @@ export class BooksFacade {
 
   setSearchPage(page: number) {
     this.store.dispatch(BOOKS_ACTIONS.SetSearchPage({ page }));
-  }
-
-  setTotalsItems(totalItems: number) {
-    this.store.dispatch(BOOKS_ACTIONS.SetTotalsItems({ totalItems }));
   }
 
   addFavoriteStatus(bookId: string) {

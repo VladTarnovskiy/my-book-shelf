@@ -39,7 +39,7 @@ describe('SearchService', () => {
         page: 0,
       })
       .subscribe((books) => {
-        booksData = books;
+        booksData = books.books;
       });
 
     const requestOne = controller.expectOne(expectedUrl);

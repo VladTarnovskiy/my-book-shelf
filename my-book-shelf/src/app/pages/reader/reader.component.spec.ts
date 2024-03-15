@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MyBooksService } from '@core/services/my-books';
+import { provideMockStore } from '@ngrx/store/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { of } from 'rxjs';
 
@@ -18,6 +19,7 @@ describe('ReaderComponent', () => {
         RouterTestingModule,
       ],
       providers: [
+        provideMockStore(),
         {
           provide: MyBooksService,
           useValue: {

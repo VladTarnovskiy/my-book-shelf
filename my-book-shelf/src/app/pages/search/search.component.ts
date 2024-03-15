@@ -72,7 +72,7 @@ export class SearchComponent implements OnInit {
         this.searchOptions = options;
       });
 
-    this.booksFacade.searchTotalItems$
+    this.booksFacade.searchTotalBooks$
       .pipe(takeUntil(this.destroy$))
       .subscribe((totalItems) => {
         if (totalItems - 10 * this.searchOptions.page > 10) {

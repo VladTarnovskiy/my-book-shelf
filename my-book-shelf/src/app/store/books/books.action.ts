@@ -20,7 +20,7 @@ export const FetchBooks = createAction(
 
 export const FetchBooksSuccess = createAction(
   `${actionSource} Fetch Success`,
-  props<{ books: IBook[]; page: number }>()
+  props<{ books: IBook[]; page: number; totalBooks: number }>()
 );
 
 export const FetchBooksFailed = createAction(
@@ -41,11 +41,6 @@ export const SetCategoryFilterType = createAction(
 export const SetSearchPage = createAction(
   `${actionSource} Set Search Page`,
   props<{ page: number }>()
-);
-
-export const SetTotalsItems = createAction(
-  `${actionSource} Set Total Items`,
-  props<{ totalItems: number }>()
 );
 
 export const AddFavoriteStatus = createAction(

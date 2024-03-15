@@ -14,8 +14,8 @@ import { SafePipe } from '@core/pipes/safe';
 import { FavoriteService } from '@core/services/favorite';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
-import { ReaderBookFacade } from '@store/reader';
 import { BooksFacade } from '@store/books';
+import { ReaderBookFacade } from '@store/reader';
 import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
 
 @Component({

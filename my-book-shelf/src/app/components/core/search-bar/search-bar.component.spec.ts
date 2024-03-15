@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchService } from '@core/services/search';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -49,7 +54,6 @@ describe('SearchBarComponent', () => {
 
     fixture = TestBed.createComponent(SearchBarComponent);
     component = fixture.componentInstance;
-    component.elasticValues.next(['lorem', 'lorem']);
     fixture.detectChanges();
   });
 
@@ -64,13 +68,14 @@ describe('SearchBarComponent', () => {
     expect(component.searchValue.value).toBe('Test value');
   });
 
-  it('elastic search data after change input value', () => {
+  it('elastic search data after change input value', fakeAsync(() => {
     const inputElement: HTMLElement =
       fixture.nativeElement.querySelector('.input');
     inputElement.dispatchEvent(new Event('input'));
+    tick(600);
     const elasticValues = component.elasticValues.getValue();
     expect(elasticValues).toEqual(['lorem', 'lorem']);
-  });
+  }));
 
   it('change filter type', () => {
     component.isFilter = true;

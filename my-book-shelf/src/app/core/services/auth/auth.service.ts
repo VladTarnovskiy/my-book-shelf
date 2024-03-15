@@ -11,7 +11,6 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { IUserDetails } from '@shared/models/user';
-import { AuthFacade } from '@store/auth';
 import { BehaviorSubject } from 'rxjs';
 
 import { ToasterService } from '../toaster';
@@ -21,13 +20,12 @@ import { UserService } from '../user';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedIn = new BehaviorSubject<boolean>(true);
+  isLoggedIn = new BehaviorSubject<boolean>(true);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
   constructor(
     private auth: Auth,
     private router: Router,
-    private authFacade: AuthFacade,
     private userService: UserService,
     private toasterService: ToasterService
   ) {}
@@ -119,31 +117,6 @@ export class AuthService {
         this.errorHandling(error);
       }
     }
-  }
-
-  getUserAfterReload(): void {
-    this.authFacade.changeUserIsLoading(true);
-    this.auth.onAuthStateChanged((user) => {
-      if (user !== null) {
-        this.setUserName(user.uid);
-      } else {
-        this.isLoggedIn.next(false);
-        this.authFacade.changeUserIsLoading(false);
-      }
-    });
-  }
-
-  setUserName(userId: string): void {
-    this.userService.getUser(userId).subscribe((user) => {
-      const userInfo = user.payload.data();
-      if (userInfo) {
-        this.authFacade.addUserName(userInfo.name);
-        this.authFacade.addUserId(userInfo.userId);
-        this.authFacade.addUserPhoto(userInfo.photo);
-        this.isLoggedIn.next(true);
-      }
-      this.authFacade.changeUserIsLoading(false);
-    });
   }
 
   errorHandling(error: Error): void {
