@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { IBook } from '../../shared/models/book';
 
-const actionSource = '[Api Reader]';
+const actionSource = '[Reader]';
 
 export const FetchBookForReader = createAction(
   `${actionSource} Fetch Book`,

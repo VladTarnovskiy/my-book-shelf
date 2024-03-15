@@ -42,12 +42,6 @@ export class QuoteComponent implements OnInit {
 
   setNewQuote(el: number): void {
     this.quotesFacade.fetchQuote();
-    this.isActive = this.isActive.map((_, index) => {
-      if (el === index) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    this.isActive = this.isActive.map((_, index) => el === index);
   }
 }

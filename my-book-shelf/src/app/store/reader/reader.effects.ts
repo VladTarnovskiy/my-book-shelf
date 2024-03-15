@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { SearchService } from '../../core/services/search/search.service';
-import * as READER_BOOKS_ACTIONS from './api-reader.action';
+import * as READER_BOOKS_ACTIONS from './reader.action';
 
 @Injectable()
 export class ReaderBookEffects {

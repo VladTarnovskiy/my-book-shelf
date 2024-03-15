@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as READER_BOOKS_ACTIONS from './api-reader.action';
+import * as READER_BOOKS_ACTIONS from './reader.action';
 import {
   selectReaderBook,
   selectReaderBookId,
   selectReaderBookLoader,
-} from './api-reader.selector';
+} from './reader.selector';
 
 @Injectable({
   providedIn: 'root',

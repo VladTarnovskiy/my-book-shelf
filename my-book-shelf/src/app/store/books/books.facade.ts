@@ -12,6 +12,7 @@ import {
   selectBookId,
   selectBooks,
   selectBooksLoading,
+  selectMyBookId,
   selectPreviewBook,
   selectPreviewBookLoader,
   selectSearchOptions,
@@ -34,6 +35,7 @@ export class BooksFacade {
   previewBook$ = this.store.select(selectPreviewBook);
   previewBookLoader$ = this.store.select(selectPreviewBookLoader);
   previewBookId$ = this.store.select(selectBookId);
+  myBookId$ = this.store.select(selectMyBookId);
 
   constructor(private store: Store) {}
 

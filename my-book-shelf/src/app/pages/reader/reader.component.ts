@@ -5,13 +5,13 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { DestroyDirective } from '@core/directives/destroy';
 import { GoBackDirective } from '@core/directives/go-back';
 import { SafePipe } from '@core/pipes/safe';
 import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
+import { BooksFacade } from '@store/books';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
 @Component({
@@ -30,24 +30,27 @@ export class ReaderComponent implements OnInit {
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
-    private route: ActivatedRoute,
-    private myBookService: MyBooksService
+    private myBookService: MyBooksService,
+    private booksFacade: BooksFacade
   ) {}
 
   ngOnInit(): void {
-    const myBookId = this.route.snapshot.params['myBookId'] as string;
-    if (myBookId) {
-      this.myBookService
-        .getMyBook(myBookId)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((book) => {
-          const bookData = book.payload.data();
-          if (bookData) {
-            this.book = bookData;
-            this.book$.next(bookData);
-          }
-        });
-    }
+    this.booksFacade.myBookId$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((myBookId) => {
+        if (myBookId) {
+          this.myBookService
+            .getMyBook(myBookId)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((book) => {
+              const bookData = book.payload.data();
+              if (bookData) {
+                this.book = bookData;
+                this.book$.next(bookData);
+              }
+            });
+        }
+      });
   }
 
   toggleFavorite(): void {
