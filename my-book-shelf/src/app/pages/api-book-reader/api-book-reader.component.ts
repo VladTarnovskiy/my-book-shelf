@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
 import { ReaderBookFacade } from '@store/reader';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-api-book-reader',
@@ -52,11 +52,12 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.readerBookFacade.readerBookId$
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((bookId) => bookId !== null)
+      )
       .subscribe((bookId) => {
-        if (bookId) {
-          this.readerBookFacade.fetchReaderBook(bookId);
-        }
+        this.readerBookFacade.fetchReaderBook(bookId);
       });
 
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
@@ -78,24 +79,16 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  addToFavorite(book: IBook): void {
-    this.favoriteService.addFavoriteBook(book);
-    this.addFavoriteStatus(book.id);
-  }
-
-  removeFromFavorite(bookId: string): void {
-    this.favoriteService.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
-    this.isFavorite$.next(false);
-  }
-
-  addFavoriteStatus(bookId: string): void {
-    this.booksFacade.addFavoriteStatus(bookId);
-    this.isFavorite$.next(true);
+  handleFavorite(book: IBook): void {
+    if (this.isFavorite$.getValue()) {
+      this.favoriteService.removeFavoriteBook(book.id);
+      this.booksFacade.removeFavoriteStatus(book.id);
+      this.isFavorite$.next(false);
+    } else {
+      this.favoriteService.addFavoriteBook(book);
+      this.booksFacade.addFavoriteStatus(book.id);
+      this.isFavorite$.next(true);
+    }
   }
 
   toggleFullScreen(): void {
