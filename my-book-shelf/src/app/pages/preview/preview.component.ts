@@ -15,7 +15,7 @@ import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { Observable, takeUntil } from 'rxjs';
+import { filter, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -48,11 +48,12 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.booksFacade.previewBookId$
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((bookId) => bookId !== null)
+      )
       .subscribe((bookId) => {
-        if (bookId) {
-          this.booksFacade.fetchPreviewBook(bookId);
-        }
+        this.booksFacade.fetchPreviewBook(bookId);
       });
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
       if (book) {

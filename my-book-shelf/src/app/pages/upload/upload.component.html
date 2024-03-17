@@ -71,7 +71,7 @@
           (change)="onSetFile($event)"
         />
       </label>
-      @if (file.hasError('required') && file.touched) {
+      @if (file.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.FILE' | translate }}
         </div>
@@ -91,7 +91,7 @@
           (change)="onSetImage($event)"
         />
       </label>
-      @if (image.hasError('required') && image.touched) {
+      @if (image.hasError('required') && uploadForm.touched) {
         <div class="invalid__message">
           {{ 'UPLOAD.ERRORS.IMAGE' | translate }}
         </div>

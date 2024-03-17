@@ -12,7 +12,7 @@ import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-reader',
@@ -36,20 +36,21 @@ export class ReaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.booksFacade.myBookId$
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((myBookId) => myBookId !== null)
+      )
       .subscribe((myBookId) => {
-        if (myBookId) {
-          this.myBookService
-            .getMyBook(myBookId)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((book) => {
-              const bookData = book.payload.data();
-              if (bookData) {
-                this.book = bookData;
-                this.book$.next(bookData);
-              }
-            });
-        }
+        this.myBookService
+          .getMyBook(myBookId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((book) => {
+            const bookData = book.payload.data();
+            if (bookData) {
+              this.book = bookData;
+              this.book$.next(bookData);
+            }
+          });
       });
   }
 

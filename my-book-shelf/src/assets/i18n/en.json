@@ -101,10 +101,10 @@
     "UPLOAD": "UPLOAD",
     "ERRORS": {
       "TITLE": "please enter a title",
-      "AUTHOR": "please enter a author",
+      "AUTHOR": "please enter an author",
       "DESCRIPTION": "please enter a description",
       "FILE": "please choose a file",
-      "IMAGE": "please choose a image"
+      "IMAGE": "please choose an image"
     },
     "MESSAGES": {
       "TITLE": "My book",
