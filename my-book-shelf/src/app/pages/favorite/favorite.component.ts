@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FavoriteBookComponent } from '@components/favorite/favorite-book';
 import { FavoriteUploadBookComponent } from '@components/favorite/favorite-upload-book';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { FavoriteService } from '@core/services/favorite';
 import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';

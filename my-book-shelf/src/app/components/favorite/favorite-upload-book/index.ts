@@ -1,3 +1,1 @@
-import { FavoriteUploadBookComponent } from './favorite-upload-book.component';
-
-export { FavoriteUploadBookComponent };
+export * from './favorite-upload-book.component';

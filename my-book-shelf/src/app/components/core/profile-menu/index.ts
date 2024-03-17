@@ -1,3 +1,1 @@
-import { ProfileMenuComponent } from './profile-menu.component';
-
-export { ProfileMenuComponent };
+export * from './profile-menu.component';

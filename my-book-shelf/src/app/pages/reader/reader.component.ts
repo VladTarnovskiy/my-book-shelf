@@ -5,9 +5,9 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { DestroyDirective } from '@core/directives/destroy';
-import { GoBackDirective } from '@core/directives/go-back';
-import { SafePipe } from '@core/pipes/safe';
+import { DestroyDirective } from '@core/directives';
+import { GoBackDirective } from '@core/directives';
+import { SafePipe } from '@core/pipes';
 import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';

@@ -1,3 +1,1 @@
-import { MyBooksService } from './my-books.service';
-
-export { MyBooksService };
+export * from './my-books.service';

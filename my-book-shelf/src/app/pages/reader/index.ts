@@ -1,3 +1,1 @@
-import { ReaderComponent } from './reader.component';
-
-export { ReaderComponent };
+export * from './reader.component';

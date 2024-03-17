@@ -9,7 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import { ModalComponent } from '@components/shared/modal';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';

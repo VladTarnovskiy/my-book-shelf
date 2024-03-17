@@ -1,3 +1,1 @@
-import { switchMenuAnimation } from './switchMenu';
-
-export { switchMenuAnimation };
+export * from './switchMenu';

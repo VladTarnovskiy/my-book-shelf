@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MyBookComponent } from '@components/my-books/my-book';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';

@@ -1,3 +1,1 @@
-import { QuotesService } from './quotes.service';
-
-export { QuotesService };
+export * from './quotes.service';

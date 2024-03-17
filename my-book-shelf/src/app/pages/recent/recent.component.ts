@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { HomeBookComponent } from '@components/home/home-book';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';

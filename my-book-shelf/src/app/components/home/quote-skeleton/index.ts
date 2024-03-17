@@ -1,3 +1,1 @@
-import { QuoteSkeletonComponent } from './quote-skeleton.component';
-
-export { QuoteSkeletonComponent };
+export * from './quote-skeleton.component';

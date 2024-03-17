@@ -1,3 +1,1 @@
-import { ReviewComponent } from './review.component';
-
-export { ReviewComponent };
+export * from './review.component';

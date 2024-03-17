@@ -1,3 +1,1 @@
-import { ToasterService } from './toaster.service';
-
-export { ToasterService };
+export * from './toaster.service';

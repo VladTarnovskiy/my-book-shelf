@@ -1,3 +1,1 @@
-import { LangMenuComponent } from './lang-menu.component';
-
-export { LangMenuComponent };
+export * from './lang-menu.component';

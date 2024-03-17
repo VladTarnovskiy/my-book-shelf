@@ -1,3 +1,1 @@
-import { NavigationComponent } from './navigation.component';
-
-export { NavigationComponent };
+export * from './navigation.component';

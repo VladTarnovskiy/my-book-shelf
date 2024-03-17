@@ -1,4 +1,2 @@
-import { AuthFacade } from './auth.facade';
-import { AuthStoreModule } from './auth.module';
-
-export { AuthFacade, AuthStoreModule };
+export * from './auth.facade';
+export * from './auth.module';

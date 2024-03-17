@@ -1,3 +1,1 @@
-import { FooterComponent } from './footer.component';
-
-export { FooterComponent };
+export * from './footer.component';

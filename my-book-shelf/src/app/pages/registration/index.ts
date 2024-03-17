@@ -1,3 +1,1 @@
-import { RegistrationComponent } from './registration.component';
-
-export { RegistrationComponent };
+export * from './registration.component';

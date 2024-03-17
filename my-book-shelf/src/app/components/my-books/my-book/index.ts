@@ -1,3 +1,1 @@
-import { MyBookComponent } from './my-book.component';
-
-export { MyBookComponent };
+export * from './my-book.component';

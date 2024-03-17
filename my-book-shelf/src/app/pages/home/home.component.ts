@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
 import { HomeBookComponent } from '@components/home/home-book';
 import { HomeBookSkeletonComponent } from '@components/home/home-book-skeleton';
 import { QuoteComponent } from '@components/home/quote';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';

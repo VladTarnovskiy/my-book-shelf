@@ -1,3 +1,1 @@
-import { SuccessComponent } from './success.component';
-
-export { SuccessComponent };
+export * from './success.component';

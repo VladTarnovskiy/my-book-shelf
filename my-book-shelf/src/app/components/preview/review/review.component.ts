@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { ReviewService } from '@core/services/review';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';

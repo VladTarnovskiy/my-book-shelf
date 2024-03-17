@@ -1,3 +1,1 @@
-import { authInterceptor } from './auth.interceptor';
-
-export { authInterceptor };
+export * from './auth/auth.interceptor';
