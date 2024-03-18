@@ -1,6 +1,6 @@
-<!-- @if (userIsLoading$ | async) { -->
-<div class="loader-container"><app-loader /></div>
-<!-- } @else {
+@if (userIsLoading$ | async) {
+  <div class="loader-container"><app-loader /></div>
+} @else {
   <router-outlet></router-outlet>
   <app-toaster-container />
-} -->
+}
