@@ -91,21 +91,31 @@ export class SearchComponent implements OnInit {
   }
 
   addToFavorite(book: IBook): void {
-    this.favoriteService.addFavoriteBook(book);
-    this.addFavoriteStatus(book.id);
+    this.favoriteService
+      .addFavoriteBook(book)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.booksFacade.addFavoriteStatus(book.id);
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 
   removeFromFavorite(bookId: string): void {
-    this.favoriteService.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  addFavoriteStatus(bookId: string): void {
-    this.booksFacade.addFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
+    this.favoriteService
+      .removeFavoriteBook(bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.booksFacade.removeFavoriteStatus(bookId);
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 
   getNextPage(): void {
