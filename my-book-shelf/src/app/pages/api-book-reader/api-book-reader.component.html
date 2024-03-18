@@ -27,15 +27,16 @@
         </div>
       </div>
       <div class="buttons">
-        @if (isFavorite$ | async) {
-          <button class="buttons__fav" (click)="removeFromFavorite(book.id)">
-            <img src="assets/heart.svg" alt="Favorite" />
-          </button>
-        } @else {
-          <button class="buttons__fav" (click)="addToFavorite(book)">
-            <img src="assets/empty-heart.svg" alt="Favorite" />
-          </button>
-        }
+        <button class="buttons__fav" (click)="toggleFavorite(book)">
+          <img
+            [src]="
+              (isFavorite$ | async)
+                ? 'assets/heart.svg'
+                : 'assets/empty-heart.svg'
+            "
+            alt="Favorite"
+          />
+        </button>
         <button class="buttons__screen" (click)="toggleFullScreen()">
           {{
             ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')

@@ -16,11 +16,15 @@
       <img src="assets/send.svg" alt="Send" class="review__send-img" />
     </button>
   </div>
-  @for (review of reviews$ | async; track review.id) {
-    <app-review-item
-      [reviewData]="review"
-      [userId]="userId$ | async"
-      (removeReview)="removeReview($event)"
-    />
+  @if (isLoading$ | async) {
+    <div class="loader-container"><app-loader /></div>
+  } @else {
+    @for (review of reviews$ | async; track review.id) {
+      <app-review-item
+        [reviewData]="review"
+        [userId]="userId$ | async"
+        (removeReview)="removeReview($event)"
+      />
+    }
   }
 </div>

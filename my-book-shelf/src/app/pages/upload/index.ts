@@ -1,3 +1,1 @@
-import { UploadComponent } from './upload.component';
-
-export { UploadComponent };
+export * from './upload.component';

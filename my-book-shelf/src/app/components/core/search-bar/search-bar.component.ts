@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { SearchService } from '@core/services/search';
 import { TranslateModule } from '@ngx-translate/core';
 import { switchMenuAnimation } from '@shared/animation';

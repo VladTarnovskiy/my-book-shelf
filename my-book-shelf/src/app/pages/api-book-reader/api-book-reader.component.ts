@@ -8,15 +8,16 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { DestroyDirective } from '@core/directives/destroy';
-import { GoBackDirective } from '@core/directives/go-back';
-import { SafePipe } from '@core/pipes/safe';
+import { DestroyDirective } from '@core/directives';
+import { GoBackDirective } from '@core/directives';
+import { SafePipe } from '@core/pipes';
 import { FavoriteService } from '@core/services/favorite';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
 import { ReaderBookFacade } from '@store/reader';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-api-book-reader',
@@ -47,16 +48,18 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   constructor(
     private readerBookFacade: ReaderBookFacade,
     private favoriteService: FavoriteService,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.readerBookFacade.readerBookId$
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((bookId) => bookId !== undefined)
+      )
       .subscribe((bookId) => {
-        if (bookId) {
-          this.readerBookFacade.fetchReaderBook(bookId);
-        }
+        this.readerBookFacade.fetchReaderBook(bookId);
       });
 
     this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
@@ -64,38 +67,36 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
         this.favoriteService
           .getFavoriteBooks()
           .pipe(takeUntil(this.destroy$))
-          .subscribe((favBooks) => {
-            const favIDs = favBooks.map(
-              (favBook) => favBook.payload.doc.data().id
-            );
-            if (favIDs.includes(book.id)) {
-              this.isFavorite$.next(true);
-            } else {
-              this.isFavorite$.next(false);
-            }
+          .subscribe({
+            next: (favBooks) => {
+              const favIDs = favBooks.map(
+                (favBook) => favBook.payload.doc.data().id
+              );
+              if (favIDs.includes(book.id)) {
+                this.isFavorite$.next(true);
+              } else {
+                this.isFavorite$.next(false);
+              }
+            },
+            error: () => {
+              this.toasterService.showFireStoreError();
+              this.isLoading$.next(false);
+            },
           });
       }
     });
   }
 
-  addToFavorite(book: IBook): void {
-    this.favoriteService.addFavoriteBook(book);
-    this.addFavoriteStatus(book.id);
-  }
-
-  removeFromFavorite(bookId: string): void {
-    this.favoriteService.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
-    this.isFavorite$.next(false);
-  }
-
-  addFavoriteStatus(bookId: string): void {
-    this.booksFacade.addFavoriteStatus(bookId);
-    this.isFavorite$.next(true);
+  toggleFavorite(book: IBook): void {
+    if (this.isFavorite$.getValue()) {
+      this.favoriteService.removeFavoriteBook(book.id);
+      this.booksFacade.removeFavoriteStatus(book.id);
+      this.isFavorite$.next(false);
+    } else {
+      this.favoriteService.addFavoriteBook(book);
+      this.booksFacade.addFavoriteStatus(book.id);
+      this.isFavorite$.next(true);
+    }
   }
 
   toggleFullScreen(): void {

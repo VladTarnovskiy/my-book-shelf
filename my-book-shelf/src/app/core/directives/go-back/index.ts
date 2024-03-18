@@ -1,3 +1,1 @@
-import { GoBackDirective } from './go-back.directive';
-
-export { GoBackDirective };
+export * from './go-back.directive';

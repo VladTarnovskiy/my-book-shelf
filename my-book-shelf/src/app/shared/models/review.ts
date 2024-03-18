@@ -4,4 +4,5 @@ export interface IReview {
   userId: string;
   id: string;
   creationDate: string;
+  likes: string[];
 }

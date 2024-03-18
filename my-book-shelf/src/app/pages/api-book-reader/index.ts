@@ -1,3 +1,1 @@
-import { ApiBookReaderComponent } from './api-book-reader.component';
-
-export { ApiBookReaderComponent };
+export * from './api-book-reader.component';

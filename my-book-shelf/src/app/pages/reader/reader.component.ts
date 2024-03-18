@@ -5,14 +5,14 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { DestroyDirective } from '@core/directives/destroy';
-import { GoBackDirective } from '@core/directives/go-back';
-import { SafePipe } from '@core/pipes/safe';
+import { DestroyDirective } from '@core/directives';
+import { GoBackDirective } from '@core/directives';
+import { SafePipe } from '@core/pipes';
 import { MyBooksService } from '@core/services/my-books';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, filter, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-reader',
@@ -36,19 +36,16 @@ export class ReaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.booksFacade.myBookId$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((myBookId) => {
-        if (myBookId) {
-          this.myBookService
-            .getMyBook(myBookId)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((book) => {
-              const bookData = book.payload.data();
-              if (bookData) {
-                this.book = bookData;
-                this.book$.next(bookData);
-              }
-            });
+      .pipe(
+        takeUntil(this.destroy$),
+        filter((myBookId) => myBookId !== undefined),
+        switchMap((myBookId) => this.myBookService.getMyBook(myBookId))
+      )
+      .subscribe((book) => {
+        const bookData = book.payload.data();
+        if (bookData) {
+          this.book = bookData;
+          this.book$.next(bookData);
         }
       });
   }

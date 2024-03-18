@@ -9,8 +9,9 @@ import { RouterLink } from '@angular/router';
 import { HomeBookComponent } from '@components/home/home-book';
 import { HomeBookSkeletonComponent } from '@components/home/home-book-skeleton';
 import { QuoteComponent } from '@components/home/quote';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { recommendedGenerator } from '@shared/utils';
@@ -40,22 +41,32 @@ export class HomeComponent implements OnInit {
   recommendedBooksIsLoading$: Observable<boolean> =
     this.recommendedBooksFacade.recBooksIsLoading$;
   skeletonItems = [...Array(10).keys()];
+  recentBooksIsLoading$ = new BehaviorSubject<boolean>(false);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private recommendedBooksFacade: RecommendedBooksFacade,
-    private recentService: RecentService
+    private recentService: RecentService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
+    this.recentBooksIsLoading$.next(true);
     const genSearchValue = recommendedGenerator();
     this.recommendedBooksFacade.fetchRecommendedBooks(genSearchValue);
     this.recentService
       .getRecentBooks()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((books) => {
-        const booksData = books.map((book) => book.payload.doc.data());
-        this.recentBooks$.next(booksData);
+      .subscribe({
+        next: (books) => {
+          const booksData = books.map((book) => book.payload.doc.data());
+          this.recentBooks$.next(booksData);
+          this.recentBooksIsLoading$.next(false);
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+          this.recentBooksIsLoading$.next(false);
+        },
       });
   }
 

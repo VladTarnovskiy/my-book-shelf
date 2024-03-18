@@ -1,3 +1,1 @@
-import { ReviewService } from './review.service';
-
-export { ReviewService };
+export * from './review.service';

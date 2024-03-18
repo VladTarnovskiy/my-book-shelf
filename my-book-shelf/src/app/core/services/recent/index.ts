@@ -1,3 +1,1 @@
-import { RecentService } from './recent.service';
-
-export { RecentService };
+export * from './recent.service';

@@ -1,3 +1,1 @@
-import { FavoriteService } from './favorite.service';
-
-export { FavoriteService };
+export * from './favorite.service';

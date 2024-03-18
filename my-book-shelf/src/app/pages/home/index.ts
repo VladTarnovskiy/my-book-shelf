@@ -1,3 +1,1 @@
-import { HomeComponent } from './home.component';
-
-export { HomeComponent };
+export * from './home.component';

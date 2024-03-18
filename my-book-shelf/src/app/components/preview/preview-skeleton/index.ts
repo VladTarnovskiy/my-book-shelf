@@ -1,3 +1,1 @@
-import { PreviewSkeletonComponent } from './preview-skeleton.component';
-
-export { PreviewSkeletonComponent };
+export * from './preview-skeleton.component';

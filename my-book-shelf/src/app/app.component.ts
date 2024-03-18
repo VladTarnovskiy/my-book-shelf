@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { ToasterContainerComponent } from '@components/core/toaster-container';
 import { LoaderComponent } from '@components/shared/loader';
 import { AuthService } from '@core/services/auth';
+import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthFacade } from '@store/auth';
@@ -33,7 +34,8 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private authFacade: AuthFacade,
     private auth: Auth,
-    private userService: UserService
+    private userService: UserService,
+    private toasterService: ToasterService
   ) {
     translate.setTranslation('en', englishLang);
     translate.setTranslation('ru', russianLang);
@@ -64,15 +66,20 @@ export class AppComponent implements OnInit {
   }
 
   setUserName(userId: string): void {
-    this.userService.getUser(userId).subscribe((user) => {
-      const userInfo = user.payload.data();
-      if (userInfo) {
-        this.authFacade.addUserName(userInfo.name);
-        this.authFacade.addUserId(userInfo.userId);
-        this.authFacade.addUserPhoto(userInfo.photo);
-        this.authService.isLoggedIn.next(true);
-      }
-      this.authFacade.changeUserIsLoading(false);
+    this.userService.getUser(userId).subscribe({
+      next: (user) => {
+        const userInfo = user.payload.data();
+        if (userInfo) {
+          this.authFacade.addUserName(userInfo.name);
+          this.authFacade.addUserId(userInfo.userId);
+          this.authFacade.addUserPhoto(userInfo.photo);
+          this.authService.isLoggedIn.next(true);
+        }
+        this.authFacade.changeUserIsLoading(false);
+      },
+      error: () => {
+        this.toasterService.showFireStoreError();
+      },
     });
   }
 }

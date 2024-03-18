@@ -1,3 +1,1 @@
-import { RecentComponent } from './recent.component';
-
-export { RecentComponent };
+export * from './recent.component';

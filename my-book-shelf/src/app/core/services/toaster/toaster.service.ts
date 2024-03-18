@@ -21,4 +21,12 @@ export class ToasterService {
       message: error.message,
     });
   }
+
+  showFireStoreError() {
+    this.subject.next({
+      type: 'error',
+      title: 'Firestore error',
+      message: 'Something went wrong',
+    });
+  }
 }

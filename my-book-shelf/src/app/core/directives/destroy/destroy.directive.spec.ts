@@ -1,4 +1,4 @@
-import { DestroyDirective } from '.';
+import { DestroyDirective } from '..';
 
 describe('DestroyDirective', () => {
   it('should create an instance', () => {

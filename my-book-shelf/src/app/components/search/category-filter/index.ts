@@ -1,3 +1,1 @@
-import { CategoryFilterComponent } from './category-filter.component';
-
-export { CategoryFilterComponent };
+export * from './category-filter.component';

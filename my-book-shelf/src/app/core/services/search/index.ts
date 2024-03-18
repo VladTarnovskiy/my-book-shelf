@@ -1,3 +1,1 @@
-import { SearchService } from './search.service';
-
-export { SearchService };
+export * from './search.service';

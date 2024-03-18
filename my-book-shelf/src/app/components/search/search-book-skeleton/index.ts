@@ -1,3 +1,1 @@
-import { SearchBookSkeletonComponent } from './search-book-skeleton.component';
-
-export { SearchBookSkeletonComponent };
+export * from './search-book-skeleton.component';

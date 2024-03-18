@@ -1,4 +1,2 @@
-import { QuotesFacade } from './quotes.facade';
-import { QuotesStoreModule } from './quotes.module';
-
-export { QuotesFacade, QuotesStoreModule };
+export * from './quotes.facade';
+export * from './quotes.module';

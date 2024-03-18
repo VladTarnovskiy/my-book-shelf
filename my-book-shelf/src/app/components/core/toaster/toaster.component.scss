@@ -1,10 +1,11 @@
 .toast {
-  width: 30rem;
+  max-width: 30rem;
+  width: 100%;
   min-height: 8rem;
   padding: 2.3rem 1.2rem;
   margin-top: 1.6rem;
   border: 1px solid transparent;
-  border-radius: 0.1rem;
+  border-radius: 0.5rem;
   animation: move 1s both;
   overflow-y: hidden;
 }
@@ -35,9 +36,13 @@
   cursor: pointer;
 }
 
-.toast-heading {
+.toast__title {
   font-family: 'Inter Semi Bold';
   margin-bottom: 1rem;
+}
+
+.toast__message {
+  overflow-wrap: break-word;
 }
 
 @keyframes move {

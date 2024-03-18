@@ -1,9 +1,5 @@
 import { NgClass } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -48,8 +44,7 @@ export class UploadComponent {
   constructor(
     private toasterService: ToasterService,
     private myBookService: MyBooksService,
-    private translateService: TranslateService,
-    private cd: ChangeDetectorRef
+    private translateService: TranslateService
   ) {}
 
   onSubmit(): void {
@@ -80,7 +75,6 @@ export class UploadComponent {
       this.uploadForm.patchValue({
         image: fileList[0],
       });
-      this.cd.detectChanges();
     }
   }
 
@@ -92,7 +86,6 @@ export class UploadComponent {
       this.uploadForm.patchValue({
         file: fileList[0],
       });
-      this.cd.detectChanges();
     }
   }
 

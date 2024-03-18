@@ -5,7 +5,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { TranslateModule } from '@ngx-translate/core';
 import { IQuote } from '@shared/models/quote';
 import { QuotesFacade } from '@store/quotes';

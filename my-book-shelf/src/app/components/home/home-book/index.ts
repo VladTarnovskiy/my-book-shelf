@@ -1,3 +1,1 @@
-import { HomeBookComponent } from './home-book.component';
-
-export { HomeBookComponent };
+export * from './home-book.component';

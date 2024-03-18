@@ -4,7 +4,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { TranslateModule } from '@ngx-translate/core';
 import { switchMenuAnimation } from '@shared/animation';
 import { CategoryFilterKeys } from '@shared/interfaces/filters';

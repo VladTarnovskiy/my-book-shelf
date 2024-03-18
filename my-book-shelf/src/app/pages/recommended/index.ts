@@ -1,3 +1,1 @@
-import { RecommendedComponent } from './recommended.component';
-
-export { RecommendedComponent };
+export * from './recommended.component';

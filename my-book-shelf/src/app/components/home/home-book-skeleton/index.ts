@@ -1,3 +1,1 @@
-import { HomeBookSkeletonComponent } from './home-book-skeleton.component';
-
-export { HomeBookSkeletonComponent };
+export * from './home-book-skeleton.component';

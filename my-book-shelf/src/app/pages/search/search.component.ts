@@ -8,8 +8,9 @@ import {
 import { CategoryFilterComponent } from '@components/search/category-filter';
 import { SearchBookComponent } from '@components/search/search-book';
 import { SearchBookSkeletonComponent } from '@components/search/search-book-skeleton';
-import { DestroyDirective } from '@core/directives/destroy';
+import { DestroyDirective } from '@core/directives';
 import { FavoriteService } from '@core/services/favorite';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { ISearchOptions } from '@shared/interfaces/search';
 import { IBook } from '@shared/models/book';
@@ -41,7 +42,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private booksFacade: BooksFacade,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -50,20 +52,25 @@ export class SearchComponent implements OnInit {
       this.favoriteService.getFavoriteBooks(),
     ])
       .pipe(takeUntil(this.destroy$))
-      .subscribe(([books, favBooks]) => {
-        if (books) {
-          const favIDs = favBooks.map(
-            (favBook) => favBook.payload.doc.data().id
-          );
-          const checkedBooks = books?.map((book) => {
-            if (favIDs.includes(book.id)) {
-              return { ...book, isFavorite: true };
-            } else {
-              return book;
-            }
-          });
-          this.books$.next(checkedBooks);
-        }
+      .subscribe({
+        next: ([books, favBooks]) => {
+          if (books) {
+            const favIDs = favBooks.map(
+              (favBook) => favBook.payload.doc.data().id
+            );
+            const checkedBooks = books?.map((book) => {
+              if (favIDs.includes(book.id)) {
+                return { ...book, isFavorite: true };
+              } else {
+                return book;
+              }
+            });
+            this.books$.next(checkedBooks);
+          }
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
       });
 
     this.booksFacade.searchOptions$

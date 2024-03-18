@@ -24,6 +24,7 @@
   &__header {
     @extend %itemsCenter;
     justify-content: space-between;
+    height: 3rem;
   }
 
   &__content {
@@ -35,5 +36,49 @@
       height: 3rem;
       width: 3rem;
     }
+  }
+}
+
+.likes {
+  @extend %itemsCenter;
+  justify-content: flex-end;
+  margin-left: auto;
+  margin-right: 0.6rem;
+
+  &__button {
+    @extend %itemsCenter;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+
+    &.like-animation {
+      animation: likeAnimation 0.8s;
+    }
+  }
+
+  &__count {
+    margin-right: 1rem;
+  }
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  35% {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  65% {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

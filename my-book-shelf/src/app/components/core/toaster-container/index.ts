@@ -1,3 +1,1 @@
-import { ToasterContainerComponent } from './toaster-container.component';
-
-export { ToasterContainerComponent };
+export * from './toaster-container.component';

@@ -1,3 +1,1 @@
-import { QuoteComponent } from './quote.component';
-
-export { QuoteComponent };
+export * from './quote.component';

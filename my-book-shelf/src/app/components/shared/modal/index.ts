@@ -1,3 +1,1 @@
-import { ModalComponent } from './modal.component';
-
-export { ModalComponent };
+export * from './modal.component';
