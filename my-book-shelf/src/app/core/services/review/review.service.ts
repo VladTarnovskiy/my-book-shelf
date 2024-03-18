@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { IReviewLikesParam } from '@shared/interfaces/review';
 import { IReview } from '@shared/models/review';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,28 +17,32 @@ export class ReviewService {
     private auth: Auth
   ) {}
 
-  addReview(review: Omit<IReview, 'id' | 'userId' | 'creationDate'>): void {
+  addReview(
+    review: Omit<IReview, 'id' | 'userId' | 'creationDate'>
+  ): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    if (userId) {
-      const reviewId = this.afs.createId();
-      const reviewInfo = {
-        ...review,
-        userId,
-        id: reviewId,
-        creationDate: String(Date.now()),
-      };
+    const reviewId = this.afs.createId();
+    const reviewInfo = {
+      ...review,
+      userId,
+      id: reviewId,
+      creationDate: String(Date.now()),
+    };
+    return from(
       this.afs
         .collection<IReview>(`/reviews/${review.bookId}/reviews`)
         .doc(reviewId)
-        .set(reviewInfo);
-    }
+        .set(reviewInfo)
+    );
   }
 
-  toggleLike({ reviewId, bookId, likes }: IReviewLikesParam): void {
-    this.afs
-      .collection<IReview>(`/reviews/${bookId}/reviews`)
-      .doc(reviewId)
-      .update({ likes: likes });
+  toggleLike({ reviewId, bookId, likes }: IReviewLikesParam): Observable<void> {
+    return from(
+      this.afs
+        .collection<IReview>(`/reviews/${bookId}/reviews`)
+        .doc(reviewId)
+        .update({ likes: likes })
+    );
   }
 
   getReviews(bookId: string): Observable<DocumentChangeAction<IReview>[]> {
@@ -47,7 +51,9 @@ export class ReviewService {
       .snapshotChanges();
   }
 
-  removeReview(bookId: string, reviewId: string): void {
-    this.afs.doc(`/reviews/${bookId}/reviews/${reviewId}`).delete();
+  removeReview(bookId: string, reviewId: string): Observable<void> {
+    return from(
+      this.afs.doc(`/reviews/${bookId}/reviews/${reviewId}`).delete()
+    );
   }
 }

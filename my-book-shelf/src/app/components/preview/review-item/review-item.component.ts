@@ -83,17 +83,31 @@ export class ReviewItemComponent implements OnInit {
         const likes = this.reviewData.likes.filter(
           (like) => like !== this.userId
         );
-        this.reviewService.toggleLike({
-          bookId: this.reviewData.bookId,
-          reviewId: this.reviewData.id,
-          likes,
-        });
+        this.reviewService
+          .toggleLike({
+            bookId: this.reviewData.bookId,
+            reviewId: this.reviewData.id,
+            likes,
+          })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            error: () => {
+              this.toasterService.showFireStoreError();
+            },
+          });
       } else {
-        this.reviewService.toggleLike({
-          bookId: this.reviewData.bookId,
-          reviewId: this.reviewData.id,
-          likes: [...this.reviewData.likes, this.userId],
-        });
+        this.reviewService
+          .toggleLike({
+            bookId: this.reviewData.bookId,
+            reviewId: this.reviewData.id,
+            likes: [...this.reviewData.likes, this.userId],
+          })
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            error: () => {
+              this.toasterService.showFireStoreError();
+            },
+          });
       }
       this.isMyLike$.next(!this.isMyLike$.getValue());
       this.likeAnimation$.next(true);

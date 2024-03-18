@@ -231,6 +231,14 @@
     "REMOVE": {
       "TITLE": "Remove",
       "MESSAGE": "The book has been deleted"
+    },
+    "ADD_REVIEW": {
+      "TITLE": "REVIEW",
+      "MESSAGE": "The review has been added"
+    },
+    "REMOVE_REVIEW": {
+      "TITLE": "REVIEW",
+      "MESSAGE": "The review has been deleted"
     }
   }
 }

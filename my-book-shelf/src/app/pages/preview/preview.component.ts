@@ -12,10 +12,11 @@ import { ReviewComponent } from '@components/preview/review';
 import { DestroyDirective } from '@core/directives';
 import { GoBackDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { filter, Observable, takeUntil } from 'rxjs';
+import { filter, Observable, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -43,7 +44,8 @@ export class PreviewComponent implements OnInit {
 
   constructor(
     private booksFacade: BooksFacade,
-    private recentService: RecentService
+    private recentService: RecentService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -55,11 +57,22 @@ export class PreviewComponent implements OnInit {
       .subscribe((bookId) => {
         this.booksFacade.fetchPreviewBook(bookId);
       });
-    this.book$.pipe(takeUntil(this.destroy$)).subscribe((book) => {
-      if (book) {
-        this.recentService.addRecentBook(book);
-      }
-    });
+    this.book$
+      .pipe(
+        takeUntil(this.destroy$),
+        switchMap((book) => {
+          if (book) {
+            return this.recentService.addRecentBook(book);
+          } else {
+            return of();
+          }
+        })
+      )
+      .subscribe({
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 
   searchAuthorBooks(author: string): void {
