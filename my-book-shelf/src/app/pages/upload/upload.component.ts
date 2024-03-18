@@ -1,15 +1,17 @@
 import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { DestroyDirective } from '@core/directives';
 import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IUpLoadBookForm } from '@shared/models/upload';
+import { from, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -17,9 +19,12 @@ import { IUpLoadBookForm } from '@shared/models/upload';
   imports: [ReactiveFormsModule, NgClass, TranslateModule],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss',
+  hostDirectives: [DestroyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadComponent {
+  private destroy$ = inject(DestroyDirective).destroy$;
+
   uploadForm = new FormGroup<IUpLoadBookForm>({
     title: new FormControl<string>('', {
       nonNullable: true,
@@ -57,12 +62,25 @@ export class UploadComponent {
         borrowedOn: Date.now().toString(),
         submissionDate: String(Date.now() + 259200000),
       };
-      this.myBookService.addMyBook(bookForFirestore);
-      this.toasterService.show({
-        type: 'success',
-        title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
-        message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
-      });
+      from(this.myBookService.addMyBook(bookForFirestore))
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (add) => {
+            add.subscribe(() => {
+              this.toasterService.show({
+                type: 'success',
+                title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
+                message: this.translateService.instant(
+                  'UPLOAD.MESSAGES.MESSAGE'
+                ),
+              });
+            });
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
+
       this.uploadForm.reset();
     }
   }

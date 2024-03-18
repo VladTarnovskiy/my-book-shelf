@@ -13,7 +13,7 @@ import {
   uploadBytes,
 } from '@angular/fire/storage';
 import { IFirestoreUploadBook, IUploadBook } from '@shared/models/upload';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class MyBooksService {
     private storage: Storage
   ) {}
 
-  async addMyBook(book: IFirestoreUploadBook): Promise<void> {
+  async addMyBook(book: IFirestoreUploadBook): Promise<Observable<void>> {
     const userId = this.auth.currentUser?.uid || null;
     const storageRefFile = ref(
       this.storage,
@@ -40,14 +40,16 @@ export class MyBooksService {
     const storageFileUrl = await getDownloadURL(storageFile.ref);
     const storageImageUrl = await getDownloadURL(storageImage.ref);
 
-    this.afs
-      .collection<IUploadBook>(`/users/${userId}/myBooks`)
-      .doc(book.id)
-      .set({
-        ...book,
-        file: storageFileUrl,
-        image: storageImageUrl,
-      });
+    return from(
+      this.afs
+        .collection<IUploadBook>(`/users/${userId}/myBooks`)
+        .doc(book.id)
+        .set({
+          ...book,
+          file: storageFileUrl,
+          image: storageImageUrl,
+        })
+    );
   }
 
   getMyBooks(): Observable<DocumentChangeAction<IUploadBook>[]> {
@@ -64,15 +66,17 @@ export class MyBooksService {
       .snapshotChanges();
   }
 
-  changeFavoriteStatus(isFavorite: boolean, bookId: string): void {
+  changeFavoriteStatus(isFavorite: boolean, bookId: string): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs
-      .doc<IUploadBook>(`/users/${userId}/myBooks/${bookId}`)
-      .update({ isFavorite });
+    return from(
+      this.afs
+        .doc<IUploadBook>(`/users/${userId}/myBooks/${bookId}`)
+        .update({ isFavorite })
+    );
   }
 
-  removeMyBook(bookId: string) {
+  removeMyBook(bookId: string): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.doc(`/users/${userId}/myBooks/${bookId}`).delete();
+    return from(this.afs.doc(`/users/${userId}/myBooks/${bookId}`).delete());
   }
 }

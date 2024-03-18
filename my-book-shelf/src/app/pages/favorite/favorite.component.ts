@@ -88,6 +88,13 @@ export class FavoriteComponent implements OnInit {
   }
 
   removeFromUploadFavorite(bookId: string): void {
-    this.myBookService.changeFavoriteStatus(false, bookId);
+    this.myBookService
+      .changeFavoriteStatus(false, bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 }

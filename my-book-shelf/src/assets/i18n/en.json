@@ -227,6 +227,10 @@
     "FIREBASE_ERROR": {
       "TITLE": "Firestore error",
       "MESSAGE": "Something went wrong"
+    },
+    "REMOVE": {
+      "TITLE": "Remove",
+      "MESSAGE": "The book has been deleted"
     }
   }
 }
