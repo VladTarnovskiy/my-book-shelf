@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
+import { ReviewService } from '@core/services/review';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
@@ -30,10 +31,31 @@ export class ReviewItemComponent implements OnInit {
   @Output() removeReview = new EventEmitter<string>();
   username$ = new BehaviorSubject<string>('Unknown');
   userPhoto$ = new BehaviorSubject<string | null>(null);
+  isMyLike$ = new BehaviorSubject<boolean>(false);
+  likeAnimation$ = new BehaviorSubject<boolean>(false);
   isRemoveModal = false;
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private reviewService: ReviewService
+  ) {}
+
+  ngOnInit(): void {
+    this.userService
+      .getUser(String(this.reviewData.userId))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
+        const userData = user.payload.data();
+        if (userData) {
+          this.username$.next(userData.name);
+          this.userPhoto$.next(userData.photo);
+        }
+      });
+    if (this.userId && this.reviewData.likes.includes(this.userId)) {
+      this.isMyLike$.next(true);
+    }
+  }
 
   openModal(): void {
     this.isRemoveModal = true;
@@ -48,16 +70,29 @@ export class ReviewItemComponent implements OnInit {
     this.closeModal(false);
   }
 
-  ngOnInit(): void {
-    this.userService
-      .getUser(String(this.reviewData.userId))
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((user) => {
-        const userData = user.payload.data();
-        if (userData) {
-          this.username$.next(userData.name);
-          this.userPhoto$.next(userData.photo);
-        }
-      });
+  toggleLike(): void {
+    if (this.userId) {
+      if (this.reviewData.likes.includes(this.userId)) {
+        const likes = this.reviewData.likes.filter(
+          (like) => like !== this.userId
+        );
+        this.reviewService.toggleLike({
+          bookId: this.reviewData.bookId,
+          reviewId: this.reviewData.id,
+          likes,
+        });
+      } else {
+        this.reviewService.toggleLike({
+          bookId: this.reviewData.bookId,
+          reviewId: this.reviewData.id,
+          likes: [...this.reviewData.likes, this.userId],
+        });
+      }
+      this.isMyLike$.next(!this.isMyLike$.getValue());
+      this.likeAnimation$.next(true);
+      setTimeout(() => {
+        this.likeAnimation$.next(false);
+      }, 1000);
+    }
   }
 }

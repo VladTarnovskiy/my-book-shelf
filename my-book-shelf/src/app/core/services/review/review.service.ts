@@ -4,6 +4,7 @@ import {
   AngularFirestore,
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
+import { IReviewLikesParam } from '@shared/interfaces/review';
 import { IReview } from '@shared/models/review';
 import { Observable } from 'rxjs';
 
@@ -18,17 +19,26 @@ export class ReviewService {
 
   addReview(review: Omit<IReview, 'id' | 'userId' | 'creationDate'>): void {
     const userId = this.auth.currentUser?.uid || null;
-    const reviewId = this.afs.createId();
-    const reviewInfo = {
-      ...review,
-      userId,
-      id: reviewId,
-      creationDate: Date.now(),
-    };
+    if (userId) {
+      const reviewId = this.afs.createId();
+      const reviewInfo = {
+        ...review,
+        userId,
+        id: reviewId,
+        creationDate: String(Date.now()),
+      };
+      this.afs
+        .collection<IReview>(`/reviews/${review.bookId}/reviews`)
+        .doc(reviewId)
+        .set(reviewInfo);
+    }
+  }
+
+  toggleLike({ reviewId, bookId, likes }: IReviewLikesParam): void {
     this.afs
-      .collection(`/reviews/${review.bookId}/reviews`)
+      .collection<IReview>(`/reviews/${bookId}/reviews`)
       .doc(reviewId)
-      .set(reviewInfo);
+      .update({ likes: likes });
   }
 
   getReviews(bookId: string): Observable<DocumentChangeAction<IReview>[]> {

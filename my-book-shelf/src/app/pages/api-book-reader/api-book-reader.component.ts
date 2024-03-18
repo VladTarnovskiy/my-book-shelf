@@ -79,7 +79,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  handleFavorite(book: IBook): void {
+  toggleFavorite(book: IBook): void {
     if (this.isFavorite$.getValue()) {
       this.favoriteService.removeFavoriteBook(book.id);
       this.booksFacade.removeFavoriteStatus(book.id);

@@ -16,6 +16,21 @@
     <div class="review-item__content">
       {{ reviewData.review }}
     </div>
+    <div class="likes">
+      <p class="likes__count">{{ reviewData.likes.length }}</p>
+      <button
+        class="likes__button"
+        [class.like-animation]="likeAnimation$ | async"
+        (click)="toggleLike()"
+      >
+        <img
+          [src]="
+            (isMyLike$ | async) ? 'assets/heart.svg' : 'assets/empty-heart.svg'
+          "
+          alt="Favorite"
+        />
+      </button>
+    </div>
   </div>
 </div>
 @if (isRemoveModal) {

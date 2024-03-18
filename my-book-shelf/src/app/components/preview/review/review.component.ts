@@ -65,6 +65,7 @@ export class ReviewComponent implements OnInit {
       const review = {
         review: this.reviewText.value,
         bookId: this.bookId,
+        likes: [],
       };
       this.reviewText.setValue('');
       this.reviewService.addReview(review);
