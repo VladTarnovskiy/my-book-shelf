@@ -12,6 +12,7 @@ import { DestroyDirective } from '@core/directives';
 import { GoBackDirective } from '@core/directives';
 import { SafePipe } from '@core/pipes';
 import { FavoriteService } from '@core/services/favorite';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
@@ -47,14 +48,15 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
   constructor(
     private readerBookFacade: ReaderBookFacade,
     private favoriteService: FavoriteService,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.readerBookFacade.readerBookId$
       .pipe(
         takeUntil(this.destroy$),
-        filter((bookId) => bookId !== null)
+        filter((bookId) => bookId !== undefined)
       )
       .subscribe((bookId) => {
         this.readerBookFacade.fetchReaderBook(bookId);
@@ -65,15 +67,21 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
         this.favoriteService
           .getFavoriteBooks()
           .pipe(takeUntil(this.destroy$))
-          .subscribe((favBooks) => {
-            const favIDs = favBooks.map(
-              (favBook) => favBook.payload.doc.data().id
-            );
-            if (favIDs.includes(book.id)) {
-              this.isFavorite$.next(true);
-            } else {
-              this.isFavorite$.next(false);
-            }
+          .subscribe({
+            next: (favBooks) => {
+              const favIDs = favBooks.map(
+                (favBook) => favBook.payload.doc.data().id
+              );
+              if (favIDs.includes(book.id)) {
+                this.isFavorite$.next(true);
+              } else {
+                this.isFavorite$.next(false);
+              }
+            },
+            error: () => {
+              this.toasterService.showFireStoreError();
+              this.isLoading$.next(false);
+            },
           });
       }
     });

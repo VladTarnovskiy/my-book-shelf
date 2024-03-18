@@ -38,7 +38,7 @@ export class ReaderComponent implements OnInit {
     this.booksFacade.myBookId$
       .pipe(
         takeUntil(this.destroy$),
-        filter((myBookId) => myBookId !== null),
+        filter((myBookId) => myBookId !== undefined),
         switchMap((myBookId) => this.myBookService.getMyBook(myBookId))
       )
       .subscribe((book) => {

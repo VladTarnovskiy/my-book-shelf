@@ -25,3 +25,9 @@
     }
   }
 }
+
+.loader-container {
+  width: 100%;
+  @extend %itemsCenter;
+  justify-content: center;
+}

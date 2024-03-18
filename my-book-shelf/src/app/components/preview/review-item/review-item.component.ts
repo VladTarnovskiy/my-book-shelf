@@ -11,6 +11,7 @@ import {
 import { ModalComponent } from '@components/shared/modal';
 import { DestroyDirective } from '@core/directives';
 import { ReviewService } from '@core/services/review';
+import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
@@ -38,19 +39,25 @@ export class ReviewItemComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
     this.userService
       .getUser(String(this.reviewData.userId))
       .pipe(takeUntil(this.destroy$))
-      .subscribe((user) => {
-        const userData = user.payload.data();
-        if (userData) {
-          this.username$.next(userData.name);
-          this.userPhoto$.next(userData.photo);
-        }
+      .subscribe({
+        next: (user) => {
+          const userData = user.payload.data();
+          if (userData) {
+            this.username$.next(userData.name);
+            this.userPhoto$.next(userData.photo);
+          }
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
       });
     if (this.userId && this.reviewData.likes.includes(this.userId)) {
       this.isMyLike$.next(true);

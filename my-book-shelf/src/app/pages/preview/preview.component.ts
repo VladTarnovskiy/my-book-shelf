@@ -50,7 +50,7 @@ export class PreviewComponent implements OnInit {
     this.booksFacade.previewBookId$
       .pipe(
         takeUntil(this.destroy$),
-        filter((bookId) => bookId !== null)
+        filter((bookId) => bookId !== undefined)
       )
       .subscribe((bookId) => {
         this.booksFacade.fetchPreviewBook(bookId);
