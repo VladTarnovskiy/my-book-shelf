@@ -28,8 +28,9 @@ describe('ToasterComponent', () => {
 
   it('should Contain message', () => {
     const titleEl: HTMLElement =
-      fixture.nativeElement.querySelector('.toast-heading');
-    const messageEl: HTMLElement = fixture.nativeElement.querySelector('p');
+      fixture.nativeElement.querySelector('.toast__title');
+    const messageEl: HTMLElement =
+      fixture.nativeElement.querySelector('.toast__message');
     expect(titleEl.textContent).toBe('Hello');
     expect(messageEl.textContent).toBe('World');
   });
