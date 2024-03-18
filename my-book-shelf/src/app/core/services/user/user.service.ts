@@ -12,7 +12,7 @@ import {
   uploadBytes,
 } from '@angular/fire/storage';
 import { IUserInfo } from '@shared/models/user';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -46,16 +46,16 @@ export class UserService {
       .snapshotChanges();
   }
 
-  changeUsername(name: string): void {
+  changeUsername(name: string): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    if (userId) {
+    return from(
       this.afs
         .doc<IUserInfo>(`/users/${userId}/userInfo/${userId}`)
-        .update({ name });
-    }
+        .update({ name })
+    );
   }
 
-  async changeUserPhoto(photo: File): Promise<void> {
+  async changeUserPhoto(photo: File): Promise<Observable<void>> {
     const userId = this.auth.currentUser?.uid || null;
     const storageRefPhoto = ref(
       this.storage,
@@ -64,12 +64,10 @@ export class UserService {
     const storagePhoto = await uploadBytes(storageRefPhoto, photo as File);
     const storagePhotoUrl = await getDownloadURL(storagePhoto.ref);
 
-    this.afs
-      .doc<IUserInfo>(`/users/${userId}/userInfo/${userId}`)
-      .update({ photo: storagePhotoUrl });
-  }
-
-  deleteUser(userId: string): void {
-    this.afs.doc(`/users/${userId}`).delete();
+    return from(
+      this.afs
+        .doc<IUserInfo>(`/users/${userId}/userInfo/${userId}`)
+        .update({ photo: storagePhotoUrl })
+    );
   }
 }

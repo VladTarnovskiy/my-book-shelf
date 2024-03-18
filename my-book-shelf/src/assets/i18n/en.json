@@ -233,12 +233,20 @@
       "MESSAGE": "The book has been deleted"
     },
     "ADD_REVIEW": {
-      "TITLE": "REVIEW",
+      "TITLE": "Review",
       "MESSAGE": "The review has been added"
     },
     "REMOVE_REVIEW": {
-      "TITLE": "REVIEW",
+      "TITLE": "Review",
       "MESSAGE": "The review has been deleted"
+    },
+    "NAME_UPDATE": {
+      "TITLE": "Update",
+      "MESSAGE": "The username has been updated"
+    },
+    "PHOTO_UPDATE": {
+      "TITLE": "Update",
+      "MESSAGE": "The photo has been updated"
     }
   }
 }
