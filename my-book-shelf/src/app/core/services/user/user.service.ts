@@ -24,20 +24,20 @@ export class UserService {
     private storage: Storage
   ) {}
 
-  addUser(user: Omit<IUserInfo, 'id' | 'photo'>): void {
+  addUser(user: Omit<IUserInfo, 'id' | 'photo'>): Observable<void> {
     const userInfo = {
       name: user.name,
       userId: user.userId,
       id: this.afs.createId(),
       photo: null,
     };
-    const userId = this.auth.currentUser?.uid || null;
-    if (userId) {
+    const userId = this.auth.currentUser?.uid || '';
+    return from(
       this.afs
         .collection<IUserInfo>(`/users/${userId}/userInfo`)
         .doc(userId)
-        .set(userInfo);
-    }
+        .set(userInfo)
+    );
   }
 
   getUser(userId: string): Observable<Action<DocumentSnapshot<IUserInfo>>> {

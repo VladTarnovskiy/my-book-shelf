@@ -89,9 +89,9 @@ export class ReviewComponent implements OnInit {
           next: () => {
             this.toasterService.show({
               type: 'success',
-              title: this.translateService.instant('UPLOAD.ADD_REVIEW.TITLE'),
+              title: this.translateService.instant('TOASTER.ADD_REVIEW.TITLE'),
               message: this.translateService.instant(
-                'UPLOAD.ADD_REVIEW.MESSAGE'
+                'TOASTER.ADD_REVIEW.MESSAGE'
               ),
             });
           },
@@ -110,9 +110,9 @@ export class ReviewComponent implements OnInit {
         next: () => {
           this.toasterService.show({
             type: 'success',
-            title: this.translateService.instant('UPLOAD.REMOVE_REVIEW.TITLE'),
+            title: this.translateService.instant('TOASTER.REMOVE_REVIEW.TITLE'),
             message: this.translateService.instant(
-              'UPLOAD.REMOVE_REVIEW.MESSAGE'
+              'TOASTER.REMOVE_REVIEW.MESSAGE'
             ),
           });
         },
