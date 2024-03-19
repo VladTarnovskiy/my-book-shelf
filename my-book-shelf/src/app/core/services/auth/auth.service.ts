@@ -129,6 +129,9 @@ export class AuthService {
 
   async logout(): Promise<void> {
     from(signOut(this.auth)).subscribe({
+      next: () => {
+        this.isLoggedIn.next(false);
+      },
       error: (error) => {
         const err = error as HttpErrorResponse;
         this.toasterService.showHttpsError(err);

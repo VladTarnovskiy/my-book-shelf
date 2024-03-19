@@ -11,20 +11,20 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitchComponent {
-  theme$ = new BehaviorSubject<string>('white');
+  theme$ = new BehaviorSubject<string>('light');
 
   changeTheme() {
     const bodyElement = document.body;
-    if (this.theme$.getValue() === 'white') {
+    bodyElement.setAttribute(
+      'data-theme',
+      this.theme$.getValue() === 'dark' ? 'light' : 'dark'
+    );
+    if (this.theme$.getValue() === 'light') {
       this.theme$.next('dark');
       localStorage.setItem('theme', JSON.stringify('dark'));
-      bodyElement.classList.add('dark');
-      bodyElement.classList.remove('light');
     } else {
-      this.theme$.next('white');
-      localStorage.setItem('theme', JSON.stringify('white'));
-      bodyElement.classList.add('light');
-      bodyElement.classList.remove('dark');
+      this.theme$.next('light');
+      localStorage.setItem('theme', JSON.stringify('light'));
     }
   }
 }
