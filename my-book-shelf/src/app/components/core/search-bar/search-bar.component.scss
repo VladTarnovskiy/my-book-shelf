@@ -10,7 +10,7 @@
   height: 4.9rem;
   border-radius: 4rem;
   margin-right: 2rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
 }
 
 .input {
@@ -18,7 +18,6 @@
   max-width: 36.2rem;
   width: 100%;
   padding: 1.2rem 2.1rem;
-  color: $primary-fourth;
 
   @include tablet-middle {
     width: 16rem;
@@ -31,7 +30,7 @@
   justify-content: center;
   height: 100%;
   border-radius: 4rem 0 0 4rem;
-  background-color: $secondary-fourth;
+  background-color: var(--secondary-fourth);
 
   &__title {
     min-width: 2.7rem;
@@ -63,7 +62,7 @@
   height: 27.2rem;
   border-radius: 1rem;
   line-height: 2.6rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   text-align: start;
   @extend %shadow;
   @extend %transition;
@@ -73,7 +72,7 @@
     padding: 1.2rem 0.9rem;
 
     &:hover {
-      background-color: $secondary-fourth;
+      background-color: var(--secondary-fourth);
     }
   }
 }
@@ -82,7 +81,7 @@
   width: 2.9rem;
   height: 3.3rem;
   padding-right: 0.9rem;
-  border-right: 1px solid $secondary-fourth;
+  border-right: 1px solid var(--secondary-fourth);
   @extend %itemsCenter;
   justify-content: center;
 
@@ -113,7 +112,7 @@
   left: 0;
   bottom: 0;
   transform: translateY(105%);
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   border-radius: 0.8rem;
   padding: 0.8rem 0;
   z-index: 2;
@@ -129,6 +128,6 @@
 
   &:hover {
     cursor: pointer;
-    background-color: $secondary-fourth;
+    background-color: var(--secondary-fourth);
   }
 }

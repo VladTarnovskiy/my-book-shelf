@@ -47,7 +47,7 @@
   }
 
   &__but.active {
-    background-color: $primary-third;
+    background-color: var(--primary-third);
   }
 }
 

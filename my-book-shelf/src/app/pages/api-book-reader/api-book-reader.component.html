@@ -1,6 +1,6 @@
 <div class="reader" [ngClass]="{ full: isFullScreen | async }">
-  @if (book$ | async; as book) {
-    <div class="reader-header">
+  <div class="reader-header">
+    @if (book$ | async; as book) {
       <div class="info">
         <button class="back" appGoBack>
           <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
@@ -44,8 +44,10 @@
           }}
         </button>
       </div>
-    </div>
-  }
+    } @else {
+      <div class="header-loader"></div>
+    }
+  </div>
   <div class="content">
     <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
       @if (isUnavailable$ | async) {

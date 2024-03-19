@@ -9,7 +9,7 @@
   flex-direction: column;
   font-size: 3rem;
   font-family: 'Inter Bold';
-  color: $primary-fifth;
+  color: var(--primary-fifth);
 
   @include tablet {
     margin-top: 10rem;

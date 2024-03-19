@@ -12,7 +12,7 @@
   height: 4.7rem;
   padding: 1.1rem 0 1rem 2.7rem;
   margin-right: 2.5rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   position: relative;
 
   &__title {
@@ -43,7 +43,7 @@
   height: 32rem;
   border-radius: 1rem;
   line-height: 2.6rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   text-align: start;
   @extend %shadow;
   @extend %transition;
@@ -52,7 +52,7 @@
     padding: 1.2rem 0.9rem;
 
     &:hover {
-      background-color: $secondary-fourth;
+      background-color: var(--secondary-fourth);
     }
   }
 }

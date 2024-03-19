@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -10,10 +10,22 @@ import { BehaviorSubject } from 'rxjs';
   styleUrl: './theme-switch.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeSwitchComponent {
+export class ThemeSwitchComponent implements OnInit {
   theme$ = new BehaviorSubject<string>('light');
 
-  changeTheme() {
+  ngOnInit(): void {
+    const themeData = localStorage.getItem('theme');
+    if (themeData) {
+      const theme = JSON.parse(themeData);
+      if (theme === 'dark') {
+        this.theme$.next('dark');
+      } else {
+        this.theme$.next('light');
+      }
+    }
+  }
+
+  changeTheme(): void {
     const bodyElement = document.body;
     bodyElement.setAttribute(
       'data-theme',

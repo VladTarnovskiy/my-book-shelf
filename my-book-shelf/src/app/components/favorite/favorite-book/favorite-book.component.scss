@@ -3,7 +3,7 @@
 
 .book {
   padding: 1.6rem 2rem 1.3rem 1.5rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   width: 30.8rem;
   min-height: 26rem;
   height: 100%;
@@ -40,7 +40,7 @@
   font-size: 1rem;
 
   .rating__total {
-    color: $secondary-fifth;
+    color: var(--secondary-fifth);
   }
 }
 
@@ -78,7 +78,7 @@
 
   &__desc {
     font-size: 1rem;
-    color: $secondary-fifth;
+    color: var(--secondary-fifth);
     line-height: 1.3rem;
   }
 }

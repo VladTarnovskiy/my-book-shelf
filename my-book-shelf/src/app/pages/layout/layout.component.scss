@@ -6,7 +6,7 @@
   border-radius: 1rem;
   margin: 4.5rem 3.6rem;
   display: flex;
-  background-color: $secondary-fourth;
+  background-color: var(--secondary-fourth);
 
   @include desktop {
     margin: 4.5rem 3.6rem;
@@ -44,7 +44,7 @@
 
 .settings {
   @extend %itemsCenter;
-  color: $primary-second;
+  color: var(--primary-second);
 
   @include desktop {
     margin-bottom: 2rem;
@@ -61,8 +61,8 @@
   border-radius: 1rem 0 0 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: $primary-third;
-  color: $primary-fourth;
+  background-color: var(--primary-third);
+  color: var(--primary-fourth);
 
   @include small-desktop {
     display: none;
@@ -132,7 +132,7 @@
   width: 3.6rem;
   height: 0.5rem;
   margin: 0.5rem auto;
-  background-color: $primary-second;
+  background-color: var(--primary-second);
   transition: all 0.3s ease-in-out;
   border-radius: 0.2rem;
 }

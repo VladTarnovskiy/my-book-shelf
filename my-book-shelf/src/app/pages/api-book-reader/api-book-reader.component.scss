@@ -3,8 +3,8 @@
 @import 'mixins';
 
 .reader {
-  color: $primary-third;
-  background-color: $primary-second;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(77, 77, 77, 1);
 
   &.full {
     position: fixed;
@@ -63,7 +63,6 @@
     height: 3rem;
     @extend %second-border;
     font-size: 1rem;
-    color: $primary-third;
   }
 }
 
@@ -150,14 +149,17 @@
   }
 }
 
-.not-found,
 .not-available {
   width: fit-content;
   margin: auto;
+  margin-top: 2.3rem;
 }
 
-.not-found {
-  margin-top: 30rem;
+.header-loader {
+  height: 10rem;
+  border-radius: 1rem;
+  width: 100%;
+  @extend %skeletonBackgroundAnimation;
 }
 
 .loader {

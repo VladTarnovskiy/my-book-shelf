@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThemeSwitchComponent } from './theme-switch.component';
+import { ThemeSwitchComponent } from '.';
 
 describe('ThemeSwitchComponent', () => {
   let component: ThemeSwitchComponent;
@@ -8,10 +8,9 @@ describe('ThemeSwitchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ThemeSwitchComponent]
-    })
-    .compileComponents();
-    
+      imports: [ThemeSwitchComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ThemeSwitchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +18,14 @@ describe('ThemeSwitchComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should switch theme', () => {
+    expect(component.theme$.getValue()).toBe('light');
+    const switchEl: HTMLElement = fixture.nativeElement.querySelector(
+      '.switcher__container'
+    );
+    switchEl.dispatchEvent(new Event('click'));
+    expect(component.theme$.getValue()).toBe('dark');
   });
 });

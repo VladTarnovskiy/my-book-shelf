@@ -16,7 +16,7 @@
   justify-content: flex-start;
   align-items: center;
   border-radius: 2rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
 }
 
 .description {
@@ -38,13 +38,13 @@
 
   &__info {
     font-size: 1.5rem;
-    color: $secondary-fifth;
+    color: var(--secondary-fifth);
   }
 }
 
 .message {
   font-size: 1.8rem;
   font-family: 'Inter Semi Bold';
-  color: $primary-second;
+  color: var(--primary-second);
   margin-bottom: 5.9rem;
 }

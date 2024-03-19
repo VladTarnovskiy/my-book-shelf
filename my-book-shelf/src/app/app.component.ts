@@ -48,6 +48,20 @@ export class AppComponent implements OnInit {
     if (lang) {
       this.translate.use(lang);
     }
+
+    const themeData = localStorage.getItem('theme');
+    const bodyElement = document.body;
+    if (themeData) {
+      const theme = JSON.parse(themeData);
+      if (theme === 'dark') {
+        bodyElement.setAttribute('data-theme', 'dark');
+      } else {
+        bodyElement.setAttribute('data-theme', 'light');
+      }
+    } else {
+      bodyElement.setAttribute('data-theme', 'light');
+    }
+
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     // );

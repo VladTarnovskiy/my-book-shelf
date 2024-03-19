@@ -9,7 +9,7 @@
   border-radius: 4rem;
   height: 4.7rem;
   padding: 0.3rem 0 0.3rem 0.3rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
 
   &__img {
     width: 4.3rem;
@@ -52,7 +52,7 @@
   min-height: 14.5rem;
   border-radius: 1rem;
   line-height: 2.6rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   text-align: start;
   @extend %shadow;
   @extend %transition;
@@ -63,7 +63,7 @@
     font-size: 1.5rem;
 
     &:hover {
-      background-color: $secondary-fourth;
+      background-color: var(--secondary-fourth);
     }
   }
 }

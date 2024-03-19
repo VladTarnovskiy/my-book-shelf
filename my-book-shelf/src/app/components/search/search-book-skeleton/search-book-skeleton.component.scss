@@ -4,7 +4,7 @@
 
 .book {
   padding: 1.3rem 2.5rem 1.3rem 2.2rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   @extend %itemsCenter;
   justify-content: flex-start;
   border-radius: 1rem;
