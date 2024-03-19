@@ -33,7 +33,7 @@
 }
 
 .book {
-  @extend %itemsCenter;
+  display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   font-size: 1.5rem;
@@ -44,6 +44,10 @@
 }
 
 .cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   min-height: 34.5rem;
   margin-right: 7.1rem;
   padding: 2.4rem 3.4rem;

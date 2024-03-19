@@ -1,0 +1,17 @@
+<button
+  class="switcher__container shadow-inner shadow-base_blue w-12 relative rounded-full dark:bg-gray-200"
+  (click)="changeTheme()"
+>
+  <div
+    class="switch h-7 w-7 mt-[-2px] rounded-full bg-base_blue flex justify-center items-center transition-all duration-200 ease-in-out active:rotate-180"
+    [ngClass]="(theme$ | async) === 'white' ? 'white' : 'dark'"
+  >
+    <img
+      [src]="
+        (theme$ | async) === 'white' ? 'assets/sun.svg' : 'assets/moon.svg'
+      "
+      alt="sun"
+      class="h-6 w-6"
+    />
+  </div>
+</button>

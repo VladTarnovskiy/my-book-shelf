@@ -55,7 +55,6 @@ export class AuthService {
   }
 
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
-    console.log('here');
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       await sendEmailVerification(user.user);
