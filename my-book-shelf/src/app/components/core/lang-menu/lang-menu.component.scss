@@ -56,11 +56,11 @@
     width: 100%;
 
     &:hover {
-      background-color: var(--secondary-fourth);
+      background-color: var(--secondary-third);
     }
 
     &.active {
-      background-color: var(--secondary-fourth);
+      background-color: var(--secondary-third);
     }
   }
 }

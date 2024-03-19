@@ -2,8 +2,8 @@
   --primary-first: rgba(250, 124, 84, 1);
   --primary-fourth: rgba(138, 138, 138, 1);
 
-  --secondary-third: rgba(66, 187, 78, 1);
-  --secondary-fifth: rgba(167, 167, 167, 1);
+  --secondary-first: rgba(66, 187, 78, 1);
+  --secondary-second: rgba(167, 167, 167, 1);
 }
 
 [data-theme='light'] {
@@ -12,7 +12,7 @@
   --primary-fifth: rgba(0, 0, 0, 1);
   --primary-sixth: rgba(220, 217, 217, 1);
 
-  --secondary-fourth: rgba(243, 243, 247, 1);
+  --secondary-third: rgba(243, 243, 247, 1);
 
   --shadow: rgba(0, 0, 0, 0.25);
 }
@@ -23,7 +23,7 @@
   --primary-fifth: rgba(77, 77, 77, 1);
   --primary-sixth: rgba(255, 255, 255, 1);
 
-  --secondary-fourth: rgba(20, 20, 20, 1);
+  --secondary-third: rgba(20, 20, 20, 1);
 
   --shadow: rgba(255, 255, 255, 0.25);
 }

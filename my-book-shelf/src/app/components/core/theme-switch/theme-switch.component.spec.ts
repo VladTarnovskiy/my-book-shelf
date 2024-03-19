@@ -21,11 +21,13 @@ describe('ThemeSwitchComponent', () => {
   });
 
   it('should switch theme', () => {
-    expect(component.theme$.getValue()).toBe('light');
+    const theme = component.theme$.getValue();
     const switchEl: HTMLElement = fixture.nativeElement.querySelector(
       '.switcher__container'
     );
-    switchEl.dispatchEvent(new Event('click'));
-    expect(component.theme$.getValue()).toBe('dark');
+    switchEl.click();
+    expect(component.theme$.getValue()).toBe(
+      theme === 'light' ? 'dark' : 'light'
+    );
   });
 });
