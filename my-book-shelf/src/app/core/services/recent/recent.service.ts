@@ -5,7 +5,7 @@ import {
   DocumentChangeAction,
 } from '@angular/fire/compat/firestore';
 import { IBook } from '@shared/models/book';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,11 @@ export class RecentService {
     private auth: Auth
   ) {}
 
-  addRecentBook(book: IBook): void {
+  addRecentBook(book: IBook): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.collection(`/users/${userId}/recent`).doc(book.id).set(book);
+    return from(
+      this.afs.collection(`/users/${userId}/recent`).doc(book.id).set(book)
+    );
   }
 
   getRecentBooks(): Observable<DocumentChangeAction<IBook>[]> {

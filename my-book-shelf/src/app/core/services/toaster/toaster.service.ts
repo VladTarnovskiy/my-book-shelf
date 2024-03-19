@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { IToaster } from '@shared/models/toaster';
 import { Subject } from 'rxjs';
 
@@ -9,6 +10,8 @@ import { Subject } from 'rxjs';
 export class ToasterService {
   subject = new Subject<IToaster>();
   toast$ = this.subject.asObservable();
+
+  constructor(private translateService: TranslateService) {}
 
   show({ type, title, message }: IToaster) {
     this.subject.next({ type, title, message });
@@ -25,8 +28,8 @@ export class ToasterService {
   showFireStoreError() {
     this.subject.next({
       type: 'error',
-      title: 'Firestore error',
-      message: 'Something went wrong',
+      title: this.translateService.instant('TOASTER.FIREBASE_ERROR.TITLE'),
+      message: this.translateService.instant('TOASTER.FIREBASE_ERROR.MESSAGE'),
     });
   }
 }

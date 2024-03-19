@@ -10,7 +10,7 @@ import { BookSkeletonComponent } from '@components/shared/book-skeleton';
 import { DestroyDirective } from '@core/directives';
 import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BehaviorSubject, takeUntil } from 'rxjs';
 
@@ -31,7 +31,8 @@ export class MyBooksComponent implements OnInit {
 
   constructor(
     private myBookService: MyBooksService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +54,20 @@ export class MyBooksComponent implements OnInit {
   }
 
   removeFromMyBook(bookId: string): void {
-    this.myBookService.removeMyBook(bookId);
+    this.myBookService
+      .removeMyBook(bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('TOASTER.REMOVE.TITLE'),
+            message: this.translateService.instant('TOASTER.REMOVE.MESSAGE'),
+          });
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 }

@@ -12,7 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { IUserDetails } from '@shared/models/user';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from, switchMap } from 'rxjs';
 
 import { ToasterService } from '../toaster';
 import { UserService } from '../user';
@@ -32,20 +32,26 @@ export class AuthService {
   ) {}
 
   async signUp({ email, password, name }: IUserDetails): Promise<void> {
-    try {
-      await createUserWithEmailAndPassword(this.auth, email, password);
-      const userId = this.auth.currentUser?.uid || null;
-      const user = {
-        name: name,
-        userId,
-      };
-      this.userService.addUser(user);
-      this.router.navigate(['auth/login']);
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        this.toasterService.showHttpsError(error);
-      }
-    }
+    from(createUserWithEmailAndPassword(this.auth, email, password))
+      .pipe(
+        switchMap(() => {
+          const userId = this.auth.currentUser?.uid || null;
+          const user = {
+            name: name,
+            userId,
+          };
+          return this.userService.addUser(user);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['auth/login']);
+        },
+        error: (error) => {
+          const err = error as HttpErrorResponse;
+          this.toasterService.showHttpsError(err);
+        },
+      });
   }
 
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
@@ -66,57 +72,67 @@ export class AuthService {
         }, 2000);
       }
     } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        this.toasterService.showHttpsError(error);
-      }
+      const err = error as HttpErrorResponse;
+      this.toasterService.showHttpsError(err);
     }
   }
 
   async logInWithGoogle(): Promise<void> {
     const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(this.auth, provider);
-      const userId = this.auth.currentUser?.uid || null;
-      const user = {
-        name: result.user.displayName || 'Unknown',
-        userId,
-      };
-      this.userService.addUser(user);
-      this.isLoggedIn.next(true);
-      this.router.navigate(['/']);
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        this.toasterService.showHttpsError(error);
-      }
-    }
+    from(signInWithPopup(this.auth, provider))
+      .pipe(
+        switchMap((result) => {
+          const userId = this.auth.currentUser?.uid || null;
+          const user = {
+            name: result.user.displayName || 'Unknown',
+            userId,
+          };
+          return this.userService.addUser(user);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.isLoggedIn.next(true);
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          const err = error as HttpErrorResponse;
+          this.toasterService.showHttpsError(err);
+        },
+      });
   }
 
   async logInWithGitHub(): Promise<void> {
     const provider = new GithubAuthProvider();
-    try {
-      const result = await signInWithPopup(this.auth, provider);
-      const userId = this.auth.currentUser?.uid || null;
-      const user = {
-        name: result.user.displayName || 'Unknown',
-        userId,
-      };
-      this.userService.addUser(user);
-      this.isLoggedIn.next(true);
-      this.router.navigate(['/']);
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        this.toasterService.showHttpsError(error);
-      }
-    }
+    from(signInWithPopup(this.auth, provider))
+      .pipe(
+        switchMap((result) => {
+          const userId = this.auth.currentUser?.uid || null;
+          const user = {
+            name: result.user.displayName || 'Unknown',
+            userId,
+          };
+          return this.userService.addUser(user);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.isLoggedIn.next(true);
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          const err = error as HttpErrorResponse;
+          this.toasterService.showHttpsError(err);
+        },
+      });
   }
 
   async logout(): Promise<void> {
-    try {
-      await signOut(this.auth);
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        this.toasterService.showHttpsError(error);
-      }
-    }
+    from(signOut(this.auth)).subscribe({
+      error: (error) => {
+        const err = error as HttpErrorResponse;
+        this.toasterService.showHttpsError(err);
+      },
+    });
   }
 }

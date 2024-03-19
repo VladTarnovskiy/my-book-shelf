@@ -11,7 +11,7 @@ import { LoaderComponent } from '@components/shared/loader';
 import { DestroyDirective } from '@core/directives';
 import { ReviewService } from '@core/services/review';
 import { ToasterService } from '@core/services/toaster';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
 import { AuthFacade } from '@store/auth';
 import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
@@ -50,7 +50,8 @@ export class ReviewComponent implements OnInit {
   constructor(
     private authFacade: AuthFacade,
     private reviewService: ReviewService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -81,11 +82,43 @@ export class ReviewComponent implements OnInit {
         likes: [],
       };
       this.reviewText.setValue('');
-      this.reviewService.addReview(review);
+      this.reviewService
+        .addReview(review)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.toasterService.show({
+              type: 'success',
+              title: this.translateService.instant('TOASTER.ADD_REVIEW.TITLE'),
+              message: this.translateService.instant(
+                'TOASTER.ADD_REVIEW.MESSAGE'
+              ),
+            });
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     }
   }
 
   removeReview(reviewId: string): void {
-    this.reviewService.removeReview(this.bookId, reviewId);
+    this.reviewService
+      .removeReview(this.bookId, reviewId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('TOASTER.REMOVE_REVIEW.TITLE'),
+            message: this.translateService.instant(
+              'TOASTER.REMOVE_REVIEW.MESSAGE'
+            ),
+          });
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 }

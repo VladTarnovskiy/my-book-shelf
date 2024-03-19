@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { IBook } from '@shared/models/book';
 import { IFavoriteBook } from '@shared/models/favoriteBook';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,19 +17,21 @@ export class FavoriteService {
     private auth: Auth
   ) {}
 
-  addFavoriteBook(book: IBook): void {
+  addFavoriteBook(book: IBook): Observable<void> {
     const favBook = {
       ...book,
       borrowedOn: Date.now().toString(),
       submissionDate: String(Date.now() + 259200000),
     };
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.collection(`/users/${userId}/favorite`).doc(book.id).set(favBook);
+    return from(
+      this.afs.collection(`/users/${userId}/favorite`).doc(book.id).set(favBook)
+    );
   }
 
-  removeFavoriteBook(bookId: string): void {
+  removeFavoriteBook(bookId: string): Observable<void> {
     const userId = this.auth.currentUser?.uid || null;
-    this.afs.doc(`/users/${userId}/favorite/${bookId}`).delete();
+    return from(this.afs.doc(`/users/${userId}/favorite/${bookId}`).delete());
   }
 
   getFavoriteBooks(): Observable<DocumentChangeAction<IFavoriteBook>[]> {

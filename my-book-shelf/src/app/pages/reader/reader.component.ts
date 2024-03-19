@@ -9,6 +9,7 @@ import { DestroyDirective } from '@core/directives';
 import { GoBackDirective } from '@core/directives';
 import { SafePipe } from '@core/pipes';
 import { MyBooksService } from '@core/services/my-books';
+import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BooksFacade } from '@store/books';
@@ -31,7 +32,8 @@ export class ReaderComponent implements OnInit {
 
   constructor(
     private myBookService: MyBooksService,
-    private booksFacade: BooksFacade
+    private booksFacade: BooksFacade,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -41,21 +43,30 @@ export class ReaderComponent implements OnInit {
         filter((myBookId) => myBookId !== undefined),
         switchMap((myBookId) => this.myBookService.getMyBook(myBookId))
       )
-      .subscribe((book) => {
-        const bookData = book.payload.data();
-        if (bookData) {
-          this.book = bookData;
-          this.book$.next(bookData);
-        }
+      .subscribe({
+        next: (book) => {
+          const bookData = book.payload.data();
+          if (bookData) {
+            this.book = bookData;
+            this.book$.next(bookData);
+          }
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
       });
   }
 
   toggleFavorite(): void {
     if (this.book) {
-      this.myBookService.changeFavoriteStatus(
-        !this.book.isFavorite,
-        this.book.id
-      );
+      this.myBookService
+        .changeFavoriteStatus(!this.book.isFavorite, this.book.id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     }
   }
 

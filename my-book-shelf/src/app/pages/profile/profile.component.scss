@@ -14,9 +14,7 @@
 }
 
 .profile-item {
-  @extend %itemsCenter;
-  justify-content: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 
   @include tablet-middle {
     flex-direction: column;
@@ -24,8 +22,6 @@
   }
 
   &__title {
-    min-width: 15rem;
-    margin-right: 1.5rem;
     margin-bottom: 1.5rem;
   }
 

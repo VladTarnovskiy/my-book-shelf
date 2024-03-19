@@ -89,13 +89,31 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
 
   toggleFavorite(book: IBook): void {
     if (this.isFavorite$.getValue()) {
-      this.favoriteService.removeFavoriteBook(book.id);
-      this.booksFacade.removeFavoriteStatus(book.id);
-      this.isFavorite$.next(false);
+      this.favoriteService
+        .removeFavoriteBook(book.id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.booksFacade.removeFavoriteStatus(book.id);
+            this.isFavorite$.next(false);
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     } else {
-      this.favoriteService.addFavoriteBook(book);
-      this.booksFacade.addFavoriteStatus(book.id);
-      this.isFavorite$.next(true);
+      this.favoriteService
+        .addFavoriteBook(book)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.booksFacade.addFavoriteStatus(book.id);
+            this.isFavorite$.next(true);
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     }
   }
 

@@ -79,15 +79,27 @@ export class FavoriteComponent implements OnInit {
   }
 
   removeFromFavorite(bookId: string): void {
-    this.favoriteService.removeFavoriteBook(bookId);
-    this.removeFavoriteStatus(bookId);
-  }
-
-  removeFavoriteStatus(bookId: string): void {
-    this.booksFacade.removeFavoriteStatus(bookId);
+    this.favoriteService
+      .removeFavoriteBook(bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.booksFacade.removeFavoriteStatus(bookId);
+        },
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 
   removeFromUploadFavorite(bookId: string): void {
-    this.myBookService.changeFavoriteStatus(false, bookId);
+    this.myBookService
+      .changeFavoriteStatus(false, bookId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        error: () => {
+          this.toasterService.showFireStoreError();
+        },
+      });
   }
 }

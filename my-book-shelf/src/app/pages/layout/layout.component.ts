@@ -6,6 +6,7 @@ import { LangMenuComponent } from '@components/core/lang-menu';
 import { NavigationComponent } from '@components/core/navigation';
 import { ProfileMenuComponent } from '@components/core/profile-menu';
 import { SearchBarComponent } from '@components/core/search-bar';
+import { ThemeSwitchComponent } from '@components/core/theme-switch';
 
 @Component({
   selector: 'app-layout',
@@ -18,6 +19,7 @@ import { SearchBarComponent } from '@components/core/search-bar';
     LangMenuComponent,
     ProfileMenuComponent,
     NgClass,
+    ThemeSwitchComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',

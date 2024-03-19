@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReviewService } from '@core/services/review';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
+import { reviewStub } from '@shared/tests';
 import { of } from 'rxjs';
 
 import { ReviewItemComponent } from '.';
@@ -21,18 +23,20 @@ describe('ReviewItemComponent', () => {
             },
           },
         },
+        {
+          provide: ReviewService,
+          useValue: {
+            toggleLike: () => {
+              return of();
+            },
+          },
+        },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ReviewItemComponent);
     component = fixture.componentInstance;
-    component.reviewData = {
-      review: 'Hello',
-      bookId: 'wdec23e',
-      userId: 'wedd234',
-      id: 'wedcwed',
-      creationDate: '2024',
-    };
+    component.reviewData = reviewStub;
     component.userId = 'wedd234';
     component.username$.next('John');
     fixture.detectChanges();

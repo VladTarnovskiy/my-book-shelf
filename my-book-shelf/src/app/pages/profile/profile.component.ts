@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DestroyDirective } from '@core/directives';
+import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthFacade } from '@store/auth';
-import { takeUntil } from 'rxjs';
+import { from, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +32,9 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private authFacade: AuthFacade
+    private authFacade: AuthFacade,
+    private translateService: TranslateService,
+    private toasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -44,13 +47,49 @@ export class ProfileComponent implements OnInit {
 
   changeUserName(): void {
     if (this.userName.valid) {
-      this.userService.changeUsername(this.userName.value);
+      this.userService
+        .changeUsername(this.userName.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.toasterService.show({
+              type: 'success',
+              title: this.translateService.instant('TOASTER.NAME_UPDATE.TITLE'),
+              message: this.translateService.instant(
+                'TOASTER.NAME_UPDATE.MESSAGE'
+              ),
+            });
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     }
   }
 
   changePhoto(): void {
     if (this.file !== null) {
-      this.userService.changeUserPhoto(this.file);
+      from(this.userService.changeUserPhoto(this.file))
+        .pipe(
+          takeUntil(this.destroy$),
+          switchMap((changePhotoFunc) => changePhotoFunc)
+        )
+        .subscribe({
+          next: () => {
+            this.toasterService.show({
+              type: 'success',
+              title: this.translateService.instant(
+                'TOASTER.PHOTO_UPDATE.TITLE'
+              ),
+              message: this.translateService.instant(
+                'TOASTER.PHOTO_UPDATE.MESSAGE'
+              ),
+            });
+          },
+          error: () => {
+            this.toasterService.showFireStoreError();
+          },
+        });
     }
   }
 
