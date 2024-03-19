@@ -28,6 +28,7 @@ export class ReaderComponent implements OnInit {
   book$ = new BehaviorSubject<IUploadBook | null>(null);
   book: IUploadBook | null = null;
   isFullScreen = new BehaviorSubject<boolean>(false);
+  isLoading$ = new BehaviorSubject<boolean>(false);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
@@ -37,6 +38,7 @@ export class ReaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLoading$.next(true);
     this.booksFacade.myBookId$
       .pipe(
         takeUntil(this.destroy$),
@@ -46,6 +48,7 @@ export class ReaderComponent implements OnInit {
       .subscribe({
         next: (book) => {
           const bookData = book.payload.data();
+          this.isLoading$.next(false);
           if (bookData) {
             this.book = bookData;
             this.book$.next(bookData);
@@ -53,6 +56,7 @@ export class ReaderComponent implements OnInit {
         },
         error: () => {
           this.toasterService.showFireStoreError();
+          this.isLoading$.next(false);
         },
       });
   }

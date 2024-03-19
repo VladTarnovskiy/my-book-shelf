@@ -17,9 +17,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   font-family: 'Inter Regular';
-  color: $primary-second;
+  color: var(--primary-second);
   font-size: 2rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
 }
 
 button:hover {
@@ -56,15 +56,6 @@ button:hover {
 
 //form validation
 
-.ng-touched.ng-invalid:not(form) {
-  border-left: 2px solid #ef4444;
-}
-
-.ng-touched.ng-valid[required],
-.ng-valid.required {
-  border-left: 2px solid #42a948;
-}
-
 .invalid__message {
   color: rgb(239 68 68);
 }
@@ -83,7 +74,7 @@ button:hover {
   justify-content: flex-start;
   width: 60rem;
   min-height: 22rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   border-radius: 1rem;
   font-family: 'Inter Semi Bold';
 
@@ -104,8 +95,8 @@ button:hover {
   &__item {
     height: 4.8rem;
     width: 10rem;
-    background-color: $primary-first;
-    color: $primary-third;
+    background-color: var(--primary-first);
+    color: var(--primary-third);
     border-radius: 0.8rem;
   }
 }
@@ -116,7 +107,7 @@ button:hover {
   @extend %itemsCenter;
   justify-content: center;
   @extend %base-border;
-  color: $primary-first;
+  color: var(--primary-first);
   border-radius: 0.5rem;
 }
 
@@ -129,13 +120,13 @@ button:hover {
 }
 
 .btn-second {
-  background-color: $secondary-third;
-  color: $primary-third;
+  background-color: var(--secondary-first);
+  color: var(--primary-third);
 }
 
 .btn-third {
-  background: $primary-first;
-  color: $primary-third;
+  background: var(--primary-first);
+  color: var(--primary-third);
 }
 
 .disabled {
@@ -144,4 +135,11 @@ button:hover {
   &:hover {
     cursor: default;
   }
+}
+
+//inputs
+
+input,
+textarea {
+  color: var(--primary-fourth);
 }

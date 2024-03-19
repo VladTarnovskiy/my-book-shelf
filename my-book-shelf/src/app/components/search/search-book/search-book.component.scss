@@ -4,7 +4,7 @@
 
 .book {
   padding: 1.3rem 2.5rem 1.3rem 2.2rem;
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   @extend %itemsCenter;
   justify-content: flex-start;
   border-radius: 1rem;
@@ -12,7 +12,7 @@
   margin-bottom: 2.3rem;
 
   &:hover {
-    background-color: $secondary-fourth;
+    background-color: var(--secondary-third);
   }
 
   @include desktop-middle {
@@ -61,7 +61,7 @@
 
   &__total {
     font-size: 1.5rem;
-    color: $secondary-fifth;
+    color: var(--secondary-second);
   }
 }
 

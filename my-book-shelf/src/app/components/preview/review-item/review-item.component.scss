@@ -2,7 +2,7 @@
 @import 'variables';
 
 .review-item {
-  background-color: $primary-third;
+  background-color: var(--primary-third);
   border-radius: 1rem;
   padding: 1rem;
   margin-bottom: 1.5rem;
@@ -28,7 +28,7 @@
   }
 
   &__content {
-    color: $primary-fourth;
+    color: var(--primary-fourth);
   }
 
   &__remove {

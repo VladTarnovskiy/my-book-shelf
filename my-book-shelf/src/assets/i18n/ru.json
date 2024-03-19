@@ -52,8 +52,7 @@
   },
   "API_READER": {
     "INTRODUCTION": "ВВЕДЕНИЕ",
-    "NOT_AVAILABLE": "Книга не доступна.",
-    "NOT_FOUND": "Книга не найдена."
+    "NOT_AVAILABLE": "Книга не доступна."
   },
   "SEARCH_BOOK": {
     "EDITION": "второе издание",
@@ -65,8 +64,7 @@
   "FAVORITE": { "TITLE": "Ваше Избранное" },
   "READER": {
     "INTRODUCTION": "ВВЕДЕНИЕ",
-    "NOT_AVAILABLE": "Книга не доступна.",
-    "NOT_FOUND": "Книга не найдена."
+    "NOT_AVAILABLE": "Книга не доступна."
   },
   "MODAL": {
     "BTN": {

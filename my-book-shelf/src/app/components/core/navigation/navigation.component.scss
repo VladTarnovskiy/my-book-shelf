@@ -23,10 +23,10 @@
 
   &:hover {
     cursor: pointer;
-    color: $primary-second;
+    color: var(--primary-second);
   }
 
   &.active {
-    color: $primary-second;
+    color: var(--primary-second);
   }
 }

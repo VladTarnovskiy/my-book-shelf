@@ -4,11 +4,11 @@
 >
   <div
     class="switch h-7 w-7 mt-[-2px] rounded-full bg-base_blue flex justify-center items-center transition-all duration-200 ease-in-out active:rotate-180"
-    [ngClass]="(theme$ | async) === 'white' ? 'white' : 'dark'"
+    [ngClass]="(theme$ | async) === 'light' ? 'light' : 'dark'"
   >
     <img
       [src]="
-        (theme$ | async) === 'white' ? 'assets/sun.svg' : 'assets/moon.svg'
+        (theme$ | async) === 'light' ? 'assets/sun.svg' : 'assets/moon.svg'
       "
       alt="sun"
       class="h-6 w-6"

@@ -6,7 +6,7 @@
   padding: 1.5rem 1.5rem 2.5rem 4.4rem;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     linear-gradient(140.88deg, #eb5231 -29.15%, #571fcf 151.64%);
-  color: $primary-third;
+  color: var(--primary-third);
   max-width: 81.1rem;
   margin-bottom: 4.2rem;
   margin-right: 2.8rem;
@@ -32,7 +32,7 @@
   justify-content: space-between;
 
   &__but {
-    border: 1px solid $primary-third;
+    border: 1px solid var(--primary-third);
     margin-right: 1rem;
     width: 1rem;
     height: 1rem;
@@ -48,6 +48,6 @@
   }
 
   &__but.active {
-    background-color: $primary-third;
+    background-color: var(--primary-third);
   }
 }

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -10,21 +10,33 @@ import { BehaviorSubject } from 'rxjs';
   styleUrl: './theme-switch.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeSwitchComponent {
-  theme$ = new BehaviorSubject<string>('white');
+export class ThemeSwitchComponent implements OnInit {
+  theme$ = new BehaviorSubject<string>('light');
 
-  changeTheme() {
+  ngOnInit(): void {
+    const themeData = localStorage.getItem('theme');
+    if (themeData) {
+      const theme = JSON.parse(themeData);
+      if (theme === 'dark') {
+        this.theme$.next('dark');
+      } else {
+        this.theme$.next('light');
+      }
+    }
+  }
+
+  changeTheme(): void {
     const bodyElement = document.body;
-    if (this.theme$.getValue() === 'white') {
+    bodyElement.setAttribute(
+      'data-theme',
+      this.theme$.getValue() === 'dark' ? 'light' : 'dark'
+    );
+    if (this.theme$.getValue() === 'light') {
       this.theme$.next('dark');
       localStorage.setItem('theme', JSON.stringify('dark'));
-      bodyElement.classList.add('dark');
-      bodyElement.classList.remove('light');
     } else {
-      this.theme$.next('white');
-      localStorage.setItem('theme', JSON.stringify('white'));
-      bodyElement.classList.add('light');
-      bodyElement.classList.remove('dark');
+      this.theme$.next('light');
+      localStorage.setItem('theme', JSON.stringify('light'));
     }
   }
 }

@@ -184,9 +184,11 @@ input {
   border: none;
 }
 
-input {
+input,
+textarea {
   /* 1 */
   outline: none;
+  background-color: inherit;
 }
 
 /**

@@ -2,7 +2,7 @@
 @import 'variables';
 
 .home {
-  color: $primary-second;
+  color: var(--primary-second);
   margin-left: 2.8rem;
   margin-top: 2.2rem;
 }
@@ -27,10 +27,10 @@
   }
 
   &__showAll {
-    color: $primary-fourth;
+    color: var(--primary-fourth);
 
     &:hover {
-      color: $primary-second;
+      color: var(--primary-second);
     }
   }
 

@@ -1,6 +1,6 @@
-@if (book$ | async; as book) {
-  <div class="reader" [ngClass]="{ full: isFullScreen | async }">
-    <div class="reader-header">
+<div class="reader" [ngClass]="{ full: isFullScreen | async }">
+  <div class="reader-header">
+    @if (book$ | async; as book) {
       <div class="info">
         <button class="back" appGoBack>
           <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
@@ -36,8 +36,12 @@
           }}
         </button>
       </div>
-    </div>
-    <div class="book" [ngClass]="{ full: isFullScreen | async }">
+    } @else if (isLoading$ | async) {
+      <div class="header-loader"></div>
+    }
+  </div>
+  <div class="book" [ngClass]="{ full: isFullScreen | async }">
+    @if (book$ | async; as book) {
       <object
         aria-label="Book"
         class="book__reader"
@@ -48,8 +52,8 @@
       >
         {{ 'READER.NOT_AVAILABLE' | translate }}
       </object>
-    </div>
+    } @else if (isLoading$ | async) {
+      <div class="loader"></div>
+    }
   </div>
-} @else {
-  <div class="not-found">{{ 'API_READER.NOT_FOUND' | translate }}</div>
-}
+</div>
