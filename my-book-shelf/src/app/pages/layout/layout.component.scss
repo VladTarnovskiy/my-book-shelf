@@ -75,7 +75,7 @@
 
 .sidebar.sidebar_mobile {
   display: none;
-  position: fixed;
+  position: absolute;
   left: 0;
   transform: translateX(-100%);
   top: 3.5rem;
@@ -153,8 +153,8 @@
 }
 
 .hamburger.active .hamburger_line:nth-child(3) {
-  -webkit-transform: translateY(-1.4rem) rotate(-45deg);
-  -ms-transform: translateY(-1.4rem) rotate(-45deg);
-  -o-transform: translateY(-1.4rem) rotate(-45deg);
-  transform: translateY(-1.4rem) rotate(-45deg);
+  -webkit-transform: translateY(-1.5rem) rotate(-45deg);
+  -ms-transform: translateY(-1.5rem) rotate(-45deg);
+  -o-transform: translateY(-1.5rem) rotate(-45deg);
+  transform: translateY(-1.5rem) rotate(-45deg);
 }
