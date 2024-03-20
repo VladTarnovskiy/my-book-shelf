@@ -8,6 +8,7 @@ import { AuthService } from '@core/services/auth';
 import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IThemes } from '@shared/interfaces/theme';
 import { AuthFacade } from '@store/auth';
 
 import englishLang from '../assets/i18n/en.json';
@@ -53,13 +54,13 @@ export class AppComponent implements OnInit {
     const bodyElement = document.body;
     if (themeData) {
       const theme = JSON.parse(themeData);
-      if (theme === 'dark') {
-        bodyElement.setAttribute('data-theme', 'dark');
+      if (theme === IThemes.Dark) {
+        bodyElement.setAttribute('data-theme', IThemes.Dark);
       } else {
-        bodyElement.setAttribute('data-theme', 'light');
+        bodyElement.setAttribute('data-theme', IThemes.Light);
       }
     } else {
-      bodyElement.setAttribute('data-theme', 'light');
+      bodyElement.setAttribute('data-theme', IThemes.Light);
     }
 
     // alert(
