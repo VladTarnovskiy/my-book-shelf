@@ -7,7 +7,7 @@
         {{ 'LOGIN.DESCRIPTION' | translate }}
       </div>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <form [formGroup]="loginForm" class="form">
       <div class="form-item">
         <label class="form-item__label">
           <div class="form-item__title">
@@ -59,6 +59,7 @@
         <button
           type="submit"
           class="buttons__login btn-third"
+          (click)="onSubmit()"
           [ngClass]="loginForm.valid ? '' : 'invalid-but'"
         >
           {{ 'LOGIN.LOGIN' | translate }}

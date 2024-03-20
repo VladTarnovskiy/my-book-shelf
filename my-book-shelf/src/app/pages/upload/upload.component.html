@@ -1,6 +1,6 @@
 <div class="upload">
   <div class="title">{{ 'UPLOAD.TITLE' | translate }}</div>
-  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" class="form">
+  <form [formGroup]="uploadForm" class="form">
     <div class="form-item">
       <label class="form-item__label">
         <div class="form-item__title">
@@ -101,6 +101,7 @@
       <button
         type="submit"
         class="buttons__submit btn-third"
+        (click)="onSubmit()"
         [ngClass]="uploadForm.valid ? '' : 'invalid-but'"
       >
         {{ 'UPLOAD.UPLOAD' | translate }}

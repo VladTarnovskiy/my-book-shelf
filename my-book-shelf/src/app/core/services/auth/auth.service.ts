@@ -12,7 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { IUserDetails } from '@shared/models/user';
-import { BehaviorSubject, from, switchMap } from 'rxjs';
+import { BehaviorSubject, from, switchMap, tap } from 'rxjs';
 
 import { ToasterService } from '../toaster';
 import { UserService } from '../user';
@@ -55,26 +55,29 @@ export class AuthService {
   }
 
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
-    try {
-      const user = await signInWithEmailAndPassword(this.auth, email, password);
-      await sendEmailVerification(user.user);
-      if (user.user.emailVerified) {
-        this.router.navigate(['auth/verification/success']);
-      } else {
-        this.router.navigate(['auth/verification']);
-        const interval = setInterval(async () => {
+    from(signInWithEmailAndPassword(this.auth, email, password))
+      .pipe(tap((user) => sendEmailVerification(user.user)))
+      .subscribe({
+        next: (user) => {
           if (user.user.emailVerified) {
-            clearInterval(interval);
-            this.isLoggedIn.next(true);
             this.router.navigate(['auth/verification/success']);
+          } else {
+            this.router.navigate(['auth/verification']);
+            const interval = setInterval(async () => {
+              if (user.user.emailVerified) {
+                clearInterval(interval);
+                this.isLoggedIn.next(true);
+                this.router.navigate(['auth/verification/success']);
+              }
+              await user.user.reload();
+            }, 2000);
           }
-          await user.user.reload();
-        }, 2000);
-      }
-    } catch (error) {
-      const err = error as HttpErrorResponse;
-      this.toasterService.showHttpsError(err);
-    }
+        },
+        error: (error) => {
+          const err = error as HttpErrorResponse;
+          this.toasterService.showHttpsError(err);
+        },
+      });
   }
 
   async logInWithGoogle(): Promise<void> {
