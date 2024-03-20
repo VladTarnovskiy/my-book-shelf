@@ -3,11 +3,15 @@
   (mousedown)="onProfileToggle()"
   (blur)="onProfileClose()"
 >
-  <img
+  <div
     class="profile__img"
-    [src]="(photo$ | async) ?? 'assets/header/profile.svg'"
     alt="Profile"
-  />
+    [style.background-image]="
+      (photo$ | async)
+        ? 'url(' + (photo$ | async) + ')'
+        : 'url(assets/header/profile.svg)'
+    "
+  ></div>
   <p class="profile__name">{{ userName$ | async }}</p>
   <img
     class="profile__polygon"
