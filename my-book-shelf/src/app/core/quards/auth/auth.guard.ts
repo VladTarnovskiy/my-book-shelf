@@ -11,7 +11,8 @@ export const authGuard = () => {
     if (isAuth) {
       return true;
     } else {
-      return router.navigate(['auth/login']);
+      router.navigate(['auth/login']);
+      return false;
     }
   });
 };

@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
   getUserAfterReload(): void {
     this.authFacade.changeUserIsLoading(true);
     this.auth.onAuthStateChanged((user) => {
-      if (user !== null) {
+      if (user !== null && user.emailVerified) {
         this.setUserName(user.uid);
       } else {
         this.authService.isLoggedIn.next(false);

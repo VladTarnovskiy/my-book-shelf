@@ -7,7 +7,7 @@
         {{ 'REGISTER.DESCRIPTION' | translate }}
       </div>
     </div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form">
+    <form [formGroup]="registerForm" class="form">
       <div class="form-item">
         <label class="form-item__label">
           <div class="form-item__title">
@@ -112,6 +112,7 @@
         <button
           type="submit"
           class="buttons__reg btn-third"
+          (click)="onSubmit()"
           [ngClass]="registerForm.valid ? '' : 'invalid-but'"
         >
           {{ 'REGISTER.REGISTER' | translate }}
