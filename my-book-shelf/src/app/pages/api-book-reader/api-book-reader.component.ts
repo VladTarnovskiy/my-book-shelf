@@ -17,7 +17,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
 import { ReaderBookFacade } from '@store/reader';
-import { BehaviorSubject, filter, Observable, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  map,
+  Observable,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-api-book-reader',
@@ -66,22 +74,23 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
       if (book) {
         this.favoriteService
           .getFavoriteBooks()
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            next: (favBooks) => {
-              const favIDs = favBooks.map(
-                (favBook) => favBook.payload.doc.data().id
-              );
-              if (favIDs.includes(book.id)) {
-                this.isFavorite$.next(true);
-              } else {
-                this.isFavorite$.next(false);
-              }
-            },
-            error: () => {
+          .pipe(
+            takeUntil(this.destroy$),
+            map((favBooks) =>
+              favBooks.map((favBook) => favBook.payload.doc.data().id)
+            ),
+            catchError(() => {
               this.toasterService.showFireStoreError();
               this.isLoading$.next(false);
-            },
+              return of();
+            })
+          )
+          .subscribe((favIDs) => {
+            if (favIDs.includes(book.id)) {
+              this.isFavorite$.next(true);
+            } else {
+              this.isFavorite$.next(false);
+            }
           });
       }
     });
@@ -91,28 +100,30 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
     if (this.isFavorite$.getValue()) {
       this.favoriteService
         .removeFavoriteBook(book.id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.booksFacade.removeFavoriteStatus(book.id);
-            this.isFavorite$.next(false);
-          },
-          error: () => {
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.booksFacade.removeFavoriteStatus(book.id);
+          this.isFavorite$.next(false);
         });
     } else {
       this.favoriteService
         .addFavoriteBook(book)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.booksFacade.addFavoriteStatus(book.id);
-            this.isFavorite$.next(true);
-          },
-          error: () => {
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.booksFacade.addFavoriteStatus(book.id);
+          this.isFavorite$.next(true);
         });
     }
   }

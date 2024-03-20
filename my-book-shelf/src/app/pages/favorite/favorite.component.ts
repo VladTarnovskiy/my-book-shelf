@@ -16,7 +16,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IFavoriteBook } from '@shared/models/favoriteBook';
 import { IUploadBook } from '@shared/models/upload';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, combineLatest, map, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  combineLatest,
+  map,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-favorite',
@@ -64,42 +71,46 @@ export class FavoriteComponent implements OnInit {
       .pipe(map((books) => books.map((item) => item.payload.doc.data())));
 
     combineLatest([myFavBooks, favBooks])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: ([myFavBooksData, favBooksData]) => {
-          this.uploadFavoriteBooks$.next(myFavBooksData);
-          this.favoriteBooks$.next(favBooksData);
-          this.isLoading$.next(false);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.isLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe(([myFavBooksData, favBooksData]) => {
+        this.uploadFavoriteBooks$.next(myFavBooksData);
+        this.favoriteBooks$.next(favBooksData);
+        this.isLoading$.next(false);
       });
   }
 
   removeFromFavorite(bookId: string): void {
     this.favoriteService
       .removeFavoriteBook(bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.booksFacade.removeFavoriteStatus(bookId);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.booksFacade.removeFavoriteStatus(bookId);
       });
   }
 
   removeFromUploadFavorite(bookId: string): void {
     this.myBookService
       .changeFavoriteStatus(false, bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
-      });
+          return of();
+        })
+      )
+      .subscribe();
   }
 }

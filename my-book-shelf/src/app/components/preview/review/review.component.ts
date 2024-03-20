@@ -14,7 +14,14 @@ import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
 import { AuthFacade } from '@store/auth';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 import { ReviewItemComponent } from '../review-item';
 
@@ -58,19 +65,22 @@ export class ReviewComponent implements OnInit {
     this.isLoading$.next(true);
     this.reviewService
       .getReviews(this.bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (reviews) => {
-          const reviewsInfo = reviews
+      .pipe(
+        takeUntil(this.destroy$),
+        map((reviews) =>
+          reviews
             .map((item) => item.payload.doc.data())
-            .sort((a, b) => Number(a.creationDate) - Number(b.creationDate));
-          this.reviews$.next(reviewsInfo);
-          this.isLoading$.next(false);
-        },
-        error: () => {
+            .sort((a, b) => Number(a.creationDate) - Number(b.creationDate))
+        ),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.isLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe((reviewsData) => {
+        this.reviews$.next(reviewsData);
+        this.isLoading$.next(false);
       });
   }
 
@@ -84,20 +94,21 @@ export class ReviewComponent implements OnInit {
       this.reviewText.setValue('');
       this.reviewService
         .addReview(review)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.toasterService.show({
-              type: 'success',
-              title: this.translateService.instant('TOASTER.ADD_REVIEW.TITLE'),
-              message: this.translateService.instant(
-                'TOASTER.ADD_REVIEW.MESSAGE'
-              ),
-            });
-          },
-          error: () => {
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('TOASTER.ADD_REVIEW.TITLE'),
+            message: this.translateService.instant(
+              'TOASTER.ADD_REVIEW.MESSAGE'
+            ),
+          });
         });
     }
   }
@@ -105,20 +116,21 @@ export class ReviewComponent implements OnInit {
   removeReview(reviewId: string): void {
     this.reviewService
       .removeReview(this.bookId, reviewId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.toasterService.show({
-            type: 'success',
-            title: this.translateService.instant('TOASTER.REMOVE_REVIEW.TITLE'),
-            message: this.translateService.instant(
-              'TOASTER.REMOVE_REVIEW.MESSAGE'
-            ),
-          });
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.toasterService.show({
+          type: 'success',
+          title: this.translateService.instant('TOASTER.REMOVE_REVIEW.TITLE'),
+          message: this.translateService.instant(
+            'TOASTER.REMOVE_REVIEW.MESSAGE'
+          ),
+        });
       });
   }
 }

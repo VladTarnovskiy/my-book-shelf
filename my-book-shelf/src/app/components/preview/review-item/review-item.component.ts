@@ -15,7 +15,7 @@ import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-review-item',
@@ -46,18 +46,19 @@ export class ReviewItemComponent implements OnInit {
   ngOnInit(): void {
     this.userService
       .getUser(String(this.reviewData.userId))
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (user) => {
-          const userData = user.payload.data();
-          if (userData) {
-            this.username$.next(userData.name);
-            this.userPhoto$.next(userData.photo);
-          }
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        map((user) => user.payload.data()),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe((userData) => {
+        if (userData) {
+          this.username$.next(userData.name);
+          this.userPhoto$.next(userData.photo);
+        }
       });
     if (this.userId && this.reviewData.likes.includes(this.userId)) {
       this.isMyLike$.next(true);
@@ -89,12 +90,14 @@ export class ReviewItemComponent implements OnInit {
             reviewId: this.reviewData.id,
             likes,
           })
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            error: () => {
+          .pipe(
+            takeUntil(this.destroy$),
+            catchError(() => {
               this.toasterService.showFireStoreError();
-            },
-          });
+              return of();
+            })
+          )
+          .subscribe();
       } else {
         this.reviewService
           .toggleLike({
@@ -102,12 +105,14 @@ export class ReviewItemComponent implements OnInit {
             reviewId: this.reviewData.id,
             likes: [...this.reviewData.likes, this.userId],
           })
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            error: () => {
+          .pipe(
+            takeUntil(this.destroy$),
+            catchError(() => {
               this.toasterService.showFireStoreError();
-            },
-          });
+              return of();
+            })
+          )
+          .subscribe();
       }
       this.isMyLike$.next(!this.isMyLike$.getValue());
       this.likeAnimation$.next(true);

@@ -15,7 +15,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ISearchOptions } from '@shared/interfaces/search';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, combineLatest, Observable, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  combineLatest,
+  Observable,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -51,26 +58,27 @@ export class SearchComponent implements OnInit {
       this.booksFacade.books$,
       this.favoriteService.getFavoriteBooks(),
     ])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: ([books, favBooks]) => {
-          if (books) {
-            const favIDs = favBooks.map(
-              (favBook) => favBook.payload.doc.data().id
-            );
-            const checkedBooks = books?.map((book) => {
-              if (favIDs.includes(book.id)) {
-                return { ...book, isFavorite: true };
-              } else {
-                return book;
-              }
-            });
-            this.books$.next(checkedBooks);
-          }
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(([books, favBooks]) => {
+        if (books) {
+          const favIDs = favBooks.map(
+            (favBook) => favBook.payload.doc.data().id
+          );
+          const checkedBooks = books?.map((book) => {
+            if (favIDs.includes(book.id)) {
+              return { ...book, isFavorite: true };
+            } else {
+              return book;
+            }
+          });
+          this.books$.next(checkedBooks);
+        }
       });
 
     this.booksFacade.searchOptions$
@@ -93,28 +101,30 @@ export class SearchComponent implements OnInit {
   addToFavorite(book: IBook): void {
     this.favoriteService
       .addFavoriteBook(book)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.booksFacade.addFavoriteStatus(book.id);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.booksFacade.addFavoriteStatus(book.id);
       });
   }
 
   removeFromFavorite(bookId: string): void {
     this.favoriteService
       .removeFavoriteBook(bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.booksFacade.removeFavoriteStatus(bookId);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.booksFacade.removeFavoriteStatus(bookId);
       });
   }
 

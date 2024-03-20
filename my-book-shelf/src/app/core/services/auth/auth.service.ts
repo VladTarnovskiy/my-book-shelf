@@ -12,7 +12,7 @@ import {
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { IUserDetails } from '@shared/models/user';
-import { BehaviorSubject, from, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, from, of, switchMap, tap } from 'rxjs';
 
 import { ToasterService } from '../toaster';
 import { UserService } from '../user';
@@ -41,42 +41,42 @@ export class AuthService {
             userId,
           };
           return this.userService.addUser(user);
-        })
-      )
-      .subscribe({
-        next: () => {
-          this.router.navigate(['auth/login']);
-        },
-        error: (error) => {
+        }),
+        catchError((error) => {
           const err = error as HttpErrorResponse;
           this.toasterService.showHttpsError(err);
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['auth/login']);
       });
   }
 
   async login({ email, password }: Omit<IUserDetails, 'name'>): Promise<void> {
     from(signInWithEmailAndPassword(this.auth, email, password))
-      .pipe(tap((user) => sendEmailVerification(user.user)))
-      .subscribe({
-        next: (user) => {
-          if (user.user.emailVerified) {
-            this.router.navigate(['auth/verification/success']);
-          } else {
-            this.router.navigate(['auth/verification']);
-            const interval = setInterval(async () => {
-              if (user.user.emailVerified) {
-                clearInterval(interval);
-                this.isLoggedIn.next(true);
-                this.router.navigate(['auth/verification/success']);
-              }
-              await user.user.reload();
-            }, 2000);
-          }
-        },
-        error: (error) => {
+      .pipe(
+        tap((user) => sendEmailVerification(user.user)),
+        catchError((error) => {
           const err = error as HttpErrorResponse;
           this.toasterService.showHttpsError(err);
-        },
+          return of();
+        })
+      )
+      .subscribe((user) => {
+        if (user.user.emailVerified) {
+          this.router.navigate(['auth/verification/success']);
+        } else {
+          this.router.navigate(['auth/verification']);
+          const interval = setInterval(async () => {
+            if (user.user.emailVerified) {
+              clearInterval(interval);
+              this.isLoggedIn.next(true);
+              this.router.navigate(['auth/verification/success']);
+            }
+            await user.user.reload();
+          }, 2000);
+        }
       });
   }
 
@@ -91,17 +91,16 @@ export class AuthService {
             userId,
           };
           return this.userService.addUser(user);
-        })
-      )
-      .subscribe({
-        next: () => {
-          this.isLoggedIn.next(true);
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
+        }),
+        catchError((error) => {
           const err = error as HttpErrorResponse;
           this.toasterService.showHttpsError(err);
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.isLoggedIn.next(true);
+        this.router.navigate(['/']);
       });
   }
 
@@ -116,29 +115,30 @@ export class AuthService {
             userId,
           };
           return this.userService.addUser(user);
-        })
-      )
-      .subscribe({
-        next: () => {
-          this.isLoggedIn.next(true);
-          this.router.navigate(['/']);
-        },
-        error: (error) => {
+        }),
+        catchError((error) => {
           const err = error as HttpErrorResponse;
           this.toasterService.showHttpsError(err);
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.isLoggedIn.next(true);
+        this.router.navigate(['/']);
       });
   }
 
   async logout(): Promise<void> {
-    from(signOut(this.auth)).subscribe({
-      next: () => {
+    from(signOut(this.auth))
+      .pipe(
+        catchError((error) => {
+          const err = error as HttpErrorResponse;
+          this.toasterService.showHttpsError(err);
+          return of();
+        })
+      )
+      .subscribe(() => {
         this.isLoggedIn.next(false);
-      },
-      error: (error) => {
-        const err = error as HttpErrorResponse;
-        this.toasterService.showHttpsError(err);
-      },
-    });
+      });
   }
 }

@@ -16,7 +16,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { recommendedGenerator } from '@shared/utils';
 import { RecommendedBooksFacade } from '@store/recommendedBooks';
-import { BehaviorSubject, Observable, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -56,17 +63,18 @@ export class HomeComponent implements OnInit {
     this.recommendedBooksFacade.fetchRecommendedBooks(genSearchValue);
     this.recentService
       .getRecentBooks()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (books) => {
-          const booksData = books.map((book) => book.payload.doc.data());
-          this.recentBooks$.next(booksData);
-          this.recentBooksIsLoading$.next(false);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        map((books) => books.map((book) => book.payload.doc.data())),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.recentBooksIsLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe((booksData) => {
+        this.recentBooks$.next(booksData);
+        this.recentBooksIsLoading$.next(false);
       });
   }
 

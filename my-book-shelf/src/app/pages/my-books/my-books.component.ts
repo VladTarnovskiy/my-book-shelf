@@ -12,7 +12,7 @@ import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-my-books',
@@ -39,35 +39,37 @@ export class MyBooksComponent implements OnInit {
     this.isLoading$.next(true);
     this.myBookService
       .getMyBooks()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (books) => {
-          const booksInfo = books.map((item) => item.payload.doc.data());
-          this.myBooks$.next(booksInfo);
-          this.isLoading$.next(false);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        map((books) => books.map((item) => item.payload.doc.data())),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.isLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe((booksData) => {
+        this.myBooks$.next(booksData);
+        this.isLoading$.next(false);
       });
   }
 
   removeFromMyBook(bookId: string): void {
     this.myBookService
       .removeMyBook(bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.toasterService.show({
-            type: 'success',
-            title: this.translateService.instant('TOASTER.REMOVE.TITLE'),
-            message: this.translateService.instant('TOASTER.REMOVE.MESSAGE'),
-          });
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.toasterService.show({
+          type: 'success',
+          title: this.translateService.instant('TOASTER.REMOVE.TITLE'),
+          message: this.translateService.instant('TOASTER.REMOVE.MESSAGE'),
+        });
       });
   }
 }

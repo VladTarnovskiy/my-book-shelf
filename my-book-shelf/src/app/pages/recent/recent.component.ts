@@ -12,7 +12,7 @@ import { RecentService } from '@core/services/recent';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-recent',
@@ -43,17 +43,18 @@ export class RecentComponent implements OnInit {
     this.isLoading$.next(true);
     this.recentService
       .getRecentBooks()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (books) => {
-          const booksData = books.map((book) => book.payload.doc.data());
-          this.recentBooks$.next(booksData);
-          this.isLoading$.next(false);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        map((books) => books.map((book) => book.payload.doc.data())),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.isLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe((booksData) => {
+        this.recentBooks$.next(booksData);
+        this.isLoading$.next(false);
       });
   }
 }

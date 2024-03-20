@@ -16,7 +16,7 @@ import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { filter, Observable, of, switchMap, takeUntil } from 'rxjs';
+import { catchError, filter, Observable, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -57,6 +57,7 @@ export class PreviewComponent implements OnInit {
       .subscribe((bookId) => {
         this.booksFacade.fetchPreviewBook(bookId);
       });
+
     this.book$
       .pipe(
         takeUntil(this.destroy$),
@@ -66,13 +67,13 @@ export class PreviewComponent implements OnInit {
           } else {
             return of();
           }
+        }),
+        catchError(() => {
+          this.toasterService.showFireStoreError();
+          return of();
         })
       )
-      .subscribe({
-        error: () => {
-          this.toasterService.showFireStoreError();
-        },
-      });
+      .subscribe();
   }
 
   searchAuthorBooks(author: string): void {
