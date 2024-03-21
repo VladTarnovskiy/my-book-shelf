@@ -11,7 +11,7 @@ import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthFacade } from '@store/auth';
-import { from, switchMap, takeUntil } from 'rxjs';
+import { catchError, from, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -49,20 +49,21 @@ export class ProfileComponent implements OnInit {
     if (this.userName.valid) {
       this.userService
         .changeUsername(this.userName.value)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          next: () => {
-            this.toasterService.show({
-              type: 'success',
-              title: this.translateService.instant('TOASTER.NAME_UPDATE.TITLE'),
-              message: this.translateService.instant(
-                'TOASTER.NAME_UPDATE.MESSAGE'
-              ),
-            });
-          },
-          error: () => {
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('TOASTER.NAME_UPDATE.TITLE'),
+            message: this.translateService.instant(
+              'TOASTER.NAME_UPDATE.MESSAGE'
+            ),
+          });
         });
     }
   }
@@ -72,23 +73,20 @@ export class ProfileComponent implements OnInit {
       from(this.userService.changeUserPhoto(this.file))
         .pipe(
           takeUntil(this.destroy$),
-          switchMap((changePhotoFunc) => changePhotoFunc)
-        )
-        .subscribe({
-          next: () => {
-            this.toasterService.show({
-              type: 'success',
-              title: this.translateService.instant(
-                'TOASTER.PHOTO_UPDATE.TITLE'
-              ),
-              message: this.translateService.instant(
-                'TOASTER.PHOTO_UPDATE.MESSAGE'
-              ),
-            });
-          },
-          error: () => {
+          switchMap((changePhotoFunc) => changePhotoFunc),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('TOASTER.PHOTO_UPDATE.TITLE'),
+            message: this.translateService.instant(
+              'TOASTER.PHOTO_UPDATE.MESSAGE'
+            ),
+          });
         });
     }
   }

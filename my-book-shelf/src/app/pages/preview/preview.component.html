@@ -8,7 +8,20 @@
       <div class="book">
         <div class="cover">
           <img [src]="bookData.images.normal" alt="Cover" class="cover__img" />
-          <app-preview-options />
+          <button class="option" (click)="getLink()">
+            <svg-icon
+              src="assets/details/share.svg"
+              [svgStyle]="{
+                'width.rem': 2.5,
+                'height.rem': 2.5,
+                fill: 'var(--primary-second)'
+              }"
+            >
+            </svg-icon>
+            <div class="option__title">
+              {{ 'PREVIEW.OPTIONS.Share' | translate }}
+            </div>
+          </button>
         </div>
         <div class="description">
           <div class="description__info">

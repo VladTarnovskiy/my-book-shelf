@@ -12,6 +12,7 @@
     top: 0;
     height: 100%;
     width: 100%;
+    z-index: 4;
   }
 }
 
@@ -134,7 +135,7 @@
   }
 
   &.full {
-    height: 80%;
+    height: 100%;
   }
 }
 

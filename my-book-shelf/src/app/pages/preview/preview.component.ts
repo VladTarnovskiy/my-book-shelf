@@ -6,30 +6,30 @@ import {
   OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { PreviewOptionsComponent } from '@components/preview/preview-options';
 import { PreviewSkeletonComponent } from '@components/preview/preview-skeleton';
 import { ReviewComponent } from '@components/preview/review';
 import { DestroyDirective } from '@core/directives';
 import { GoBackDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
 import { ToasterService } from '@core/services/toaster';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { filter, Observable, of, switchMap, takeUntil } from 'rxjs';
+import { SvgIconComponent } from 'angular-svg-icon';
+import { catchError, filter, Observable, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-details',
   standalone: true,
   imports: [
     PreviewSkeletonComponent,
-    PreviewOptionsComponent,
     GoBackDirective,
     TranslateModule,
     ReviewComponent,
     AsyncPipe,
     RouterLink,
     DatePipe,
+    SvgIconComponent,
   ],
   templateUrl: './preview.component.html',
   styleUrl: './preview.component.scss',
@@ -45,7 +45,8 @@ export class PreviewComponent implements OnInit {
   constructor(
     private booksFacade: BooksFacade,
     private recentService: RecentService,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private translateService: TranslateService
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +58,7 @@ export class PreviewComponent implements OnInit {
       .subscribe((bookId) => {
         this.booksFacade.fetchPreviewBook(bookId);
       });
+
     this.book$
       .pipe(
         takeUntil(this.destroy$),
@@ -66,13 +68,13 @@ export class PreviewComponent implements OnInit {
           } else {
             return of();
           }
+        }),
+        catchError(() => {
+          this.toasterService.showFireStoreError();
+          return of();
         })
       )
-      .subscribe({
-        error: () => {
-          this.toasterService.showFireStoreError();
-        },
-      });
+      .subscribe();
   }
 
   searchAuthorBooks(author: string): void {
@@ -81,6 +83,15 @@ export class PreviewComponent implements OnInit {
       filterType: 'Author',
       categoryFilterType: 'Browse',
       page: 0,
+    });
+  }
+
+  getLink(): void {
+    navigator.clipboard.writeText(window.location.href);
+    this.toasterService.show({
+      type: 'success',
+      title: this.translateService.instant('TOASTER.COPY_URL.TITLE'),
+      message: this.translateService.instant('TOASTER.COPY_URL.MESSAGE'),
     });
   }
 }

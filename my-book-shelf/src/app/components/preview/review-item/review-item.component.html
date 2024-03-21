@@ -3,7 +3,7 @@
     [style.background-image]="
       (userPhoto$ | async)
         ? 'url(' + (userPhoto$ | async) + ')'
-        : 'url(assets/header/profile.svg)'
+        : 'url(assets/google.svg)'
     "
     alt="User photo"
     class="review-item__photo"
@@ -13,7 +13,15 @@
       <p class="username">{{ username$ | async }}</p>
       @if (userId === reviewData.userId) {
         <button class="review-item__remove" (click)="openModal()">
-          <img src="assets/close.svg" alt="Send" />
+          <svg-icon
+            src="assets/close.svg"
+            [svgStyle]="{
+              'width.rem': 3,
+              'height.rem': 3,
+              stroke: 'var(--primary-second)'
+            }"
+          >
+          </svg-icon>
         </button>
       }
     </div>

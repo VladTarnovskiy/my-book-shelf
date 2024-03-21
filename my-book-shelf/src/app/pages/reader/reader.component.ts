@@ -13,7 +13,15 @@ import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, filter, switchMap, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  map,
+  of,
+  switchMap,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-reader',
@@ -43,21 +51,20 @@ export class ReaderComponent implements OnInit {
       .pipe(
         takeUntil(this.destroy$),
         filter((myBookId) => myBookId !== undefined),
-        switchMap((myBookId) => this.myBookService.getMyBook(myBookId))
-      )
-      .subscribe({
-        next: (book) => {
-          const bookData = book.payload.data();
-          this.isLoading$.next(false);
-          if (bookData) {
-            this.book = bookData;
-            this.book$.next(bookData);
-          }
-        },
-        error: () => {
+        switchMap((myBookId) => this.myBookService.getMyBook(myBookId)),
+        map((book) => book.payload.data()),
+        catchError(() => {
           this.toasterService.showFireStoreError();
           this.isLoading$.next(false);
-        },
+          return of();
+        })
+      )
+      .subscribe((bookData) => {
+        this.isLoading$.next(false);
+        if (bookData) {
+          this.book = bookData;
+          this.book$.next(bookData);
+        }
       });
   }
 
@@ -65,12 +72,14 @@ export class ReaderComponent implements OnInit {
     if (this.book) {
       this.myBookService
         .changeFavoriteStatus(!this.book.isFavorite, this.book.id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe({
-          error: () => {
+        .pipe(
+          takeUntil(this.destroy$),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
-        });
+            return of();
+          })
+        )
+        .subscribe();
     }
   }
 

@@ -48,16 +48,14 @@
       <div class="header-loader"></div>
     }
   </div>
-  <div class="content">
-    <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
-      @if (isUnavailable$ | async) {
-        <div class="not-available">
-          {{ 'API_READER.NOT_AVAILABLE' | translate }}
-        </div>
-      }
-      @if (isLoading$ | async) {
-        <div class="loader"></div>
-      }
-    </div>
+  <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
+    @if (isUnavailable$ | async) {
+      <div class="not-available">
+        {{ 'API_READER.NOT_AVAILABLE' | translate }}
+      </div>
+    }
+    @if (isLoading$ | async) {
+      <div class="loader"></div>
+    }
   </div>
 </div>

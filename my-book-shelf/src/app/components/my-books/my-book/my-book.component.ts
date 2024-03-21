@@ -10,11 +10,18 @@ import { RouterLink } from '@angular/router';
 import { ModalComponent } from '@components/shared/modal';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUploadBook } from '@shared/models/upload';
+import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-my-book',
   standalone: true,
-  imports: [DatePipe, RouterLink, ModalComponent, TranslateModule],
+  imports: [
+    DatePipe,
+    RouterLink,
+    ModalComponent,
+    TranslateModule,
+    SvgIconComponent,
+  ],
   templateUrl: './my-book.component.html',
   styleUrl: './my-book.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

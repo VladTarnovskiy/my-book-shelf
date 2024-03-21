@@ -75,11 +75,15 @@
               />
             </button>
             <button class="social-btn__item" (click)="loginWithGitHub()">
-              <img
-                class="social-btn__img"
+              <svg-icon
                 src="assets/github.svg"
-                alt="Google"
-              />
+                [svgStyle]="{
+                  'width.rem': 4.5,
+                  'height.rem': 4.5,
+                  fill: 'var(--primary-second)'
+                }"
+              >
+              </svg-icon>
             </button>
           </div>
         </div>

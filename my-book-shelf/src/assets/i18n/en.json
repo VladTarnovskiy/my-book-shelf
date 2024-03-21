@@ -45,8 +45,6 @@
     "COPY": "Hard Copy",
     "EDITION": "second edition",
     "OPTIONS": {
-      "Review": "Review",
-      "Notes": "Notes",
       "Share": "Share"
     }
   },
@@ -243,6 +241,10 @@
     "PHOTO_UPDATE": {
       "TITLE": "Update",
       "MESSAGE": "The photo has been updated"
+    },
+    "COPY_URL": {
+      "TITLE": "Copy",
+      "MESSAGE": "Book URL copied"
     }
   }
 }

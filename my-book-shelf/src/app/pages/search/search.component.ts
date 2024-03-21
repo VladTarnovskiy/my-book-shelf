@@ -15,7 +15,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ISearchOptions } from '@shared/interfaces/search';
 import { IBook } from '@shared/models/book';
 import { BooksFacade } from '@store/books';
-import { BehaviorSubject, combineLatest, Observable, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  combineLatest,
+  map,
+  Observable,
+  of,
+  takeUntil,
+} from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -34,7 +42,7 @@ import { BehaviorSubject, combineLatest, Observable, takeUntil } from 'rxjs';
 })
 export class SearchComponent implements OnInit {
   isLoading$: Observable<boolean> = this.booksFacade.booksLoading$;
-  searchOptions!: ISearchOptions;
+  searchOptions: ISearchOptions | null = null;
   books$ = new BehaviorSubject<IBook[]>([]);
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
@@ -51,26 +59,30 @@ export class SearchComponent implements OnInit {
       this.booksFacade.books$,
       this.favoriteService.getFavoriteBooks(),
     ])
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: ([books, favBooks]) => {
-          if (books) {
-            const favIDs = favBooks.map(
-              (favBook) => favBook.payload.doc.data().id
-            );
-            const checkedBooks = books?.map((book) => {
-              if (favIDs.includes(book.id)) {
-                return { ...book, isFavorite: true };
-              } else {
-                return book;
-              }
-            });
-            this.books$.next(checkedBooks);
-          }
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        }),
+        map(([books, favBooks]) => {
+          const favIDs = favBooks.map(
+            (favBook) => favBook.payload.doc.data().id
+          );
+          return { books, favIDs };
+        })
+      )
+      .subscribe(({ books, favIDs }) => {
+        if (books) {
+          const checkedBooks = books?.map((book) => {
+            if (favIDs.includes(book.id)) {
+              return { ...book, isFavorite: true };
+            } else {
+              return book;
+            }
+          });
+          this.books$.next(checkedBooks);
+        }
       });
 
     this.booksFacade.searchOptions$
@@ -82,10 +94,12 @@ export class SearchComponent implements OnInit {
     this.booksFacade.searchTotalBooks$
       .pipe(takeUntil(this.destroy$))
       .subscribe((totalItems) => {
-        if (totalItems - 10 * this.searchOptions.page > 10) {
-          this.isShowMore = true;
-        } else {
-          this.isShowMore = false;
+        if (this.searchOptions) {
+          if (totalItems - 10 * this.searchOptions.page > 10) {
+            this.isShowMore = true;
+          } else {
+            this.isShowMore = false;
+          }
         }
       });
   }
@@ -93,42 +107,48 @@ export class SearchComponent implements OnInit {
   addToFavorite(book: IBook): void {
     this.favoriteService
       .addFavoriteBook(book)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.booksFacade.addFavoriteStatus(book.id);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.booksFacade.addFavoriteStatus(book.id);
       });
   }
 
   removeFromFavorite(bookId: string): void {
     this.favoriteService
       .removeFavoriteBook(bookId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => {
-          this.booksFacade.removeFavoriteStatus(bookId);
-        },
-        error: () => {
+      .pipe(
+        takeUntil(this.destroy$),
+        catchError(() => {
           this.toasterService.showFireStoreError();
-        },
+          return of();
+        })
+      )
+      .subscribe(() => {
+        this.booksFacade.removeFavoriteStatus(bookId);
       });
   }
 
   getNextPage(): void {
     this.setNextPage();
-    this.booksFacade.fetchBooks({
-      searchValue: this.searchOptions.searchValue,
-      filterType: this.searchOptions.filterType,
-      categoryFilterType: this.searchOptions.categoryFilterType,
-      page: this.searchOptions.page,
-    });
+    if (this.searchOptions) {
+      this.booksFacade.fetchBooks({
+        searchValue: this.searchOptions.searchValue,
+        filterType: this.searchOptions.filterType,
+        categoryFilterType: this.searchOptions.categoryFilterType,
+        page: this.searchOptions.page,
+      });
+    }
   }
 
   setNextPage(): void {
-    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
+    if (this.searchOptions) {
+      this.booksFacade.setSearchPage(this.searchOptions.page + 1);
+    }
   }
 }

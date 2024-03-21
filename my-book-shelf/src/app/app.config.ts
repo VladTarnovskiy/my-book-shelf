@@ -20,6 +20,7 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StateModule } from '@store/state.module';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
 
 import { firebaseConfig } from '../environments/environment';
 import { routes } from './app.routes';
@@ -42,6 +43,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor])),
     provideRouterStore(),
     provideAnimationsAsync(),
+    provideAngularSvgIcon(),
     importProvidersFrom([
       StateModule,
       provideFirebaseApp(() => initializeApp(firebaseConfig.firebase)),

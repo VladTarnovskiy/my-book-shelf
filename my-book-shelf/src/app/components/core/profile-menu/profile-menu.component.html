@@ -9,7 +9,7 @@
     [style.background-image]="
       (photo$ | async)
         ? 'url(' + (photo$ | async) + ')'
-        : 'url(assets/header/profile.svg)'
+        : 'url(assets/google.svg)'
     "
   ></div>
   <p class="profile__name">{{ userName$ | async }}</p>

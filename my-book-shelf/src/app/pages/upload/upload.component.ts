@@ -11,7 +11,7 @@ import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IUpLoadBookForm } from '@shared/models/upload';
-import { from, switchMap, takeUntil } from 'rxjs';
+import { catchError, from, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -65,19 +65,18 @@ export class UploadComponent {
       from(this.myBookService.addMyBook(bookForFirestore))
         .pipe(
           takeUntil(this.destroy$),
-          switchMap((addFunc) => addFunc)
-        )
-        .subscribe({
-          next: () => {
-            this.toasterService.show({
-              type: 'success',
-              title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
-              message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
-            });
-          },
-          error: () => {
+          switchMap((addFunc) => addFunc),
+          catchError(() => {
             this.toasterService.showFireStoreError();
-          },
+            return of();
+          })
+        )
+        .subscribe(() => {
+          this.toasterService.show({
+            type: 'success',
+            title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
+            message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
+          });
         });
 
       this.uploadForm.reset();
