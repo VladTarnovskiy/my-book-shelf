@@ -114,6 +114,9 @@ export class AuthService {
             name: result.user.displayName || 'Unknown',
             userId,
           };
+
+          console.log(result.user.displayName);
+          console.log(userId);
           return this.userService.addUser(user);
         }),
         catchError((error) => {
