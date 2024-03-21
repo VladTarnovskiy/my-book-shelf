@@ -12,6 +12,7 @@ import { AuthService } from '@core/services/auth';
 import { TranslateModule } from '@ngx-translate/core';
 import { IUserDetailsLoginForm } from '@shared/models/user';
 import { ValidatePassword } from '@shared/validators';
+import { SvgIconComponent } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ import { ValidatePassword } from '@shared/validators';
     RouterLink,
     TranslateModule,
     NgClass,
+    SvgIconComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
