@@ -19,6 +19,7 @@ import {
   BehaviorSubject,
   catchError,
   combineLatest,
+  map,
   Observable,
   of,
   takeUntil,
@@ -41,7 +42,7 @@ import {
 })
 export class SearchComponent implements OnInit {
   isLoading$: Observable<boolean> = this.booksFacade.booksLoading$;
-  searchOptions!: ISearchOptions;
+  searchOptions: ISearchOptions | null = null;
   books$ = new BehaviorSubject<IBook[]>([]);
   skeletonItems = [...Array(10).keys()];
   isShowMore = false;
@@ -63,13 +64,16 @@ export class SearchComponent implements OnInit {
         catchError(() => {
           this.toasterService.showFireStoreError();
           return of();
-        })
-      )
-      .subscribe(([books, favBooks]) => {
-        if (books) {
+        }),
+        map(([books, favBooks]) => {
           const favIDs = favBooks.map(
             (favBook) => favBook.payload.doc.data().id
           );
+          return { books, favIDs };
+        })
+      )
+      .subscribe(({ books, favIDs }) => {
+        if (books) {
           const checkedBooks = books?.map((book) => {
             if (favIDs.includes(book.id)) {
               return { ...book, isFavorite: true };
@@ -90,10 +94,12 @@ export class SearchComponent implements OnInit {
     this.booksFacade.searchTotalBooks$
       .pipe(takeUntil(this.destroy$))
       .subscribe((totalItems) => {
-        if (totalItems - 10 * this.searchOptions.page > 10) {
-          this.isShowMore = true;
-        } else {
-          this.isShowMore = false;
+        if (this.searchOptions) {
+          if (totalItems - 10 * this.searchOptions.page > 10) {
+            this.isShowMore = true;
+          } else {
+            this.isShowMore = false;
+          }
         }
       });
   }
@@ -130,15 +136,19 @@ export class SearchComponent implements OnInit {
 
   getNextPage(): void {
     this.setNextPage();
-    this.booksFacade.fetchBooks({
-      searchValue: this.searchOptions.searchValue,
-      filterType: this.searchOptions.filterType,
-      categoryFilterType: this.searchOptions.categoryFilterType,
-      page: this.searchOptions.page,
-    });
+    if (this.searchOptions) {
+      this.booksFacade.fetchBooks({
+        searchValue: this.searchOptions.searchValue,
+        filterType: this.searchOptions.filterType,
+        categoryFilterType: this.searchOptions.categoryFilterType,
+        page: this.searchOptions.page,
+      });
+    }
   }
 
   setNextPage(): void {
-    this.booksFacade.setSearchPage(this.searchOptions.page + 1);
+    if (this.searchOptions) {
+      this.booksFacade.setSearchPage(this.searchOptions.page + 1);
+    }
   }
 }
