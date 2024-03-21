@@ -15,12 +15,13 @@ import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
+import { SvgIconComponent } from 'angular-svg-icon';
 import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-review-item',
   standalone: true,
-  imports: [AsyncPipe, ModalComponent, TranslateModule],
+  imports: [AsyncPipe, ModalComponent, TranslateModule, SvgIconComponent],
   templateUrl: './review-item.component.html',
   styleUrl: './review-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

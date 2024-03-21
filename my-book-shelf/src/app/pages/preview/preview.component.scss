@@ -68,6 +68,18 @@
   }
 }
 
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-family: 'Inter Bold';
+    font-size: 1.1rem;
+    margin-top: 0.7rem;
+  }
+}
+
 .description {
   display: flex;
   flex-direction: column;

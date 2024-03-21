@@ -58,29 +58,23 @@
   }
 }
 
-.options {
-  @extend %itemsCenter;
-  justify-content: space-between;
-  width: 19.3rem;
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 0.6rem;
 
-  .option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.7rem;
+    @extend %skeletonBackgroundAnimation;
+  }
 
-    &__icon {
-      width: 2.5rem;
-      height: 2.5rem;
-      margin-bottom: 0.7rem;
-      @extend %skeletonBackgroundAnimation;
-    }
-
-    &__title {
-      width: 3.1rem;
-      height: 1.2rem;
-      @extend %skeletonBackgroundAnimation;
-    }
+  &__title {
+    width: 3.1rem;
+    height: 1.2rem;
+    @extend %skeletonBackgroundAnimation;
   }
 }
 

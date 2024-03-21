@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PreviewOptionsComponent } from '@components/preview/preview-options';
 import { PreviewSkeletonComponent } from '@components/preview/preview-skeleton';
 import { ReviewComponent } from '@components/preview/review';
 import { RecentService } from '@core/services/recent';
@@ -12,9 +11,6 @@ import { PreviewComponent } from '.';
 
 @Component({ standalone: true, selector: 'app-preview-skeleton', template: '' })
 class PreviewSkeletonStubComponent {}
-
-@Component({ standalone: true, selector: 'app-preview-options', template: '' })
-class PreviewOptionsStubComponent {}
 
 @Component({ standalone: true, selector: 'app-review', template: '' })
 class ReviewStubComponent {}
@@ -42,18 +38,10 @@ describe('PreviewComponent', () => {
     })
       .overrideComponent(PreviewComponent, {
         add: {
-          imports: [
-            PreviewSkeletonComponent,
-            PreviewOptionsComponent,
-            ReviewComponent,
-          ],
+          imports: [PreviewSkeletonComponent, ReviewComponent],
         },
         remove: {
-          imports: [
-            PreviewSkeletonStubComponent,
-            PreviewOptionsStubComponent,
-            ReviewStubComponent,
-          ],
+          imports: [PreviewSkeletonStubComponent, ReviewStubComponent],
         },
       })
       .compileComponents();
