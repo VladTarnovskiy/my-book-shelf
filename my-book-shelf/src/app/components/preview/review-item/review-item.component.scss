@@ -54,9 +54,17 @@
       animation: likeAnimation 0.8s;
     }
   }
+}
+
+.likes-info {
+  position: relative;
 
   &__count {
     margin-right: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

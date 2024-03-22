@@ -7,12 +7,12 @@
     class="profile__img"
     alt="Profile"
     [style.background-image]="
-      (photo$ | async)
-        ? 'url(' + (photo$ | async) + ')'
+      (userData$ | async)?.userPhoto
+        ? 'url(' + (userData$ | async)?.userPhoto + ')'
         : 'url(assets/google.svg)'
     "
   ></div>
-  <p class="profile__name">{{ userName$ | async }}</p>
+  <p class="profile__name">{{ (userData$ | async)?.username }}</p>
   <img
     class="profile__polygon"
     src="assets/header/polygon.svg"

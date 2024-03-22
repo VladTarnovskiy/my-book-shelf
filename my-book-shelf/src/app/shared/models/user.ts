@@ -30,3 +30,9 @@ export interface IUserInfo {
   photo: string | null;
   userId: string | null;
 }
+
+export interface IUserData {
+  username: string;
+  userPhoto: string | null;
+  userId: string | null;
+}

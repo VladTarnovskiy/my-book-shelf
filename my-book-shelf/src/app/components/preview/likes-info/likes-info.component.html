@@ -1,0 +1,25 @@
+<div class="likes-info">
+  <button class="likes-info__close" (click)="emitToggleLikesInfo()">
+    <svg-icon
+      src="assets/close.svg"
+      [svgStyle]="{
+        'width.rem': 2,
+        'height.rem': 2,
+        stroke: 'var(--primary-second)'
+      }"
+    >
+    </svg-icon>
+  </button>
+  <div class="likes-info__items">
+    @for (like of likes; track like.userId) {
+      <div class="likes-info-item">
+        <div
+          [style.background-image]="'url' + '(' + like.userPhoto + ')'"
+          alt="User photo"
+          class="likes-info-item__photo"
+        ></div>
+        <p class="likes-info-item__username">{{ like.username }}</p>
+      </div>
+    }
+  </div>
+</div>

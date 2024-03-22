@@ -1,8 +1,8 @@
 <div class="review-item">
   <div
     [style.background-image]="
-      (userPhoto$ | async)
-        ? 'url(' + (userPhoto$ | async) + ')'
+      (reviewUserPhoto$ | async)
+        ? 'url(' + (reviewUserPhoto$ | async) + ')'
         : 'url(assets/google.svg)'
     "
     alt="User photo"
@@ -10,8 +10,8 @@
   ></div>
   <div class="review-item__description">
     <div class="review-item__header">
-      <p class="username">{{ username$ | async }}</p>
-      @if (userId === reviewData.userId) {
+      <p class="username">{{ reviewUsername$ | async }}</p>
+      @if (currentUserData.userId === reviewData.userId) {
         <button class="review-item__remove" (click)="openModal()">
           <svg-icon
             src="assets/close.svg"
@@ -29,7 +29,17 @@
       {{ reviewData.review }}
     </div>
     <div class="likes">
-      <p class="likes__count">{{ reviewData.likes.length }}</p>
+      <div class="likes-info">
+        <button (click)="toggleLikesInfo()" class="likes-info__count">
+          {{ reviewData.likes.length }}
+        </button>
+        @if ((likesInfo$ | async) && reviewData.likes.length) {
+          <app-likes-info
+            [likes]="reviewData.likes"
+            (toggleLikesInfo)="toggleLikesInfo()"
+          />
+        }
+      </div>
       <button
         class="likes__button"
         [class.like-animation]="likeAnimation$ | async"
@@ -39,7 +49,7 @@
           [src]="
             (isMyLike$ | async) ? 'assets/heart.svg' : 'assets/empty-heart.svg'
           "
-          alt="Favorite"
+          alt="Close"
         />
       </button>
     </div>
