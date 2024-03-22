@@ -23,3 +23,12 @@ export const selectUserIsLoading = createSelector(
   selectAuthStore,
   (state: AuthState) => state.isLoading
 );
+
+export const selectUserData = createSelector(
+  selectUserName,
+  selectUserPhoto,
+  selectUserId,
+  (username, userPhoto, userId) => {
+    return { username, userPhoto, userId };
+  }
+);

@@ -13,6 +13,7 @@ import { ReviewService } from '@core/services/review';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
+import { IUserData } from '@shared/models/user';
 import { AuthFacade } from '@store/auth';
 import {
   BehaviorSubject,
@@ -42,9 +43,8 @@ import { ReviewItemComponent } from '../review-item';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewComponent implements OnInit {
-  userPhoto$: Observable<string | null> = this.authFacade.userPhoto$;
+  currentUserData$: Observable<IUserData> = this.authFacade.userData$;
   reviews$ = new BehaviorSubject<null | IReview[]>(null);
-  userId$: Observable<string | null> = this.authFacade.userId$;
   reviewText = new FormControl<string>('', {
     nonNullable: true,
     validators: [Validators.required],

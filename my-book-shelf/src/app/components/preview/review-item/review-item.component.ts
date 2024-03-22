@@ -15,13 +15,22 @@ import { ToasterService } from '@core/services/toaster';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { IReview } from '@shared/models/review';
+import { IUserData } from '@shared/models/user';
 import { SvgIconComponent } from 'angular-svg-icon';
 import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
+
+import { LikesInfoComponent } from '../likes-info/likes-info.component';
 
 @Component({
   selector: 'app-review-item',
   standalone: true,
-  imports: [AsyncPipe, ModalComponent, TranslateModule, SvgIconComponent],
+  imports: [
+    AsyncPipe,
+    ModalComponent,
+    TranslateModule,
+    SvgIconComponent,
+    LikesInfoComponent,
+  ],
   templateUrl: './review-item.component.html',
   styleUrl: './review-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,12 +38,13 @@ import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 })
 export class ReviewItemComponent implements OnInit {
   @Input({ required: true }) reviewData!: IReview;
-  @Input({ required: true }) userId!: string | null;
+  @Input({ required: true }) currentUserData!: IUserData;
   @Output() removeReview = new EventEmitter<string>();
-  username$ = new BehaviorSubject<string>('Unknown');
-  userPhoto$ = new BehaviorSubject<string | null>(null);
+  reviewUsername$ = new BehaviorSubject<string>('Unknown');
+  reviewUserPhoto$ = new BehaviorSubject<string | null>(null);
   isMyLike$ = new BehaviorSubject<boolean>(false);
   likeAnimation$ = new BehaviorSubject<boolean>(false);
+  likesInfo$ = new BehaviorSubject<boolean>(false);
   isRemoveModal = false;
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -57,11 +67,15 @@ export class ReviewItemComponent implements OnInit {
       )
       .subscribe((userData) => {
         if (userData) {
-          this.username$.next(userData.name);
-          this.userPhoto$.next(userData.photo);
+          this.reviewUsername$.next(userData.name);
+          this.reviewUserPhoto$.next(userData.photo);
         }
       });
-    if (this.userId && this.reviewData.likes.includes(this.userId)) {
+    const likes = this.reviewData.likes.map((like) => like.userId);
+    if (
+      this.currentUserData.userId &&
+      likes.includes(this.currentUserData.userId)
+    ) {
       this.isMyLike$.next(true);
     }
   }
@@ -79,11 +93,16 @@ export class ReviewItemComponent implements OnInit {
     this.closeModal(false);
   }
 
+  toggleLikesInfo(): void {
+    this.likesInfo$.next(!this.likesInfo$.getValue());
+  }
+
   toggleLike(): void {
-    if (this.userId) {
-      if (this.reviewData.likes.includes(this.userId)) {
+    if (this.currentUserData.userId) {
+      const likes = this.reviewData.likes.map((like) => like.userId);
+      if (likes.includes(this.currentUserData.userId)) {
         const likes = this.reviewData.likes.filter(
-          (like) => like !== this.userId
+          (like) => like.userId !== this.currentUserData.userId
         );
         this.reviewService
           .toggleLike({
@@ -100,11 +119,16 @@ export class ReviewItemComponent implements OnInit {
           )
           .subscribe();
       } else {
+        const newLike = {
+          userPhoto: this.currentUserData.userPhoto || 'assets/google.svg',
+          username: this.currentUserData.username || 'Unknown',
+          userId: this.currentUserData.userId,
+        };
         this.reviewService
           .toggleLike({
             bookId: this.reviewData.bookId,
             reviewId: this.reviewData.id,
-            likes: [...this.reviewData.likes, this.userId],
+            likes: [...this.reviewData.likes, newLike],
           })
           .pipe(
             takeUntil(this.destroy$),

@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { switchMenuAnimation } from '@shared/animation';
+import { IUserData } from '@shared/models/user';
 import { AuthFacade } from '@store/auth';
 import { Observable } from 'rxjs';
 
@@ -20,8 +21,7 @@ import { profileList } from './profile-menu.constant';
 export class ProfileMenuComponent {
   navigationList = profileList;
   isMenu = false;
-  userName$: Observable<string> = this.authFacade.userName$;
-  photo$: Observable<string | null> = this.authFacade.userPhoto$;
+  userData$: Observable<IUserData> = this.authFacade.userData$;
 
   constructor(private authFacade: AuthFacade) {}
 

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as AUTH_ACTIONS from './auth.action';
 import {
+  selectUserData,
   selectUserId,
   selectUserIsLoading,
   selectUserName,
@@ -17,6 +18,7 @@ export class AuthFacade {
   userId$ = this.store.select(selectUserId);
   userPhoto$ = this.store.select(selectUserPhoto);
   userIsLoading$ = this.store.select(selectUserIsLoading);
+  userData$ = this.store.select(selectUserData);
 
   constructor(private store: Store) {}
 

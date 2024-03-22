@@ -4,5 +4,11 @@ export interface IReview {
   userId: string | null;
   id: string;
   creationDate: string;
-  likes: string[];
+  likes: ILikeInfo[];
+}
+
+export interface ILikeInfo {
+  userPhoto: string;
+  username: string;
+  userId: string;
 }

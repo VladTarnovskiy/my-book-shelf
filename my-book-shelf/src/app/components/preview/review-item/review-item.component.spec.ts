@@ -1,8 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReviewService } from '@core/services/review';
 import { UserService } from '@core/services/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { reviewStub } from '@shared/tests';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
 import { of } from 'rxjs';
 
 import { ReviewItemComponent } from '.';
@@ -13,8 +15,13 @@ describe('ReviewItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReviewItemComponent, TranslateModule.forRoot()],
+      imports: [
+        ReviewItemComponent,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+      ],
       providers: [
+        provideAngularSvgIcon(),
         {
           provide: UserService,
           useValue: {
@@ -37,8 +44,12 @@ describe('ReviewItemComponent', () => {
     fixture = TestBed.createComponent(ReviewItemComponent);
     component = fixture.componentInstance;
     component.reviewData = reviewStub;
-    component.userId = 'wedd234';
-    component.username$.next('John');
+    component.currentUserData = {
+      username: 'Jake',
+      userPhoto: 'photo',
+      userId: 'wedd234',
+    };
+    component.reviewUsername$.next('John');
     fixture.detectChanges();
   });
 

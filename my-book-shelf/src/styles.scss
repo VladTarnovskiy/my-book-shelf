@@ -139,3 +139,10 @@ input,
 textarea {
   color: var(--primary-fourth);
 }
+
+input::file-selector-button {
+  color: var(--primary-fifth);
+  border: none;
+  border-radius: 0.3rem;
+  background-color: var(--secondary-second);
+}

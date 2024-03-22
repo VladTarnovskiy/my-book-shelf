@@ -1,7 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { myBookStub } from '@shared/tests';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
 
 import { MyBookComponent } from '.';
 
@@ -15,7 +17,9 @@ describe('MyBookComponent', () => {
         MyBookComponent,
         TranslateModule.forRoot(),
         RouterTestingModule,
+        HttpClientTestingModule,
       ],
+      providers: [provideAngularSvgIcon()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MyBookComponent);
