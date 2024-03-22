@@ -12,13 +12,15 @@
   </button>
   <div class="likes-info__items">
     @for (like of likes; track like.userId) {
-      <div class="likes-info-item">
+      <div class="likes-info-item" [title]="like.username">
         <div
           [style.background-image]="'url' + '(' + like.userPhoto + ')'"
           alt="User photo"
           class="likes-info-item__photo"
         ></div>
-        <p class="likes-info-item__username">{{ like.username }}</p>
+        <p class="likes-info-item__username">
+          {{ like.username }}
+        </p>
       </div>
     }
   </div>
