@@ -9,7 +9,7 @@ import { SvgIconComponent } from 'angular-svg-icon';
   templateUrl: './likes-info.component.html',
   styleUrl: './likes-info.component.scss',
 })
-export class LikesInfoComponent {
+export clss LikesInfoComponent {
   @Input({ required: true }) likes!: ILikeInfo[];
   @Output() toggleLikesInfo = new EventEmitter();
 

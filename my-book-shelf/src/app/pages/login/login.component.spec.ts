@@ -1,7 +1,9 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService } from '@core/services/auth';
 import { TranslateModule } from '@ngx-translate/core';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
 
 import { LoginComponent } from '.';
 
@@ -11,8 +13,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginComponent, TranslateModule.forRoot(), RouterTestingModule],
+      imports: [
+        LoginComponent,
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
       providers: [
+        provideAngularSvgIcon(),
         {
           provide: AuthService,
           useValue: {
