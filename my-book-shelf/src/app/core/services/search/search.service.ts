@@ -8,10 +8,10 @@ import { IBookResp, ISearchResp } from '@shared/interfaces/booksResp';
 import { IBook } from '@shared/models/book';
 import {
   getBooksSearchHeaders,
-  transformRespBookData,
+  transformRespBookDat
   transformRespBooksData,
 } from '@shared/utils';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -35,10 +35,62 @@ export class SearchService {
 
     return this.http.get<ISearchResp>(this.searchURL, options).pipe(
       map((resp) => {
+        this.getBookX().then((x) => x.subscribe());
         const transData = transformRespBooksData(resp);
         return { books: transData, totalBooks: resp.totalItems };
       })
     );
+  }
+
+  async hash(string: string) {
+    const utf8 = new TextEncoder().encode(string);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((bytes) => bytes.toString(16).padStart(2, '0'))
+      .join('');
+    return hashHex;
+  }
+
+  // hash(string: string) {
+  // let hash = 0;
+
+  // if (string.length == 0) return hash;
+
+  // for (let i = 0; i < string.length; i++) {
+  //   const char = string.charCodeAt(i);
+  //   hash = (hash << 5) - hash + char;
+  //   hash = hash & hash;
+  // }
+
+  // return hash;
+
+  //   const hashPwd = crypto.createHash('sha1').update(string).digest('hex');
+
+  //   return hashPwd;
+  // }
+
+  async getBookX() {
+    const x = await this.hash(
+      `355fc37475c71f6e37536c2867773eb0eb4300bb5f${Math.floor(Date.now() / 1000)}`
+    );
+    console.log(x);
+    return this.http
+      .post('https://api.hotelbeds.com/hotel-api/1.0/status', {
+        headers: {
+          Accept: 'application/json',
+          'Api-key': '355fc37475c71f6e37536c2867773eb0',
+          'X-Signature': String(x),
+          'X-Skip-Interceptor': '',
+          'Accept-Encoding': 'gzip',
+          'Content-Type': 'application/json',
+        },
+      })
+      .pipe(
+        tap((resp) => {
+          console.log(resp);
+        })
+      );
   }
 
   getBook(bookId: string): Observable<IBook> {
