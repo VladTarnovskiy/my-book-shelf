@@ -9,7 +9,7 @@ import { IBook } from '@shared/models/book';
 import {
   getBooksSearchHeaders,
   transformRespBookData,
-  transformRespBooks,
+  transformRespBooksData,
 } from '@shared/utils';
 import { map, Observable } from 'rxjs';
 
