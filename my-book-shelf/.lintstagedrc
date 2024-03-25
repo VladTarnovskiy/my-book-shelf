@@ -1,3 +1,3 @@
 {
-  "*.{css,scss,js,ts}": ["npm run lint"]
+  "*.+{scss,ts}": ["npm run lint"]
 }
