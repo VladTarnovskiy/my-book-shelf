@@ -105,6 +105,7 @@
 
 .description {
   font-family: 'Inter Semi Bold';
+  max-width: 25rem;
 
   &__title {
     font-size: 1.4rem;
@@ -124,14 +125,16 @@
 
 .book {
   width: 100%;
-  height: 80rem;
+  height: 84rem;
+  @extend %itemsCenter;
+  justify-content: center;
 
   @include tablet-big {
-    height: 60rem;
+    height: 64rem;
   }
 
   @include tablet-big {
-    height: 40rem;
+    height: 44rem;
   }
 
   &.full {
@@ -153,10 +156,10 @@
 }
 
 .loader {
-  height: 100%;
+  height: 90%;
   max-width: 68rem;
   width: 100%;
-  margin: auto;
+  margin: 2rem;
   border-radius: 1rem;
   @extend %skeletonBackgroundAnimation;
 }
