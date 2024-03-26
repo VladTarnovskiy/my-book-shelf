@@ -16,3 +16,7 @@ export interface IBook {
   ISBN: string | null;
   rating: number;
 }
+
+export interface IRecentBook extends IBook {
+  creationDate: number;
+}

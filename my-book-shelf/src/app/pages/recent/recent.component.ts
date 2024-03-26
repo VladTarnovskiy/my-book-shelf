@@ -11,7 +11,7 @@ import { DestroyDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
-import { IBook } from '@shared/models/book';
+import { IRecentBook } from '@shared/models/book';
 import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
 
 @Component({
@@ -29,7 +29,7 @@ import { BehaviorSubject, catchError, map, of, takeUntil } from 'rxjs';
   hostDirectives: [DestroyDirective],
 })
 export class RecentComponent implements OnInit {
-  recentBooks$ = new BehaviorSubject<IBook[] | null>(null);
+  recentBooks$ = new BehaviorSubject<IRecentBook[] | null>(null);
   isLoading$ = new BehaviorSubject<boolean>(false);
   private destroy$ = inject(DestroyDirective).destroy$;
   skeletonItems = [...Array(10).keys()];
