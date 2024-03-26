@@ -15,6 +15,7 @@ export interface IBook {
   categories: string[];
   ISBN: string | null;
   rating: number;
+  edition: string;
 }
 
 export interface IRecentBook extends IBook {

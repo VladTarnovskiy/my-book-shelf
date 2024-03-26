@@ -37,7 +37,13 @@
               >,
               {{ bookData.publishedDate | date: 'y' }}
             </p>
-            <p class="edition">{{ 'PREVIEW.EDITION' | translate }}</p>
+            <p class="edition">
+              {{
+                ('COMMON.EDITION.' + bookData.edition | translate) +
+                  ' ' +
+                  ('COMMON.EDITION_TITLE' | translate)
+              }}
+            </p>
             <div class="rating">
               <div class="stars">
                 @if (bookData.rating; as rating) {

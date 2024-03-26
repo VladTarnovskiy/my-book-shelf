@@ -1,10 +1,10 @@
 import { IBookResp, ISearchResp } from '../interfaces/booksResp';
 import { IBook } from '../models/book';
-import { getRandomRatingValue } from '.';
+import { getEdition, getRandomRatingValue } from '.';
 
 export const transformRespBooksData = (data: ISearchResp): IBook[] => {
   const transData = data.items.map((book) => {
-    const transBook = {
+    const transBook: IBook = {
       id: book.id,
       isFavorite: false,
       title: book.volumeInfo.title || '',
@@ -25,6 +25,7 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
           )?.identifier || null
         : null,
       rating: getRandomRatingValue(),
+      edition: getEdition(book.volumeInfo.contentVersion),
     };
     return transBook;
   });
@@ -33,7 +34,7 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
 };
 
 export const transformRespBookData = (book: IBookResp): IBook => {
-  const transBook = {
+  const transBook: IBook = {
     id: book.id,
     isFavorite: false,
     title: book.volumeInfo.title || '',
@@ -54,6 +55,7 @@ export const transformRespBookData = (book: IBookResp): IBook => {
         )?.identifier || null
       : null,
     rating: getRandomRatingValue(),
+    edition: getEdition(book.volumeInfo.contentVersion),
   };
 
   return transBook;
