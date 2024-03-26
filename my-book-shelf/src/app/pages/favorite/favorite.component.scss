@@ -1,0 +1,21 @@
+@import 'placeholders';
+@import 'variables';
+
+.favorite {
+  padding: 1.8rem 4.5rem;
+  margin-top: 1.8rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-family: 'Inter Bold';
+  color: var(--primary-second);
+  margin-bottom: 5.1rem;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30.8rem, 1fr));
+  justify-items: center;
+  gap: 2.8rem;
+}

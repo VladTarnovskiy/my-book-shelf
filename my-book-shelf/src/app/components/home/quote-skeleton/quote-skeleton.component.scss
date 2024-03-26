@@ -1,0 +1,59 @@
+@import 'placeholders';
+@import 'variables';
+
+.container {
+  margin-right: 2.8rem;
+}
+
+.title {
+  width: 100%;
+  max-width: 15rem;
+  height: 2.6rem;
+  margin-bottom: 2.6rem;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.content,
+.content-second {
+  margin-bottom: 0.8rem;
+  width: 100%;
+  max-width: 75.4rem;
+  height: 2.4rem;
+  margin-bottom: 0.4rem;
+  @extend %skeletonBackgroundAnimation;
+}
+
+.content-second {
+  margin-bottom: 0.8rem;
+  width: 100%;
+  max-width: 45.4rem;
+}
+
+.description {
+  @extend %itemsCenter;
+  justify-content: space-between;
+}
+
+.slider {
+  @extend %itemsCenter;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 7rem;
+  height: 1rem;
+  @extend %skeletonBackgroundAnimation;
+
+  &__but:last-child {
+    margin-right: 0;
+  }
+
+  &__but.active {
+    background-color: var(--primary-third);
+  }
+}
+
+.author {
+  width: 100%;
+  max-width: 14rem;
+  height: 1.6rem;
+  @extend %skeletonBackgroundAnimation;
+}

@@ -1,0 +1,10 @@
+<div class="recommended">
+  <div class="title">{{ 'RECOMMENDED.TITLE' | translate }}</div>
+  <div class="books">
+    @for (book of recBooks$ | async; track book.id) {
+      <app-home-book [bookData]="book" />
+    } @empty {
+      {{ 'COMMON.EMPTY' | translate }}
+    }
+  </div>
+</div>

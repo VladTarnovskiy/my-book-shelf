@@ -1,0 +1,39 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.switcher__container {
+  @extend %shadow;
+  box-shadow: 0 0.1rem 0.5rem 0 var(--shadow) inset;
+  position: relative;
+  width: 4.8rem;
+  border-radius: 2.4rem;
+
+  &:active .switch {
+    transform: rotate(180deg);
+  }
+}
+
+.switch {
+  height: 2.9rem;
+  width: 2.9rem;
+  @extend %itemsCenter;
+  justify-content: center;
+  transition: all 0.2s linear;
+  border-radius: 1.5rem;
+
+  &.light {
+    margin-right: 1.9rem;
+  }
+
+  &.dark {
+    margin-left: 1.9rem;
+  }
+
+  img {
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: var(--primary-first);
+    border-radius: 1.3rem;
+  }
+}

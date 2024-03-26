@@ -1,0 +1,48 @@
+@import 'placeholders';
+@import 'variables';
+
+.book {
+  width: 16rem;
+  min-height: 26rem;
+  border-radius: 0.5rem;
+  padding: 1.6rem 1.5rem 1.3rem 1.5rem;
+  background-color: var(--primary-third);
+  @extend %transition;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--secondary-third);
+  }
+}
+
+.cover {
+  width: 12.3rem;
+  height: 17rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  height: 1.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.author {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating {
+  font-size: 1rem;
+
+  .rating__total {
+    color: var(--secondary-second);
+  }
+}

@@ -1,0 +1,19 @@
+<div class="my-books">
+  <div class="title">{{ 'MY_BOOKS.TITLE' | translate }}</div>
+  <div class="books">
+    @if (isLoading$ | async) {
+      @for (skeleton of skeletonItems; track skeleton) {
+        <app-book-skeleton />
+      }
+    } @else {
+      @for (book of myBooks$ | async; track book.id) {
+        <app-my-book
+          [bookData]="book"
+          (removeFromMyBookEvent)="removeFromMyBook($event)"
+        />
+      } @empty {
+        {{ 'COMMON.EMPTY' | translate }}
+      }
+    }
+  </div>
+</div>

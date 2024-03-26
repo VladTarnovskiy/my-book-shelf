@@ -1,0 +1,176 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.details {
+  padding: 9.1rem 4.5rem;
+
+  @include desktop-middle {
+    padding: 5.1rem 4.5rem;
+  }
+}
+
+.back-but {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  height: 2.2rem;
+  margin-bottom: 2.2rem;
+
+  &__arrow {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 1.3rem;
+  }
+  &__title {
+    font-size: 1.5rem;
+  }
+}
+
+.content {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  margin-bottom: 3rem;
+}
+
+.book {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 1.5rem;
+
+  @include tablet-big {
+    flex-direction: column;
+  }
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 34.5rem;
+  margin-right: 7.1rem;
+  padding: 2.4rem 3.4rem;
+  background-color: var(--primary-third);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+
+  &__img {
+    width: 20.9rem;
+    margin-bottom: 2.7rem;
+
+    @include tablet-big {
+      width: 15rem;
+      line-height: 20rem;
+    }
+  }
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    font-family: 'Inter Bold';
+    font-size: 1.1rem;
+    margin-top: 0.7rem;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 3.5rem;
+  line-height: 4.5rem;
+  margin-bottom: 0.8rem;
+
+  @include desktop-middle {
+    font-size: 2.5rem;
+    line-height: 3.5rem;
+  }
+}
+
+.author {
+  line-height: 1.8rem;
+  margin-bottom: 1.8rem;
+
+  &__name {
+    text-decoration: underline;
+  }
+}
+
+.edition {
+  color: var(--secondary-second);
+  margin-bottom: 4.2rem;
+}
+
+.rating {
+  margin-bottom: 3.5rem;
+  @extend %itemsCenter;
+  justify-content: flex-start;
+
+  &__value {
+    font-family: 'Inter Medium';
+  }
+}
+
+.stars {
+  margin-right: 0.8rem;
+
+  &__item {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.3rem;
+  }
+}
+
+.availability {
+  margin-bottom: 4.4rem;
+
+  &__title {
+    font-family: 'Inter Bold';
+    margin-bottom: 1.1rem;
+  }
+}
+
+.availability-item {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  margin-bottom: 0.8rem;
+
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.8rem;
+  }
+}
+
+.buttons {
+  @extend %itemsCenter;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @include desktop-middle {
+    flex-direction: column;
+  }
+
+  &__read,
+  &__ebook {
+    width: 20.9rem;
+    height: 6.1rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-right: 3.8rem;
+
+    @include desktop-middle {
+      margin-bottom: 1.5rem;
+    }
+  }
+}

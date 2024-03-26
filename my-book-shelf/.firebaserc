@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "prdlab-auth": {
+      "hosting": {
+        "my-book-shelf": [
+          "my-shelf-book"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "prdlab-auth"
+  }
+}

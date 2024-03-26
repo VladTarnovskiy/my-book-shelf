@@ -1,0 +1,40 @@
+<div class="book">
+  <div class="label"></div>
+  <div class="book-info">
+    <img class="cover" [src]="uploadBookData.image" alt="Cover" />
+    <p class="title">{{ uploadBookData.title }}</p>
+    <p class="author">
+      {{ uploadBookData.author }},
+      <span class="year">{{
+        uploadBookData.borrowedOn | date: 'dd MMM yyyy'
+      }}</span>
+    </p>
+  </div>
+  <div class="additional">
+    <button class="favorite-but" (click)="removeFromUploadFavorite()">
+      <img class="favorite-but__img" src="assets/heart.svg" alt="Favorite" />
+    </button>
+    <div class="terms">
+      <div class="borrowed">
+        <p class="borrowed__title">{{ 'COMMON.BORROWED' | translate }}</p>
+        <p class="borrowed__desc">
+          {{ uploadBookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
+      </div>
+      <div class="submission">
+        <p class="submission__title">{{ 'COMMON.SUBMISSION' | translate }}</p>
+        <p class="submission__desc">
+          {{ uploadBookData.submissionDate | date: 'dd MMM yyyy' }}
+        </p>
+      </div>
+    </div>
+    <div class="links">
+      <button
+        class="read btn-first"
+        [routerLink]="['/my-books/reader', uploadBookData.id]"
+      >
+        {{ 'COMMON.BTN.READ' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+@import 'placeholders';
+@import 'variables';
+
+.container {
+  padding-top: 7.5rem;
+}
+
+.verification {
+  max-width: 56.5rem;
+  min-height: 91.7rem;
+  padding: 6.3rem 7.1rem 8.7rem 7.1rem;
+  margin: auto;
+  @extend %shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 2rem;
+  background-color: var(--primary-third);
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 6.2rem;
+
+  &__icon {
+    width: 15rem;
+    height: 9.2rem;
+    margin-bottom: 5.5rem;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+
+  &__info {
+    font-size: 1.5rem;
+    color: var(--secondary-second);
+  }
+}
+
+.message {
+  font-size: 1.8rem;
+  font-family: 'Inter Semi Bold';
+  color: var(--primary-second);
+  margin-bottom: 5.9rem;
+}

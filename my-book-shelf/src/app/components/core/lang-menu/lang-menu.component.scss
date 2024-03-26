@@ -1,0 +1,66 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.lang {
+  @extend %itemsCenter;
+  @extend %shadow;
+  position: relative;
+  border-radius: 4rem;
+  height: 4.7rem;
+  padding: 1.4rem 0 1.4rem 2.5rem;
+  margin-right: 2.5rem;
+  background-color: var(--primary-third);
+
+  &__img {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 2rem;
+  }
+
+  &__title {
+    margin-right: 2rem;
+
+    @include tablet-middle {
+      display: none;
+    }
+  }
+
+  &__polygon {
+    margin-right: 2.9rem;
+    @extend %transition;
+
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.lang-menu {
+  position: absolute;
+  visibility: hidden;
+  right: 0;
+  bottom: 0;
+  width: 15.5rem;
+  min-height: 7rem;
+  border-radius: 1rem;
+  background-color: var(--primary-third);
+  @extend %shadow;
+  @extend %transition;
+  z-index: 2;
+
+  &__item {
+    padding: 0.5rem 3.5rem 0.5rem 1.9rem;
+    font-size: 1.5rem;
+    text-align: start;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--secondary-third);
+    }
+
+    &.active {
+      background-color: var(--secondary-third);
+    }
+  }
+}

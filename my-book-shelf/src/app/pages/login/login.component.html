@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="login">
+    <div class="description">
+      <img src="assets/logo.svg" alt="Logo" class="description__icon" />
+      <div class="description__title">{{ 'LOGIN.TITLE' | translate }}</div>
+      <div class="description__info">
+        {{ 'LOGIN.DESCRIPTION' | translate }}
+      </div>
+    </div>
+    <form [formGroup]="loginForm" class="form">
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'LOGIN.INPUT.EMAIL' | translate }}
+          </div>
+          <input
+            [formControl]="email"
+            required
+            type="email"
+            class="form-item__input form-item__input_email"
+          />
+        </label>
+        @if (email.hasError('required') && email.touched) {
+          <div class="invalid__message">
+            {{ 'LOGIN.ERRORS.EMAIL.REQUIRE' | translate }}
+          </div>
+        }
+        @if (email.hasError('email') && email.touched) {
+          <div class="invalid__message email-error">
+            {{ 'LOGIN.ERRORS.EMAIL.INVALID' | translate }}
+          </div>
+        }
+      </div>
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'LOGIN.INPUT.PASSWORD' | translate }}
+          </div>
+          <input
+            [formControl]="password"
+            type="password"
+            required
+            autoComplete="on"
+            class="form-item__input form-item__input_password"
+          />
+        </label>
+        @if (password.hasError('required') && password.touched) {
+          <div class="invalid__message">
+            {{ 'LOGIN.ERRORS.PASSWORD.REQUIRE' | translate }}
+          </div>
+        }
+        @if (password.hasError('forbiddenPassword') && password.touched) {
+          <div class="invalid__message password-error">
+            {{ password.errors?.['forbiddenPassword'].value }}
+          </div>
+        }
+      </div>
+      <div class="buttons">
+        <button
+          type="submit"
+          class="buttons__login btn-third"
+          (click)="onSubmit()"
+          [ngClass]="loginForm.valid ? '' : 'invalid-but'"
+        >
+          {{ 'LOGIN.LOGIN' | translate }}
+        </button>
+        <div class="social">
+          <div class="social__title">{{ 'LOGIN.SOCIAL' | translate }}</div>
+          <div class="social-btn">
+            <button class="social-btn__item" (click)="loginWithGoogle()">
+              <img
+                class="social-btn__img"
+                src="assets/google.svg"
+                alt="Google"
+              />
+            </button>
+            <button class="social-btn__item" (click)="loginWithGitHub()">
+              <svg-icon
+                src="assets/github.svg"
+                [svgStyle]="{
+                  'width.rem': 4.5,
+                  'height.rem': 4.5,
+                  fill: 'var(--primary-second)'
+                }"
+              >
+              </svg-icon>
+            </button>
+          </div>
+        </div>
+        <div class="user-check">
+          <div>{{ 'LOGIN.NEW_USER' | translate }}&ensp;</div>
+          <a routerLink="../registration">
+            <button type="button" class="register-link">
+              {{ 'LOGIN.REG_USER' | translate }}
+            </button>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

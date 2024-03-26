@@ -1,0 +1,11 @@
+@import 'placeholders';
+@import 'variables';
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-100%);
+  width: 100%;
+  @extend %itemsCenter;
+  justify-content: center;
+}

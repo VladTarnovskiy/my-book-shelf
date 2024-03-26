@@ -1,0 +1,65 @@
+<div class="book">
+  <div class="book-info">
+    <div class="cover">
+      <img class="cover__img" [src]="bookData.image" alt="Cover" />
+    </div>
+    <p class="title">{{ bookData.title }}</p>
+    <p class="author">
+      {{ bookData.author }},
+      <span class="year">{{ bookData.description }}</span>
+    </p>
+    <div class="rating">4.5 <span class="rating__total">/5</span></div>
+  </div>
+  <div class="additional">
+    <button class="remove-but" (click)="openModal()">
+      <svg-icon
+        src="assets/close.svg"
+        [svgStyle]="{
+          'width.rem': 3,
+          'height.rem': 3,
+          stroke: 'var(--primary-second)'
+        }"
+      >
+      </svg-icon>
+    </button>
+    <div class="terms">
+      <div class="borrowed">
+        <p class="borrowed__title">{{ 'COMMON.BORROWED' | translate }}</p>
+        <p class="borrowed__desc">
+          {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
+      </div>
+      <div class="submission">
+        <p class="submission__title">{{ 'COMMON.SUBMISSION' | translate }}</p>
+        <p class="submission__desc">
+          {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
+        </p>
+      </div>
+    </div>
+    <div class="links">
+      <button
+        class="read btn-first"
+        [routerLink]="['/my-books/reader', bookData.id]"
+      >
+        {{ 'COMMON.BTN.READ' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+@if (isRemoveModal) {
+  <app-modal (closeModal)="closeModal($event)">
+    <div class="modal-content">
+      <div class="modal-title">
+        {{ 'MODAL.MY_BOOK.QUESTION' | translate }}
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-buttons__item" (click)="removeFromMyBook()">
+          {{ 'MODAL.BTN.REMOVE' | translate }}
+        </button>
+        <button class="modal-buttons__item" (click)="closeModal(false)">
+          {{ 'MODAL.BTN.CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+  </app-modal>
+}
