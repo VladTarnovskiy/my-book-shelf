@@ -35,8 +35,12 @@ export class SearchService {
 
     return this.http.get<ISearchResp>(this.searchURL, options).pipe(
       map((resp) => {
-        const transData = transformRespBooksData(resp);
-        return { books: transData, totalBooks: resp.totalItems };
+        if (resp.items) {
+          const transData = transformRespBooksData(resp);
+          return { books: transData, totalBooks: resp.totalItems };
+        } else {
+          return { books: [], totalBooks: 0 };
+        }
       })
     );
   }
