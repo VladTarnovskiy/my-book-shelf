@@ -53,7 +53,7 @@ export const transformRespBookData = (book: IBookResp): IBook => {
           (item) => item.type === 'ISBN_10'
         )?.identifier || null
       : null,
-    rating: 5,
+    rating: getRandomRatingValue(),
   };
 
   return transBook;

@@ -13,7 +13,7 @@ import { DestroyDirective } from '@core/directives';
 import { RecentService } from '@core/services/recent';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
-import { IBook } from '@shared/models/book';
+import { IBook, IRecentBook } from '@shared/models/book';
 import { recommendedGenerator } from '@shared/utils';
 import { RecommendedBooksFacade } from '@store/recommendedBooks';
 import {
@@ -42,7 +42,7 @@ import {
   hostDirectives: [DestroyDirective],
 })
 export class HomeComponent implements OnInit {
-  recentBooks$ = new BehaviorSubject<IBook[] | null>(null);
+  recentBooks$ = new BehaviorSubject<IRecentBook[] | null>(null);
   recommendedBooks$: Observable<IBook[]> =
     this.recommendedBooksFacade.recommendedBooks$;
   recommendedBooksIsLoading$: Observable<boolean> =
