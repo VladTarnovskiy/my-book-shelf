@@ -17,6 +17,7 @@ export const bookDataStub = {
   categories: ['Fiction'],
   ISBN: '9048844452',
   rating: 4,
+  edition: 'second',
 };
 
 export const favoriteBookDataStub = {
@@ -40,6 +41,7 @@ export const favoriteBookDataStub = {
   borrowedOn: '2024',
   submissionDate: '2024',
   rating: 4,
+  edition: 'second',
 };
 
 export const myBookStub = {
