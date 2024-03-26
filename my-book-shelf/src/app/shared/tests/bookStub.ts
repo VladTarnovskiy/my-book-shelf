@@ -16,6 +16,7 @@ export const bookDataStub = {
   },
   categories: ['Fiction'],
   ISBN: '9048844452',
+  rating: 4,
 };
 
 export const favoriteBookDataStub = {
@@ -38,6 +39,7 @@ export const favoriteBookDataStub = {
   ISBN: '9048844452',
   borrowedOn: '2024',
   submissionDate: '2024',
+  rating: 4,
 };
 
 export const myBookStub = {
@@ -51,4 +53,5 @@ export const myBookStub = {
     'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
   file: 'http://books.google.com/books/content?id=kksoEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
   description: 'description',
+  rating: 4,
 };

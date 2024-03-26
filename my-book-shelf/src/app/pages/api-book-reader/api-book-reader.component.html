@@ -37,7 +37,7 @@
             alt="Favorite"
           />
         </button>
-        <button class="buttons__screen" (click)="toggleFullScreen()">
+        <button class="buttons__screen" (click)="toggleFullScreen(book.ISBN)">
           {{
             ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')
               | translate

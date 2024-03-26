@@ -6,7 +6,9 @@
       {{ bookData.authors[0] }},
       <span class="year">{{ bookData.publishedDate }}</span>
     </p>
-    <div class="rating">4.5 <span class="rating__total">/5</span></div>
+    <div class="rating">
+      {{ bookData.rating }} <span class="rating__total">/5</span>
+    </div>
   </div>
   <div class="additional">
     <button class="favorite-but" (click)="removeFromFavorite()">

@@ -128,8 +128,24 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  toggleFullScreen(): void {
+  toggleFullScreen(ISBN: string | null): void {
     this.isFullScreen.next(!this.isFullScreen.getValue());
+    if (document.body.querySelector('#google-script') && ISBN) {
+      const viewer = new window.google.books.DefaultViewer(
+        this.bookCanvas.nativeElement
+      );
+      viewer.load(
+        `ISBN:${ISBN}`,
+        () => {
+          this.isUnavailable$.next(true);
+          this.isLoading$.next(false);
+        },
+        () => {
+          this.isUnavailable$.next(false);
+          this.isLoading$.next(false);
+        }
+      );
+    }
   }
 
   ngAfterViewInit(): void {
@@ -171,7 +187,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
                   this.isLoading$.next(false);
                 }
               );
-            }, 4000);
+            }, 4500);
           });
           document.body.appendChild(scriptTag);
         }
