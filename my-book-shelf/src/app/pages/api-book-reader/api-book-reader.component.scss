@@ -128,17 +128,11 @@
   height: 84rem;
   @extend %itemsCenter;
   justify-content: center;
-
-  @include small-desktop {
-    width: 100%;
-  }
+  overflow: hidden;
+  overflow-x: auto;
 
   @include tablet-big {
     height: 64rem;
-  }
-
-  @include tablet-big {
-    height: 44rem;
   }
 
   &.full {
