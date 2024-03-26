@@ -65,7 +65,12 @@ export class HomeComponent implements OnInit {
       .getRecentBooks()
       .pipe(
         takeUntil(this.destroy$),
-        map((books) => books.map((book) => book.payload.doc.data())),
+        map((books) =>
+          books
+            .map((book) => book.payload.doc.data())
+            .sort((a, b) => a.creationDate - b.creationDate)
+            .reverse()
+        ),
         catchError(() => {
           this.toasterService.showFireStoreError();
           this.recentBooksIsLoading$.next(false);
