@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ILikeInfo } from '@shared/models/review';
 import { SvgIconComponent } from 'angular-svg-icon';
 
@@ -8,6 +14,7 @@ import { SvgIconComponent } from 'angular-svg-icon';
   imports: [SvgIconComponent],
   templateUrl: './likes-info.component.html',
   styleUrl: './likes-info.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LikesInfoComponent {
   @Input({ required: true }) likes!: ILikeInfo[];

@@ -1,5 +1,6 @@
 import { IBookResp, ISearchResp } from '../interfaces/booksResp';
 import { IBook } from '../models/book';
+import { getRandomRatingValue } from '.';
 
 export const transformRespBooksData = (data: ISearchResp): IBook[] => {
   const transData = data.items.map((book) => {
@@ -23,6 +24,7 @@ export const transformRespBooksData = (data: ISearchResp): IBook[] => {
             (item) => item.type === 'ISBN_10'
           )?.identifier || null
         : null,
+      rating: getRandomRatingValue(),
     };
     return transBook;
   });
@@ -51,6 +53,7 @@ export const transformRespBookData = (book: IBookResp): IBook => {
           (item) => item.type === 'ISBN_10'
         )?.identifier || null
       : null,
+    rating: 5,
   };
 
   return transBook;

@@ -14,4 +14,5 @@ export interface IBook {
   };
   categories: string[];
   ISBN: string | null;
+  rating: number;
 }

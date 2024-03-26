@@ -187,7 +187,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
                   this.isLoading$.next(false);
                 }
               );
-            }, 4000);
+            }, 4500);
           });
           document.body.appendChild(scriptTag);
         }

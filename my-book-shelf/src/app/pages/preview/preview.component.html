@@ -40,12 +40,23 @@
             <p class="edition">{{ 'PREVIEW.EDITION' | translate }}</p>
             <div class="rating">
               <div class="stars">
-                @for (item of ratingItems; track item) {
-                  <img src="assets/star.svg" alt="Star" class="stars__item" />
+                @if (bookData.rating; as rating) {
+                  @for (item of ratingItems; track item) {
+                    <img
+                      [src]="
+                        bookData.rating < item + 1
+                          ? 'assets/empty-star.svg'
+                          : 'assets/star.svg'
+                      "
+                      alt="Star"
+                      class="stars__item"
+                    />
+                  }
                 }
               </div>
               <p class="rating__value">
-                <span>5.0</span> {{ 'PREVIEW.RATING' | translate }}
+                <span>{{ bookData.rating }}</span>
+                {{ 'PREVIEW.RATING' | translate }}
               </p>
             </div>
             <div class="availability">
