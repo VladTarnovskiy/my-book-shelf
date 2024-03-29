@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
 import { AuthStoreModule } from './auth';
@@ -19,6 +20,7 @@ import { RouterStoreModule } from './router';
     RouterStoreModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot({}),
+    StoreRouterConnectingModule.forRoot(),
   ],
 })
 export class StateModule {}
