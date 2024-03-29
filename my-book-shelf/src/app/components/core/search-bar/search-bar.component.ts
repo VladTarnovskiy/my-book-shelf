@@ -20,6 +20,7 @@ import {
   BehaviorSubject,
   debounceTime,
   distinctUntilChanged,
+  switchMap,
   takeUntil,
 } from 'rxjs';
 
@@ -63,19 +64,21 @@ export class SearchBarComponent implements OnInit {
       });
 
     this.searchValue.valueChanges
-      .pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
-      .subscribe(() => {
-        this.searchService
-          .getSearchData({
+      .pipe(
+        takeUntil(this.destroy$),
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(() =>
+          this.searchService.getSearchData({
             searchValue: this.searchValue.value,
             filterType: this.filterType.getValue(),
             categoryFilterType: this.filterCategory,
             page: 0,
           })
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((searchValues) => {
-            this.elasticValues.next(searchValues);
-          });
+        )
+      )
+      .subscribe((searchValues) => {
+        this.elasticValues.next(searchValues);
       });
   }
 

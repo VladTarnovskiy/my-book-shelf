@@ -16,7 +16,6 @@ import {
   withPreloading,
 } from '@angular/router';
 import { authInterceptor } from '@core/interceptors';
-import { provideRouterStore } from '@ngrx/router-store';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StateModule } from '@store/state.module';
@@ -41,7 +40,6 @@ export const appConfig: ApplicationConfig = {
     }).providers!,
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([authInterceptor])),
-    provideRouterStore(),
     provideAnimationsAsync(),
     provideAngularSvgIcon(),
     importProvidersFrom([
