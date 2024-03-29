@@ -1,8 +1,6 @@
-import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PreviewSkeletonComponent } from '@components/preview/preview-skeleton';
 import { ReviewComponent } from '@components/preview/review';
@@ -64,12 +62,12 @@ describe('PreviewComponent', () => {
       .compileComponents();
 
     fixture = TestBed.createComponent(PreviewComponent);
-    router = TestBed.inject(Router);
-    location = TestBed.inject(Location);
+    // router = TestBed.inject(Router);
+    // location = TestBed.inject(Location);
     component = fixture.componentInstance;
     component.book$ = of(bookDataStub);
-    router.navigate(['home/efvaefq']);
-    router.initialNavigation();
+    // router.navigate(['home/efvaefq']);
+    // router.initialNavigation();
     fixture.detectChanges();
   });
 
