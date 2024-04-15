@@ -70,7 +70,7 @@ export class AppComponent implements OnInit {
         bodyElement.setAttribute('data-theme', IThemes.Light);
       }
     } else {
-      bodyElement.setAttribute('data-theme', IThemes.Light);
+      bodyElement.setAttribute('data-theme', IThemes.Dark);
     }
 
     // alert(
