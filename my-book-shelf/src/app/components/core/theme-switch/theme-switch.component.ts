@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeSwitchComponent implements OnInit {
-  theme$ = new BehaviorSubject<string>(IThemes.Light);
+  theme$ = new BehaviorSubject<string>(IThemes.Dark);
 
   ngOnInit(): void {
     const themeData = localStorage.getItem('theme');
