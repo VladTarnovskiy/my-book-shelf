@@ -73,17 +73,6 @@ export class AppComponent implements OnInit {
       bodyElement.setAttribute('data-theme', IThemes.Light);
     }
 
-    //start fragment from api-reader to test in app component
-
-    // const scriptTag = document.createElement('script');
-    // scriptTag.src = 'https://www.google.com/books/jsapi.js';
-    // scriptTag.id = 'google-script';
-    // scriptTag.addEventListener('load', () => {
-    //   window.google.books.load();
-    //   window.google.books.setOnLoadCallback(() => console.log('here'));
-    // });
-    // document.body.appendChild(scriptTag);
-
     // alert(
     //   'The Google books API is not available in Belarus, please, use a VPN to make the service work correctly!'
     // );

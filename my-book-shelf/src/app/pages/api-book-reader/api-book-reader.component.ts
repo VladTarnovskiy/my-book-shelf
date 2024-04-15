@@ -170,29 +170,9 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
           const scriptTag = document.createElement('script');
           scriptTag.src = 'https://www.google.com/books/jsapi.js';
           scriptTag.id = 'google-script';
-          // scriptTag.addEventListener('load', () => {
-          //   window.google.books.load();
-          //   setTimeout(() => {
-          //     const viewer = new window.google.books.DefaultViewer(
-          //       this.bookCanvas.nativeElement
-          //     );
-          //     viewer.load(
-          //       `ISBN:${book?.ISBN}`,
-          //       () => {
-          //         this.isUnavailable$.next(true);
-          //         this.isLoading$.next(false);
-          //       },
-          //       () => {
-          //         this.isUnavailable$.next(false);
-          //         this.isLoading$.next(false);
-          //       }
-          //     );
-          //   }, 4500);
-          // });
-
           scriptTag.addEventListener('load', () => {
             window.google.books.load();
-            window.google.books.setOnLoadCallback(() => {
+            setTimeout(() => {
               const viewer = new window.google.books.DefaultViewer(
                 this.bookCanvas.nativeElement
               );
@@ -207,8 +187,7 @@ export class ApiBookReaderComponent implements OnInit, AfterViewInit {
                   this.isLoading$.next(false);
                 }
               );
-              console.log('here');
-            });
+            }, 4500);
           });
           document.body.appendChild(scriptTag);
         }
