@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { quotesUrl } from '@shared/environments';
 import { IQuote } from '@shared/models/quote';
 import { Observable } from 'rxjs';
 
@@ -7,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class QuotesService {
-  private quotesURL = 'https://dummyjson.com/quotes/random';
+  private quotesURL = `${quotesUrl}/random`;
 
   constructor(private http: HttpClient) {}
 

@@ -21,8 +21,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StateModule } from '@store/state.module';
 import { provideAngularSvgIcon } from 'angular-svg-icon';
 
-import { firebaseConfig } from '../environments/environment';
 import { routes } from './app.routes';
+import { firebaseConfig } from './shared/environments';
 
 function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
