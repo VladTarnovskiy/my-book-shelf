@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { booksUrl } from '@shared/environments';
 import {
   IBooksInfoData,
   IBooksSearchParams,
@@ -17,7 +18,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService {
-  private searchURL = 'https://www.googleapis.com/books/v1/volumes';
+  private searchURL = `${booksUrl}/volumes`;
   constructor(private http: HttpClient) {}
 
   getBooks({
