@@ -1,5 +1,7 @@
 # Онлайн библиотека "My Book Shelf"
 
+- Deploy: https://my-book-shelf-vladtarnovskiy.vercel.app/
+
 ## Используемые технологии
 
 - **_npm/yarn_** - Менеджер пакетов.
