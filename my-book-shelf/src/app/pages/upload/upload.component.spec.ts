@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,7 +12,11 @@ describe('UploadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UploadComponent, TranslateModule.forRoot()],
+      imports: [
+        UploadComponent,
+        TranslateModule.forRoot(),
+        RouterTestingModule,
+      ],
       providers: [
         {
           provide: MyBooksService,

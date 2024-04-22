@@ -48,6 +48,12 @@
           {{ 'COMMON.BTN.READ' | translate }}
         </button>
       }
+      <button
+        class="show-more btn-first"
+        [routerLink]="['/search/preview', bookData.id]"
+      >
+        {{ 'COMMON.BTN.SHOW_MORE' | translate }}
+      </button>
     </div>
   </div>
 </div>
