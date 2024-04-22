@@ -85,16 +85,16 @@
 .links {
   margin-top: auto;
 
-  .ebook {
+  .ebook,
+  .read,
+  .show-more {
     width: 12.5rem;
     height: 4rem;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
 
-  .read {
-    width: 12.5rem;
-    height: 4rem;
-    font-size: 1.5rem;
+  .show-more {
+    margin-bottom: 0;
   }
 }

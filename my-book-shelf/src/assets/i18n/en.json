@@ -28,7 +28,8 @@
       "READ": "Read",
       "EBOOK": "E-BOOK",
       "FULL": "Full Screen",
-      "SHORT": "Regular Screen"
+      "SHORT": "Regular Screen",
+      "SHOW_MORE": "Show More"
     },
     "EDITION_TITLE": "edition",
     "EDITION": {
@@ -49,8 +50,7 @@
       "TITLE": "Title",
       "RATING": "Rating",
       "CATEGORY": "Category"
-    },
-    "SHOW_MORE": "Show More"
+    }
   },
   "PREVIEW": {
     "RATING": "Ratings",

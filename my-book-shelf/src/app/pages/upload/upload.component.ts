@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DestroyDirective } from '@core/directives';
 import { MyBooksService } from '@core/services/my-books';
 import { ToasterService } from '@core/services/toaster';
@@ -49,7 +50,8 @@ export class UploadComponent {
   constructor(
     private toasterService: ToasterService,
     private myBookService: MyBooksService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private router: Router
   ) {}
 
   onSubmit(): void {
@@ -77,6 +79,7 @@ export class UploadComponent {
             title: this.translateService.instant('UPLOAD.MESSAGES.TITLE'),
             message: this.translateService.instant('UPLOAD.MESSAGES.MESSAGE'),
           });
+          this.router.navigateByUrl('/my-books');
         });
 
       this.uploadForm.reset();
