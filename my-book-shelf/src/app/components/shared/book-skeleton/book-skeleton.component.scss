@@ -1,0 +1,10 @@
+@import 'placeholders';
+@import 'variables';
+
+.book {
+  width: 30.8rem;
+  min-height: 26rem;
+  height: 100%;
+  border-radius: 1rem;
+  @extend %skeletonBackgroundAnimation;
+}

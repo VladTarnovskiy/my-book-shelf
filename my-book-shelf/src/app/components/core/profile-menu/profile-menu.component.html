@@ -1,0 +1,29 @@
+<button
+  class="profile"
+  (mousedown)="onProfileToggle()"
+  (blur)="onProfileClose()"
+>
+  <div
+    class="profile__img"
+    alt="Profile"
+    [style.background-image]="
+      (userData$ | async)?.userPhoto
+        ? 'url(' + (userData$ | async)?.userPhoto + ')'
+        : 'url(assets/google.svg)'
+    "
+  ></div>
+  <p class="profile__name">{{ (userData$ | async)?.username }}</p>
+  <img
+    class="profile__polygon"
+    src="assets/header/polygon.svg"
+    alt="Polygon"
+    [class.active]="isMenu"
+  />
+  <button class="profile-menu" [@switchMenu]="isMenu">
+    @for (item of navigationList; track item.title) {
+      <div class="profile-menu__item" [routerLink]="[item.link]">
+        {{ 'PROFILE.' + item.title | translate }}
+      </div>
+    }
+  </button>
+</button>

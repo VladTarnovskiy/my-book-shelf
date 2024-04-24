@@ -1,0 +1,261 @@
+{
+  "HOME": {
+    "GREETING": {
+      "MORNING": "Good morning",
+      "AFTERNOON": "Good afternoon",
+      "EVENING": "Good evening",
+      "NIGHT": "Good night"
+    },
+    "RECOMMENDED": "Recommended for You",
+    "RECENT": "Recent Readings",
+    "SHOW_ALL": "Show All",
+    "QUOTES": {
+      "TITLE": "Today’s Quote"
+    }
+  },
+  "RECENT": {
+    "TITLE": "Your Recent"
+  },
+  "RECOMMENDED": {
+    "TITLE": "Your Recommended"
+  },
+  "COMMON": {
+    "EMPTY": "Empty list of books",
+    "BORROWED": "Borrowed on",
+    "SUBMISSION": "Submission Due",
+    "BTN": {
+      "BACK": "Back to results",
+      "READ": "Read",
+      "EBOOK": "E-BOOK",
+      "FULL": "Full Screen",
+      "SHORT": "Regular Screen",
+      "SHOW_MORE": "Show More"
+    },
+    "EDITION_TITLE": "edition",
+    "EDITION": {
+      "first": "first",
+      "second": "second",
+      "third": "third",
+      "fourth": "fourth",
+      "fifth": "fifth",
+      "sixth": "sixth",
+      "seventh": "seventh",
+      "eighth": "eighth",
+      "ninth": "ninth",
+      "tenth": "tenth"
+    }
+  },
+  "SEARCH": {
+    "HEAD": {
+      "TITLE": "Title",
+      "RATING": "Rating",
+      "CATEGORY": "Category"
+    }
+  },
+  "PREVIEW": {
+    "RATING": "Ratings",
+    "AVAILABILITY": "Availability",
+    "COPY": "Hard Copy",
+    "OPTIONS": {
+      "Share": "Share"
+    }
+  },
+  "API_READER": {
+    "INTRODUCTION": "INTRODUCTION",
+    "NOT_AVAILABLE": "Book not available."
+  },
+  "SEARCH_BOOK": {
+    "BTN_PREVIEW": "Preview"
+  },
+  "MY_BOOKS": {
+    "TITLE": "My Books"
+  },
+  "FAVORITE": { "TITLE": "Your Favorite" },
+  "READER": {
+    "INTRODUCTION": "INTRODUCTION",
+    "NOT_AVAILABLE": "Book not available."
+  },
+  "MODAL": {
+    "BTN": {
+      "REMOVE": "Remove",
+      "CANCEL": "Cancel"
+    },
+    "MY_BOOK": {
+      "QUESTION": "Are you sure that you want to delete this book?"
+    },
+    "REVIEW": {
+      "QUESTION": "Are you sure that you want to delete this review?"
+    }
+  },
+  "UPLOAD": {
+    "TITLE": "Upload Your Book",
+    "INPUT": {
+      "TITLE": "Title",
+      "AUTHOR": "Author",
+      "DESCRIPTION": "Description",
+      "FILE": "File",
+      "IMAGE": "Image"
+    },
+    "PLACEHOLDERS": {
+      "TITLE": "Book title",
+      "AUTHOR": "Author",
+      "DESCRIPTION": "Purpose",
+      "FILE": "Upload book file",
+      "IMAGE": "Image"
+    },
+    "UPLOAD": "UPLOAD",
+    "ERRORS": {
+      "TITLE": "please enter a title",
+      "AUTHOR": "please enter an author",
+      "DESCRIPTION": "please enter a description",
+      "FILE": "please choose a file",
+      "IMAGE": "please choose an image"
+    },
+    "MESSAGES": {
+      "TITLE": "My book",
+      "MESSAGE": "The book was created!"
+    }
+  },
+  "SEARCH_BAR": {
+    "PLACEHOLDER": "Search"
+  },
+  "CATEGORY_FILTER": {
+    "Browse": "Browse",
+    "Engineering": "Engineering",
+    "Medical": "Medical",
+    "Arts & Science": "Arts & Science",
+    "Architecture": "Architecture",
+    "Law": "Law"
+  },
+  "TYPE_FILTER": {
+    "All": "All",
+    "Title": "Title",
+    "Author": "Author",
+    "Text": "Text",
+    "Subjects": "Subjects"
+  },
+  "LOGIN": {
+    "TITLE": "Welcome Back !",
+    "DESCRIPTION": "Sign in to continue to your Digital Library",
+    "LOGIN": "Login",
+    "SOCIAL": "Or Login Using",
+    "NEW_USER": "New User?",
+    "REG_USER": "Register here",
+    "INPUT": {
+      "EMAIL": "Email",
+      "PASSWORD": "Password"
+    },
+    "ERRORS": {
+      "EMAIL": {
+        "REQUIRE": "please enter a email",
+        "INVALID": "the email is invalid"
+      },
+      "PASSWORD": {
+        "REQUIRE": "please enter a password"
+      }
+    }
+  },
+  "REGISTER": {
+    "TITLE": "Registration",
+    "DESCRIPTION": "For Both Staff & Students",
+    "REGISTER": "Register",
+    "ALREADY_USER": "Already a User?",
+    "LOGIN_USER": "Login now",
+    "INPUT": {
+      "NAME": "Name",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM": "Confirm Password"
+    },
+    "ERRORS": {
+      "NAME": {
+        "REQUIRE": "please enter a username",
+        "LENGTH": "username should contains less then 40 symbols"
+      },
+      "EMAIL": {
+        "REQUIRE": "please enter a email",
+        "INVALID": "the email is invalid"
+      },
+      "PASSWORD": {
+        "REQUIRE": "please enter a password"
+      },
+      "CONFIRM": "passwords does'nt match"
+    }
+  },
+  "VERIFICATION": {
+    "TITLE": "Verification",
+    "DESCRIPTION": "Check your E-mail for link",
+    "MESSAGE": "Please, follow the link to login"
+  },
+  "VERIFICATION_SUC": {
+    "TITLE": "Verification",
+    "DESCRIPTION": "Thank you",
+    "MESSAGE": "You are Verified"
+  },
+  "FOOTER": {
+    "About": "About",
+    "Support": "Support",
+    "Terms & Condition": "Terms & Condition"
+  },
+  "LANG": {
+    "TITLE": "Lang",
+    "EN": "English",
+    "RU": "Russian"
+  },
+  "NAVIGATION": {
+    "Home": "Home",
+    "Search": "Search",
+    "Favorite": "Favorite",
+    "My Books": "My Books",
+    "Upload": "Upload"
+  },
+  "PROFILE": {
+    "Profile": "Profile",
+    "Favorite": "Favorite",
+    "My Books": "My Books",
+    "Logout": "Logout"
+  },
+  "REVIEW": {
+    "TITLE": "Reviews",
+    "PLACEHOLDER": "Review"
+  },
+  "PROFILE_PAGE": {
+    "TITLE": "Profile",
+    "PHOTO": "Profile photo",
+    "NAME": "Username",
+    "BUTTON": "Save"
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page not found"
+  },
+  "TOASTER": {
+    "FIREBASE_ERROR": {
+      "TITLE": "Firestore error",
+      "MESSAGE": "Something went wrong"
+    },
+    "REMOVE": {
+      "TITLE": "Remove",
+      "MESSAGE": "The book has been deleted"
+    },
+    "ADD_REVIEW": {
+      "TITLE": "Review",
+      "MESSAGE": "The review has been added"
+    },
+    "REMOVE_REVIEW": {
+      "TITLE": "Review",
+      "MESSAGE": "The review has been deleted"
+    },
+    "NAME_UPDATE": {
+      "TITLE": "Update",
+      "MESSAGE": "The username has been updated"
+    },
+    "PHOTO_UPDATE": {
+      "TITLE": "Update",
+      "MESSAGE": "The photo has been updated"
+    },
+    "COPY_URL": {
+      "TITLE": "Copy",
+      "MESSAGE": "Book URL copied"
+    }
+  }
+}

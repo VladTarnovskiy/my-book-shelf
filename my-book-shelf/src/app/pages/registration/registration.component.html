@@ -1,0 +1,131 @@
+<div class="container">
+  <div class="registration">
+    <div class="description">
+      <img src="assets/logo.svg" alt="Logo" class="description__icon" />
+      <div class="description__title">{{ 'REGISTER.TITLE' | translate }}</div>
+      <div class="description__info">
+        {{ 'REGISTER.DESCRIPTION' | translate }}
+      </div>
+    </div>
+    <form [formGroup]="registerForm" class="form">
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'REGISTER.INPUT.NAME' | translate }}
+          </div>
+          <input
+            type="text"
+            [formControl]="name"
+            class="form-item__input form-item__input_name"
+            required
+          />
+        </label>
+        @if (name.hasError('required') && name.touched) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.NAME.REQUIRE' | translate }}
+          </div>
+        }
+        @if (name.hasError('maxlength') && name.touched) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.NAME.LENGTH' | translate }}
+          </div>
+        }
+        @if (name.hasError('forbiddenUsername') && name.touched) {
+          <div class="invalid__message">
+            {{ name.errors?.['forbiddenUsername'].value }}
+          </div>
+        }
+      </div>
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'REGISTER.INPUT.EMAIL' | translate }}
+          </div>
+          <input
+            [formControl]="email"
+            required
+            type="email"
+            class="form-item__input form-item__input_email"
+          />
+        </label>
+        @if (email.hasError('required') && email.touched) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.EMAIL.REQUIRE' | translate }}
+          </div>
+        }
+        @if (email.hasError('email') && email.touched) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.EMAIL.INVALID' | translate }}
+          </div>
+        }
+      </div>
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'REGISTER.INPUT.PASSWORD' | translate }}
+          </div>
+          <input
+            [formControl]="password"
+            type="password"
+            required
+            autoComplete="on"
+            class="form-item__input form-item__input_password"
+          />
+        </label>
+        @if (password.hasError('required') && password.touched) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.PASSWORD.REQUIRE' | translate }}
+          </div>
+        }
+        @if (password.hasError('forbiddenPassword') && password.touched) {
+          <div class="invalid__message">
+            {{ password.errors?.['forbiddenPassword'].value }}
+          </div>
+        }
+      </div>
+      <div class="form-item">
+        <label class="form-item__label">
+          <div class="form-item__title">
+            {{ 'REGISTER.INPUT.CONFIRM' | translate }}
+          </div>
+          <input
+            [formControl]="confirmPassword"
+            type="password"
+            required
+            autoComplete="on"
+            class="form-item__input form-item__input_confirm-pass"
+            [ngClass]="{
+              'ng-invalid': registerForm.errors?.['passwordNoMatch'],
+              'ng-valid': !registerForm.errors?.['passwordNoMatch']
+            }"
+          />
+        </label>
+        @if (
+          registerForm.hasError('passwordNoMatch') && confirmPassword.touched
+        ) {
+          <div class="invalid__message">
+            {{ 'REGISTER.ERRORS.CONFIRM' | translate }}
+          </div>
+        }
+      </div>
+      <div class="buttons">
+        <button
+          type="submit"
+          class="buttons__reg btn-third"
+          (click)="onSubmit()"
+          [ngClass]="registerForm.valid ? '' : 'invalid-but'"
+        >
+          {{ 'REGISTER.REGISTER' | translate }}
+        </button>
+        <div class="user-check">
+          <div>{{ 'REGISTER.ALREADY_USER' | translate }}&ensp;</div>
+          <a routerLink="../login">
+            <button type="button" class="login-link">
+              {{ 'REGISTER.LOGIN_USER' | translate }}
+            </button>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

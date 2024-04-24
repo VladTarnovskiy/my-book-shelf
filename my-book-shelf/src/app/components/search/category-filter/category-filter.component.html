@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <button
+    class="filter"
+    (mousedown)="onFilterToggle()"
+    (blur)="onFilterClose()"
+  >
+    <div class="filter__title">
+      {{ 'CATEGORY_FILTER.' + filterCategory | translate }}
+    </div>
+    <img
+      class="filter__polygon"
+      [class.active]="isFilter"
+      src="assets/header/polygon.svg"
+      alt="Polygon"
+    />
+    <button
+      class="menu"
+      [@switchMenu]="isFilter"
+      (click)="changeFilterType($event)"
+    >
+      @for (item of filterCategoryList; track $index) {
+        <div class="menu__item" [attr.data-filterType]="item">
+          {{ 'CATEGORY_FILTER.' + item | translate }}
+        </div>
+      }
+    </button>
+  </button>
+</div>

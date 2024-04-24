@@ -1,0 +1,59 @@
+<div class="book">
+  <div class="book-info">
+    <img class="cover" [src]="bookData.images.small" alt="Cover" />
+    <p class="title">{{ bookData.title }}</p>
+    <p class="author">
+      {{ bookData.authors[0] }},
+      <span class="year">{{ bookData.publishedDate }}</span>
+    </p>
+    <div class="rating">
+      {{ bookData.rating }} <span class="rating__total">/5</span>
+    </div>
+  </div>
+  <div class="additional">
+    <button class="favorite-but" (click)="removeFromFavorite()">
+      <img class="favorite-but__img" src="assets/heart.svg" alt="Favorite" />
+    </button>
+    <div class="terms">
+      <div class="borrowed">
+        <p class="borrowed__title">
+          {{ 'COMMON.BORROWED' | translate }}
+        </p>
+        <p class="borrowed__desc">
+          {{ bookData.borrowedOn | date: 'dd MMM yyyy hh:mm a' }}
+        </p>
+      </div>
+      <div class="submission">
+        <p class="submission__title">
+          {{ 'COMMON.SUBMISSION' | translate }}
+        </p>
+        <p class="submission__desc">
+          {{ bookData.submissionDate | date: 'dd MMM yyyy' }}
+        </p>
+      </div>
+    </div>
+    <div class="links">
+      @if (bookData.epub.isAvailable) {
+        <a [href]="bookData.epub.link">
+          <button class="ebook btn-second">
+            {{ 'COMMON.BTN.EBOOK' | translate }}
+          </button>
+        </a>
+      }
+      @if (bookData.ISBN) {
+        <button
+          class="read btn-first"
+          [routerLink]="['/search/reader', bookData.id]"
+        >
+          {{ 'COMMON.BTN.READ' | translate }}
+        </button>
+      }
+      <button
+        class="show-more btn-first"
+        [routerLink]="['/search/preview', bookData.id]"
+      >
+        {{ 'COMMON.BTN.SHOW_MORE' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

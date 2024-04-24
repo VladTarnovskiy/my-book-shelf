@@ -1,0 +1,59 @@
+<div class="reader" [ngClass]="{ full: isFullScreen | async }">
+  <div class="reader-header">
+    @if (book$ | async; as book) {
+      <div class="info">
+        <button class="back" appGoBack>
+          <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
+          <div class="back__title">{{ 'COMMON.BTN.BACK' | translate }}</div>
+        </button>
+        <div class="introduction">
+          <img [src]="book.image" alt="Cover" class="introduction__cover" />
+          <div class="description">
+            <div class="description__title">
+              {{ 'READER.INTRODUCTION' | translate }}
+            </div>
+            <p class="description__name">{{ book.title }}</p>
+            <p class="description__author">
+              {{ book.author }},
+              <span class="year">2024</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="buttons__fav" (click)="toggleFavorite()">
+          <img
+            [src]="
+              book.isFavorite ? 'assets/heart.svg' : 'assets/empty-heart.svg'
+            "
+            alt="Favorite"
+          />
+        </button>
+        <button class="buttons__screen" (click)="toggleFullScreen()">
+          {{
+            ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')
+              | translate
+          }}
+        </button>
+      </div>
+    } @else if (isLoading$ | async) {
+      <div class="header-loader"></div>
+    }
+  </div>
+  <div class="book" [ngClass]="{ full: isFullScreen | async }">
+    @if (book$ | async; as book) {
+      <object
+        aria-label="Book"
+        class="book__reader"
+        [data]="book.file | safe"
+        type="application/pdf"
+        width="100%"
+        height="100%"
+      >
+        {{ 'READER.NOT_AVAILABLE' | translate }}
+      </object>
+    } @else if (isLoading$ | async) {
+      <div class="loader"></div>
+    }
+  </div>
+</div>

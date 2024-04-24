@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "my-book-shelf",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="title">{{ 'REVIEW.TITLE' | translate }}:</div>
+  <div class="review">
+    <input
+      type="text"
+      class="review__input"
+      [placeholder]="'REVIEW.PLACEHOLDER' | translate"
+      [formControl]="reviewText"
+      (keyup.enter)="sendReview()"
+    />
+    <button
+      class="review__send"
+      (click)="sendReview()"
+      [ngClass]="{ disabled: reviewText.hasError('required') }"
+    >
+      <img src="assets/send.svg" alt="Send" class="review__send-img" />
+    </button>
+  </div>
+  @if ((isLoading$ | async) !== false) {
+    <div class="loader-container"><app-loader /></div>
+  } @else {
+    @if (currentUserData$ | async; as currentUserData) {
+      @for (review of reviews$ | async; track review.id) {
+        <app-review-item
+          [reviewData]="review"
+          [currentUserData]="currentUserData"
+          (removeReview)="removeReview($event)"
+        />
+      }
+    }
+  }
+</div>

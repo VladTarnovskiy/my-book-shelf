@@ -1,0 +1,30 @@
+<div class="favorite">
+  <div class="title">{{ 'FAVORITE.TITLE' | translate }}</div>
+  <div class="books">
+    @if (isLoading$ | async) {
+      @for (skeleton of skeletonItems; track skeleton) {
+        <app-book-skeleton />
+      }
+    } @else {
+      @for (uploadBook of uploadFavoriteBooks$ | async; track uploadBook.id) {
+        <app-favorite-upload-book
+          [uploadBookData]="uploadBook"
+          (removeFromUploadFavoriteEvent)="removeFromUploadFavorite($event)"
+        />
+      }
+      @for (book of favoriteBooks$ | async; track book.id) {
+        <app-favorite-book
+          [bookData]="book"
+          (removeFromFavoriteEvent)="removeFromFavorite($event)"
+        />
+      }
+
+      @if (
+        (uploadFavoriteBooks$ | async)?.length === 0 &&
+        (favoriteBooks$ | async)?.length === 0
+      ) {
+        {{ 'COMMON.EMPTY' | translate }}
+      }
+    }
+  </div>
+</div>

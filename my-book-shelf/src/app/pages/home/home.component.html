@@ -1,0 +1,50 @@
+<div class="home">
+  <app-quote />
+  <p class="greeting">{{ 'HOME.GREETING.' + getTimeOfDay() | translate }}</p>
+  <section class="recommended">
+    <h3 class="recommended__description">
+      <h3 class="recommended__title">{{ 'HOME.RECOMMENDED' | translate }}</h3>
+      <button class="recommended__showAll" [routerLink]="['/recommended']">
+        {{ 'HOME.SHOW_ALL' | translate }}
+      </button>
+    </h3>
+    <div class="recommended__wrapper">
+      <div class="recommended__books">
+        @if (recommendedBooksIsLoading$ | async) {
+          @for (skeleton of skeletonItems; track skeleton) {
+            <app-home-book-skeleton />
+          }
+        } @else {
+          @for (recBook of recommendedBooks$ | async; track recBook.id) {
+            <app-home-book [bookData]="recBook" />
+          } @empty {
+            {{ 'COMMON.EMPTY' | translate }}
+          }
+        }
+      </div>
+    </div>
+  </section>
+  <section class="recent">
+    <h3 class="recent__description">
+      <h3 class="recent__title">{{ 'HOME.RECENT' | translate }}</h3>
+      <button class="recent__showAll" [routerLink]="['/recent']">
+        {{ 'HOME.SHOW_ALL' | translate }}
+      </button>
+    </h3>
+    <div class="recent__wrapper">
+      <div class="recent__books">
+        @if (recentBooksIsLoading$ | async) {
+          @for (skeleton of skeletonItems; track skeleton) {
+            <app-home-book-skeleton />
+          }
+        } @else {
+          @for (book of recentBooks$ | async; track book.id) {
+            <app-home-book [bookData]="book" />
+          } @empty {
+            {{ 'COMMON.EMPTY' | translate }}
+          }
+        }
+      </div>
+    </div>
+  </section>
+</div>

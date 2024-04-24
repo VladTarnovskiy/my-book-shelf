@@ -1,0 +1,101 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.container {
+  padding-top: 7.5rem;
+}
+
+.registration {
+  max-width: 56.5rem;
+  min-height: 91.7rem;
+  padding: 6.3rem 7.1rem 8.7rem 7.1rem;
+  margin: auto;
+  @extend %shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 2rem;
+  background-color: var(--primary-third);
+
+  @include tablet {
+    padding: 6rem 3rem;
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 3.1rem;
+
+  &__icon {
+    width: 15rem;
+    height: 9.2rem;
+    margin-bottom: 5.5rem;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+
+  &__info {
+    font-size: 1.5rem;
+    color: var(--secondary-second);
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 1.6rem;
+  width: 100%;
+}
+
+.form-item {
+  margin-bottom: 2rem;
+  width: 100%;
+
+  &__title {
+    font-family: 'Inter Semi Bold';
+    margin-bottom: 0.8rem;
+  }
+
+  &__input {
+    width: 42.2rem;
+    height: 5.6rem;
+    width: 100%;
+    border-radius: 0.8rem;
+    padding: 1.6rem;
+    @extend %second-border;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.8rem;
+
+  &__reg {
+    height: 4.8rem;
+    width: 100%;
+    border-radius: 0.8rem;
+    margin-bottom: 3.8rem;
+  }
+}
+
+.user-check {
+  @extend %itemsCenter;
+  justify-content: center;
+}
+
+.login-link {
+  text-decoration: underline;
+}

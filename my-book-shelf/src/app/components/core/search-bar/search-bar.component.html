@@ -1,0 +1,52 @@
+<div class="searchBar">
+  <button
+    class="filters"
+    (mousedown)="onFilterToggle()"
+    (blur)="onFilterClose()"
+  >
+    <div class="filters__title">
+      {{ 'TYPE_FILTER.' + (filterType | async) | translate }}
+    </div>
+    <img
+      class="filters__img"
+      [class.active]="isFilter"
+      src="assets/header/polygon.svg"
+      alt="Polygon"
+    />
+    <button
+      class="menu"
+      [@switchMenu]="isFilter"
+      (click)="changeFilterType($event)"
+    >
+      @for (item of filterTypeList; track item) {
+        <div class="menu__item" [attr.data-filterType]="item">
+          {{ 'TYPE_FILTER.' + item | translate }}
+        </div>
+      }
+    </button>
+  </button>
+  <input
+    [formControl]="searchValue"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    type="search"
+    class="input"
+    [placeholder]="'SEARCH_BAR.PLACEHOLDER' | translate"
+    (keyup.enter)="onSearch()"
+  />
+  <button class="searchBut" (click)="onSearch()">
+    <img class="searchBut__img" src="assets/header/search.svg" alt="Search" />
+  </button>
+  <button class="scanner">
+    <img class="scanner__img" src="assets/header/scanner.svg" alt="Scanner" />
+  </button>
+  @if (isFocus && (elasticValues | async)!.length >= 1) {
+    <div class="elastic-search">
+      @for (elasticItem of elasticValues | async; track elasticItem) {
+        <button class="elastic-item" (mousedown)="elasticSearch(elasticItem)">
+          {{ elasticItem }}
+        </button>
+      }
+    </div>
+  }
+</div>

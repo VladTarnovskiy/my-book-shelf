@@ -1,0 +1,54 @@
+@import 'placeholders';
+@import 'variables';
+
+.home {
+  color: var(--primary-second);
+  margin-left: 2.8rem;
+  margin-top: 2.2rem;
+}
+
+.greeting {
+  font-family: 'Inter Semi Bold';
+  font-size: 3.5rem;
+  margin-bottom: 2.4rem;
+}
+
+.recommended,
+.recent {
+  &__description {
+    @extend %itemsCenter;
+    justify-content: space-between;
+    margin-right: 4.8rem;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: 2.4rem;
+  }
+
+  &__showAll {
+    color: var(--primary-fourth);
+
+    &:hover {
+      color: var(--primary-second);
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    height: 27.3rem;
+    margin-bottom: 5.3rem;
+  }
+
+  &__books {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 3.9rem;
+    margin-bottom: 5.3rem;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+}

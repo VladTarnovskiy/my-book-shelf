@@ -1,0 +1,108 @@
+@if (book$ | async; as bookData) {
+  <div class="details">
+    <button class="back-but" appGoBack>
+      <img src="assets/arrow.svg" alt="Back" class="back-but__arrow" />
+      <div class="back-but__title">{{ 'COMMON.BTN.BACK' | translate }}</div>
+    </button>
+    <div class="content">
+      <div class="book">
+        <div class="cover">
+          <img [src]="bookData.images.normal" alt="Cover" class="cover__img" />
+          <button class="option" (click)="getLink()">
+            <svg-icon
+              src="assets/details/share.svg"
+              [svgStyle]="{
+                'width.rem': 2.5,
+                'height.rem': 2.5,
+                fill: 'var(--primary-second)'
+              }"
+            >
+            </svg-icon>
+            <div class="option__title">
+              {{ 'PREVIEW.OPTIONS.Share' | translate }}
+            </div>
+          </button>
+        </div>
+        <div class="description">
+          <div class="description__info">
+            <p class="title">{{ bookData.title }}</p>
+            <p class="author">
+              By
+              <button
+                class="author__name"
+                (click)="searchAuthorBooks(bookData.authors[0])"
+                [routerLink]="['/search']"
+              >
+                {{ bookData.authors[0] }}</button
+              >,
+              {{ bookData.publishedDate | date: 'y' }}
+            </p>
+            <p class="edition">
+              {{
+                ('COMMON.EDITION.' + bookData.edition | translate) +
+                  ' ' +
+                  ('COMMON.EDITION_TITLE' | translate)
+              }}
+            </p>
+            <div class="rating">
+              <div class="stars">
+                @if (bookData.rating; as rating) {
+                  @for (item of ratingItems; track item) {
+                    <img
+                      [src]="
+                        bookData.rating < item + 1
+                          ? 'assets/empty-star.svg'
+                          : 'assets/star.svg'
+                      "
+                      alt="Star"
+                      class="stars__item"
+                    />
+                  }
+                }
+              </div>
+              <p class="rating__value">
+                <span>{{ bookData.rating }}</span>
+                {{ 'PREVIEW.RATING' | translate }}
+              </p>
+            </div>
+            <div class="availability">
+              <div class="availability__title">
+                {{ 'PREVIEW.AVAILABILITY' | translate }}
+              </div>
+              <div class="availability-item">
+                <img
+                  src="assets/availability.svg"
+                  alt="Availability"
+                  class="availability-item__icon"
+                />
+                <div class="availability-item__title">
+                  {{ 'PREVIEW.COPY' | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            @if (bookData.ISBN) {
+              <button
+                class="buttons__read btn-third"
+                [routerLink]="['/search/reader', bookData.id]"
+              >
+                {{ 'COMMON.BTN.READ' | translate }}
+              </button>
+            }
+            @if (bookData.epub.isAvailable) {
+              <a [href]="bookData.epub.link">
+                <button class="buttons__ebook btn-second">
+                  {{ 'COMMON.BTN.EBOOK' | translate }}
+                </button>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-review [bookId]="bookData.id" />
+  </div>
+} @else if (isLoading$ | async) {
+  <app-preview-skeleton />
+}

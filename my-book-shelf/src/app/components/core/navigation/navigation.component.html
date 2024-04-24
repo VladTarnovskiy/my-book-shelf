@@ -1,0 +1,15 @@
+<nav class="nav">
+  @for (item of navigationList; track item.title) {
+    <a
+      [routerLink]="[item.link]"
+      class="item"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <img class="item__img" [src]="item.icon" [alt]="item.title" />
+      <div class="item__title">
+        {{ 'NAVIGATION.' + item.title | translate }}
+      </div>
+    </a>
+  }
+</nav>

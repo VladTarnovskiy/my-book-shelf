@@ -1,0 +1,81 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.upload {
+  padding: 4.6rem 8.9rem 2.8rem 10rem;
+  max-width: 73.2rem;
+  min-height: 84.5rem;
+  border-radius: 1rem;
+  color: var(--primary-fifth);
+  background-color: var(--primary-third);
+  margin: auto;
+  margin-bottom: 3.8rem;
+
+  @include desktop-middle {
+    padding: 4.6rem 2rem;
+  }
+}
+
+.title {
+  font-family: 'Inter Semi Bold';
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 3.9rem;
+}
+
+.form-item {
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+
+  &__title {
+    font-family: 'Inter Semi Bold';
+    margin-bottom: 2.2rem;
+  }
+
+  &__input {
+    width: 100%;
+    height: 5.9rem;
+    border-radius: 1rem;
+    padding: 2rem 3rem;
+    @extend %second-border;
+  }
+}
+
+.form-item.file,
+.form-item.image {
+  .form-item__title {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-item__input {
+    padding: 1.3rem 3rem;
+  }
+
+  .form-item__input::file-selector-button {
+    padding: 0.5rem;
+    @extend %second-border;
+    border-radius: 0.3rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.form-item.description {
+  .form-item__input {
+    min-height: 10.8rem;
+  }
+}
+
+.buttons {
+  padding-top: 0.7rem;
+
+  &__submit {
+    display: block;
+    height: 6.5rem;
+    width: 31.6rem;
+    margin: auto;
+  }
+}

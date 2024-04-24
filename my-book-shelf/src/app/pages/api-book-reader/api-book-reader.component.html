@@ -1,0 +1,61 @@
+<div class="reader" [ngClass]="{ full: isFullScreen | async }">
+  <div class="reader-header">
+    @if (book$ | async; as book) {
+      <div class="info">
+        <button class="back" appGoBack>
+          <img src="assets/arrow-light.svg" alt="Back" class="back__arrow" />
+          <div class="back__title">{{ 'COMMON.BTN.BACK' | translate }}</div>
+        </button>
+        <div class="introduction">
+          <img
+            [src]="book.images.small"
+            alt="Cover"
+            class="introduction__cover"
+          />
+          <div class="description">
+            <div class="description__title">
+              {{ 'API_READER.INTRODUCTION' | translate }}
+            </div>
+            <p class="description__name">{{ book.title }}</p>
+            <p class="description__author">
+              {{ book.authors[0] }},
+              <span class="year">
+                {{ book.publishedDate | date: 'y' }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="buttons__fav" (click)="toggleFavorite(book)">
+          <img
+            [src]="
+              (isFavorite$ | async)
+                ? 'assets/heart.svg'
+                : 'assets/empty-heart.svg'
+            "
+            alt="Favorite"
+          />
+        </button>
+        <button class="buttons__screen" (click)="toggleFullScreen(book.ISBN)">
+          {{
+            ((isFullScreen | async) ? 'COMMON.BTN.SHORT' : 'COMMON.BTN.FULL')
+              | translate
+          }}
+        </button>
+      </div>
+    } @else {
+      <div class="header-loader"></div>
+    }
+  </div>
+  <div class="book" #bookCanvas [ngClass]="{ full: isFullScreen | async }">
+    @if (isUnavailable$ | async) {
+      <div class="not-available">
+        {{ 'API_READER.NOT_AVAILABLE' | translate }}
+      </div>
+    }
+    @if (isLoading$ | async) {
+      <div class="loader"></div>
+    }
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="quote">
+  @if (quote && (isLoading$ | async) === false) {
+    <h3 class="title">{{ 'HOME.QUOTES.TITLE' | translate }}</h3>
+    <p class="content">
+      {{ quote.quote }}
+    </p>
+    <div class="description">
+      <div class="slider">
+        @for (item of [0, 1, 2, 3]; track item) {
+          <button
+            aria-label="change quote"
+            class="slider__but"
+            [class]="{ active: isActive[item] }"
+            (click)="setNewQuote(item)"
+          ></button>
+        }
+      </div>
+      <p class="author">-{{ quote.author }}</p>
+    </div>
+  } @else if (isLoading$ | async) {
+    <app-quote-skeleton />
+  }
+</div>

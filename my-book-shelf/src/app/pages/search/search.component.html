@@ -1,0 +1,31 @@
+<div class="search">
+  <app-category-filter />
+  <div class="titles">
+    <div class="titles__title">{{ 'SEARCH.HEAD.TITLE' | translate }}</div>
+    <div class="titles__rating">{{ 'SEARCH.HEAD.RATING' | translate }}</div>
+    <div class="titles__category">{{ 'SEARCH.HEAD.CATEGORY' | translate }}</div>
+  </div>
+  <div class="books">
+    @for (book of books$ | async; track book.id) {
+      <app-search-book
+        [bookData]="book"
+        (addToFavoriteEvent)="addToFavorite($event)"
+        (removeFromFavoriteEvent)="removeFromFavorite($event)"
+      />
+    }
+    @if (isLoading$ | async) {
+      @for (item of skeletonItems; track item) {
+        <app-search-book-skeleton />
+      }
+    } @else if (!(books$ | async)?.length) {
+      {{ 'COMMON.EMPTY' | translate }}
+    }
+  </div>
+  @if (isShowMore) {
+    <div class="show-more">
+      <button class="show-more__button" (click)="getNextPage()">
+        {{ 'COMMON.BTN.SHOW_MORE' | translate }}
+      </button>
+    </div>
+  }
+</div>

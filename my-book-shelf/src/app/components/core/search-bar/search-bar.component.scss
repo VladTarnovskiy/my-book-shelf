@@ -1,0 +1,133 @@
+@import 'placeholders';
+@import 'variables';
+@import 'mixins';
+
+.searchBar {
+  @extend %itemsCenter;
+  @extend %shadow;
+  position: relative;
+  justify-content: center;
+  height: 4.9rem;
+  border-radius: 4rem;
+  margin-right: 2rem;
+  background-color: var(--primary-third);
+}
+
+.input {
+  height: 100%;
+  max-width: 36.2rem;
+  width: 100%;
+  padding: 1.2rem 2.1rem;
+
+  @include tablet-middle {
+    width: 16rem;
+  }
+}
+
+.filters {
+  position: relative;
+  @extend %itemsCenter;
+  justify-content: center;
+  height: 100%;
+  border-radius: 4rem 0 0 4rem;
+  background-color: var(--secondary-third);
+
+  &__title {
+    min-width: 2.7rem;
+    margin-left: 3.7rem;
+    margin-right: 1rem;
+
+    @include tablet-big {
+      width: 2rem;
+      overflow: hidden;
+    }
+  }
+
+  &__img {
+    margin-right: 1.1rem;
+    @extend %transition;
+
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+  visibility: hidden;
+  left: 0;
+  bottom: 0;
+  width: 17rem;
+  height: 27.2rem;
+  border-radius: 1rem;
+  line-height: 2.6rem;
+  background-color: var(--primary-third);
+  text-align: start;
+  @extend %shadow;
+  @extend %transition;
+  z-index: 2;
+
+  &__item {
+    padding: 1.2rem 0.9rem;
+
+    &:hover {
+      background-color: var(--secondary-third);
+    }
+  }
+}
+
+.searchBut {
+  width: 2.9rem;
+  height: 3.3rem;
+  padding-right: 0.9rem;
+  border-right: 1px solid var(--secondary-third);
+  @extend %itemsCenter;
+  justify-content: center;
+
+  &__img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.scanner {
+  height: 100%;
+  width: 4.8rem;
+  border-radius: 0 4rem 4rem 0;
+  padding: 0 1.7rem 0 1.1rem;
+  @extend %itemsCenter;
+  justify-content: center;
+
+  &__img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.elastic-search {
+  @extend %shadow;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(105%);
+  background-color: var(--primary-third);
+  border-radius: 0.8rem;
+  padding: 0.8rem 0;
+  z-index: 2;
+}
+
+.elastic-item {
+  padding: 0.4rem 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--secondary-third);
+  }
+}

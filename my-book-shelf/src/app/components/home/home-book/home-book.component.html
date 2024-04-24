@@ -1,0 +1,11 @@
+<div class="book" [routerLink]="['/search/preview', bookData.id]">
+  <img class="cover" [src]="bookData.images.small" alt="Cover" />
+  <p class="title">{{ bookData.title }}</p>
+  <p class="author">
+    {{ bookData.authors[0] }},
+    <span class="year">{{ bookData.publishedDate | date: 'y' }}</span>
+  </p>
+  <div class="rating">
+    {{ bookData.rating }} <span class="rating_total">/5</span>
+  </div>
+</div>

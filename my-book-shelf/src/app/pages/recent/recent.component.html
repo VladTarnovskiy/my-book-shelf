@@ -1,0 +1,16 @@
+<div class="recent">
+  <div class="title">{{ 'RECENT.TITLE' | translate }}</div>
+  <div class="books">
+    @if (isLoading$ | async) {
+      @for (skeleton of skeletonItems; track skeleton) {
+        <app-home-book-skeleton />
+      }
+    } @else {
+      @for (book of recentBooks$ | async; track book.id) {
+        <app-home-book [bookData]="book" />
+      } @empty {
+        {{ 'COMMON.EMPTY' | translate }}
+      }
+    }
+  </div>
+</div>
